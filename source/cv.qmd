@@ -2,26 +2,132 @@
 title: "curriculum vitae"
 subtitle: "Beck Chan"
 sidebar: false
+html:
+grid:
+    body-width: 1000px
 ---
 
 ## Work Experience
 
-### ValidMind, Inc.
+::: {.timeline .tl-diamond .tl-label-banner .vertical}
 
+::: {.event data-label="March 2024 - July 2026"}
+### ValidMind, Inc.
+#### Senior Technical Writer
+
+- Took features from design to complete release supported by storytelling alongside software engineers in GitHub.
+- Improved documentation and training through quality auditing and comprehensive redesigns using Quarto.
+- Authored 53% of user guidance content, including Jupyter Notebook samples for models and agentic systems.
+- Bridged gap between product design and user experience, verifying feature functionality and applying bug fixes.
+- Contributed to CI/CD infrastructure, open-source code libraries and software frontend built on TypeScript.
+- Designed, standardized, and implemented processes built to scale to close gaps and reduce team workload.
+- Spearheaded the implementation of an extensible custom Zendesk solution.
+
+:::
+
+::: {.event data-label="April 2023 - January 2024"}
+### SaaSquatch by impact.com
+#### Senior Customer Solutions Specialist
+
+- Executed migration of evolving support processes to Freshdesk, resulting in a team 100% CSAT satisfaction rate.
+- Pioneered comprehensive reporting solutions, maintaining systematic report history to identify long-term trends.
+- Created exhaustive documentation, feedback metrics, and learning curriculums to onboard and train new agents.
+- Empowered users to understand and maximize the use of products by auditing and overhauling documentation.
+
+:::
+
+::: {.event data-label="October 2022 - March 2023"}
 ### SaaSquatch by impact.com
 
+#### Senior Technical Specialist
+
+- Designed and led solo migration of support processes to Zendesk built to scale, increasing efficiency by 74%.
+- Managed team escalations from complex technical cases, ensuring delivery of solutions to customers.
+- Proactively identified opportunities for customer growth and product improvements during ticket management.
+- Provided advanced technical support for web and mobile SDKs built on JavaScript, REST API, and GraphQL.
+
+:::
+
+::: {.event data-label="October 2018 - September 2022"}
+### SaaSquatch by impact.com
+
+#### Solutions Architect
+
+- Streamlined workload by 51% through improvement of implementation processes and onboarding strategies.
+- Proactively created and maintained public documentation, focusing on accuracy, accessibility, and extensibility.
+- Produced tangible results for customers by collaborating cross-functionally to deliver custom features.
+- Designed and executed solutions for custom JavaScript, REST API, and GraphQL software installations.
+
+:::
+
+::: {.event data-label="October 2017 - August 2018"}
 ### Develus Systems Inc. for Complia Health
 
+#### Customer Support Analyst
+
+- Led creation of a knowledgebase to empower team members with extensive training and reference materials.
+- Created a mentorship and feedback program, strengthening team cohesion.
+- Triaged, escalated, and owned resolution of product bugs for custom installations using Zendesk.
+
+:::
+
+::: {.event data-label="July 2016 - September 2017"}
 ### AbeBooks.com, Amazon subsidiary
 
+#### Customer Support Representative
+
+- Exceeded target metric expectations at 160% while providing technical support in a fast-paced call center. 
+- Initiated improvements to best practices and processes, including documentation for team knowledgebase.
+
+:::
+
+::: {.event data-label="January 2014 - July 2016"}
 ### Hudson's Bay Optical
 
+#### Optical Technician & Medical Office Assistant
+
+- Multitasked in a fast-paced sales environment to administer and facilitate the sale of prescription glasses. 
+- Managed patient charts, sales reports, office inventory and stock orders.
+
+:::
+
+::: {.event data-label="July 2013 - December 2013"}
 ### Inner Harbour Optometry
+
+#### Medical Office Assistant / Receptionist
+
+- Managed confidental medical charts while performing optometic testing and customer support.
+- Improved patient re-call system to increase business revenue.
+
+:::
+
+::: {.event data-label="July 2010 - July 2013"}
 
 ### Sylvan Learning
 
+#### Administrative & Teaching Assistant
+
+- Coached and assisted students on the classroom floor and in 1-on-1 lessons. 
+- Created lesson plans and personalized curriculums tailored to individual student needs
+
+:::
+
+:::
+
+
+
 ## Education
 
-### Lighthouse Labs
+::: {.timeline .tl-diamond .tl-label-badge .vertical}
 
+::: {.event data-label="Completed 2019"}
+### Lighthouse Labs
+Intro to Front-End with JavaScript
+:::
+
+::: {.event data-label="Graduated 2013"}
 ### University of Victoria
+Bachelor of Arts, English Literature & Japanese Studies (*cum laude*)
+:::
+
+:::

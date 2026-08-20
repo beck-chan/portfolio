@@ -31,10 +31,6 @@ website:
 
   sidebar: 
     style: docked
-    # contents:
-    #   - text: "About"
-    #   - cv.qmd
-    #   - changelog.qmd
 
   search:
     location: navbar
@@ -52,3 +48,6 @@ format:
     css: styles.css
     toc: true
     link-external-newwindow: true
+  
+filters:
+  - timeline
