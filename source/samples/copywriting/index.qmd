@@ -2,7 +2,7 @@
 title: "Copywriting"
 subtitle: "Samples"
 listing:
-  - id: copywriting
+  - id: validmind-copywriting
     type: grid
     grid-columns: 3
     max-description-length: 250
@@ -13,3 +13,5 @@ listing:
     - reduce-culture-risk.qmd
     - osff-takeaways.qmd
 ---
+
+## ValidMind

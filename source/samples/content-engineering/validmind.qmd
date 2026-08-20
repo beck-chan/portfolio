@@ -2,7 +2,7 @@
 title: "ValidMind"
 subtitle: "Content Engineering"
 listing:
-  - id: validmind
+  - id: validmind-content
     type: grid
     grid-columns: 2
     max-description-length: 250

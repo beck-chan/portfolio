@@ -4,6 +4,9 @@ project:
 
 metadata-files:
   - samples/content-engineering/_sidebar.yaml
+  - samples/technical-writing/_sidebar.yaml
+  - samples/copywriting/_sidebar.yaml
+  - samples/developer-advocacy/_sidebar.yaml
 
 website:
   title: "Beck Chan &diams; Portfolio"
@@ -23,35 +26,6 @@ website:
       - text: "About"
       - cv.qmd
       - changelog.qmd
-      - text: "---"
-      - text: "Samples"
-      - section: "Content Engineering"
-        href: samples/content-engineering/index.qmd
-        contents:
-          - samples/content-engineering/validmind.qmd
-          - samples/content-engineering/atryum.qmd
-      - section: "Technical Writing"
-        href: samples/technical-writing/index.qmd
-        contents:
-          - samples/technical-writing/validmind.qmd
-          - samples/technical-writing/atryum.qmd
-          - samples/technical-writing/saasquatch.qmd
-      - section: "Copywriting"
-        href: samples/copywriting/index.qmd
-        contents:
-          - text: "Honor the Human"
-            file: samples/copywriting/honor-the-human.qmd
-          - text: "Reduce Culture Risk"
-            file: samples/copywriting/reduce-culture-risk.qmd
-          - text: "OSFF Takeaways"
-            file: samples/copywriting/osff-takeaways.qmd
-      - section: "Developer Advocacy"
-        href: samples/developer-advocacy/index.qmd
-        contents:
-          - samples/developer-advocacy/supabase.qmd
-          - samples/developer-advocacy/posthog.qmd
-          - samples/developer-advocacy/google-sheets.qmd
-
 
   search:
     location: navbar

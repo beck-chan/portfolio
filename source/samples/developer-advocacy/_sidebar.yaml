@@ -1,0 +1,11 @@
+website:
+  sidebar:
+    - id: developer
+      title: "Developer Advocacy"
+      contents:
+        - text: "Developer Advocacy"
+          file: samples/developer-advocacy/index.qmd
+        - text: "---"
+        - samples/developer-advocacy/supabase.qmd
+        - samples/developer-advocacy/posthog.qmd
+        - samples/developer-advocacy/google-sheets.qmd

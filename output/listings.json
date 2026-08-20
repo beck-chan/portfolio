@@ -28,9 +28,9 @@
   {
     "listing": "/samples/copywriting/index.html",
     "items": [
-      "/samples/copywriting/honor-the-human.html",
-      "/samples/copywriting/reduce-culture-risk.html",
-      "/samples/copywriting/osff-takeaways.html"
+      "/samples/copywriting/validmind/honor-the-human.html",
+      "/samples/copywriting/validmind/reduce-culture-risk.html",
+      "/samples/copywriting/validmind/osff-takeaways.html"
     ]
   },
   {
@@ -61,5 +61,17 @@
       "/samples/content-engineering/validmind/academy.html",
       "/samples/content-engineering/validmind/releases.html"
     ]
+  },
+  {
+    "listing": "/samples/technical-writing/atryum.html",
+    "items": []
+  },
+  {
+    "listing": "/samples/technical-writing/validmind.html",
+    "items": []
+  },
+  {
+    "listing": "/samples/technical-writing/saasquatch.html",
+    "items": []
   }
 ]
