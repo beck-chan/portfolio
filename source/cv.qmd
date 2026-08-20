@@ -1,6 +1,27 @@
 ---
 title: "curriculum vitae"
 subtitle: "Beck Chan"
+sidebar: false
 ---
 
+## Work Experience
 
+### ValidMind, Inc.
+
+### SaaSquatch by impact.com
+
+### Develus Systems Inc. for Complia Health
+
+### AbeBooks.com, Amazon subsidiary
+
+### Hudson's Bay Optical
+
+### Inner Harbour Optometry
+
+### Sylvan Learning
+
+## Education
+
+### Lighthouse Labs
+
+### University of Victoria

@@ -1,33 +1,13 @@
 [
   {
-    "objectID": "index.html#samples",
-    "href": "index.html#samples",
-    "title": "Beck Chan",
-    "section": "Samples",
-    "text": "Samples\n\n\n\n\n\n\n\nContent Engineering\n\n\n\n\n\n\n\n\n\n\n\n\nTechnical Writing\n\n\n\n\n\n\n\n\n\n\n\n\nCopywriting\n\n\n\n\n\n\n\n\n\n\n\n\nDeveloper Advocacy\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Beck Chan",
+    "objectID": "samples/technical-writing/validmind.html",
+    "href": "samples/technical-writing/validmind.html",
+    "title": "ValidMind",
     "section": "",
-    "text": "I’m Beck, a poet with a passion for process — helping you empower users by designing and building solutions built to scale.\nI’ve designed, implemented, and managed everything from content, support, training, and onboarding architecture for organizations from startups to enterprises.\nMy methods bridge the gap between product design and user experience, whether that’s advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features."
-  },
-  {
-    "objectID": "index.html#about",
-    "href": "index.html#about",
-    "title": "Beck Chan",
-    "section": "",
-    "text": "Beck Chan\n\n\n\n\n\n\n\n\n\n\n\n\n\nLatest update:\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "samples/content-engineering/index.html",
-    "href": "samples/content-engineering/index.html",
-    "title": "Content Engineering",
-    "section": "",
-    "text": "ValidMind\n\n\nContent Engineering\n\n\n\n\n\n\n\n\n\n\n\n\nAtryum\n\n\nContent Engineering\n\n\n\n\n\n\n\n\nNo matching items",
+    "text": "No matching items",
     "crumbs": [
-      "Content Engineering"
+      "Content Engineering",
+      "ValidMind"
     ]
   },
   {
@@ -42,58 +22,6 @@
     ]
   },
   {
-    "objectID": "samples/copywriting/index.html",
-    "href": "samples/copywriting/index.html",
-    "title": "Copywriting",
-    "section": "",
-    "text": "Honor the Human with ValidMind\n\n\nCopywriting\n\n\n\n\n\n\n\n\n\n\n\n\nReduce Culture Risk with ValidMind\n\n\nCopywriting\n\n\n\n\n\n\n\n\n\n\n\n\nTakeaways from Open Source in Finance Forum: Future of Fintech, OSS, and GenAI\n\n\nCopywriting\n\n\n\n\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Content Engineering",
-      "Copywriting"
-    ]
-  },
-  {
-    "objectID": "samples/developer-advocacy/index.html",
-    "href": "samples/developer-advocacy/index.html",
-    "title": "Developer Advocacy",
-    "section": "",
-    "text": "Supabase\n\n\nDeveloper Advocacy\n\n\n\n\n\n\n\n\n\n\n\n\nPosthog\n\n\nDeveloper Advocacy\n\n\n\n\n\n\n\n\n\n\n\n\nGoogle Sheets\n\n\nDeveloper Advocacy\n\n\n\n\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Content Engineering",
-      "Developer Advocacy"
-    ]
-  },
-  {
-    "objectID": "samples/index.html",
-    "href": "samples/index.html",
-    "title": "Samples",
-    "section": "",
-    "text": "Supabase\n\n\nDeveloper Advocacy\n\n\n\n\n\n\n\n\n\n\n\n\nPosthog\n\n\nDeveloper Advocacy\n\n\n\n\n\n\n\n\n\n\n\n\nGoogle Sheets\n\n\nDeveloper Advocacy\n\n\n\n\n\n\n\n\nNo matching items",
-    "crumbs": [
-      "Content Engineering",
-      "Samples"
-    ]
-  },
-  {
-    "objectID": "samples/content-engineering/validmind/academy.html",
-    "href": "samples/content-engineering/validmind/academy.html",
-    "title": "Content Engineering",
-    "section": "",
-    "text": "No matching items",
-    "crumbs": [
-      "Content Engineering",
-      "ValidMind",
-      "Content Engineering"
-    ]
-  },
-  {
-    "objectID": "samples/content-engineering/validmind/releases.html",
-    "href": "samples/content-engineering/validmind/releases.html",
-    "title": "Release Notes",
-    "section": "",
-    "text": "te"
-  },
-  {
     "objectID": "samples/content-engineering/validmind.html",
     "href": "samples/content-engineering/validmind.html",
     "title": "ValidMind",
@@ -105,22 +33,35 @@
     ]
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Beck Chan",
+    "section": "",
+    "text": "I’m Beck, a poet with a passion for process — helping you empower users by designing and building solutions built to scale.\nI’ve designed, implemented, and managed everything from content, support, training, and onboarding architecture for organizations from startups to enterprises.\nMy methods bridge the gap between product design and user experience, whether that’s advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features."
+  },
+  {
+    "objectID": "index.html#samples",
+    "href": "index.html#samples",
+    "title": "Beck Chan",
+    "section": "Samples",
+    "text": "Samples\n\n\n\n\n\n\n\nContent Engineering\n\n\n\n\n\n\n\n\n\n\n\n\nTechnical Writing\n\n\n\n\n\n\n\n\n\n\n\n\nCopywriting\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "samples/content-engineering/index.html",
+    "href": "samples/content-engineering/index.html",
+    "title": "Content Engineering",
+    "section": "",
+    "text": "ValidMind\n\n\nContent Engineering\n\n\n\n\n\n\n\n\n\n\n\n\nAtryum\n\n\nContent Engineering\n\n\n\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Content Engineering"
+    ]
+  },
+  {
     "objectID": "samples/technical-writing/atryum.html",
     "href": "samples/technical-writing/atryum.html",
     "title": "Atryum",
     "section": "",
     "text": "No matching items"
-  },
-  {
-    "objectID": "samples/technical-writing/validmind.html",
-    "href": "samples/technical-writing/validmind.html",
-    "title": "ValidMind",
-    "section": "",
-    "text": "No matching items",
-    "crumbs": [
-      "Content Engineering",
-      "ValidMind"
-    ]
   },
   {
     "objectID": "samples/technical-writing/saasquatch.html",
@@ -130,10 +71,24 @@
     "text": "No matching items"
   },
   {
-    "objectID": "index.html#info",
-    "href": "index.html#info",
-    "title": "Beck Chan",
-    "section": "Info",
-    "text": "Info\n\n\n\n\n\n\n\ncurriculum vitae\n\n\nBeck Chan\n\n\n\n\n\n\n\n\n\n\n\n\nChangelog\n\n\nLatest update:\n\n\n\n\n\n\n\n\nNo matching items"
+    "objectID": "cv.html#education",
+    "href": "cv.html#education",
+    "title": "curriculum vitae",
+    "section": "Education",
+    "text": "Education"
+  },
+  {
+    "objectID": "cv.html",
+    "href": "cv.html",
+    "title": "curriculum vitae",
+    "section": "",
+    "text": ":::\n\n\n\n:::"
+  },
+  {
+    "objectID": "cv.html#work-experience",
+    "href": "cv.html#work-experience",
+    "title": "curriculum vitae",
+    "section": "",
+    "text": ":::\n\n\n\n:::"
   }
 ]

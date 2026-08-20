@@ -1,19 +1,7 @@
 [
   {
-    "listing": "/index.html",
-    "items": [
-      "/samples/content-engineering/index.html",
-      "/samples/technical-writing/index.html",
-      "/samples/copywriting/index.html",
-      "/samples/developer-advocacy/index.html"
-    ]
-  },
-  {
-    "listing": "/samples/content-engineering/index.html",
-    "items": [
-      "/samples/content-engineering/validmind.html",
-      "/samples/content-engineering/atryum.html"
-    ]
+    "listing": "/samples/technical-writing/validmind.html",
+    "items": []
   },
   {
     "listing": "/samples/technical-writing/index.html",
@@ -21,14 +9,6 @@
       "/samples/technical-writing/validmind.html",
       "/samples/technical-writing/atryum.html",
       "/samples/technical-writing/saasquatch.html"
-    ]
-  },
-  {
-    "listing": "/samples/copywriting/index.html",
-    "items": [
-      "/samples/copywriting/validmind/honor-the-human.html",
-      "/samples/copywriting/validmind/reduce-culture-risk.html",
-      "/samples/copywriting/validmind/osff-takeaways.html"
     ]
   },
   {
@@ -40,18 +20,6 @@
     ]
   },
   {
-    "listing": "/samples/index.html",
-    "items": [
-      "/samples/developer-advocacy/supabase.html",
-      "/samples/developer-advocacy/posthog.html",
-      "/samples/developer-advocacy/google-sheets.html"
-    ]
-  },
-  {
-    "listing": "/samples/content-engineering/validmind/academy.html",
-    "items": []
-  },
-  {
     "listing": "/samples/content-engineering/validmind.html",
     "items": [
       "/samples/content-engineering/validmind/quickstarts.html",
@@ -61,11 +29,30 @@
     ]
   },
   {
-    "listing": "/samples/technical-writing/atryum.html",
-    "items": []
+    "listing": "/index.html",
+    "items": [
+      "/samples/content-engineering/index.html",
+      "/samples/technical-writing/index.html",
+      "/samples/copywriting/index.html"
+    ]
   },
   {
-    "listing": "/samples/technical-writing/validmind.html",
+    "listing": "/samples/content-engineering/index.html",
+    "items": [
+      "/samples/content-engineering/validmind.html",
+      "/samples/content-engineering/atryum.html"
+    ]
+  },
+  {
+    "listing": "/samples/copywriting/index.html",
+    "items": [
+      "/samples/copywriting/validmind/honor-the-human.html",
+      "/samples/copywriting/validmind/reduce-culture-risk.html",
+      "/samples/copywriting/validmind/osff-takeaways.html"
+    ]
+  },
+  {
+    "listing": "/samples/technical-writing/atryum.html",
     "items": []
   },
   {
