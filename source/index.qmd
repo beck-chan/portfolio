@@ -1,18 +1,18 @@
 ---
 title: "Beck Chan"
-subtitle: "Portfolio"
+subtitle: "Content Engineer &bull; Solutions Architect"
 page-layout: full
 sidebar: false
 listing:
-  - id: about
-    type: grid
-    grid-columns: 2
-    max-description-length: 250
-    sort: false
-    fields: [title, subtitle, description]
-    contents:
-    - cv.qmd
-    - changelog.qmd
+  # - id: about
+  #   type: grid
+  #   grid-columns: 2
+  #   max-description-length: 250
+  #   sort: false
+  #   fields: [title, subtitle, description]
+  #   contents:
+  #   - cv.qmd
+  #   - changelog.qmd
   - id: samples
     type: grid
     max-description-length: 250
@@ -26,10 +26,16 @@ listing:
     - samples/developer-advocacy/index.qmd
 ---
 
-## About
+I'm **Beck**, a poet with a passion for process — helping you empower users by designing and building solutions built to scale. 
+
+I've designed, implemented, and managed everything from content, support, training, and onboarding architecture for organizations from startups to enterprises.
+
+My methods bridge the gap between product design and user experience, whether that's advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features. 
+
+<!-- ## Info
 
 :::{#about}
-:::
+::: -->
 
 ## Samples
 

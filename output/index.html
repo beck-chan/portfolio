@@ -44,7 +44,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-f670ab49fb9634e9dab58972b11477cb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-abc8d05d46af1384937a7dca9ae4bb04.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/all.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-6.7.2/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,34 +74,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-about .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-title','listing-subtitle','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-about'] = new List('listing-about', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
     const listingTargetEl = window.document.querySelector('#listing-samples .list');
@@ -201,10 +175,29 @@ window.Quarto = {
     <a class="nav-link" href="./cv.html"> 
 <span class="menu-text">curriculum vitae</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./changelog.html"> 
-<span class="menu-text">Changelog</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-contact" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Contact</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-contact">    
+        <li>
+    <a class="dropdown-item" href="https://github.com/beck-chan">
+ <span class="dropdown-text"><i class="fa-brands fa-github" aria-label="github"></i> <strong>GitHub</strong> / beck-chan</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="https://linkedin.com/in/beck-chan">
+ <span class="dropdown-text"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i> <strong>LinkedIn</strong> / beck-chan</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="mailto:rebecca.ht.chan@gmail.com">
+ <span class="dropdown-text"><i class="fa-solid fa-envelope" aria-label="envelope"></i> rebecca.ht.chan@gmail.com</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="tel:1-250-885-6801">
+ <span class="dropdown-text"><i class="fa-solid fa-phone" aria-label="phone"></i> +1 (250) 885-6801</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -221,8 +214,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#about" id="toc-about" class="nav-link active" data-scroll-target="#about">About</a></li>
-  <li><a href="#samples" id="toc-samples" class="nav-link" data-scroll-target="#samples">Samples</a></li>
+  <li><a href="#samples" id="toc-samples" class="nav-link active" data-scroll-target="#samples">Samples</a></li>
   </ul>
 </nav>
     </div>
@@ -232,7 +224,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Beck Chan</h1>
-<p class="subtitle lead">Portfolio</p>
+<p class="subtitle lead">Content Engineer • Solutions Architect</p>
 </div>
 
 
@@ -249,46 +241,13 @@ window.Quarto = {
 </header>
 
 
-<section id="about" class="level2">
-<h2 class="anchored" data-anchor-id="about">About</h2>
-<div id="listing-about" class="quarto-listing quarto-listing-container-grid">
-<div class="list grid quarto-listing-cols-2">
-<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1787257891855" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="./cv.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-curriculum vitae
-</h5>
-<div class="card-subtitle listing-subtitle">
-Beck Chan
-</div>
-<div class="card-text listing-description delink">
+<p>I’m <strong>Beck</strong>, a poet with a passion for process — helping you empower users by designing and building solutions built to scale.</p>
+<p>I’ve designed, implemented, and managed everything from content, support, training, and onboarding architecture for organizations from startups to enterprises.</p>
+<p>My methods bridge the gap between product design and user experience, whether that’s advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features.</p>
+<!-- ## Info
 
-</div>
-</div>
-</div></a>
-</div>
-<div class="g-col-1" data-index="1" data-listing-file-modified-sort="1787257469801" data-listing-reading-time-sort="1" data-listing-word-count-sort="1">
-<a href="./changelog.html" class="quarto-grid-link">
-<div class="quarto-grid-item card h-100 card-left">
-<div class="card-body post-contents">
-<h5 class="no-anchor card-title listing-title">
-Changelog
-</h5>
-<div class="card-subtitle listing-subtitle">
-Latest update:
-</div>
-<div class="card-text listing-description delink">
-
-</div>
-</div>
-</div></a>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div>
-</section>
+:::{#about}
+::: -->
 <section id="samples" class="level2">
 <h2 class="anchored" data-anchor-id="samples">Samples</h2>
 <div id="listing-samples" class="quarto-listing quarto-listing-container-grid">
@@ -385,11 +344,6 @@ Technical Writing
 Technical Writing
 </div>
 <div class="card-text listing-description delink">
-
-<div class="list grid quarto-listing-cols-2">
-
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
 
 </div>
 </div>
@@ -575,6 +529,11 @@ Developer Advocacy
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
         }
       }
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
@@ -889,6 +848,27 @@ Developer Advocacy
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ <a href="https://github.com/beck-chan/portfolio/releases">Releases</a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ <a href="https://github.com/beck-chan"><i class="fa-brands fa-github"></i></a> • <a href="https://www.linkedin.com/in/beck-chan"><i class="fa-brands fa-linkedin"></i></a> • <a href="mailto:rebecca.ht.chan@gmail.com"><i class="fa fa-envelope"></i></a> • <a href="tel:1-250-885-6801"><i class="fa fa-phone"></i></a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
 
 
 

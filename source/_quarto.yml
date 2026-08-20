@@ -18,20 +18,37 @@ website:
       - samples/developer-advocacy/index.qmd
     right:
       - cv.qmd
-      - changelog.qmd
+      - text: "Contact"
+        menu:
+        - text: "{{< fa brands github >}} **GitHub** / beck-chan"
+          href: https://github.com/beck-chan
+        - text: "{{< fa brands linkedin >}} **LinkedIn** / beck-chan"
+          href: https://linkedin.com/in/beck-chan
+        - text: "{{< fa envelope >}} rebecca.ht.chan@gmail.com"
+          href: mailto:rebecca.ht.chan@gmail.com
+        - text: "{{< fa phone >}} +1 (250) 885-6801"
+          href: tel:1-250-885-6801
 
   sidebar: 
     style: docked
-    contents:
-      - text: "About"
-      - cv.qmd
-      - changelog.qmd
+    # contents:
+    #   - text: "About"
+    #   - cv.qmd
+    #   - changelog.qmd
 
   search:
     location: navbar
 
+  page-footer: 
+    left: 
+      - text: <a href="https://github.com/beck-chan/portfolio/releases">Releases</a>
+    right:
+      - text: <a href="https://github.com/beck-chan"><i class="fa-brands fa-github"></i></a> &bull; <a href="https://www.linkedin.com/in/beck-chan"><i class="fa-brands fa-linkedin"></i></a> &bull; <a href="mailto:rebecca.ht.chan@gmail.com"><i class="fa fa-envelope"></i></a> &bull; <a href="tel:1-250-885-6801"><i class="fa fa-phone"></i></a>
+
 format:
   html:
+    page-layout: full
     theme: cosmo
     css: styles.css
     toc: true
+    link-external-newwindow: true
