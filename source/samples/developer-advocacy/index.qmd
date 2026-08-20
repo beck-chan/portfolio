@@ -1,4 +1,15 @@
 ---
 title: "Developer Advocacy"
 subtitle: "Samples"
+listing:
+  - id: developer
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - supabase.qmd
+    - posthog.qmd
+    - google-sheets.qmd
 ---

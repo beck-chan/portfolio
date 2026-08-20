@@ -1,6 +1,6 @@
 ---
-title: "Beck Chan"
-subtitle: "curriculum vitae"
+title: "curriculum vitae"
+subtitle: "Beck Chan"
 ---
 
 

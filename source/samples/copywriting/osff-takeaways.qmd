@@ -1,0 +1,4 @@
+---
+title: "Takeaways from Open Source in Finance Forum: Future of Fintech, OSS, and GenAI"
+subtitle: "Copywriting"
+---

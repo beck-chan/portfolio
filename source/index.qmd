@@ -1,7 +1,38 @@
 ---
 title: "Beck Chan"
 subtitle: "Portfolio"
+page-layout: full
+sidebar: false
+listing:
+  - id: about
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - cv.qmd
+    - changelog.qmd
+  - id: samples
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, description]
+    contents:
+    - samples/content-engineering/index.qmd
+    - samples/technical-writing/index.qmd
+    - samples/copywriting/index.qmd
+    - samples/developer-advocacy/index.qmd
 ---
 
+## About
+
+:::{#about}
+:::
+
 ## Samples
+
+:::{#samples}
+:::
 

@@ -1,0 +1,4 @@
+---
+title: "ValidMind"
+subtitle: "Technical Writing"
+---
