@@ -1,4 +1,18 @@
 ---
 title: "ValidMind"
 subtitle: "Content Engineering"
+listing:
+  - id: validmind
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - validmind/quickstarts.qmd
+    - validmind/library.qmd
+    - validmind/academy.qmd
+    - validmind/releases.qmd
 ---
+
+testing?

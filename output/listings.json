@@ -48,5 +48,18 @@
       "/samples/developer-advocacy/posthog.html",
       "/samples/developer-advocacy/google-sheets.html"
     ]
+  },
+  {
+    "listing": "/samples/content-engineering/validmind/academy.html",
+    "items": []
+  },
+  {
+    "listing": "/samples/content-engineering/validmind.html",
+    "items": [
+      "/samples/content-engineering/validmind/quickstarts.html",
+      "/samples/content-engineering/validmind/library.html",
+      "/samples/content-engineering/validmind/academy.html",
+      "/samples/content-engineering/validmind/releases.html"
+    ]
   }
 ]

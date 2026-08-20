@@ -2,6 +2,9 @@ project:
   type: website
   output-dir: ../output
 
+metadata-files:
+  - samples/content-engineering/_sidebar.yaml
+
 website:
   title: "Beck Chan &diams; Portfolio"
   navbar:

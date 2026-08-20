@@ -27,4 +27,6 @@ quarto render
 - favicon
 - spacing/formatting of sidebar sections
 - theme
-
+- developer-advocacy search false, 3 column tiles
+- topic tags, make unclickable? investigate click hubs
+- remove output, .gitignore?

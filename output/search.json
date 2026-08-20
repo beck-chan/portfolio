@@ -73,5 +73,35 @@
       "Content Engineering",
       "Samples"
     ]
+  },
+  {
+    "objectID": "samples/content-engineering/validmind/academy.html",
+    "href": "samples/content-engineering/validmind/academy.html",
+    "title": "Content Engineering",
+    "section": "",
+    "text": "No matching items",
+    "crumbs": [
+      "Content Engineering",
+      "ValidMind",
+      "Content Engineering"
+    ]
+  },
+  {
+    "objectID": "samples/content-engineering/validmind/releases.html",
+    "href": "samples/content-engineering/validmind/releases.html",
+    "title": "Release Notes",
+    "section": "",
+    "text": "te"
+  },
+  {
+    "objectID": "samples/content-engineering/validmind.html",
+    "href": "samples/content-engineering/validmind.html",
+    "title": "ValidMind",
+    "section": "",
+    "text": "testing?\n\n\n\n\n\n\n\n\n\n\n\nQuickstart Guides\n\n\nValidMind\n\n\n\n\n\n\n\n\n\n\n\n\nDeveloper Library\n\n\nValidMind\n\n\n\n\n\n\n\n\n\n\n\n\nValidMind Academy\n\n\nValidMind\n\n\n\n\n\n\n\n\n\n\n\n\nRelease Notes\n\n\nValidMind\n\n\n\n\n\n\n\n\nNo matching items",
+    "crumbs": [
+      "Content Engineering",
+      "ValidMind"
+    ]
   }
 ]

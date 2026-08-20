@@ -1,0 +1,16 @@
+website:
+  sidebar:
+    - id: content
+      title: "Content Engineering"
+      contents:
+        - text: "Content Engineering"
+          file: samples/content-engineering/index.qmd
+        - text: "---"
+        - section: "ValidMind"
+          href: samples/content-engineering/validmind.qmd
+          contents:
+            - samples/content-engineering/validmind/quickstarts.qmd
+            - samples/content-engineering/validmind/library.qmd
+            - samples/content-engineering/validmind/academy.qmd
+            - samples/content-engineering/validmind/releases.qmd
+        - samples/content-engineering/atryum.qmd
