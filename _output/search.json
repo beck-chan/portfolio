@@ -47,7 +47,7 @@
     "href": "index.html",
     "title": "Beck Chan",
     "section": "",
-    "text": "test ?? ugh esdfs\ncode"
+    "text": "I’m Beck, poet with a passion for process — helping you empower users by designing and building solutions built to scale.\nI’ve designed, implemented, and managed everything from content, support, training, and onboarding architecture for organizations from startups to enterprises.\nMy methods bridge the gap between product design and user experience, whether that’s advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features."
   },
   {
     "objectID": "index.html#samples",
@@ -71,7 +71,7 @@
     "href": "samples/copywriting/index.html",
     "title": "Copywriting",
     "section": "",
-    "text": "lorem ipsum etc so the preview shows text",
+    "text": "lorem ipsum etc so the preview shows text testing",
     "crumbs": [
       "Content Engineering",
       "Copywriting"
@@ -201,7 +201,7 @@
     "href": "samples/copywriting/validmind/osff-takeaways.html#article-copy",
     "title": "Takeaways from Open Source in Finance Forum: Future of Fintech, OSS, and GenAI",
     "section": "Article copy",
-    "text": "Article copy\nThe Fintech Open Source Foundation (FINOS) hosted its annual Open Source in Finance Forum in New York (OSFF NY) last week, attended by several members of ValidMind. Distinguished speakers representing prominent names in software and financial services led discussions on open-source ideologies, industry best practices, and projections. Of note were the many panels on artificial intelligence (AI), including deep dives into the use of Generative AI (GenAI) within financial services and software development as a whole.\nGitHub — a service almost intrinsically linked with the idea of open source — hosted two sessions that focused on demonstrating the organization’s OpenAI tool, GitHub Copilot. Through the democratization of AI through Copilot, GitHub representatives argued that the barrier for entry to begin developing has been drastically lowered. Claiming to “maximize developer happiness, increase developer productivity, [and] accelerate software development” with its offering that includes suggested resolutions for proactively identified issues, GitHub’s outlook is that AI simplifies and enhances workflows for individuals and institutions enabling innovation and increased oversight — a philosophy we share here at ValidMind.\nBut the increased adoption of “non-traditional” models — that is, large language models (LLMs) or other types of GenAI models that produce outputs that are non-deterministic and unpredictable but have the benefit of more flexible applications and advanced scope beyond initial trained datasets — is not without its challenges. Panelists and participants at OSFF NY discussed and debated topics such as the unexpected intricacies when adapting open source licenses in the age of LLMs, or whether or not LLMs have the ability to tackle generating, reviewing, and utilizing complex documents required during key processes in financial services, and more. From legal ramifications to process practicalities, the question of AI expansion is not if but when and how best executed.\nGrowing pains notwithstanding, during the panel Making GenAI a Tool for Everyone, Colin Eberhardt, CTO of Scott Logic, proposed that soon it would be difficult to imagine a world before AI at the pace it is permeating every aspect of our lives. However, despite the significant and rapid increase in GenAI usage in many sectors such as mass media and law, statistics for financial services are lagging behind. While the apprehension is understandable for an industry so steeped in standardization and ruled by regulation, the community and conversation at OSFF NY posits that we are at the precipice of a phenomenal restructuring of our reality thanks to AI, with open-source software leading the charge.\nTo wrap up the organization’s keynote address on the final day of the conference, FINOS announced the inauguration of their AI Readiness Governance Framework, along with the next stage of their AI Readiness project — an open-source initiative that aims to manage the onboarding, development, and utilization of AI-based solutions to help dissolve the aforementioned reticence when it comes to GenAI adoption currently present within financial services. Reflecting their goal of fostering open source, open standards, and collaborative software development practices in financial services, FINOS now invites the wider community to join them in “developing and operationalizing frameworks, policies, and tools for the effective, safe, trustworthy, and compliant deployment of generative AI technologies.”1\nCommunity creates change, and transparency turns into trust — which is why in late February of 2024, we shifted the ValidMind product library to an open-source license,2 welcoming contributions to our code.",
+    "text": "Article copy\nThe Fintech Open Source Foundation (FINOS) hosted its annual Open Source in Finance Forum in New York (OSFF NY) last week, attended by several members of ValidMind. Distinguished speakers representing prominent names in software and financial services led discussions on open-source ideologies, industry best practices, and projections. Of note were the many panels on artificial intelligence (AI), including deep dives into the use of Generative AI (GenAI) within financial services and software development as a whole.\nGitHub — a service almost intrinsically linked with the idea of open source — hosted two sessions that focused on demonstrating the organization’s OpenAI tool, GitHub Copilot. Through the democratization of AI through Copilot, GitHub representatives argued that the barrier for entry to begin developing has been drastically lowered. Claiming to “maximize developer happiness, increase developer productivity, [and] accelerate software development” with its offering that includes suggested resolutions for proactively identified issues, GitHub’s outlook is that AI simplifies and enhances workflows for individuals and institutions enabling innovation and increased oversight — a philosophy we share here at ValidMind.\nBut the increased adoption of “non-traditional” models — that is, large language models (LLMs) or other types of GenAI models that produce outputs that are non-deterministic and unpredictable but have the benefit of more flexible applications and advanced scope beyond initial trained datasets — is not without its challenges. Panelists and participants at OSFF NY discussed and debated topics such as the unexpected intricacies when adapting open source licenses in the age of LLMs, or whether or not LLMs have the ability to tackle generating, reviewing, and utilizing complex documents required during key processes in financial services, and more. From legal ramifications to process practicalities, the question of AI expansion is not if but when and how best executed.\nGrowing pains notwithstanding, during the panel Making GenAI a Tool for Everyone, Colin Eberhardt, CTO of Scott Logic, proposed that soon it would be difficult to imagine a world before AI at the pace it is permeating every aspect of our lives. However, despite the significant and rapid increase in GenAI usage in many sectors such as mass media and law, statistics for financial services are lagging behind. While the apprehension is understandable for an industry so steeped in standardization and ruled by regulation, the community and conversation at OSFF NY posits that we are at the precipice of a phenomenal restructuring of our reality thanks to AI, with open-source software leading the charge.\nTo wrap up the organization’s keynote address on the final day of the conference, FINOS announced the inauguration of their AI Readiness Governance Framework, along with the next stage of their AI Readiness project — an open-source initiative that aims to manage the onboarding, development, and utilization of AI-based solutions to help dissolve the aforementioned reticence when it comes to GenAI adoption currently present within financial services. Reflecting their goal of fostering open source, open standards, and collaborative software development practices in financial services, FINOS now invites the wider community to join them in “developing and operationalizing frameworks, policies, and tools for the effective, safe, trustworthy, and compliant deployment of generative AI technologies.””\nCommunity creates change, and transparency turns into trust — which is why in late February of 2024, we shifted the ValidMind product library to an open-source license, welcoming contributions to our code.",
     "crumbs": [
       "Content Engineering",
       "ValidMind",
@@ -219,5 +219,26 @@
       "ValidMind",
       "OSFF Takeaways"
     ]
+  },
+  {
+    "objectID": "index.html#remove-me-after",
+    "href": "index.html#remove-me-after",
+    "title": "Beck Chan",
+    "section": "Remove me after",
+    "text": "Remove me after"
+  },
+  {
+    "objectID": "index.html#h2",
+    "href": "index.html#h2",
+    "title": "Beck Chan",
+    "section": "h2",
+    "text": "h2\n\nh3\n\nh4\nis the text actually smaller\n\nh5\nMy methods bridge the gap between product design and user experience, whether that’s advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features. test ????????????????????????????\ncode\n\nlist item\n\nblock quere\nbutton\ntext above\n\n\n\n\n\n\nNonetest\n\n\n\ntest and a link\n\n\ntext below????"
+  },
+  {
+    "objectID": "index.html#testing",
+    "href": "index.html#testing",
+    "title": "Beck Chan",
+    "section": "testing",
+    "text": "testing\neshfkjshkjf"
   }
 ]

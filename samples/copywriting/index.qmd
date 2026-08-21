@@ -15,6 +15,6 @@ listing:
     - osff-takeaways.qmd
 ---
 
-lorem ipsum etc so the preview shows text
+lorem ipsum etc so the preview shows text testing
 
 ## ValidMind

@@ -10,7 +10,7 @@ metadata-files:
 
 website:
   title: "Portfolio"
-  favicon: headshot-blue.png
+  favicon: assets/headshot.png
   navbar:
     left:
       - samples/content-engineering/index.qmd
@@ -19,19 +19,28 @@ website:
       # - samples/developer-advocacy/index.qmd
     right:
       - cv.qmd
-      - text: "Contact"
-        menu:
-        - text: "{{< fa brands github >}} **GitHub** &bull; beck-chan"
-          href: https://github.com/beck-chan
-        - text: "{{< fa brands linkedin >}} **LinkedIn** &bull; beck-chan"
-          href: https://linkedin.com/in/beck-chan
-        - text: "{{< fa envelope >}} rebecca.ht.chan@gmail.com"
-          href: mailto:rebecca.ht.chan@gmail.com
-        - text: "{{< fa phone >}} +1 (250) 885-6801"
-          href: tel:1-250-885-6801
+      - text: "{{< fa brands github >}}"
+        href: https://github.com/beck-chan
+      - text: "{{< fa brands linkedin >}}"
+        href: https://linkedin.com/in/beck-chan
+      - text: "{{< fa envelope >}}"
+        href: mailto:rebecca.ht.chan@gmail.com
+      - text: "{{< fa phone >}}"
+        href: tel:1-250-885-6801
+      # - text: "Contact"
+      #   menu:
+      #   - text: "{{< fa brands github >}} **GitHub** &bull; beck-chan"
+      #     href: https://github.com/beck-chan
+      #   - text: "{{< fa brands linkedin >}} **LinkedIn** &bull; beck-chan"
+      #     href: https://linkedin.com/in/beck-chan
+      #   - text: "{{< fa envelope >}} rebecca.ht.chan@gmail.com"
+      #     href: mailto:rebecca.ht.chan@gmail.com
+      #   - text: "{{< fa phone >}} +1 (250) 885-6801"
+      #     href: tel:1-250-885-6801
 
   sidebar: 
     style: docked
+    border: false
 
   search:
     location: navbar
@@ -49,13 +58,11 @@ format:
     page-layout: full
     grid:
       body-width: 1000px
-    # theme: cosmo
-    css: styles.css
+      sidebar-width: 300px
+    theme:
+      light: assets/styles.scss
     toc: true
     link-external-newwindow: true
-    backgroundcolor: "#fee3e5"
-    linkcolor: "#ff6162"
-    monobackgroundcolor: "#ff6162"
   
 filters:
   - timeline
