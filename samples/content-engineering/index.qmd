@@ -12,3 +12,5 @@ listing:
     - validmind.qmd
     - atryum.qmd
 ---
+
+lorem ipsum etc so the preview shows text

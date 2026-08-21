@@ -1,6 +1,6 @@
 ---
 title: "Beck Chan"
-subtitle: "Content Engineer &bull; Solutions Architect"
+subtitle: "Content Engineer &diams; Solutions Architect"
 page-layout: full
 sidebar: false
 toc: false
@@ -28,11 +28,29 @@ listing:
   #   - samples/developer-advocacy/index.qmd
 ---
 
+[test](cv.qmd) ?? ugh esdfs
+
+`code`
+
+:::: {.flex .flex-wrap .justify-around}
+
+::: {.w-20-ns}
+
+![](headshot.png){width=80% .pfp}
+
+:::
+
+::: {.w-80-ns}
+
 I'm **Beck**, poet with a passion for process — helping you empower users by designing and building solutions built to scale. 
 
 I've designed, implemented, and managed everything from **content**, **support**, **training**, and **onboarding** architecture for organizations from startups to enterprises.
 
 My methods bridge the gap between product design and user experience, whether that's advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features. 
+
+:::
+
+::::
 
 ## Samples
 

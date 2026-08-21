@@ -21,7 +21,6 @@ quarto render
 
 ## Notes
 
-- favicon
 - spacing/formatting of sidebar sections
 - theme
 - topic tags, make unclickable? investigate click hubs

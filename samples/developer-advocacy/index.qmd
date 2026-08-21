@@ -13,3 +13,5 @@ listing:
     - posthog.qmd
     - google-sheets.qmd
 ---
+
+lorem ipsum etc so the preview shows text
