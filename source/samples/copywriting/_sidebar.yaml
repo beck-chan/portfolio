@@ -10,8 +10,8 @@ website:
           # href: samples/copywriting/validmind.qmd
           contents:
             - text: "Honor the Human"
-              file: samples/copywriting/honor-the-human.qmd
+              file: samples/copywriting/validmind/honor-the-human.qmd
             - text: "Reduce Culture Risk"
-              file: samples/copywriting/reduce-culture-risk.qmd
+              file: samples/copywriting/validmind/reduce-culture-risk.qmd
             - text: "OSFF Takeaways"
-              file: samples/copywriting/osff-takeaways.qmd
+              file: samples/copywriting/validmind/osff-takeaways.qmd

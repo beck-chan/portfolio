@@ -1,5 +1,5 @@
 ---
-title: "curriculum vitae"
+title: "*curriculum vitae*"
 subtitle: "Beck Chan"
 sidebar: false
 html:
@@ -108,7 +108,7 @@ grid:
 #### Administrative & Teaching Assistant
 
 - Coached and assisted students on the classroom floor and in 1-on-1 lessons. 
-- Created lesson plans and personalized curriculums tailored to individual student needs
+- Created lesson plans and personalized curriculums tailored to individual student needs.
 
 :::
 

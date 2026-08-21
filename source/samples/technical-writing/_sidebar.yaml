@@ -8,22 +8,22 @@ website:
         - text: "---"
         - section: "ValidMind"
           href: samples/technical-writing/validmind.qmd
-          contents:
-            - samples/technical-writing/validmind/placeholder.qmd
-            - samples/technical-writing/validmind/placeholder.qmd
-            - samples/technical-writing/validmind/placeholder.qmd
-            - samples/technical-writing/validmind/placeholder.qmd
+          # contents:
+          #   - samples/technical-writing/validmind/placeholder.qmd
+          #   - samples/technical-writing/validmind/placeholder.qmd
+          #   - samples/technical-writing/validmind/placeholder.qmd
+          #   - samples/technical-writing/validmind/placeholder.qmd
         - section: "Atryum"
           href: samples/technical-writing/validmind.qmd
-          contents:
-            - samples/technical-writing/atryum/placeholder.qmd
-            - samples/technical-writing/atryum/placeholder.qmd
-            - samples/technical-writing/atryum/placeholder.qmd
-            - samples/technical-writing/atryum/placeholder.qmd
+          # contents:
+          #   - samples/technical-writing/atryum/placeholder.qmd
+          #   - samples/technical-writing/atryum/placeholder.qmd
+          #   - samples/technical-writing/atryum/placeholder.qmd
+          #   - samples/technical-writing/atryum/placeholder.qmd
         - section: "SaaSquatch"
           href: samples/technical-writing/validmind.qmd
-          contents:
-            - samples/technical-writing/saasquatch/placeholder.qmd
-            - samples/technical-writing/saasquatch/placeholder.qmd
-            - samples/technical-writing/saasquatch/placeholder.qmd
-            - samples/technical-writing/saasquatch/placeholder.qmd
+          # contents:
+          #   - samples/technical-writing/saasquatch/placeholder.qmd
+          #   - samples/technical-writing/saasquatch/placeholder.qmd
+          #   - samples/technical-writing/saasquatch/placeholder.qmd
+          #   - samples/technical-writing/saasquatch/placeholder.qmd

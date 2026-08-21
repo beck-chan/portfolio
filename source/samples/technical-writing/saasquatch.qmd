@@ -1,16 +1,16 @@
 ---
 title: "SaaSquatch"
 subtitle: "Technical Writing"
-listing:
-  - id: saasquatch-technical
-    type: grid
-    grid-columns: 2
-    max-description-length: 250
-    sort: false
-    fields: [title, subtitle, description]
-    contents:
-    - validmind/placeholder.qmd
-    - validmind/placeholder.qmd
-    - validmind/placeholder.qmd
-    - validmind/placeholder.qmd
+# listing:
+#   - id: saasquatch-technical
+#     type: grid
+#     grid-columns: 2
+#     max-description-length: 250
+#     sort: false
+#     fields: [title, subtitle, description]
+#     contents:
+#     - validmind/placeholder.qmd
+#     - validmind/placeholder.qmd
+#     - validmind/placeholder.qmd
+#     - validmind/placeholder.qmd
 ---
