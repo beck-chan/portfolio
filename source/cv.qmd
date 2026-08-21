@@ -11,7 +11,7 @@ grid:
 
 ::: {.timeline .tl-diamond .tl-label-banner .vertical}
 
-::: {.event data-label="March 2024 - July 2026"}
+::: {.event data-label="March 2024 - July 2026" style="--tl-color-label: #de267e; --tl-color-dot: #de267e;"}
 ### ValidMind, Inc.
 #### Senior Technical Writer
 
@@ -25,7 +25,7 @@ grid:
 
 :::
 
-::: {.event data-label="April 2023 - January 2024"}
+::: {.event data-label="April 2023 - January 2024" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;"}
 ### SaaSquatch by impact.com
 #### Senior Customer Solutions Specialist
 
@@ -36,7 +36,7 @@ grid:
 
 :::
 
-::: {.event data-label="October 2022 - March 2023"}
+::: {.event data-label="October 2022 - March 2023" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;"}
 ### SaaSquatch by impact.com
 
 #### Senior Technical Specialist
@@ -48,7 +48,7 @@ grid:
 
 :::
 
-::: {.event data-label="October 2018 - September 2022"}
+::: {.event data-label="October 2018 - September 2022" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;"}
 ### SaaSquatch by impact.com
 
 #### Solutions Architect
@@ -60,7 +60,7 @@ grid:
 
 :::
 
-::: {.event data-label="October 2017 - August 2018"}
+::: {.event data-label="October 2017 - August 2018" style="--tl-color-label: #f26b29; --tl-color-dot: #f26b29;"}
 ### Develus Systems Inc. for Complia Health
 
 #### Customer Support Analyst
@@ -71,7 +71,7 @@ grid:
 
 :::
 
-::: {.event data-label="July 2016 - September 2017"}
+::: {.event data-label="July 2016 - September 2017" style="--tl-color-label: #cd1727; --tl-color-dot: #cd1727;"}
 ### AbeBooks.com, Amazon subsidiary
 
 #### Customer Support Representative
@@ -81,7 +81,7 @@ grid:
 
 :::
 
-::: {.event data-label="January 2014 - July 2016"}
+::: {.event data-label="January 2014 - July 2016" style="--tl-color-label: #f3be60; --tl-color-dot: #f3be60;"}
 ### Hudson's Bay Optical
 
 #### Optical Technician & Medical Office Assistant
@@ -91,7 +91,7 @@ grid:
 
 :::
 
-::: {.event data-label="July 2013 - December 2013"}
+::: {.event data-label="July 2013 - December 2013" style="--tl-color-label: #0272be; --tl-color-dot: #0272be;"}
 ### Inner Harbour Optometry
 
 #### Medical Office Assistant / Receptionist
@@ -101,7 +101,7 @@ grid:
 
 :::
 
-::: {.event data-label="July 2010 - July 2013"}
+::: {.event data-label="July 2010 - July 2013" style="--tl-color-label: #222e84; --tl-color-dot: #222e84;"}
 
 ### Sylvan Learning
 
@@ -120,12 +120,12 @@ grid:
 
 ::: {.timeline .tl-diamond .tl-label-badge .vertical}
 
-::: {.event data-label="Completed 2019"}
+::: {.event data-label="Completed 2019" style="--tl-color-label: #ff6068; --tl-color-dot: #ff6068;"}
 ### Lighthouse Labs
 Intro to Front-End with JavaScript
 :::
 
-::: {.event data-label="Graduated 2013"}
+::: {.event data-label="Graduated 2013" style="--tl-color-label: #0272be; --tl-color-dot: #0272be;"}
 ### University of Victoria
 Bachelor of Arts, English Literature & Japanese Studies (*cum laude*)
 :::
