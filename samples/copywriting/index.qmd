@@ -8,7 +8,7 @@ listing:
     grid-columns: 3
     max-description-length: 250
     sort: false
-    fields: [title, subtitle, description]
+    fields: [title, subtitle]
     contents:
     - honor-the-human.qmd
     - reduce-culture-risk.qmd

@@ -2,9 +2,6 @@
 title: "*curriculum vitae*"
 subtitle: "Beck Chan"
 sidebar: false
-html:
-grid:
-    body-width: 1000px
 ---
 
 ## Work Experience

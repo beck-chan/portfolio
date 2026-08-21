@@ -36,17 +36,19 @@ website:
   search:
     location: navbar
 
-  page-footer: 
-    background: "#ff6162"
-    foreground: "#fee3e5"
-    left: 
-      - text: <a href="https://github.com/beck-chan/portfolio/releases">Releases</a>
-    right:
-      - text: <a href="https://github.com/beck-chan"><i class="fa-brands fa-github"></i></a> <a href="https://www.linkedin.com/in/beck-chan"><i class="fa-brands fa-linkedin"></i></a> <a href="mailto:rebecca.ht.chan@gmail.com"><i class="fa fa-envelope"></i></a> <a href="tel:1-250-885-6801"><i class="fa fa-phone"></i></a>
+  # page-footer: 
+  #   background: "#ff6162"
+  #   foreground: "#fee3e5"
+  #   left: 
+  #     - text: <a href="https://github.com/beck-chan/portfolio/releases">Releases</a>
+  #   right:
+  #     - text: <a href="https://github.com/beck-chan"><i class="fa-brands fa-github"></i></a> <a href="https://www.linkedin.com/in/beck-chan"><i class="fa-brands fa-linkedin"></i></a> <a href="mailto:rebecca.ht.chan@gmail.com"><i class="fa fa-envelope"></i></a> <a href="tel:1-250-885-6801"><i class="fa fa-phone"></i></a>
 
 format:
   html:
     page-layout: full
+    grid:
+      body-width: 1000px
     # theme: cosmo
     css: styles.css
     toc: true
