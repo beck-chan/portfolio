@@ -1,6 +1,6 @@
 project:
   type: website
-  output-dir: ../output
+  output-dir: _output
 
 metadata-files:
   - samples/content-engineering/_sidebar.yaml
@@ -10,6 +10,7 @@ metadata-files:
 
 website:
   title: "Beck Chan &diams; Portfolio"
+  favicon: headshot-blue.png
   navbar:
     left:
       - samples/content-engineering/index.qmd

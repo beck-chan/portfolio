@@ -6,16 +6,13 @@
 
 ### Preview
 
-Automatically preview into `output`:
-
 ```
-cd source
 quarto preview 
 ```
 
 ## Render
 
-Automatically render HTML into `output`:
+Render HTML into `_output`:
 
 ```
 cd source
