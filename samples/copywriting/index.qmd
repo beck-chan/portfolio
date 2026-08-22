@@ -13,6 +13,7 @@ listing:
     - honor-the-human.qmd
     - reduce-culture-risk.qmd
     - osff-takeaways.qmd
+    categories: true
 ---
 
 lorem ipsum etc so the preview shows text testing

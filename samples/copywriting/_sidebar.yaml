@@ -6,7 +6,7 @@ website:
         - text: "Copywriting"
           file: samples/copywriting/index.qmd
         - text: "---"
-        - section: "ValidMind"
+        - text: "ValidMind"
           # href: samples/copywriting/validmind.qmd
           contents:
             - text: "Honor the Human"

@@ -1,6 +1,7 @@
 ---
 title: "Honor the Human with ValidMind"
-subtitle: "Copywriting"
+subtitle: "Blog Post"
+categories: ["Blog", "Artficial Intelligence (AI)", "EU AI Act", "AI Risk", "Model Risk Management", "ValidMind"]
 ---
 
 [ValidThoughts: View original post](https://validmind.com/blog/honor-the-human-with-validmind/)

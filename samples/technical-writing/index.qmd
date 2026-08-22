@@ -14,4 +14,4 @@ listing:
     - saasquatch.qmd
 ---
 
-lorem ipsum etc so the preview shows text
+lorem ipsum etc so the preview shows text redo this so that all the tiles are on this page per grouping so that the categories filter can work

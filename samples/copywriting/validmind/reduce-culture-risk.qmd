@@ -1,6 +1,7 @@
 ---
 title: "Reduce Culture Risk with ValidMind"
-subtitle: "Copywriting"
+subtitle: "Blog Post"
+categories: ["Blog", "Artficial Intelligence (AI)", "AI Risk", "Model Risk Management", "ValidMind"]
 ---
 
 [ValidThoughts: View original post](https://validmind.com/blog/reduce-culture-risk-with-validmind/)

@@ -4,7 +4,7 @@
     "href": "samples/technical-writing/index.html",
     "title": "Technical Writing",
     "section": "",
-    "text": "lorem ipsum etc so the preview shows text\n\n\n\n\n\n\n\n\n\n\n\nValidMind\n\n\nTechnical Writing\n\n\n\n\n\n\n\n\n\n\n\n\nAtryum\n\n\nTechnical Writing\n\n\n\n\n\n\n\n\n\n\n\n\nSaaSquatch\n\n\nTechnical Writing\n\n\n\n\n\n\n\n\nNo matching items",
+    "text": "lorem ipsum etc so the preview shows text redo this so that all the tiles are on this page per grouping so that the categories filter can work\n\n\n\n\n\n\n\n\n\n\n\nValidMind\n\n\nTechnical Writing\n\n\n\n\n\n\n\n\n\n\n\n\nAtryum\n\n\nTechnical Writing\n\n\n\n\n\n\n\n\n\n\n\n\nSaaSquatch\n\n\nTechnical Writing\n\n\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Content Engineering",
       "Technical Writing"
@@ -61,7 +61,7 @@
     "href": "samples/content-engineering/index.html",
     "title": "Content Engineering",
     "section": "",
-    "text": "lorem ipsum etc so the preview shows text\n\n\n\n\n\n\n\n\n\n\n\nValidMind\n\n\nContent Engineering\n\n\n\n\n\n\n\n\n\n\n\n\nAtryum\n\n\nContent Engineering\n\n\n\n\n\n\n\n\nNo matching items",
+    "text": "lorem ipsum etc so the preview shows text same here, same listing page\n\n\n\n\n\n\n\n\n\n\n\nValidMind\n\n\nContent Engineering\n\n\n\n\n\n\n\n\n\n\n\n\nAtryum\n\n\nContent Engineering\n\n\n\n\n\n\n\n\nNo matching items",
     "crumbs": [
       "Content Engineering"
     ]
@@ -240,5 +240,12 @@
     "title": "Beck Chan",
     "section": "testing",
     "text": "testing\neshfkjshkjf"
+  },
+  {
+    "objectID": "samples/topics/integrations.html",
+    "href": "samples/topics/integrations.html",
+    "title": "Integrations",
+    "section": "",
+    "text": "lorem ipsum etc so the preview shows text\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

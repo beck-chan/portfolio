@@ -13,4 +13,4 @@ listing:
     - atryum.qmd
 ---
 
-lorem ipsum etc so the preview shows text
+lorem ipsum etc so the preview shows text same here, same listing page 

@@ -1,6 +1,7 @@
 ---
 title: "Takeaways from Open Source in Finance Forum: Future of Fintech, OSS, and GenAI"
-subtitle: "Copywriting"
+subtitle: "Blog Post"
+categories: ["Blog", "Artficial Intelligence (AI)", "Generative AI", "Large Language Models", "Open-Source", "ValidMind"]
 ---
 
 [ValidThoughts: View original post](https://validmind.com/blog/takeaways-from-open-source-in-finance-forum-future-of-fintech-oss-and-genai/)
