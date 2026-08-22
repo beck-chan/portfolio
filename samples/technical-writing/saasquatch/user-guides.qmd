@@ -1,0 +1,9 @@
+---
+title: "User Guides"
+subtitle: "Reference Guides"
+categories: ["User Guides", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+---
+
+In addition to the tech sphere, my professional experience includes education, healthcare and sales—reflecting my passion for instruction and illumination. I believe that the solution for delivering an excellent experience for employees and customers alike starts with proper training and thorough documentation, especially when it comes to the ever-changing landscape of software.
+
+Below are a few samples of the software guides I produced to instruct customers, as well as to serve as documentation for the features and their functionality:

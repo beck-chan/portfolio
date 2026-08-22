@@ -2,16 +2,34 @@
 title: "Technical Writing"
 subtitle: "Samples"
 listing:
-  - id: technical
+  - id: saasquatch-technical
     type: grid
     grid-columns: 3
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
     contents:
-    - validmind.qmd
-    - atryum.qmd
-    - saasquatch.qmd
+      - saasquatch/integrations.qmd
+      - saasquatch/sdk.qmd
+      - saasquatch/user-guides.qmd
+
 ---
 
-lorem ipsum etc so the preview shows text redo this so that all the tiles are on this page per grouping so that the categories filter can work
+Tutorials, user guides, training, developer content and more, oh my!
+
+## ValidMind
+
+{{< include /samples/single-source/_validmind.qmd >}}
+
+### Atryum
+
+{{< include /samples/single-source/_atryum.qmd >}}
+
+## SaaSquatch
+
+{{< include /samples/single-source/_saasquatch.qmd >}}
+
+Below is some of the content I owned:
+
+:::{#saasquatch-technical}
+:::

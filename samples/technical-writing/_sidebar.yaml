@@ -21,9 +21,7 @@ website:
           #   - samples/technical-writing/atryum/placeholder.qmd
           #   - samples/technical-writing/atryum/placeholder.qmd
         - section: "SaaSquatch"
-          href: samples/technical-writing/validmind.qmd
-          # contents:
-          #   - samples/technical-writing/saasquatch/placeholder.qmd
-          #   - samples/technical-writing/saasquatch/placeholder.qmd
-          #   - samples/technical-writing/saasquatch/placeholder.qmd
-          #   - samples/technical-writing/saasquatch/placeholder.qmd
+          contents:
+            - samples/technical-writing/saasquatch/integrations.qmd
+            - samples/technical-writing/saasquatch/sdk.qmd
+            - samples/technical-writing/saasquatch/user-guides.qmd

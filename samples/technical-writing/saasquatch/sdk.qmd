@@ -1,0 +1,9 @@
+---
+title: "JavaScript SDK"
+subtitle: "Developer Content"
+categories: ["Developer Content", "JavaScript SDK", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+---
+
+Before I worked at SaaSquatch, I only had a surface-level understanding of JavaScript. As a **Solutions Architect**, I acted as the primary technical contact for both installations of the SaaSquatch product suite and our many APIs and SDKs, including squatch.JS. 
+
+Below are a few samples of the guides I was involved heavily in writing, editing and reviewing for accuracy. The following guides were composed based on our SDK reference or provided Cucumber specs, as well as several independent UATs I performed in order to understand the features fully:

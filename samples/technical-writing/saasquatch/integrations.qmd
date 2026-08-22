@@ -1,0 +1,9 @@
+---
+title: "3rd-Party Integrations"
+subtitle: "Feature Documentation"
+categories: ["Feature Documentation", "Integrations", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+---
+
+Before I worked at SaaSquatch, I had never used Salesforce (SFDC). Very quickly after onboarding, I became the company Subject Matter Expert for our custom SFDC integration, which I helped develop during my time as a **Solutions Architect** as part of custom work for a client. 
+
+Below are a few samples of the guides I produced to assist with custom SFDC integrations, as well as to serve as documentation for the feature and its complex functionality:

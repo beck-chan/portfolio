@@ -10,17 +10,41 @@ listing:
     sort: false
     fields: [title, subtitle]
     contents:
-    - honor-the-human.qmd
-    - reduce-culture-risk.qmd
-    - osff-takeaways.qmd
+    - validmind/honor-the-human.qmd
+    - validmind/reduce-culture-risk.qmd
+    - validmind/osff-takeaways.qmd
+    categories: true
+  - id: saasquatch-copywriting
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - saasquatch/growth-automation.qmd
     categories: true
 ---
 
-Blog posts, marketing copy, and so forth.
+Blog posts, feature highlights, marketing copy, and so forth.
 
 ## ValidMind
 
 {{< include /samples/single-source/_validmind.qmd >}}
 
 Check out some blog posts I wrote on our product offering and industry that shine some insight into my writing style:
+
+:::{#validmind-copywriting}
+:::
+
+## SaaSquatch
+
+{{< include /samples/single-source/_saasquatch.qmd >}}
+
+Below is the very first article I wrote for SaaSquatch. While it feels a bit rough now years later, it still showcases my consistent author voice:
+
+:::{#saasquatch-copywriting}
+:::
+
+
+
 
