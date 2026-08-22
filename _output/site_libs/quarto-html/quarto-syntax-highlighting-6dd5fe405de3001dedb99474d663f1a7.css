@@ -1,0 +1,102 @@
+/* quarto syntax highlight colors */
+:root {
+  --quarto-hl-co-color: #fee3e5;
+  --quarto-hl-kw-color: #ffb3ba;
+  --quarto-hl-cf-color: #ff6162;
+  --quarto-hl-fu-color: #ff6162;
+  --quarto-hl-st-color: #ff6162;
+  --quarto-hl-op-color: #ffb3ba;
+  --quarto-hl-dt-color: #df9a49;
+  --quarto-hl-dv-color: #fee3e5;
+  --quarto-hl-fl-color: #fee3e5;
+  --quarto-hl-at-color: #ffb3ba;
+  --quarto-hl-sc-color: #ff6162;
+}
+
+/* other quarto variables */
+:root {
+  --quarto-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+/* syntax highlight based on Pandoc's rules */
+pre > code.sourceCode > span {
+  color: #df9a49;
+}
+
+code.sourceCode > span {
+  color: #df9a49;
+}
+
+div.sourceCode,
+div.sourceCode pre.sourceCode {
+  color: #df9a49;
+}
+
+/* Normal */
+code span {
+  color: #df9a49;
+}
+
+/* Attribute */
+code span.at {
+  color: #ffb3ba;
+}
+
+/* ControlFlow */
+code span.cf {
+  color: #ff6162;
+  font-weight: bold;
+}
+
+/* Comment */
+code span.co {
+  color: #fee3e5;
+  font-style: italic;
+}
+
+/* DataType */
+code span.dt {
+  color: #df9a49;
+}
+
+/* DecVal */
+code span.dv {
+  color: #fee3e5;
+}
+
+/* Float */
+code span.fl {
+  color: #fee3e5;
+}
+
+/* Function */
+code span.fu {
+  color: #ff6162;
+}
+
+/* Keyword */
+code span.kw {
+  color: #ffb3ba;
+  font-weight: bold;
+}
+
+/* Operator */
+code span.op {
+  color: #ffb3ba;
+}
+
+/* SpecialChar */
+code span.sc {
+  color: #ff6162;
+}
+
+/* String */
+code span.st {
+  color: #ff6162;
+}
+
+.prevent-inlining {
+  content: "</";
+}
+
+/*# sourceMappingURL=15566e74ba2257bff8f35419865af48f.css.map */

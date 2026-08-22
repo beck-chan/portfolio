@@ -53,45 +53,4 @@ My methods bridge the gap between product design and user experience, whether th
 :::{#samples}
 :::
 
-## Remove me after
 
-# h1 
-
-## h2
-
-### h3 
-
-#### h4 
-
-is the text actually smaller
-
-##### h5 
-
-My methods bridge the gap between product design and user experience, whether that's advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features. [test](cv.qmd) ????????????????????????????
-
-`code`
-
-- [ ] list item
-
-```
-block quere
-```
-
-[button](index.qmd){.button}
-
-text above
-
-
-::: {.callout title="test"}
-
-test [and a link](index.qmd)
-
-:::
-
-text below????
-
-::: {.attn}
-## testing
-
-eshfkjshkjf
-:::

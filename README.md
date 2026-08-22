@@ -23,8 +23,6 @@ quarto render
 
 ## Notes
 
-- theme
 - topic tags, make unclickable? investigate click hubs
 - remove output, .gitignore?
-- toc links
 - hide contact links on mobile

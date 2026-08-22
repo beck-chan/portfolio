@@ -59,8 +59,11 @@ format:
     grid:
       body-width: 1000px
       sidebar-width: 300px
+      margin-width: 500px
     theme:
       light: assets/styles.scss
+    highlight-style: assets/code.theme
+    code-overflow: wrap
     toc: true
     link-external-newwindow: true
   

@@ -225,14 +225,14 @@
     "href": "index.html#remove-me-after",
     "title": "Beck Chan",
     "section": "Remove me after",
-    "text": "Remove me after"
+    "text": "Remove me after\nMy methods bridge the gap between product design and user experience, whether that’s advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features. test ????????????????????????????\nbutton\ntext above\n\n\n\n\n\n\nNonetest\n\n\n\ntest and a link\n\n\ntext below????\nname: Execute demo notebooks\ndescription: Installs python3, validmind, checks dependencies then executes ONLY the training notebook series with development heap tracking\n\ninputs:\n  dev_env:\n    description: \"Load the created dev.env file\"\n    required: true\n  valid_env:\n    description: \"Load the created valid.env file\"\n    required: true\n\nruns:\n  using: \"composite\"\n  steps:\n    - name: Install python3 for Jupyter Notebooks\n      shell: bash\n      run: |\n        python3 -m pip install jupyter\n        python -m pip install --upgrade pip\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.pipeline import Pipeline\n\n# Scaling features ensures the lbfgs solver converges reliably\nmodel_lr = Pipeline([\n    (\"scaler\", StandardScaler()),\n    (\"lr\", LogisticRegression()),\n])\nmodel_lr.fit(x_train, y_train)\n\n# Initialize the ValidMind model object for the logistic regression model\nvm_model_lr = vm.init_model(\n    model_lr,\n    input_id=\"logistic_regression\",\n)\n\n# Assign predictions to the test dataset for the logistic regression model\nvm_test_ds.assign_predictions(model=vm_model_lr)\ncode\n\nlist item\ntwo\nthree?"
   },
   {
     "objectID": "index.html#h2",
     "href": "index.html#h2",
     "title": "Beck Chan",
     "section": "h2",
-    "text": "h2\n\nh3\n\nh4\nis the text actually smaller\n\nh5\nMy methods bridge the gap between product design and user experience, whether that’s advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features. test ????????????????????????????\ncode\n\nlist item\n\nblock quere\nbutton\ntext above\n\n\n\n\n\n\nNonetest\n\n\n\ntest and a link\n\n\ntext below????"
+    "text": "h2\n\nh3\n\nh4\nis the text actually smaller\n\nh5\n???? don’t forget toc breadcrumbs"
   },
   {
     "objectID": "index.html#testing",
