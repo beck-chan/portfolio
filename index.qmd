@@ -32,7 +32,7 @@ listing:
 
 ::: {.w-20-ns .tc .mb3}
 
-![](assets/headshot.png){width=60% .pfp}
+![](assets/headshot.png){width=50% .pfp}
 
 :::
 

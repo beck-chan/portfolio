@@ -7,7 +7,7 @@ listing:
     grid-columns: 3
     max-description-length: 250
     sort: false
-    fields: [title, subtitle, description]
+    fields: [title, subtitle]
     contents:
       - saasquatch/integrations.qmd
       - saasquatch/sdk.qmd
