@@ -53,7 +53,6 @@ $breadcrumb-active-color: #ff6162;;
 .navbar-nav .nav-link.active {
     font-weight: bold;
   }
-  
 
 /* Sidebar styling */
 
@@ -304,11 +303,62 @@ ul.task-list {
 
 // TOC links
 nav#TOC {
-    // border: 2px solid #0b2a12 !important; 
-    border-left: 3px solid #0b2a12;
-    background-color: #FFFFFF80;
-    padding: 1rem;
+  border-left: 3px solid #0b2a12;
+  background-color: #FFFFFF80;
+  padding: 1rem;
+  
+  ul {
+    border-left: none !important;
+    padding-left: 0; 
+    
+    ul {
+      padding-left: 0.6rem; 
+    }
+    
+    li a.nav-link {
+      color: #ff6162 !important;
+      text-decoration: none;
+      border-left: 1px solid transparent !important;
+      margin-left: 0 !important;
+      padding-left: 0.5rem !important;
+      position: relative;
+      
+      &:hover {
+        color: #0b2a12 !important;
+      }
+      
+      &.active {
+        color: #0b2a12 !important;
+        font-weight: 400 !important;
+        
+        &::before {
+          content: "";
+          position: absolute;
+          left: -0.1rem; 
+          top: 50%;
+          transform: translateY(-50%) rotate(45deg);
+          width: 6px;
+          height: 6px;
+          border-top: 2px solid #0b2a12;
+          border-right: 2px solid #0b2a12;
+          background-color: transparent;
+          z-index: 10;
+        }
+      }
+    }
   }
+
+  #quarto-sidebar-toc-header, h2, h3 {
+    color: #0b2a12 !important;
+  }
+
+  .toc-actions ul li a.toc-action {
+    color: #0b2a12;
+    text-decoration: none;
+    font-size: 0.9em;
+    margin-right: 1em;
+  }
+}
 
 #quarto-sidebar-toc-header, 
 nav#TOC > h2, 
@@ -483,6 +533,53 @@ margin-right: 1em;
 #quarto-margin-sidebar .quarto-listing-category .category .quarto-category-count {
   color: inherit !important;
 }
+
+
+
+
+/* Mobile social icon horizontal display */
+
+
+
+@media (max-width: 991.98px) {
+
+
+  .navbar-nav {
+    display: block !important; 
+  }
+
+
+  .navbar-nav .nav-item {
+    display: block !important;
+    clear: both !important;
+    width: 100% !important;
+    text-align: left !important;
+  }
+
+
+  .navbar-nav .nav-item:has(.fa-brands),
+  .navbar-nav .nav-item:has(.fa-solid),
+  .navbar-nav .nav-item:has([class^="fa-"]) {
+    display: inline-block !important;
+    width: auto !important;            
+    clear: none !important;           
+    
+ 
+    float: right !important; 
+    
+
+    margin-left: 25px !important;      
+    margin-right: 0 !important;        
+    margin-top: 25px !important;      
+    margin-bottom: 10px !important;
+
+    .nav-link {
+      display: inline-flex !important;
+      padding: 0 !important;           
+    }
+  }
+}
+
 
   
   

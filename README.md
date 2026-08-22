@@ -22,7 +22,4 @@ quarto render
 ```
 
 ## Notes
-
-- topic tags, make unclickable? investigate click hubs
 - remove output, .gitignore?
-- hide contact links on mobile
