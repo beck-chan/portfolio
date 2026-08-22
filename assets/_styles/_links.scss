@@ -1,0 +1,84 @@
+/* Link styling */
+#quarto-document-content a:hover:not(.quarto-grid-link):not(.button):not(.breadcrumb), 
+main a:hover:not(.quarto-grid-link):not(.button):not(.breadcrumb) { 
+  &:not(.quarto-page-breadcrumbs a):not(.quarto-secondary-nav a) {
+    color: #ff6162; 
+    text-decoration: none !important; 
+    border-bottom: none !important; 
+  }
+}
+
+// Breadcrumbs
+.quarto-page-breadcrumbs,
+.quarto-secondary-nav,
+.breadcrumb,
+nav[aria-label="breadcrumb"] {
+  &, & *, & a, & a * {
+    border-bottom: none !important;
+    text-decoration: none !important;
+  }
+  
+  a:hover {
+    border-bottom: none !important;
+    text-decoration: underline !important; 
+  }
+}
+
+// Listing tiles
+.card {
+    border-radius: 0 !important;
+    border: 1px solid #ff6162;
+    background-color: #FFFFFF60;
+  }
+  
+.card-title {
+    padding-bottom: 0.2rem;
+    font-size: 100%;
+    font-weight: bold;
+    color: #ff6162;
+  }
+  
+.card:hover {
+    border: 1px solid #0b2a12;
+    background-color: #FFFFFF80;
+  }
+
+
+.quarto-grid-item .listing-subtitle {
+    text-transform: uppercase;
+    font-size: .75em;
+  }
+
+// Buttons
+.button {
+    color: #ff6162;
+    background-color: #FFFFFF60;
+    text-decoration: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    border: 1px solid #ff6162;
+    font-size: 16px;
+    transition: color 0.15s ease-in, background-color 0.15s ease-in;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .button:hover {
+    color: #ff6162;
+    text-decoration: none;
+    border: 1px solid #0b2a12;
+    background-color: #FFFFFF80;
+  }
+
+// Active breadcrumb
+.quarto-page-breadcrumbs .breadcrumb-item:last-child a {
+    color: #0b2a12 !important;         
+    text-decoration: none !important;   
+    pointer-events: none !important;    
+    cursor: default !important;
+    font-weight: 500;
+}
