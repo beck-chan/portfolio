@@ -16,6 +16,11 @@ listing:
     categories: true
 ---
 
-lorem ipsum etc so the preview shows text testing
+Blog posts, marketing copy, and so forth.
 
 ## ValidMind
+
+{{< include /samples/single-source/_validmind.qmd >}}
+
+Check out some blog posts I wrote on our product offering and industry that shine some insight into my writing style:
+

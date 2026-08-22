@@ -48,6 +48,7 @@ format:
     highlight-style: assets/code.theme
     code-overflow: wrap
     toc: true
+    toc-depth: 5
     link-external-newwindow: true
   
 filters:

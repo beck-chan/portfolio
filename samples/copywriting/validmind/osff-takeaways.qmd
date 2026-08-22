@@ -4,10 +4,6 @@ subtitle: "Blog Post"
 categories: ["Blog", "Artficial Intelligence (AI)", "Generative AI", "Large Language Models", "Open-Source", "ValidMind"]
 ---
 
-[ValidThoughts: View original post](https://validmind.com/blog/takeaways-from-open-source-in-finance-forum-future-of-fintech-oss-and-genai/)
-
-## Article copy
-
 The Fintech Open Source Foundation (FINOS) hosted its annual Open Source in Finance Forum in New York (OSFF NY) last week, attended by several members of ValidMind. Distinguished speakers representing prominent names in software and financial services led discussions on open-source ideologies, industry best practices, and projections. Of note were the many panels on artificial intelligence (AI), including deep dives into the use of Generative AI (GenAI) within financial services and software development as a whole.
 
 GitHub — a service almost intrinsically linked with the idea of open source — hosted two sessions that focused on demonstrating the organization’s OpenAI tool, GitHub Copilot. Through the democratization of AI through Copilot, GitHub representatives argued that the barrier for entry to begin developing has been drastically lowered. Claiming to "maximize developer happiness, increase developer productivity, [and] accelerate software development" with its offering that includes suggested resolutions for proactively identified issues, GitHub’s outlook is that AI simplifies and enhances workflows for individuals and institutions enabling innovation and increased oversight — a philosophy we share here at ValidMind.
@@ -19,3 +15,8 @@ Growing pains notwithstanding, during the panel Making GenAI a Tool for Everyone
 To wrap up the organization’s keynote address on the final day of the conference, FINOS announced the inauguration of their AI Readiness Governance Framework, along with the next stage of their AI Readiness project — an open-source initiative that aims to manage the onboarding, development, and utilization of AI-based solutions to help dissolve the aforementioned reticence when it comes to GenAI adoption currently present within financial services. Reflecting their goal of fostering open source, open standards, and collaborative software development practices in financial services, FINOS now invites the wider community to join them in "developing and operationalizing frameworks, policies, and tools for the effective, safe, trustworthy, and compliant deployment of generative AI technologies.""
 
 Community creates change, and transparency turns into trust — which is why in late February of 2024, we shifted the ValidMind product library to an open-source license, welcoming contributions to our code.
+
+#### Citation
+
+
+[ValidThoughts: View original post](https://validmind.com/blog/takeaways-from-open-source-in-finance-forum-future-of-fintech-oss-and-genai/){.button}

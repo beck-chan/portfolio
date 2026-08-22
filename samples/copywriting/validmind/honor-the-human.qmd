@@ -4,10 +4,6 @@ subtitle: "Blog Post"
 categories: ["Blog", "Artficial Intelligence (AI)", "EU AI Act", "AI Risk", "Model Risk Management", "ValidMind"]
 ---
 
-[ValidThoughts: View original post](https://validmind.com/blog/honor-the-human-with-validmind/)
-
-## Article copy
-
 The threat of technology is nothing new. When the printing press emerged in Europe in the early 15th century, it introduced the idea that occupations could be overwritten by automation — gone were the days of pious monks toiling in dim light over delicate sheets of parchment, illuminating every manuscript meticulously by hand. But what sprung forth from volumes inked with remarkable speed and accuracy by machinery was the democratization of information, heralding a new age of literacy and imagination.
 
 In 1746, a member of the British intelligentsia by the name of Samuel Johnson was commissioned to create A Dictionary of the English Language. Johnson famously boasted that he alone would be able to complete the project in a fraction of the 40 long years it took 40 different scholars from the Académie Française to complete their version — thanks in part to technological advances.
@@ -18,7 +14,7 @@ Very few would argue that this tedium would be preferable, nor would very many o
 
 A chilling prophecy, a narrative so often repeated in disillusioned visions of our dystopian future. Yet Caecus, a politician and writer from the Roman Republic who lived over 2000 years ago, offered a more optimistic assessment of our capabilities as Homo faber — "human, the maker." Through the ingenious use of tools, each person is the architect of their own destiny.
 
-### A model reality
+## A model reality
 
 Models, loosely defined as a simulation designed to help analyze and predict reality, have been used to fortify humanity’s understanding of the universe around us as far back as classical antiquity. From ancient theories of philosophy and astronomy to more modern concepts of physics and economics, tools like models enable us to more fully grasp abstract information and as a result drive concrete change.
 
@@ -26,7 +22,7 @@ Many consider the advent of artificial intelligence (AI) as somewhere in the mid
 
 With the 20th century came an incredible realization of this profound tenet, as advances in spheres such as statistics and computing radically influenced decisions made in finance and beyond — changes that continue to shift the macroeconomic tides that wash all over the world. Information and tasks can now be processed at a speed and volume almost incomprehensible to human understanding — think compressing 40 years into 40 seconds. Using technology, humans have even been able to manipulate the passage of time.
 
-### Autonomy through automation
+## Autonomy through automation
 
 From setting our alarms with Alexa to trusting the weather forecast’s estimate as to when the sun will be at its zenith, technology is woven into the very fabric of our being. Despite our apprehensions, most of us recognize that automation grants us autonomy to shape the future by streamlining the present. By removing the obstacle of how to accomplish a task, we can instead focus on the expanded possibilities of what else we can do with the resources made available by automation.
 
@@ -34,7 +30,7 @@ Let’s transpose ourselves again into the alternate reality where automation is
 
 The mere idea is maddening — you know that there is a much more effective, efficient, and accurate method — one where time and human cost is vastly reduced simply by leaning on the use of automation somewhere along the way. Similarly, you would likely be as frustrated by a process governed only by cold calculation, one where human oversight was absent and nuance was easily overlooked by impartial mathematics.
 
-### (Hu)man in the machine
+## (Hu)man in the machine
 
 Ideal automation, therefore, marries both the human and the machine — a dialogue where both elements are intertwined and interact at various parts along the journey. Even Johnson’s patrons, who presumably had access to the same printing press as he did, recognized the need for an expert in the loop — someone who’s authority and input served as a control for the accuracy and quality of the output.
 
@@ -48,3 +44,7 @@ Accurate and thorough documentation plays an integral role in moving a model for
 ValidMind’s approach to model documentation puts the human first, starting the conversation between developer and model using automation. Your model cannot yet speak for itself, but until then — there’s ValidMind.
 
 :::
+
+#### Citation
+
+[ValidThoughts: View original post](https://validmind.com/blog/honor-the-human-with-validmind/){.button}
