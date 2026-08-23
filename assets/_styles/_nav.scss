@@ -1,5 +1,4 @@
 /* Navbar styling */
-
 // Navbar title text
 .navbar-title { 
     text-transform: uppercase;
@@ -25,7 +24,7 @@
 .sidebar-navigation .sidebar-divider {
     margin-top: 1rem;
     color: #ff6162;
-    border-top: 1px dotted #ff6162 !important; 
+    border-top: 1px dotted #ffb3ba !important; 
     opacity: 1 !important;    
     }
 
@@ -66,3 +65,47 @@
     background-color: transparent; 
     margin-left: -0.1rem;
     }
+
+/* Footer */
+footer.footer,
+.nav-footer,
+.nav-footer-left,
+.nav-footer-center,
+.nav-footer-right,
+.nav-footer p,
+.nav-footer span,
+.nav-footer div {
+  color: #0b2a12 !important; 
+  padding-top: 0.85rem;
+  margin-top: -0.5rem !important;  
+  position: relative !important;
+  z-index: 100 !important;       
+}
+
+.nav-footer-left,
+.nav-footer-center,
+.nav-footer-right {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.nav-footer a,
+.nav-footer a *,
+footer.footer a,
+footer.footer a * {
+  color: #0b2a12 !important; 
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  --bs-link-color: #0b2a12 !important;;
+}
+
+
+.nav-footer a:hover,
+.nav-footer a:hover *,
+footer.footer a:hover,
+footer.footer a:hover * {
+  color: #0b2a1280 !important; 
+  --bs-link-hover-color: #0b2a1280 !important;
+}
+

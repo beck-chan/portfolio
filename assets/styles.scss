@@ -4,14 +4,16 @@
 // Coral: #ff6162
 // Pink: #ffb3ba
 // Light pink: #fee3e5 
+// Lightest pink: #fff4f5 
+// Almost white: #fff8f9
 
 /*-- scss:defaults --*/
 
 // Foundations
-$body-bg: #fee3e5; // Page colour
+$body-bg: #fff8f9; // Page colour
 $body-color: #0b2a12; // Font colour
 $navbar-bg: #0b2a12; // Top nav bg colour
-$sidebar-bg: #ffb3ba; // Side nav bg colour
+$sidebar-bg: #fee3e5; // Side nav bg colour
 $navbar-padding-y: 1rem; // Top nav padding
 $sidebar-padding-y: 1rem; // Top nav padding
 
@@ -43,9 +45,13 @@ $pre-bg:#0b2a12; // Block background color
 @import '_styles/content';
 @import '_styles/margin';
 @import '_styles/mobile';
+
+
+
+
+
   
-
-
+  
 
 
 

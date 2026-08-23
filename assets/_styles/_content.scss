@@ -1,11 +1,20 @@
 /* Content styles */
 
+// Subtitle
+.subtitle, 
+header .subtitle {
+  color: #0b2a1290 !important;       
+  font-size: 1.25rem !important;   
+  font-weight: 400 !important;
+  margin-top: 0.5rem !important;   
+}
+
 // Bolding
 strong, b {
     margin: 0.10rem;
     border-radius: 3px;   
-    letter-spacing: 0.1rem;    
     font-weight: 500 !important;     
+    color: #0b2a1290 !important;
 }
 
 // Profile pic
@@ -15,16 +24,15 @@ strong, b {
 
 // Callouts
 div.callout.callout {
-    border: 1px solid #0b2a12;
-    border-left: 5px dotted #0b2a12;
-    margin-left: 1.5rem !important; 
-    border-radius: 0 !important; 
+    border: 1px solid #0b2a1280;
+    border-right: 2px solid #0b2a12;
+    border-bottom: 2px solid #0b2a12;
+    background-color: #fff4f5;
+    margin: 1.5rem 2rem 1.5rem 2rem !important; 
     padding: 1rem;
-    background-color: #ffb3ba80;
   }
   
 .callout-title-container {
-    color: #0b2a12;
     margin-bottom: 10px;
     }
 
@@ -32,6 +40,29 @@ div.callout.callout {
     margin-bottom: 10px;
     padding-left: 1rem;
     }
+
+.callout-style-default .callout-icon-container {
+    display: none !important;
+    }
+    
+div.callout-header {
+    background-color: transparent !important;
+    background: transparent !important;
+    color: #0b2a1290;
+    }
+    
+
+.callout-style-default .callout-title-container {
+    color: #ff6162 !important;
+    padding-left: 0 !important;
+    }
+    
+.callout-style-default .callout-toggle {
+    background-image: var(--quarto-callout-toggle-img) !important; 
+    display: inline-block !important;
+    filter: invert(57%) sepia(51%) saturate(3501%) hue-rotate(324deg) brightness(101%) contrast(101%) !important;
+    }
+    
 
 // Headings
 h1 {
@@ -45,7 +76,7 @@ h2 {
     font-weight: 500;
     margin-top: 1rem;
     color: #ff6162; 
-    border-bottom: 5px dotted #ffb3ba;
+    border-bottom: 4px dotted #ffb3ba;
 }
 
 h3 {
@@ -58,16 +89,18 @@ h3 {
 h4 {
     font-size: 1.5rem;
     font-weight: 500;
-    margin-top: 1rem;
-    color: #083E44;
-    border-bottom: 4px dotted #083E44;
+    margin: 0.5rem 0 0.5rem 0;
+    color: #0b2a1290;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px dotted #083E4480;
 }
 
 // Also listing tile headings!!
 h5 {
     font-size: 1.5rem;
     font-weight: 500;
-    color: #083E44;
+    color: #0b2a1290;
+    margin: 0.5rem 0 0.5rem 0;
 }
 
 // Codeblock padding & margins
@@ -81,35 +114,80 @@ ul.task-list {
     list-style: none !important; 
     padding-left: 1.5rem !important;
   
-    li input[type="checkbox"] {
-      -webkit-appearance: none !important;
-      appearance: none !important;
-      width: 1.2em !important;
-      height: 1.2em !important;
-      margin-right: 0.5rem !important;
-      display: inline-block !important;
-      vertical-align: middle !important;
-      position: relative !important;
-      opacity: 1 !important; 
-      cursor: default !important;
-      background-color: #ffffff60 !important;           
-      border: 2px solid #ff6162 !important;           
-      border-radius: 0 !important;
-      &:checked {
-        background-color: #ff6162 !important;         
-        border-color: #ff6162 !important;
-        border-radius: 0 !important; 
-        &::after {
-            content: "" !important;
-            position: absolute !important;
-            left: 35% !important;
-            top: 10% !important;
-            width: 30% !important;
-            height: 60% !important;
-            border: solid white !important; 
-            border-width: 0 2px 2px 0 !important;
-            transform: rotate(45deg) !important;
+    li {
+
+      &:has(input[type="checkbox"]:checked) {
+        color: #ff6162 !important;          
+        text-decoration: line-through;  
+        font-weight: 400;    
+      }
+
+      input[type="checkbox"] {
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        width: 1.2em !important;
+        height: 1.2em !important;
+        margin-right: 0.5rem !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
+        position: relative !important;
+        opacity: 1 !important; 
+        cursor: default !important;      
+        border: 2px solid #ffb3ba !important;           
+        border-radius: 0 !important;
+
+        &:checked {
+          background-color: #ffb3ba !important;         
+          border-color: #ffb3ba !important;
+          border-radius: 0 !important; 
+
+          &::after {
+              content: "" !important;
+              position: absolute !important;
+              left: 35% !important;
+              top: 10% !important;
+              width: 30% !important;
+              height: 60% !important;
+              border: solid #ff6162 !important; 
+              border-width: 0 2px 2px 0 !important;
+              transform: rotate(45deg) !important;
+          }
         }
       }
     }
+}
+
+// Blockquotes
+
+blockquote {
+    border-left: none !important;        
+    background: transparent !important;   
+    position: relative !important;        
+    padding: 0 !important;                
+    margin: 3rem 6rem 3rem 6rem !important;
+    color: #0b2a1290 !important;            
+    font-style: italic !important;        
   }
+  
+  blockquote::before {
+    content: "“" !important;             
+    position: absolute !important;
+    left: -2.5rem !important;           
+    top: -0.75rem !important;             
+    font-family: Georgia, serif !important; 
+    font-size: 3.5rem !important;         
+    line-height: 1 !important;
+    color: #ffb3ba !important;            
+  }
+  
+  blockquote::after {
+    content: "”" !important;             
+    position: absolute !important;
+    right: -1.5rem !important;          
+    bottom: -1.5rem !important;         
+    font-family: Georgia, serif !important;
+    font-size: 2.5rem !important;        
+    line-height: 1 !important;
+    color: #ffb3ba !important;          
+  }
+  

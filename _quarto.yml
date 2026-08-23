@@ -11,6 +11,8 @@ metadata-files:
 website:
   title: "Portfolio"
   favicon: assets/headshot.png
+  # repo-url: https://github.com/beck-chan
+  # repo-actions: [issue]
   navbar:
     left:
       - samples/content-engineering/index.qmd
@@ -35,6 +37,15 @@ website:
 
   search:
     location: navbar
+
+  page-footer:
+    background: "#df9a49"
+    left:
+      - text: "{{< fa brands github >}} Report Issue"
+        href: https://github.com/beck-chan/portfolio/issues
+        target: _blank
+    right:
+      - text: "&#169; 2026 <b>Beck Chan</b>. All rights reserved."
 
 format:
   html:

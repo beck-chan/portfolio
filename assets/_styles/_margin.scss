@@ -1,7 +1,8 @@
 // TOC links
 nav#TOC {
-    border-left: 3px solid #0b2a12;
-    background-color: #FFFFFF80;
+    border-left: 3px solid #ffb3ba
+    ;
+    background-color: #fff4f5;
     padding: 1rem;
     
     ul {
@@ -13,7 +14,7 @@ nav#TOC {
       }
       
       li a.nav-link {
-        color: #ff6162 !important;
+        color: #0b2a12 !important;
         text-decoration: none;
         border-left: 1px solid transparent !important;
         margin-left: 0 !important;
@@ -21,11 +22,11 @@ nav#TOC {
         position: relative;
         
         &:hover {
-          color: #0b2a12 !important;
+          color: #ff6162 !important;
         }
         
         &.active {
-          color: #0b2a12 !important;
+          color: #ff6162 !important;
           font-weight: 400 !important;
           
           &::before {
@@ -60,7 +61,7 @@ nav#TOC {
 #quarto-sidebar-toc-header, 
   nav#TOC > h2, 
   nav#TOC > h3 {
-    color: #0b2a12 !important;
+    color: #0b2a1290 !important;
   }
   
 nav#TOC ul li a.nav-link,
@@ -135,11 +136,13 @@ nav#TOC .toc-actions ul li a.toc-action {
 // Category tags & filtering
 .quarto-categories .quarto-category {
     opacity: 1 !important;        
-    background-color: #ffb3ba !important; 
+    background-color: #fee3e5 !important; 
     border: 1px solid #ff6162 !important; 
-    border-radius: 4px;
-    padding: 2px 8px;
-    display: inline-block;      
+    display: inline-block; 
+    border-radius: 50px !important;    
+    padding: 0.4em 1em !important;      
+    display: inline-block !important;   
+    line-height: 1 !important;          
     }
 
 .quarto-categories .quarto-category a {
@@ -157,37 +160,44 @@ nav#TOC .toc-actions ul li a.toc-action {
     border-bottom: none !important;
     }
 
-#quarto-margin-sidebar .quarto-listing-category-title {
-    color: #0b2a12 !important;
-    font-weight: 600;
-    font-size: 1rem !important;
-    margin: 1rem 0 0 0 !important;
-    padding: 1rem 1rem 0 1rem !important; 
-    background-color: #FFFFFF80 !important; 
-    border-left: 3px solid #0b2a12 !important; 
-    display: block !important;
-    }
 
-#quarto-margin-sidebar .quarto-listing-category {
-    background-color: #FFFFFF80 !important;    
-    border-left: 3px solid #0b2a12 !important; 
+#quarto-margin-sidebar .quarto-listing-category-title {
+    // color: #0b2a12 !important;
+    font-weight: 400;
+    margin: 1rem 0 0 1rem !important;
+    padding: 0.5rem 0 0.25rem  !important;  
+    display: block !important;
+    font-size: 0 !important; 
+}
+
+/* 2. Inject your new replacement text */
+#quarto-margin-sidebar .quarto-listing-category-title::after {
+    content: "filter by category"; 
+    font-variant: small-caps;
+    font-size: 1rem !important;  
+    color: #ff6162 !important;      
+}
+
+#quarto-margin-sidebar .quarto-listing-category {   
+    border: 1px solid #ffb3ba !important; 
+    border-top: 2px solid #ffb3ba !important; 
     margin: 0 !important;                     
-    padding: 0.5rem 1rem 1rem 1rem !important;
+    padding: 1rem !important;
     display: block !important;
     }
 
 #quarto-margin-sidebar .quarto-listing-category .category {
     position: relative !important;
     display: block !important;
-    color: #ff6162 !important;               
+    color: #0b2a1290 !important;               
     font-size: 0.9em !important;             
     padding-left: 1rem !important;            
     margin: 0 0 0.35rem 0 !important;         
     cursor: pointer !important;                
     border-bottom: none !important;           
     text-decoration: none !important;
+    font-size: 0.8rem !important;
     }
-
 
 #quarto-margin-sidebar .quarto-listing-category .category:hover {
     color: #0b2a12 !important;                

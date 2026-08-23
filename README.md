@@ -14,4 +14,6 @@ To preview changes:
 quarto preview 
 ```
 
+## Copyright
 
+&#169; 2026 Beck Chan. All rights reserved.
