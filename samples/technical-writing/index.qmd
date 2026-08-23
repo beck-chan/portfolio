@@ -31,7 +31,7 @@ listing:
     sort: false
     fields: [title, subtitle]
     contents:
-      - saasquatch/integration.qmd
+      - saasquatch/integrations.qmd
       - saasquatch/sdk.qmd
       - saasquatch/user-guides.qmd
     categories: true
