@@ -7,21 +7,19 @@ website:
           file: samples/technical-writing/index.qmd
         - text: "---"
         - section: "ValidMind"
-          href: samples/technical-writing/validmind.qmd
-          # contents:
-          #   - samples/technical-writing/validmind/placeholder.qmd
-          #   - samples/technical-writing/validmind/placeholder.qmd
-          #   - samples/technical-writing/validmind/placeholder.qmd
-          #   - samples/technical-writing/validmind/placeholder.qmd
+          contents:
+            - samples/technical-writing/validmind/jupyter-notebooks.qmd
+            - samples/technical-writing/validmind/training.qmd
+            - samples/technical-writing/validmind/user-guides.qmd
+            - samples/technical-writing/validmind/quickstarts.qmd
+            - samples/technical-writing/validmind/enablement.qmd
         - section: "Atryum"
-          href: samples/technical-writing/validmind.qmd
-          # contents:
-          #   - samples/technical-writing/atryum/placeholder.qmd
-          #   - samples/technical-writing/atryum/placeholder.qmd
-          #   - samples/technical-writing/atryum/placeholder.qmd
-          #   - samples/technical-writing/atryum/placeholder.qmd
+          contents:
+            - samples/technical-writing/atryum/integrations.qmd
+            - samples/technical-writing/atryum/user-guides.qmd
+            - samples/technical-writing/atryum/quickstart.qmd
         - section: "SaaSquatch"
           contents:
-            - samples/technical-writing/saasquatch/integrations.qmd
+            - samples/technical-writing/saasquatch/integration.qmd
             - samples/technical-writing/saasquatch/sdk.qmd
             - samples/technical-writing/saasquatch/user-guides.qmd

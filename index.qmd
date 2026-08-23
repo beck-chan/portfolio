@@ -5,7 +5,7 @@ page-layout: full
 sidebar: false
 toc: false
 listing:
-  - id: samples
+  - id: samples-type
     type: grid
     max-description-length: 250
     grid-columns: 3
@@ -48,9 +48,26 @@ My methods bridge the gap between product design and user experience, whether th
 
 ::::
 
-## Samples
+## Samples by type
 
-:::{#samples}
+:::{#samples-type}
 :::
 
+## Samples by topic
+
+::: {.panel-tabset}
+
+### one
+
+test
+
+### two
+
+test
+
+### three
+
+test
+
+:::
 

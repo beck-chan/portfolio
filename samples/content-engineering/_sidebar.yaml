@@ -7,10 +7,14 @@ website:
           file: samples/content-engineering/index.qmd
         - text: "---"
         - section: "ValidMind"
-          href: samples/content-engineering/validmind.qmd
           contents:
             - samples/content-engineering/validmind/quickstarts.qmd
             - samples/content-engineering/validmind/library.qmd
             - samples/content-engineering/validmind/academy.qmd
             - samples/content-engineering/validmind/releases.qmd
-        - samples/content-engineering/atryum.qmd
+        - samples/content-engineering/validmind/atryum.qmd
+        - samples/content-engineering/personal/portfolio.qmd
+        # - section: "Personal"
+        #   contents:
+        #     - samples/content-engineering/personal/portfolio.qmd
+            # - samples/content-engineering/personal/guestbook.qmd

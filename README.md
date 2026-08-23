@@ -4,22 +4,14 @@ A lovingly handed-coded portfolio, built on [Quarto](https://quarto.org/).
 
 ## Live site
 
+Lives at [https://beck-chan.github.io/](https://beck-chan.github.io/), auto-rendered then deployed by [.github\workflows\deploy.yaml](.github\workflows\deploy.yaml).
+
 ## Local site
 
-### Preview
+To preview changes:
 
 ```
 quarto preview 
 ```
 
-## Render
 
-Render HTML into `_output`:
-
-```
-cd source
-quarto render 
-```
-
-## Notes
-- remove output, .gitignore?

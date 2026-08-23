@@ -1,5 +1,5 @@
 ---
-title: "3rd-Party Integrations"
+title: "3rd-Party Integration"
 subtitle: "Feature Documentation"
 categories: ["Feature Documentation", "Integrations", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
 ---

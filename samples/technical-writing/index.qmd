@@ -2,6 +2,28 @@
 title: "Technical Writing"
 subtitle: "Samples"
 listing:
+  - id: validmind-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+      - validmind/jupyter-notebooks.qmd
+      - validmind/training.qmd
+      - validmind/user-guides.qmd
+      - validmind/quickstarts.qmd
+      - validmind/enablement.qmd
+  - id: atryum-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+      - atryum/integrations.qmd
+      - atryum/user-guides.qmd
+      - atryum/quickstart.qmd
   - id: saasquatch-technical
     type: grid
     grid-columns: 3
@@ -9,10 +31,10 @@ listing:
     sort: false
     fields: [title, subtitle]
     contents:
-      - saasquatch/integrations.qmd
+      - saasquatch/integration.qmd
       - saasquatch/sdk.qmd
       - saasquatch/user-guides.qmd
-
+    categories: true
 ---
 
 Tutorials, user guides, training, developer content and more, oh my!
@@ -21,9 +43,15 @@ Tutorials, user guides, training, developer content and more, oh my!
 
 {{< include /samples/single-source/_validmind.qmd >}}
 
+:::{#validmind-technical}
+:::
+
 ### Atryum
 
 {{< include /samples/single-source/_atryum.qmd >}}
+
+:::{#atryum-technical}
+:::
 
 ## SaaSquatch
 
