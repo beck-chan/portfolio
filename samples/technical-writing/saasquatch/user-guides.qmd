@@ -2,8 +2,22 @@
 title: "User Guides"
 subtitle: "Reference Guides"
 categories: ["User Guides", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+listing:
+  - id: saasquatch-guides
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - user-guides/sharelinks.qmd
+      - user-guides/csv-import.qmd
+      - user-guides/tango-card.qmd
+      - user-guides/message-links.qmd
+      - user-guides/vanity-links.qmd
+      - user-guides/widget.qmd
 ---
 
 In addition to the tech sphere, my professional experience includes education, healthcare and sales — reflecting my passion for instruction and illumination. I believe that the solution for delivering an excellent experience for employees and customers alike starts with proper training and thorough documentation, especially when it comes to the ever-changing landscape of software.
 
-Below are a few samples of the software guides I produced to instruct customers, as well as to serve as documentation for the features and their functionality:
+Below are a few samples of the software guides I produced to instruct customers before I held any formal technical writing or content role, intended also to serve as documentation for the features and their functionality:

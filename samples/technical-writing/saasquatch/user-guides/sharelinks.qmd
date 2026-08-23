@@ -1,0 +1,5 @@
+---
+title: "Understanding Sharelinks"
+subtitle: "User Guides"
+categories: ["User Guides", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+---

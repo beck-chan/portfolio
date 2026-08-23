@@ -1,0 +1,5 @@
+---
+title: "Assign Vanity Share Links or Referral Codes"
+subtitle: "User Guides"
+categories: ["User Guides", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+---

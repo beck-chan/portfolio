@@ -4,6 +4,8 @@ subtitle: "Blog Post"
 categories: ["Blog", "Artficial Intelligence (AI)", "AI Risk", "Model Risk Management", "ValidMind"]
 ---
 
+> I owned this blog post from start to finish.
+
 In our previous article Honor the Human with ValidMind, we introduced the idea that good automation elevates human oversight over models by bridging the gap between model and developer. But model development is only the first stage of the multi-faceted model lifecycle, a complex interplay between various model risk management (MRM) teams, business units, and stakeholders with often competing requirements and resources. 
 
 Accurate, thorough — and yes, efficient and easily maintained — documentation builds a powerful foundation for the rest of the model lifecycle. However, effective management of model risks, defined simply as the possibility of loss or damages due to limitations or misuse of models, can only be achieved with greater cooperation between all the different players involved. 
@@ -26,7 +28,7 @@ A competent MRM framework not only correctly reflects model risk appetite, or th
 
 An often overlooked element of model risk is something Juan Martinez, a Machine Learning Engineer at ValidMind, aptly calls a kind of culture risk: a mismatch of expectations, processes, and mindsets between the three lines of defense. When we consider that a guiding principle of strong MRM is a well managed effective challenge process, reducing culture risk becomes a paramount task. 
 
-With each change in guard during the model lifecycle, culture risk is amplified. Most of us are familiar with the game of “telephone,” where a message becomes comically distorted as it is passed along from one person to another, becoming nigh unrecognizable by the end. A veritable poster child of the philosophy behind epistemic reliability, which poses questions about how faithful information may be depending on the trustworthiness of the processes, methods, or systems through which we acquire it, and oft an allegory for the inherently erratic nature of communication. 
+With each change in guard during the model lifecycle, culture risk is amplified. Most of us are familiar with the game of "telephone," where a message becomes comically distorted as it is passed along from one person to another, becoming nigh unrecognizable by the end. A veritable poster child of the philosophy behind epistemic reliability, which poses questions about how faithful information may be depending on the trustworthiness of the processes, methods, or systems through which we acquire it, and oft an allegory for the inherently erratic nature of communication. 
 
 Herein lies our paradox: effective challenge is key to reducing model risk, but the exercise itself is especially susceptible to culture risk, as it relies on input from independent stakeholders. It also necessitates the transfer of information between parties — information that should be credible and comprehensive. While there are no perfect solutions, teams can minimize the chance of miscommunication by reducing the frequency that information is transformed as it is transmitted, and by ensuring that processes accommodate for a margin of error. 
 

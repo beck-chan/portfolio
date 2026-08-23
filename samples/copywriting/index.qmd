@@ -8,7 +8,7 @@ listing:
     grid-columns: 3
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
     - validmind/honor-the-human.qmd
     - validmind/reduce-culture-risk.qmd
@@ -19,7 +19,7 @@ listing:
     grid-columns: 2
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
     - saasquatch/growth-automation.qmd
     categories: true

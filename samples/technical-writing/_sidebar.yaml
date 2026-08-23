@@ -20,6 +20,28 @@ website:
             - samples/technical-writing/atryum/quickstart.qmd
         - section: "SaaSquatch"
           contents:
-            - samples/technical-writing/saasquatch/integration.qmd
-            - samples/technical-writing/saasquatch/sdk.qmd
-            - samples/technical-writing/saasquatch/user-guides.qmd
+            - section: "Integrations"
+              href: samples/technical-writing/saasquatch/integrations.qmd
+              contents:
+              - text: "Tango Card"
+                file: samples/technical-writing/saasquatch/user-guides/tango-card.qmd
+            - section: "JavaScript SDK"
+              href: samples/technical-writing/saasquatch/sdk.qmd
+              contents:
+              - samples/technical-writing/saasquatch/sdk/key-sjs.qmd
+              - text: "`squatch.js` Advanced"
+                file: samples/technical-writing/saasquatch/sdk/sjs-advanced.qmd
+              - samples/technical-writing/saasquatch/sdk/tracking-cookies.qmd
+            - section: "User Guides"
+              href: samples/technical-writing/saasquatch/user-guides.qmd
+              contents:
+              - samples/technical-writing/saasquatch/user-guides/sharelinks.qmd
+              - text: "CSV Import"
+                file: samples/technical-writing/saasquatch/user-guides/csv-import.qmd
+              - text: "Tango Card"
+                file: samples/technical-writing/saasquatch/user-guides/tango-card.qmd
+              - samples/technical-writing/saasquatch/user-guides/message-links.qmd
+              - text: "Vanity Share Links & Codes"
+                file: samples/technical-writing/saasquatch/user-guides/vanity-links.qmd
+              - text: "Widget & Microsite Stats"
+                file: samples/technical-writing/saasquatch/user-guides/csv-import.qmd

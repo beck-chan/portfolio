@@ -4,6 +4,8 @@ subtitle: "Blog Post"
 categories: ["Blog", "Artficial Intelligence (AI)", "EU AI Act", "AI Risk", "Model Risk Management", "ValidMind"]
 ---
 
+> I owned this blog post from start to finish.
+
 The threat of technology is nothing new. When the printing press emerged in Europe in the early 15th century, it introduced the idea that occupations could be overwritten by automation — gone were the days of pious monks toiling in dim light over delicate sheets of parchment, illuminating every manuscript meticulously by hand. But what sprung forth from volumes inked with remarkable speed and accuracy by machinery was the democratization of information, heralding a new age of literacy and imagination.
 
 In 1746, a member of the British intelligentsia by the name of Samuel Johnson was commissioned to create A Dictionary of the English Language. Johnson famously boasted that he alone would be able to complete the project in a fraction of the 40 long years it took 40 different scholars from the Académie Française to complete their version — thanks in part to technological advances.

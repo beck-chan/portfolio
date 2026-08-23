@@ -1,0 +1,5 @@
+---
+title: "Adding Users & Triggering Reward Goals via CSV Import"
+subtitle: "User Guides"
+categories: ["User Guides", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+---

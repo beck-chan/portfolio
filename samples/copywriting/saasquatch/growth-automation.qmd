@@ -4,6 +4,8 @@ subtitle: "Feature Highlight"
 categories: ["Feature Highlights", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
 ---
 
+> I owned this feature hightlight post from start to finish.
+
 **How the SaaSquatch approach to Growth Automation extends the frontiers of marketing.**
 
 This guide provides an outline of how the SaaSquatch Growth Automation Platform enables you to leverage the fundamental values of Growth Automation to grow your Customer Lifetime Value.

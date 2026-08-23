@@ -2,6 +2,17 @@
 title: "JavaScript SDK"
 subtitle: "Developer Content"
 categories: ["Developer Content", "JavaScript SDK", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+listing:
+  - id: saasquatch-sdk
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - sdk/key-sjs.qmd
+      - sdk/sjs-advanced.qmd
+      - sdk/tracking-cookies.qmd
 ---
 
 Before I worked at SaaSquatch, I only had a surface-level understanding of JavaScript. As a **Solutions Architect**, I acted as the primary technical contact for both installations of the SaaSquatch product suite and our many APIs and SDKs, including squatch.JS. 
