@@ -1,0 +1,66 @@
+---
+title: "Poetry"
+subtitle: "Original Work"
+lightbox: false
+page-layout: full
+sidebar: false
+toc: false
+---
+
+Congrats! You found the silly little easter egg. 
+
+I am a human that hates talking about myself, which you wouldn't believe if you managed to corner me into an interview. The best I can do is some original poetry, some of which may or may not be autobiographical.
+
+Refresh the page to receive a different one, y'know, in honour of the ephemeral. No, I will not be taking any feedback, thank you very kindly.
+
+::: {.callout-tip collapse="true"}
+
+## I'm ready!
+
+<div id="random-text-container">Crafting...</div>
+
+<button class="button" onClick="location.reload(true);">Show me another one.</button>
+
+:::
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const fileNames = [
+    'random/wonder.html',
+    'random/24-guests.html',
+    'random/derelict-dog-star.html',
+    'random/envy.html',
+    'random/future.html',
+    'random/past.html',
+    'random/persimmons.html',
+    'random/present.html',
+    'random/taken.html',
+    'random/to-dc.html',
+    'random/ode-to-peonies.html'
+  ];
+  const randomFile = fileNames[Math.floor(Math.random() * fileNames.length)];
+
+  fetch(randomFile)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Failed to load file: ${randomFile}`);
+      }
+      return response.text();
+    })
+    .then(htmlData => {
+      const container = document.getElementById("random-text-container");
+      if (container) {
+        container.innerHTML = htmlData.trim(); 
+      }
+    })
+    .catch(error => {
+      console.error('Error loading quote file:', error);
+      const container = document.getElementById("random-text-container");
+      if (container) {
+        container.innerHTML = "Hmm, no poetry here.";
+      }
+    });
+});
+</script>
+
+

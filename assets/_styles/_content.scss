@@ -1,5 +1,12 @@
 /* Content styles */
 
+// Adjust the extra margin at the bottom of the page
+main.content,
+article.content {
+  padding-bottom: 2rem !important;
+  margin-bottom: -40px !important;
+}
+
 // Subtitle
 .subtitle, 
 header .subtitle {
@@ -18,9 +25,14 @@ strong, b {
 }
 
 // Profile pic
-.pfp, div.quarto-post .thumbnail img {
+.pfp, 
+div.quarto-post .thumbnail img {
   border-radius: 50%;
-    }
+  border: none !important;
+  box-shadow: 4px 4px 0px 0px #ffb3ba !important;
+  pointer-events: none !important; 
+  cursor: default !important;
+}
 
 // Callouts
 div.callout.callout {
@@ -168,8 +180,14 @@ blockquote {
     color: #0b2a1290 !important;            
     font-style: italic !important;        
   }
+
+blockquote strong, 
+blockquote b {
+  color: #0b2a12 !important; 
+}
+
   
-  blockquote::before {
+blockquote::before {
     content: "“" !important;             
     position: absolute !important;
     left: -2.5rem !important;           
@@ -180,7 +198,7 @@ blockquote {
     color: #ffb3ba !important;            
   }
   
-  blockquote::after {
+blockquote::after {
     content: "”" !important;             
     position: absolute !important;
     right: -1.5rem !important;          
@@ -190,4 +208,20 @@ blockquote {
     line-height: 1 !important;
     color: #ffb3ba !important;          
   }
-  
+
+// Lightbox
+figcaption {
+  font-family: "Your Font Name", system-ui, sans-serif !important;
+  font-size: 0.85rem !important;     
+  color: #0b2a1280 !important;          
+  text-align: center !important;     
+  margin-top: 0.75rem !important;   
+}
+
+// Image class
+
+.pics,
+div.quarto-post .thumbnail img {
+  border: 1px solid #ffb3ba;
+  box-shadow: 4px 4px 0px 0px #ffb3ba !important;
+}

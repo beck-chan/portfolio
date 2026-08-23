@@ -55,7 +55,7 @@ The Growth Automation 101 article provides the basics of what Growth Automation 
 The next part of this guide outlines the core components that are unique to a Growth Automation program. Familiarizing yourself with these pieces will allow you to build an extremely flexible custom program.
 :::
 
-More about how your users will interact with your Growth Automation program can be found in our Growth Automation Customer Lifecycle
+More about how your users will interact with your Growth Automation program can be found in our Growth Automation Customer Lifecycle article.
 
 #### Citation
 

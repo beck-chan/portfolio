@@ -9,8 +9,9 @@ sidebar: false
 ::: {.timeline .tl-diamond .tl-label-banner .vertical}
 
 ::: {.event data-label="March 2024 - July 2026" style="--tl-color-label: #de267e; --tl-color-dot: #de267e;"}
-##### ValidMind, Inc.
-**Senior Technical Writer**
+### Senior Technical Writer
+
+**ValidMind, Inc**
 
 - Took features from design to complete release supported by storytelling alongside software engineers in GitHub.
 - Improved documentation and training through quality auditing and comprehensive redesigns using Quarto.
@@ -23,8 +24,9 @@ sidebar: false
 :::
 
 ::: {.event data-label="April 2023 - January 2024" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;"}
-##### SaaSquatch by impact.com
-**Senior Customer Solutions Specialist**
+### Senior Customer Solutions Specialist
+
+**SaaSquatch by impact.com**
 
 - Executed migration of evolving support processes to Freshdesk, resulting in a team 100% CSAT satisfaction rate.
 - Pioneered comprehensive reporting solutions, maintaining systematic report history to identify long-term trends.
@@ -34,9 +36,9 @@ sidebar: false
 :::
 
 ::: {.event data-label="October 2022 - March 2023" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;"}
-##### SaaSquatch by impact.com
+### Senior Technical Specialist
 
-**Senior Technical Specialist**
+**SaaSquatch by impact.com**
 
 - Designed and led solo migration of support processes to Zendesk built to scale, increasing efficiency by 74%.
 - Managed team escalations from complex technical cases, ensuring delivery of solutions to customers.
@@ -46,9 +48,9 @@ sidebar: false
 :::
 
 ::: {.event data-label="October 2018 - September 2022" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;"}
-##### SaaSquatch by impact.com
+### Solutions Architect
 
-**Solutions Architect**
+**SaaSquatch by impact.com**
 
 - Streamlined workload by 51% through improvement of implementation processes and onboarding strategies.
 - Proactively created and maintained public documentation, focusing on accuracy, accessibility, and extensibility.
@@ -58,9 +60,9 @@ sidebar: false
 :::
 
 ::: {.event data-label="October 2017 - August 2018" style="--tl-color-label: #f26b29; --tl-color-dot: #f26b29;"}
-##### Develus Systems Inc. for Complia Health
+### Customer Support Analyst
 
-**Customer Support Analyst**
+**Develus Systems Inc. for Complia Health**
 
 - Led creation of a knowledgebase to empower team members with extensive training and reference materials.
 - Created a mentorship and feedback program, strengthening team cohesion.
@@ -69,9 +71,9 @@ sidebar: false
 :::
 
 ::: {.event data-label="July 2016 - September 2017" style="--tl-color-label: #cd1727; --tl-color-dot: #cd1727;"}
-##### AbeBooks.com, Amazon subsidiary
+### Customer Support Representative
 
-**Customer Support Representative**
+AbeBooks.com, Amazon subsidiary
 
 - Exceeded target metric expectations at 160% while providing technical support in a fast-paced call center. 
 - Initiated improvements to best practices and processes, including documentation for team knowledgebase.
@@ -79,9 +81,9 @@ sidebar: false
 :::
 
 ::: {.event data-label="January 2014 - July 2016" style="--tl-color-label: #f3be60; --tl-color-dot: #f3be60;"}
-##### Hudson's Bay Optical
+### Optical Technician & Medical Office Assistan
 
-**Optical Technician & Medical Office Assistant**
+**Hudson's Bay Optical**
 
 - Multitasked in a fast-paced sales environment to administer and facilitate the sale of prescription glasses. 
 - Managed patient charts, sales reports, office inventory and stock orders.
@@ -89,9 +91,9 @@ sidebar: false
 :::
 
 ::: {.event data-label="July 2013 - December 2013" style="--tl-color-label: #0272be; --tl-color-dot: #0272be;"}
-##### Inner Harbour Optometry
+### Medical Office Assitant / Receptionist
 
-**Medical Office Assistant / Receptionist**
+**Inner Harbour Optometry**
 
 - Managed confidental medical charts while performing optometic testing and customer support.
 - Improved patient re-call system to increase business revenue.
@@ -100,9 +102,9 @@ sidebar: false
 
 ::: {.event data-label="July 2010 - July 2013" style="--tl-color-label: #222e84; --tl-color-dot: #222e84;"}
 
-##### Sylvan Learning, Victoria
+### Administrative & Teaching Assistant
 
-**Administrative & Teaching Assistant**
+**Sylvan Learning, Inc.**
 
 - Coached and assisted students on the classroom floor and in 1-on-1 lessons. 
 - Created lesson plans and personalized curriculums tailored to individual student needs.
@@ -111,6 +113,73 @@ sidebar: false
 
 :::
 
+::: {.column-margin}
+
+### Technical Skills
+
+**Technical Writing**
+
+- Docs-as-code engineering
+- Quarto publishing
+- Jupyter Notebooks
+- Markdown
+- CI/CD workflows
+
+**Software Development**
+
+- GitHub
+- Cursor Code
+- Visual Studio Code
+- Docker
+- Postman
+- HTML
+- CSS
+- TypeScript
+
+**Solutions Architecture & Implementation**
+
+- REST API
+- GraphQL
+- JavaScript
+- JSONata
+- Python
+- SQL
+- FTP
+
+**Support Engineering & Lifecycle Automation**
+
+- Zendesk
+- Freshdesk
+- Zapier
+- Salesforce
+- Hubspot
+- Intercom
+- Front
+
+**Project Management**
+
+- Shortcut
+- Notion
+- Jira
+- Confluence
+- Asana
+- Google Workspace
+- Microsoft 365
+- Adobe Creative Cloud
+
+
+**Integrations**
+
+- Paypal
+- Recurly
+- Stripe
+- Branch
+- Appsflyer
+
+:::
+
+
+
 
 
 ## Education
@@ -118,13 +187,16 @@ sidebar: false
 ::: {.timeline .tl-diamond .tl-label-badge .vertical}
 
 ::: {.event data-label="Completed 2019" style="--tl-color-label: #ff6068; --tl-color-dot: #ff6068;"}
-##### Lighthouse Labs
+### Lighthouse Labs
 Intro to Front-End with JavaScript
 :::
 
 ::: {.event data-label="Graduated 2013" style="--tl-color-label: #0272be; --tl-color-dot: #0272be;"}
-##### University of Victoria
-Bachelor of Arts, English Literature & Japanese Studies (*cum laude*)
+### University of Victoria
+***cum laude***
+
+Bachelor of Arts, English Literature & Japanese Studies 
 :::
 
 :::
+

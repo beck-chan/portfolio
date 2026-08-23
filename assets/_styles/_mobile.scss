@@ -1,5 +1,3 @@
-/* Mobile social icon horizontal display */
-
 @media (max-width: 991.98px) {
 
     .navbar-nav {
@@ -29,6 +27,41 @@
         display: inline-flex !important;
         padding: 0 !important;           
       }
+    }
+
+    blockquote {              
+      margin: 0rem 3rem 0rem 3rem !important;       
+    }
+
+    div.callout.callout {
+      margin: 0rem 1rem 0rem 1rem !important; 
+    }
+    footer.footer,
+    .nav-footer {
+      padding-top: 1.5rem !important; 
+      padding-bottom: 0 !important;
+    }
+  
+    .nav-footer p,
+    .nav-footer span,
+    .nav-footer div {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      margin-top: 0 !important;        
+      margin-bottom: 0 !important;
+    }
+  
+    .nav-footer-left,
+    .nav-footer-center,
+    .nav-footer-right {
+      padding-top: 0.15rem !important;    
+      padding-bottom: 0rem !important; 
+      margin-top: 0 !important;           
+      margin-bottom: 0 !important;        
+    }
+
+    #technical-skills {
+      display: none !important;
     }
   }
   

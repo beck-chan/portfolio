@@ -1,6 +1,6 @@
 /* Link styling */
-#quarto-document-content a:not(.quarto-grid-link):not(.button):not(.breadcrumb), 
-main a:not(.quarto-grid-link):not(.button):not(.breadcrumb) { 
+#quarto-document-content a:not(.quarto-grid-link):not(.button):not(.breadcrumb):not(.anchorjs-link):not(.footnote-ref), 
+main a:not(.quarto-grid-link):not(.button):not(.breadcrumb):not(.anchorjs-link):not(.footnote-ref) { 
   &:not(.quarto-page-breadcrumbs a):not(.quarto-secondary-nav a) {
     font-weight: 500;
     text-decoration: underline double #ff6162 1px;
@@ -74,8 +74,7 @@ nav[aria-label="breadcrumb"] {
     padding-right: 1rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
-    margin-top: 1rem;
+    margin: 0.5rem;
     display: inline-block;
     border: 2px solid #ffb3ba;
     font-size: 16px;
@@ -87,7 +86,17 @@ nav[aria-label="breadcrumb"] {
   .button:hover {
     color: #ff6162;
     text-decoration: none;
+    background-color: #ffb3ba;
+  }
+
+  .cta{
+    color: #ff6162;
     background-color: #fee3e5;
+    border: 2px solid #ff6162;
+  }
+  
+  .cta:hover {
+    background-color: #fff4f5;
   }
 
 // Tabset styling
@@ -147,3 +156,15 @@ nav[aria-label="breadcrumb"] {
   background-color: #fee3e5;
   border-color: #ff7d7d #ff7d7d transparent #ff7d7d !important; 
   }
+
+
+// Anchor link offset for fixed header
+main.content h1, 
+main.content h2, 
+main.content h3, 
+main.content h4, 
+main.content h5, 
+main.content h6,
+section[id] {
+  scroll-margin-top: 85px !important;
+}

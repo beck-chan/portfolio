@@ -1,6 +1,9 @@
 project:
   type: website
   output-dir: _output
+  render:
+    - "**/*.qmd"
+    - "**/*.ipynb"
 
 metadata-files:
   - samples/content-engineering/_sidebar.yaml
@@ -11,8 +14,7 @@ metadata-files:
 website:
   title: "Portfolio"
   favicon: assets/headshot.png
-  # repo-url: https://github.com/beck-chan
-  # repo-actions: [issue]
+  page-navigation: true
   navbar:
     left:
       - samples/content-engineering/index.qmd
@@ -30,6 +32,8 @@ website:
       - text: "{{< fa envelope >}}"
         href: mailto:rebecca.ht.chan@gmail.com
         target: _blank
+      - text: "{{< fa feather >}}"
+        href: poetry/index.qmd
 
   sidebar: 
     style: docked
@@ -41,6 +45,8 @@ website:
   page-footer:
     background: "#df9a49"
     left:
+      - text: "A lovingly handed-coded portfolio, built on <b>Quarto</b>."
+    center:
       - text: "{{< fa brands github >}} Report Issue"
         href: https://github.com/beck-chan/portfolio/issues
         target: _blank
@@ -61,6 +67,9 @@ format:
     toc: true
     toc-depth: 5
     link-external-newwindow: true
+    reference-location: margin
+    footnotes-hover: true
+    lightbox: true
   
 filters:
   - timeline

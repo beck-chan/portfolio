@@ -1,5 +1,5 @@
 ---
 title: "Quickstart"
-subtitle: "Onboarding"
+subtitle: "Tutorial"
 categories: ["Atryum", "ValidMind"]
 ---

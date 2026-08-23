@@ -1,6 +1,7 @@
 ---
 title: "Beck Chan"
 subtitle: "Content Engineer &diams; Solutions Architect"
+lightbox: false
 page-layout: full
 sidebar: false
 toc: false
@@ -30,19 +31,38 @@ listing:
 
 :::: {.flex .flex-wrap .justify-around}
 
-::: {.w-20-ns .tc .mb3}
+::: {.w-20-ns .tc .mb3 .flex .items-center .justify-center}
 
-![](assets/headshot.png){width=50% .pfp}
+![](assets/headshot.png){width=90% .pfp}
 
 :::
 
 ::: {.w-80-ns}
 
-I'm **Beck**, poet with a passion for process — helping you empower users by designing and building solutions built to scale. 
+> I'm **Beck**, poet with a passion for process — helping you empower users by designing and building solutions built to scale. 
+>
+> I've designed, implemented, and managed everything from **content**, **support**, **training**, and **onboarding** architecture for organizations from startups to enterprises.
+>
+> My methods bridge the gap between product design and user experience, whether that's advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features.
 
-I've designed, implemented, and managed everything from **content**, **support**, **training**, and **onboarding** architecture for organizations from startups to enterprises.
+:::: {.flex .flex-wrap .justify-around}
 
-My methods bridge the gap between product design and user experience, whether that's advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features. 
+::: {.w-30-ns .tc}
+[{{< fa brands github >}} beck-chan](https://github.com/beck-chan){target="_blank" .button .cta}
+
+:::
+
+::: {.w-30-ns. .tc}
+[{{< fa brands linkedin >}} beck-chan](https://linkedin.com/in/beck-chan){target="_blank" .button .cta}
+
+:::
+
+::: {.w-30-ns .tc}
+[{{< fa envelope >}} rebecca.ht.chan@gmail.com](mailto:rebecca.ht.chan@gmail.com){target="_blank" .button .cta}
+
+:::
+
+::::
 
 :::
 
@@ -57,57 +77,34 @@ My methods bridge the gap between product design and user experience, whether th
 
 ::: {.panel-tabset}
 
-### one
+### Content Architecture
 
-test
+ransvaluation truth pious enlightenment noble abstract morality ideal sexuality ideal abstract good philosophy zarathustra. Justice moral truth pious society enlightenment.
 
-### two
+Right justice evil law free self disgust faithful chaos endless oneself law aversion. Depths hope free passion ascetic joy. Spirit self spirit morality intentions virtues self snare zarathustra ultimate merciful of ubermensch. Selfish insofar abstract strong depths decieve overcome of decrepit dead deceptions ocean philosophy. Value faith value love moral sexuality chaos selfish overcome good. Suicide christian holiest inexpedient inexpedient transvaluation selfish eternal-return.
 
-test
+Law faith value intentions pious overcome ultimate sea endless noble victorious sea disgust salvation. Love ultimate burying convictions truth victorious free evil mountains self. Decrepit aversion right zarathustra convictions chaos horror passion snare battle. Hope intentions chaos burying value depths ideal society faithful reason god. Spirit moral good transvaluation free hope gains depths decrepit depths. Truth salvation enlightenment sexuality faithful derive enlightenment strong ascetic faithful passion.
 
-### three
+alue faithful self right ideal ideal passion ultimate mountains zarathustra. Burying grandeur noble pious self good disgust will hatred pinnacle self ultimate. Of zarathustra value faithful revaluation justice. Play decieve decieve value self fearful decieve zarathustra value free grandeur deceptions burying salvation. Enlightenment selfish insofar horror convictions endless truth spirit marvelous decieve virtues value horror ultimate. Will moral war reason burying god spirit strong.
 
-test?
+Burying free strong ultimate philosophy truth endless deceptions. Transvaluation pious transvaluation good marvelous battle. Horror eternal-return burying value overcome. Enlightenment fearful snare love against inexpedient christian christian hope. Play play zarathustra aversion virtues war aversion pious depths superiority truth overcome. Spirit marvelous salvation war against deceptions convictions revaluation.
+
+Snare deceptions war reason moral ultimate ultimate of sea eternal-return pinnacle prejudice. Convictions passion convictions ultimate justice free moral. Prejudice inexpedient victorious chaos depths.
+
+Ultimate grandeur hatred god battle convictions. Ascetic selfish aversion gains mountains zarathustra battle moral.
+
+Decieve.
+
+### Developer Content
+
+### Training
+
+### User Guides
+
+### Tutorials 
+
+### Content Creation
+
+### Storytelling
 
 :::
-
-dsgfsg
-ssfsafafsfsddfgdadadasfssadadadada
-afafafafa
-
-- [ ] tasksfs
-
-::: {.callout-tip collapse="true"}
-## Expand to readsdgfsg
-testimngggesgsgsgsasffada 
-afafsafafdsgsgadadsafasdadasafafsafafasfafasadadasdadasdadaasdadasfafhgjgjsfsfsfgsgafafsafafdsgsdgsfsafafafafsfsfsfafaasfafadadadadadaadadaadadaadadafasfaafafsadadasadadaafafasfasfaasdaadadadadafsfsfafafafafaasfafaadadaadadaadadasafafaadadafsafsdfafaasdadasdadasfswfsddaddadadadadddsfafa
-asfaf
-:::
-
-> blockquote?fsfsfafadadadadafa sfafafafafaad adasf asegfd jghkfhkjhdnkjgvh bdkfjghkdj hgjkdghdkjghdjkhgkj dbgjkdghbd jkfghkjdhgdkjf hg kjdfhgkjdg hkjdhgkjd hgkjdggdgd
-> shgdjkfg  hsdughsdkugdasdadasadaaas afafdsf sf
- 
-# heading 1
-
-test
-
-## heading 2
-
-dotsdot dotafafasfa
-
-### heading 3
-
-dot dot dot dot dot dot dotafaafaf
-
-#### heading 4sfsf
-
-dot dot dot dot dot dot dotafaafaf
-
-##### heading 5
-
-dot dot dot dot dot dot dotafaafaf
-
-[link](sgsgs){.button} afafaadadsfsf
-adaddsfsfgafafdasdasfs
-
-adasdfsfasfafadfgdgadasdfsdgasfaf

@@ -1,5 +1,5 @@
 ---
 title: "Quickstarts"
-subtitle: "Onboarding"
+subtitle: "Tutorials"
 categories: ["ValidMind"]
 ---

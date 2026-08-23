@@ -12,11 +12,14 @@ But the increased adoption of “non-traditional” models — that is, large la
 
 Growing pains notwithstanding, during the panel Making GenAI a Tool for Everyone, Colin Eberhardt, CTO of Scott Logic, proposed that soon it would be difficult to imagine a world before AI at the pace it is permeating every aspect of our lives. However, despite the significant and rapid increase in GenAI usage in many sectors such as mass media and law, statistics for financial services are lagging behind. While the apprehension is understandable for an industry so steeped in standardization and ruled by regulation, the community and conversation at OSFF NY posits that we are at the precipice of a phenomenal restructuring of our reality thanks to AI, with open-source software leading the charge.
 
-To wrap up the organization’s keynote address on the final day of the conference, FINOS announced the inauguration of their AI Readiness Governance Framework, along with the next stage of their AI Readiness project — an open-source initiative that aims to manage the onboarding, development, and utilization of AI-based solutions to help dissolve the aforementioned reticence when it comes to GenAI adoption currently present within financial services. Reflecting their goal of fostering open source, open standards, and collaborative software development practices in financial services, FINOS now invites the wider community to join them in "developing and operationalizing frameworks, policies, and tools for the effective, safe, trustworthy, and compliant deployment of generative AI technologies.""
+To wrap up the organization’s keynote address on the final day of the conference, FINOS announced the inauguration of their AI Readiness Governance Framework, along with the next stage of their AI Readiness project — an open-source initiative that aims to manage the onboarding, development, and utilization of AI-based solutions to help dissolve the aforementioned reticence when it comes to GenAI adoption currently present within financial services. Reflecting their goal of fostering open source, open standards, and collaborative software development practices in financial services, FINOS now invites the wider community to join them in "developing and operationalizing frameworks, policies, and tools for the effective, safe, trustworthy, and compliant deployment of generative AI technologies."
 
+
+::: {.callout}
 Community creates change, and transparency turns into trust — which is why in late February of 2024, we shifted the ValidMind product library to an open-source license, welcoming contributions to our code.
 
-#### Citation
+:::
 
+#### Citation
 
 [ValidThoughts: View original post](https://validmind.com/blog/takeaways-from-open-source-in-finance-forum-future-of-fintech-oss-and-genai/){.button}

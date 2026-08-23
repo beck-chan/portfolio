@@ -228,6 +228,22 @@ nav#TOC .toc-actions ul li a.toc-action {
     color: inherit !important;
     }
 
+
+// Margin content
+
+main.content p,
+main.content ul, 
+main.content li {
+  color: #2c3e50 !important;  
+}
+
+main.content li::marker {
+  color: #2c3e50 !important;  
+}
+main.content li a {
+  font-family: "Your Font Name", system-ui, sans-serif !important;
+  color: #2c3e50 !important;
+}
   
   
   
