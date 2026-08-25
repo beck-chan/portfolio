@@ -5,7 +5,7 @@ categories: ["Feature Documentation", "User Guides", "Integrations", "Salesforce
 listing:
   - id: saasquatch-sfdc
     type: grid
-    grid-columns: 2
+    grid-columns: 3
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
@@ -13,7 +13,6 @@ listing:
       - sfdc/invocable-methods.qmd
       - sfdc/attribution-lookup.qmd
       - sfdc/user-account-ids.qmd
-      - sfdc/integration-guide.qmd
   - id: saasquatch-integrations
     type: grid
     grid-columns: 3

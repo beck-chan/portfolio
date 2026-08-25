@@ -6,7 +6,7 @@ categories: ["Feature Documentation", "User Guides", "Integrations", "Salesforce
 
 > I owned this entire guide from start to finish. 
 >
-> For this endeavour I drew upon my knowledge of:
+> For this endeavour, I researched and familiarized myself with the following Salesforce features:
 >
 > - [Salesforce: Page Layouts](https://help.salesforce.com/s/articleView?id=platform.customize_layout.htm&type=5){target="_blank"}
 > - [Salesforce: Create a Custom Field](https://help.salesforce.com/s/articleView?id=platform.adding_fields.htm&type=5){target="_blank"}
@@ -27,12 +27,12 @@ This guide provides instruction on how to make use of a Lookup Custom Field to p
 
 ## Before You Start
 
-1. Make sure that you've installed the [SaaSquatch SFDC integration](integration-guide.qmd) into your Salesforce instance, including adding the "Referral Code" field to the Contact Page Layout.
+1. Make sure that you've installed the SaaSquatch SFDC integration into your Salesforce instance, including adding the "Referral Code" field to the Contact Page Layout.
 
 2. Make sure you have administrative access and know how to work with:
     - Page Layouts
     - Custom Fields
-    - Processes within Process Builder.
+    - Processes within Process Builder
 
 3. The below guide also assumes that:
     - Your new Referred Users are being created as Leads,
@@ -48,6 +48,10 @@ Create a new Custom Field on the Lead:
 - Name the related list something like "Referred Leads"
 - SFDC Contact Lookup Field
 
+::: {.tc}
+![](sfdc-lookup-field.png){.pics width="80%"}
+:::
+
 ::: {.callout}
 Make sure to make the field available to the required users as well as adding it to the Lead Page Layout. We recommend editing the Page Layout to include your Custom Field in the "SaaSquatch" section.
 
@@ -57,8 +61,13 @@ Make sure to make the field available to the required users as well as adding it
 Create a new Custom Field on the Lead:
 
 - Make sure to select a Data Type of "Text"
-- Enter a max length (e.g. 255)
+- Enter a max length (*e.g*. `255`)
 - Name your field something like "Attribution Code" or "Referred By Code"
+
+::: {.tc}
+![](sfdc-referredby-field.png){.pics width="80%"}
+:::
+
 
 ::: {.callout}
 Make sure to make the field available to the required users as well as adding it to the Lead Page Layout. We recommend editing the Page Layout to include your Custom Field in the "SaaSquatch" section.
@@ -74,12 +83,22 @@ Once you've set up a Lookup field to search for Contacts, and a Text field to ho
 
 3. Add an Object, and select 'Lead' as your Object. We recommend allowing the Process to start "when a record is created or edited", so that both creation and update of users can occur.
 
-4. Add your Criteria. We recommend setting a Condition that the Process will only run if the "Referral Code" field on the Contact that was looked up exists (i.e. Is null: False): SFDC Contact Referral Code SFDC Referral Code Exists
+4. Add your Criteria. We recommend setting a Condition that the Process will only run if the "Referral Code" field on the Contact that was looked up exists (*i.e*. `Is null: False`): SFDC Contact Referral Code SFDC Referral Code Exists
+
+::: {.tc}
+![](sfdc-select-field.png){.pics width="80%"}
+<br><br>
+![](sfdc-conditions.png){.pics width="80%"}
+:::
 
 5. Add your Actions:
-    - Select 'Update Records' under "Action Type", and give your action a name that reflects the outcome (e.g. Apply Referral Code)
+    - Select 'Update Records' under "Action Type", and give your action a name that reflects the outcome (*e.g*. Apply Referral Code)
     - Choose 'Select the Lead record that started your process' under your "Record Type".
-    - Set the field value for the Lead you want to update. Select the Text Custom Field you created previously (e.g. Attribution Code) and select the Contact's Referral Code as the Value via a Field Reference Type: SFDC Attribution Code Reference
+    - Set the field value for the Lead you want to update. Select the Text Custom Field you created previously (*e.g*. Attribution Code) and select the Contact's Referral Code as the Value via a Field Reference Type: 
+    
+::: {.tc}
+![](sfdc-actions.png){.pics width="80%"}
+:::
 
 6. Once your Process is completed and Saved, make sure to Activate it so it can run.
 
@@ -88,9 +107,14 @@ You can also set this up using Workflow Rules or through APEX if those methods a
 :::
 
 ## 4. Sending the `ReferredByCodes` Information to SaaSquatch
-Once the your ReferredByCodes Custom Field is populated, you can send that information to SaaSquatch via an upsert.
+Once the your `ReferredByCodes` Custom Field is populated, you can send that information to SaaSquatch via an upsert.
 
 When defining your Apex Variables in your Process, select the Field "Referred By Codes" and then reference the Custom Field you've created and configured to autopopulate with the Referrer's "Referral Code":
+
+::: {.tc}
+![](sfdc-sq-codes.png){.pics width="80%"}
+:::
+
 
 ::: {.callout}
 You can also make an upsert via APEX if this is easier for you.
@@ -98,4 +122,4 @@ You can also make an upsert via APEX if this is easier for you.
 
 #### Citation
 
-[SaaSquatch Help Center: View original guide](https://docs.saasquatch.com/salesforce/process-builder/){.button}
+[SaaSquatch Help Center: View original guide](https://docs.saasquatch.com/salesforce/attribution-lookup/){.button}

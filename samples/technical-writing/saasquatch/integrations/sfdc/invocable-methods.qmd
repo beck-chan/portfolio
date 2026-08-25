@@ -6,11 +6,10 @@ categories: ["Feature Documentation", "User Guides", "Integrations", "Salesforce
 
 > I owned this entire guide from start to finish. 
 >
-> For this endeavour I drew upon my knowledge of:
+> For this endeavour, I researched and familiarized myself with the following Salesforce features:
 >
-> - [Salesforce: Page Layouts](https://help.salesforce.com/s/articleView?id=platform.customize_layout.htm&type=5){target="_blank"}
-> - [Salesforce: Create a Custom Field](https://help.salesforce.com/s/articleView?id=platform.adding_fields.htm&type=5){target="_blank"}
-> - [Salesforce: Map Custom Lead Fields ...](https://help.salesforce.com/s/articleView?id=sales.customize_mapleads.htm&type=5){target="_blank"}
+> - [Salesforce: InvocableMethod Annotation](https://developer.salesforce.com/docs/atlas.en-us.216.0.apexcode.meta/apexcode/apex_classes_annotation_InvocableMethod.htm){target="_blank"}
+> - [Salesforce: Process Builder](https://help.salesforce.com/s/articleView?id=platform.process_overview.htm&type=5){target="_blank"}
 >
 > Any links to guides I did not author have been removed for this archived version.
 
@@ -34,13 +33,13 @@ This guide provides an overview of how to work with the following Invocable Meth
 
 ## Before You Start
 
-1. Make sure that you've installed the [SaaSquatch SFDC integration](integration-guide.qmd) into your Salesforce instance.
+1. Make sure that you've installed the SaaSquatch SFDC integration into your Salesforce instance.
 
 2. Make sure you have administrative access to create and modify Processes within Process Builder.
 
 3. The below guide also assumes that:
     - You have an understanding of how to work with Process Builder
-    - You have identified the who, what, where, and when behind sending data to SaaSquatch, as well as what the data being sent will be (*e.g.* whenever any user in SalesForce creates a Lead record with an email, upsert a user in SaaSquatch with the email as their User ID & Account ID)
+    - You have identified the who, what, where, and when behind sending data to SaaSquatch, as well as what the data being sent will be (*e.g.* whenever any user in Salesforce creates a Lead record with an email, upsert a user in SaaSquatch with the email as their User ID & Account ID)
     - Setup has already been configured for the activity meant to trigger sending the information to SaaSquatch (*e.g* a referral code should to applied to the user in SaaSquatch when a value is seen on a `ReferredByCodes` Custom Field in a Lead or Contact, so that `ReferredByCodes` Custom Field exists on those Objects and is accessible)
 
 ## Upserting Users

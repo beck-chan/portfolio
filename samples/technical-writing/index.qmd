@@ -52,6 +52,8 @@ As I authored the bulk of 53% of user content out of many contributors,[^1] most
 
 {{< include /samples/single-source/_atryum.qmd >}}
 
+As I authored approximately 95% of the content for Atryum,[^2] including the samples selected below: 
+
 :::{#atryum-technical}
 :::
 
@@ -73,3 +75,4 @@ While the following samples are quite dated before I refined my voice in an offi
 
 [^1]: ![Statistics snapsnot from validmind/documentation](validmind/beck-contributions.png){.pics}<br><br>Citation: [{{< fa brands github >}} `validmind/documentation` statistic archive](https://github.com/validbeck/validmind-docs/graphs/contributors?from=8%2F24%2F2024&selectedMetric=additions){target="_blank"}
 
+[^2]: Citation: [{{< fa brands github >}} `validmind/atryum/website` (documentation) archive](https://github.com/validbeck/atryum/tree/main/website){target="_blank"}
