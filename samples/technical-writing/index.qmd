@@ -43,6 +43,8 @@ Tutorials, user guides, training, developer content and more, oh my!
 
 {{< include /samples/single-source/_validmind.qmd >}}
 
+As I authored the bulk of 53% of user content out of many contributors,[^1] most of ValidMind's documentation saw my influence at some point. I've selected some of my best work to showcase below: 
+
 :::{#validmind-technical}
 :::
 
@@ -51,6 +53,10 @@ Tutorials, user guides, training, developer content and more, oh my!
 {{< include /samples/single-source/_atryum.qmd >}}
 
 :::{#atryum-technical}
+:::
+
+::: {.callout}
+You can learn more about my involvement with ValidMind, Atryum, and the impact I had on content and content architecture under [Content Engineering](/samples/content-engineering/index.qmd)
 :::
 
 ## SaaSquatch
@@ -62,4 +68,8 @@ While the following samples are quite dated before I refined my voice in an offi
 :::{#saasquatch-technical}
 :::
 
+
+<!-- FOOTNOTES -->
+
+[^1]: ![Statistics snapsnot from validmind/documentation](validmind/beck-contributions.png){.pics}<br><br>Citation: [{{< fa brands github >}} `validmind/documentation` statistic archive](https://github.com/validbeck/validmind-docs/graphs/contributors?from=8%2F24%2F2024&selectedMetric=additions){target="_blank"}
 

@@ -11,9 +11,9 @@ listing:
     fields: [title, subtitle, description]
     contents:
       - sfdc/invocable-methods.qmd
-      - sfdc/integration-guide.qmd
       - sfdc/attribution-lookup.qmd
       - sfdc/user-account-ids.qmd
+      - sfdc/integration-guide.qmd
   - id: saasquatch-integrations
     type: grid
     grid-columns: 3
