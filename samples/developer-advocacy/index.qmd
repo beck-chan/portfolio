@@ -4,14 +4,15 @@ subtitle: "Samples"
 listing:
   - id: developer
     type: grid
-    grid-columns: 3
+    grid-columns: 2
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
     contents:
-    - supabase.qmd
-    - posthog.qmd
-    - google-sheets.qmd
+    - supabase/index.qmd
+    - posthog/index.qmd
+    - quarto/index.qmd
+    - google-sheets/index.qmd
 ---
 
 lorem ipsum etc so the preview shows text

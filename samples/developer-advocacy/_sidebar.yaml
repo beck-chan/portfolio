@@ -6,6 +6,7 @@ website:
         - text: "Developer Advocacy"
           file: samples/developer-advocacy/index.qmd
         - text: "---"
-        - samples/developer-advocacy/supabase.qmd
-        - samples/developer-advocacy/posthog.qmd
-        - samples/developer-advocacy/google-sheets.qmd
+        - samples/developer-advocacy/supabase/index.qmd
+        - samples/developer-advocacy/posthog/index.qmd
+        - samples/developer-advocacy/supabase/index.qmd
+        - samples/developer-advocacy/google-sheets/index.qmd

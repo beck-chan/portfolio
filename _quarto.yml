@@ -17,7 +17,7 @@ website:
   page-navigation: true
   navbar:
     left:
-      - samples/content-engineering/index.qmd
+      # - samples/content-engineering/index.qmd
       - samples/technical-writing/index.qmd
       - samples/copywriting/index.qmd
       # - samples/developer-advocacy/index.qmd

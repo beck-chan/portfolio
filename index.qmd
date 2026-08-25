@@ -9,24 +9,14 @@ listing:
   - id: samples-type
     type: grid
     max-description-length: 250
-    grid-columns: 3
+    grid-columns: 2
     sort: false
     fields: [title, description]
     contents:
-    - samples/content-engineering/index.qmd
+    # - samples/content-engineering/index.qmd
     - samples/technical-writing/index.qmd
     - samples/copywriting/index.qmd
-  # - id: samples-wip
-  #   type: grid
-  #   max-description-length: 250
-  #   grid-columns: 2
-  #   sort: false
-  #   fields: [title, description]
-  #   contents:
-  #   - samples/content-engineering/index.qmd
-  #   - samples/technical-writing/index.qmd
-  #   - samples/copywriting/index.qmd
-  #   - samples/developer-advocacy/index.qmd
+    # - samples/developer-advocacy/index.qmd
 ---
 
 :::: {.flex .flex-wrap .justify-around}
@@ -77,9 +67,9 @@ listing:
 
 ::: {.panel-tabset}
 
-### Content Architecture
+<!-- ### Content Architecture
 
-ransvaluation truth pious enlightenment noble abstract morality ideal sexuality ideal abstract good philosophy zarathustra. Justice moral truth pious society enlightenment.
+Transvaluation truth pious enlightenment noble abstract morality ideal sexuality ideal abstract good philosophy zarathustra. Justice moral truth pious society enlightenment.
 
 Right justice evil law free self disgust faithful chaos endless oneself law aversion. Depths hope free passion ascetic joy. Spirit self spirit morality intentions virtues self snare zarathustra ultimate merciful of ubermensch. Selfish insofar abstract strong depths decieve overcome of decrepit dead deceptions ocean philosophy. Value faith value love moral sexuality chaos selfish overcome good. Suicide christian holiest inexpedient inexpedient transvaluation selfish eternal-return.
 
@@ -93,7 +83,7 @@ Snare deceptions war reason moral ultimate ultimate of sea eternal-return pinnac
 
 Ultimate grandeur hatred god battle convictions. Ascetic selfish aversion gains mountains zarathustra battle moral.
 
-Decieve.
+Decieve. -->
 
 ### Developer Content
 

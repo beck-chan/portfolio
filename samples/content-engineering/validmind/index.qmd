@@ -9,10 +9,10 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-    - validmind/quickstarts.qmd
-    - validmind/library.qmd
-    - validmind/academy.qmd
-    - validmind/releases.qmd
+    - quickstarts.qmd
+    - library.qmd
+    - academy.qmd
+    - releases.qmd
 ---
 
 testing?

@@ -57,9 +57,9 @@ As I authored approximately 95% of the content for Atryum,[^2] including the sam
 :::{#atryum-technical}
 :::
 
-::: {.callout}
+<!-- ::: {.callout}
 You can learn more about my involvement with ValidMind, Atryum, and the impact I had on content and content architecture under [Content Engineering](/samples/content-engineering/index.qmd)
-:::
+::: -->
 
 ## SaaSquatch
 
