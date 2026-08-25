@@ -1,8 +1,8 @@
 ---
 title: "ValidMind"
-subtitle: "Content Engineering"
+subtitle: "Technical Writing"
 listing:
-  - id: validmind-content
+  - id: validmind-technical
     type: grid
     grid-columns: 2
     max-description-length: 250
@@ -15,4 +15,7 @@ listing:
     - quickstarts.qmd
     - enablement.qmd
 ---
+
+:::{#validmind-technical}
+:::
 

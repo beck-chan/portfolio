@@ -1,5 +1,35 @@
 ---
-title: "Quickstart"
+title: "Atryum Quickstart"
 subtitle: "Tutorial"
-categories: ["Atryum", "ValidMind"]
+categories: ["Feature Documentation", "User Guides", "Quickstart", "Agentic Orchestration", "Artficial Intelligence (AI)", "AI Risk", "Agents", "Risk Governance", "Software as a Service", "Atryum", "ValidMind"]
+listing:
+  - id: atryum-quickstart
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/atryum-docs/documentation/1_quickstart.html
+      title: "Quickstart"
+      subtitle: "Tutorial"
+    - path: https://validbeck.github.io/atryum-docs/
+      title: "atryum.org"
+      subtitle: "Landing Page"
 ---
+
+{{< include /samples/single-source/atryum/_quickstart.qmd >}}
+
+:::{#atryum-quickstart}
+:::
+
+::: {.column-margin}
+**Compare:**
+
+[Previous Atryum quickstart guide](https://validbeck.github.io/atryum-archive/docs.html){target="_blank" .button .cta}
+
+[Previous Atryum landing page](https://validbeck.github.io/atryum-archive/){target="_blank" .button .cta}
+
+:::
+
+{{< include /samples/single-source/atryum/_github-citation.qmd >}}

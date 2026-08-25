@@ -15,11 +15,16 @@ website:
             - samples/technical-writing/validmind/quickstarts.qmd
             - samples/technical-writing/validmind/enablement.qmd
         - section: "Atryum"
+          href: samples/technical-writing/atryum/index.qmd
           contents:
-            - samples/technical-writing/atryum/integrations.qmd
-            - samples/technical-writing/atryum/user-guides.qmd
-            - samples/technical-writing/atryum/quickstart.qmd
+            - text: "Integrations"
+              file: samples/technical-writing/atryum/integrations.qmd
+            - text: "User Guides"
+              file: samples/technical-writing/atryum/user-guides.qmd
+            - text: "Quickstart"
+              file: samples/technical-writing/atryum/quickstart.qmd
         - section: "SaaSquatch"
+          href: samples/technical-writing/saasquatch/index.qmd
           contents:
             - section: "Integrations"
               href: samples/technical-writing/saasquatch/integrations/index.qmd

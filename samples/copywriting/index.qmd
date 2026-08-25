@@ -29,7 +29,7 @@ Blog posts, feature highlights, marketing copy, and so forth.
 
 ## ValidMind
 
-{{< include /samples/single-source/_validmind.qmd >}}
+{{< include /samples/single-source/validmind/_validmind.qmd >}}
 
 Check out some blog posts I wrote on our product offering and industry that shine some insight into my writing style:
 
@@ -38,7 +38,7 @@ Check out some blog posts I wrote on our product offering and industry that shin
 
 ## SaaSquatch
 
-{{< include /samples/single-source/_saasquatch.qmd >}}
+{{< include /samples/single-source/saasquatch/_saasquatch.qmd >}}
 
 Below is the very first article I wrote for SaaSquatch. While it feels a bit rough now years later, it still showcases my consistent author voice:
 

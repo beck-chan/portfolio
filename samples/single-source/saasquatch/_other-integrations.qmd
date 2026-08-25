@@ -1,0 +1,1 @@
+Below are a few samples of the guides I produced to assist with custom payment provider and rewards integrations, written based on provided Cucumber specs and several independent UATs I performed in order to understand the features fully:

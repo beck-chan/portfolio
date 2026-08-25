@@ -1,0 +1,6 @@
+## Citation
+
+[{{< fa brands github >}} archive of `validmind/atryum` commits by Beck](https://github.com/validbeck/atryum/commits/main/?author=validbeck){target="_blank" .button}
+
+
+

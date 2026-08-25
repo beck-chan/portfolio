@@ -14,9 +14,7 @@ listing:
       - csv-import.qmd
 ---
 
-While I served no formal technical writing role while at SaaSquatch, a core facet of my work was my focus on improving user content for both customers and colleagues.
-
-Below are a few samples of the core software feature documentation guides I produced to instruct customers before I held any formal technical writing or content role:
+{{< include /samples/single-source/saasquatch/_guides.qmd >}}
 
 :::{#saasquatch-guides}
 :::

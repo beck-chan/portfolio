@@ -25,27 +25,18 @@ listing:
       - tango-card.qmd
 ---
 
-During my tenure at SaaSquatch, I became the company Subject Matter Expert for many of our custom integrations, including our intergration for Salesforce which I helped develop.
-
-::: {.callout}
-
-Please note that these guides were written between 2018 &ndash; 2022, and as such, the archived documentation below may not reflect the current functionality of the third-party software.
-
-:::
+{{< include /samples/single-source/saasquatch/_integrations.qmd >}}
 
 ## Salesforce 
 
-Before I worked at SaaSquatch, I had never used Salesforce (SFDC). Very quickly after onboarding, I helped develop our SFDC integration during my time as a **Solutions Architect** as part of custom work for a client. 
-
-Below are a few samples of the guides I produced to assist with custom implementations utilising our SFDC integration:
+{{< include /samples/single-source/saasquatch/_sfdc.qmd >}}
 
 :::{#saasquatch-sfdc}
 :::
 
-
 ## Other
 
-Below are a few samples of the guides I produced to assist with custom payment provider and rewards integrations, written based on provided Cucumber specs and several independent UATs I performed in order to understand the features fully:
+{{< include /samples/single-source/saasquatch/_other-integrations.qmd >}}
 
 :::{#saasquatch-integrations}
 :::

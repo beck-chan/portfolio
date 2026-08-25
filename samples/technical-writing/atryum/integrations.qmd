@@ -1,5 +1,32 @@
 ---
-title: "Integrations"
-subtitle: "Reference Content"
-categories: ["Atryum", "ValidMind"]
+title: "Atryum Integrations"
+subtitle: "Feature Documentation"
+categories: ["Feature Documentation", "User Guides", "Integrations", "Agentic Orchestration", "Artficial Intelligence (AI)", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Risk Governance", "Software as a Service", "Atryum", "ValidMind"]
+listing:
+  - id: atryum-integrations
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/atryum-docs/documentation/1_integrations/2_connect-agents.html
+      title: "Connect agents"
+      subtitle: "Integrations"
+    - path: https://validbeck.github.io/atryum-docs/documentation/1_integrations/3_connect-mcp-servers.html
+      title: "Connect MCP servers"
+      subtitle: "Integrations"
+    - path: https://validbeck.github.io/atryum-docs/documentation/1_integrations/4_configure-llm-providers.html
+      title: "Configure LLM providers"
+      subtitle: "Integrations"
+    - path: https://validbeck.github.io/atryum-docs/documentation/1_integrations/1_connect-validmind.html
+      title: "Connect ValidMind"
+      subtitle: "Integrations"
 ---
+
+{{< include /samples/single-source/atryum/_link-blurb.qmd >}}
+
+:::{#atryum-integrations}
+:::
+
+{{< include /samples/single-source/atryum/_github-citation.qmd >}}

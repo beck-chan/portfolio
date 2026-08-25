@@ -15,9 +15,7 @@ listing:
       - tracking-cookies.qmd
 ---
 
-As a **Solutions Architect**, I acted as the primary technical contact for both installations of the SaaSquatch product suite and our many APIs and SDKs, including squatch.JS.  
-
-Below are a few samples of the guides I was involved heavily in writing, editing and reviewing for accuracy. The following guides were composed based on our SDK reference or provided Cucumber specs, as well as several independent UATs I performed in order to understand the features fully:
+{{< include /samples/single-source/saasquatch/_sdk.qmd >}}
 
 :::{#saasquatch-sdk}
 :::
