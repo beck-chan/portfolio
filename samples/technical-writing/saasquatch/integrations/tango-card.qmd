@@ -1,6 +1,6 @@
 ---
 title: "Connect Your Tango Card Account to SaaSquatch"
-subtitle: "User Guides"
+subtitle: "Reward Integration"
 categories: ["Feature Documentation", "User Guides", "Integrations", "Tango Card", "Reward Providers", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
 ---
 

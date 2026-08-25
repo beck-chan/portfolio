@@ -59,7 +59,7 @@ format:
     page-layout: full
     grid:
       body-width: 1000px
-      sidebar-width: 300px
+      sidebar-width: 400px
       margin-width: 500px
     theme:
       light: assets/styles.scss

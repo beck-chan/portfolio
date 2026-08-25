@@ -5,16 +5,13 @@ categories: ["Feature Documentation", "User Guides", "Referrals & Attributions",
 listing:
   - id: saasquatch-guides
     type: grid
-    grid-columns: 3
+    grid-columns: 2
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - user-guides/sharelinks.qmd
-      - user-guides/csv-import.qmd
-      - user-guides/message-links.qmd
-      - user-guides/vanity-links.qmd
-      - user-guides/widget.qmd
+      - sharelinks.qmd
+      - csv-import.qmd
 ---
 
 While I served no formal technical writing role while at SaaSquatch, a core facet of my work was my focus on improving user content for both customers and colleagues.

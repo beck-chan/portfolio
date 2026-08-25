@@ -1,6 +1,6 @@
 ---
 title: "Recurly Integration Install Guide"
-subtitle: "Feature Documentation"
+subtitle: "Payment Provider Integration"
 categories: ["Feature Documentation", "User Guides", "Integrations", "Recurly", "Payment Providers", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
 ---
 

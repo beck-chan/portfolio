@@ -54,8 +54,3 @@ website:
               - samples/technical-writing/saasquatch/user-guides/sharelinks.qmd
               - text: "CSV Import"
                 file: samples/technical-writing/saasquatch/user-guides/csv-import.qmd
-              - samples/technical-writing/saasquatch/user-guides/message-links.qmd
-              - text: "Vanity Share Links & Codes"
-                file: samples/technical-writing/saasquatch/user-guides/vanity-links.qmd
-              - text: "Widget & Microsite Stats"
-                file: samples/technical-writing/saasquatch/user-guides/csv-import.qmd

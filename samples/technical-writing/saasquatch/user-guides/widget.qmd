@@ -1,5 +1,0 @@
----
-title: "Widget and Microsite Statistics"
-subtitle: "User Guides"
-categories: ["Feature Documentation", "User Guides", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
----
