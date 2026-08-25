@@ -7,6 +7,8 @@ categories: ["Developer Content", "JavaScript SDK", "Referrals & Attributions", 
 > I owned this entire guide from start to finish. 
 >
 > For this endeavour I researched and familiarized myself with [First-party cookie recipes](https://web.dev/articles/first-party-cookie-recipes){target="_blank"}.
+> 
+> Any links to guides I did not author have been removed for this archived version below.
 
 
 As of June 2020, SaaSquatch has enabled the usage of 1st Party Cookies to accommodate a wider industry shift towards the increased protection of end user privacy.

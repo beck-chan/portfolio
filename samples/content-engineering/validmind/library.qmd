@@ -1,4 +1,4 @@
 ---
-title: "Developer Library"
-subtitle: "ValidMind"
+title: "ValidMind Developer Library"
+subtitle: "Content Engineering"
 ---

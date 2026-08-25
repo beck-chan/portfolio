@@ -14,6 +14,8 @@ categories: ["Developer Content", "JavaScript SDK", "Referrals & Attributions", 
 > - [DOM: `getElementById()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementById){target="_blank"}
 > - [DOM: `getElementsByClassName()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByClassName){target="_blank"}
 > - [DOM: `getElementsByTagName()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/getElementsByTagName){target="_blank"}
+> 
+> Any links to guides I did not author have been removed for this archived version below.
 
 ## Key `squatch.js` Scripts
 

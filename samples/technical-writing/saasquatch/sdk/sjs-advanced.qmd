@@ -11,6 +11,8 @@ categories: ["Developer Content", "JavaScript SDK", "Referrals & Attributions", 
 > - [JSON Web Tokens](https://www.jwt.io/){target="_blank"}
 > - [DOM: `querySelector()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector){target="_blank"}
 > - [i18n](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/i18n){target="_blank"}
+> 
+> Any links to guides I did not author have been removed for this archived version below.
 
 `squatch.js`, our JavaScript SDK, has all the functionality required to incorporate a SaaSquatch program into your website or web app. Below are some advanced use cases that you may run into when implementing `squatch.js`.
 

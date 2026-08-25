@@ -14,6 +14,8 @@ categories: ["Feature Documentation", "User Guides", "Integrations", "Stripe", "
 > - [ISO 4217 - Currency codes](https://www.iso.org/iso-4217-currency-codes.html){target="_blank"}
 > - [Stripe - The customer object](https://docs.stripe.com/api/customers/object){target="_blank"}
 > - [Stripe - Customer invoice balance](https://docs.stripe.com/billing/customer/balance){target="_blank"}
+> 
+> Any links to guides I did not author have been removed for this archived version below.
 
 SaaSquatch's Stripe integration uses Stripe Connect to automatically fulfill credit rewards as balance adjustments on a customer's account in Stripe.
 
@@ -49,6 +51,9 @@ After you've connected your Stripe Integration, you'll need to configure the cur
 
 Any currencies you choose will be associated with the program **reward unit** `CREDIT/{CURRENCY_CODE}`.
 
+:::: {.flex .flex-wrap .justify-around}
+
+::: {.w-70-ns .pr3}
 ::: {.callout}
 ## A Few Examples:
 
@@ -62,7 +67,18 @@ These are all based on the assumption that the recipient of the reward is linked
 
 :::
 
-## Custom Stripe Reward Units
+:::
+
+::: {.w-30-ns .tc .flex .items-center .justify-center}
+
+![](stripe-examples.png){width="90%" .pics}
+
+:::
+
+::::
+
+
+### Custom Stripe Reward Units
 The Stripe Integration supports fulfillment of alternative reward units in addition to `CREDIT` as long as it is specificed in the Stripe Configuration and a valid currency code is appended. For example, instead of using `CREDIT/USD` you could use `SPECIAL/USD`.
 
 To do so, navigate to the Stripe Configurator in the Integrations tab and select "Custom" rather than "Currency" from the drop-down menu. You can then add `SPECIAL` as the custom unit that accepts all currencies, or `SPECIAL/USD` or `SPECIAL/CAD` if you would like to specify the currency accepted. As with the standard `CREDIT/` unit, custom units will accept any valid ISO 4217 currency code.
@@ -76,7 +92,23 @@ If you would like one of your programs in SaaSquatch to issue rewards that are a
 4. If you have selected a standard currency (*i.e.* `USD`) when configuring Stripe, then you will add `CREDIT/USD` as the custom reward unit. The pattern is `CREDIT/{CURRENCY_CODE}` for rewards to be picked up by Stripe.
 5. If you selected a Custom unit when configuring Stripe, you will need to utilize that unit if you want Stripe to automatically fulfill the reward. Using the above examples, in the Custom unit field of your program, you would enter `SPECIAL/USD`.
 
-## Applicable Reward Types/Fulfillment
+:::: {.flex .flex-wrap .justify-around}
+
+::: {.w-50-ns .tc}
+
+![](stripe-credit-usd.png){width="90%" .pics}
+
+:::
+
+::: {.w-50-ns .tc}
+
+![](stripe-special-usd.png){width="90%" .pics}
+
+:::
+
+::::
+
+### Applicable Reward Types/Fulfillment
 Stripe Integration currently only supports fulfillment of **credit reward types** and does not yet support fulfillment of percentage discounts. Unsupported rewards will be ignored by Stripe and go unfulfilled.
 
 While SaaSquatch recommends using the custom reward units as outlined above, it is possible to use the *Dollar* reward unit with Stripe. To do so, return to the Stripe configuration and select *Custom* instead of *Currency* and put `CENTS/USD` into the field. Note that using this setup will **only** support USD as the currency.

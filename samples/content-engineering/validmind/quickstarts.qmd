@@ -1,4 +1,4 @@
 ---
-title: "Quickstart Guides"
-subtitle: "ValidMind"
+title: "ValidMind Quickstart Guides"
+subtitle: "Content Engineering"
 ---

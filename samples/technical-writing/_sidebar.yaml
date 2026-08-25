@@ -37,9 +37,9 @@ website:
                 contents:
                 - text: "Stripe"
                   file: samples/technical-writing/saasquatch/integrations/stripe.qmd
-                - text: "Tango Card"
-                  file: samples/technical-writing/saasquatch/integrations/recurly.qmd
                 - text: "Recurly"
+                  file: samples/technical-writing/saasquatch/integrations/recurly.qmd
+                - text: "Tango Card"
                   file: samples/technical-writing/saasquatch/integrations/tango-card.qmd
             - section: "JavaScript SDK"
               href: samples/technical-writing/saasquatch/sdk/index.qmd

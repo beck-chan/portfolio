@@ -8,11 +8,16 @@ website:
         - text: "---"
         - section: "ValidMind"
           contents:
-            - samples/content-engineering/validmind/quickstarts.qmd
-            - samples/content-engineering/validmind/library.qmd
-            - samples/content-engineering/validmind/academy.qmd
-            - samples/content-engineering/validmind/releases.qmd
-        - samples/content-engineering/validmind/atryum.qmd
+            - text: "Developer Library"
+              file: samples/content-engineering/validmind/library.qmd
+            - text: "Training"
+              file: samples/content-engineering/validmind/academy.qmd
+            - text: "Release Notes"
+              file: samples/content-engineering/validmind/releases.qmd
+            - text: "Quickstarts"
+              file: samples/content-engineering/validmind/quickstarts.qmd
+        - text: "Atryum Docs"
+          file: samples/content-engineering/validmind/atryum.qmd
         - samples/content-engineering/personal/portfolio.qmd
         # - section: "Personal"
         #   contents:

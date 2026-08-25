@@ -9,8 +9,8 @@ listing:
     sort: false
     fields: [title, subtitle]
     contents:
-      - validmind/releases.qmd
       - validmind/library.qmd
+      - validmind/releases.qmd
       - validmind/academy.qmd
       - validmind/quickstarts.qmd
   - id: atryum-content

@@ -57,7 +57,7 @@ Tutorials, user guides, training, developer content and more, oh my!
 
 {{< include /samples/single-source/_saasquatch.qmd >}}
 
-Below is some of the content I owned:
+While the following samples are quite dated before I refined my voice in an official technical writing role, I've included them for completion and progression value:
 
 :::{#saasquatch-technical}
 :::

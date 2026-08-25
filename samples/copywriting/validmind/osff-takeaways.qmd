@@ -5,6 +5,8 @@ categories: ["Blog", "Artficial Intelligence (AI)", "Generative AI", "Large Lang
 ---
 
 > I owned this blog post from start to finish.
+> 
+> Any links to guides I did not author have been removed for this archived version.
 
 The Fintech Open Source Foundation (FINOS) hosted its annual Open Source in Finance Forum in New York (OSFF NY) last week, attended by several members of ValidMind. Distinguished speakers representing prominent names in software and financial services led discussions on open-source ideologies, industry best practices, and projections. Of note were the many panels on artificial intelligence (AI), including deep dives into the use of Generative AI (GenAI) within financial services and software development as a whole.
 

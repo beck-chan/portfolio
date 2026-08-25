@@ -28,6 +28,12 @@ listing:
 
 During my tenure at SaaSquatch, I became the company Subject Matter Expert for many of our custom integrations, including our intergration for Salesforce which I helped develop.
 
+::: {.callout}
+
+Please note that these guides were written between 2018 &ndash; 2022, and as such, the archived documentation below may not reflect the current functionality of the third-party software.
+
+:::
+
 ## Salesforce 
 
 Before I worked at SaaSquatch, I had never used Salesforce (SFDC). Very quickly after onboarding, I helped develop our SFDC integration during my time as a **Solutions Architect** as part of custom work for a client. 

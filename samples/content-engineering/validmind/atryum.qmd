@@ -1,4 +1,4 @@
 ---
-title: "Atryum"
+title: "Atryum Documentation"
 subtitle: "Content Engineering"
 ---

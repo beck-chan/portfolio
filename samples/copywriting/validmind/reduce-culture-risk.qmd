@@ -5,8 +5,10 @@ categories: ["Blog", "Artficial Intelligence (AI)", "AI Risk", "Model Risk Manag
 ---
 
 > I owned this blog post from start to finish.
+> 
+> Any links to guides I did not author have been removed for this archived version.
 
-In our previous article Honor the Human with ValidMind, we introduced the idea that good automation elevates human oversight over models by bridging the gap between model and developer. But model development is only the first stage of the multi-faceted model lifecycle, a complex interplay between various model risk management (MRM) teams, business units, and stakeholders with often competing requirements and resources. 
+In our previous article [Honor the Human with ValidMind](honor-the-human.qmd), we introduced the idea that good automation elevates human oversight over models by bridging the gap between model and developer. But model development is only the first stage of the multi-faceted model lifecycle, a complex interplay between various model risk management (MRM) teams, business units, and stakeholders with often competing requirements and resources. 
 
 Accurate, thorough — and yes, efficient and easily maintained — documentation builds a powerful foundation for the rest of the model lifecycle. However, effective management of model risks, defined simply as the possibility of loss or damages due to limitations or misuse of models, can only be achieved with greater cooperation between all the different players involved. 
 

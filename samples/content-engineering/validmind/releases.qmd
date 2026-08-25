@@ -1,4 +1,4 @@
 ---
-title: "Release Notes"
-subtitle: "ValidMind"
+title: "ValidMind Release Notes"
+subtitle: "Content Engineering"
 ---
