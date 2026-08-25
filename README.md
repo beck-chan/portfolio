@@ -1,18 +1,11 @@
 # Portfolio
 
-A lovingly handed-coded portfolio, built on [Quarto](https://quarto.org/).
+> [https://beck-chan.github.io/](https://beck-chan.github.io/)
 
-## Live site
+A lovingly handed-coded portfolio, built on [Quarto](https://quarto.org/):
 
-Lives at [https://beck-chan.github.io/](https://beck-chan.github.io/), auto-rendered then deployed by [.github\workflows\deploy.yaml](.github\workflows\deploy.yaml).
-
-## Local site
-
-To preview changes:
-
-```
-quarto preview 
-```
+- Auto-rendered then deployed to the URL above via GitHub Pages by [.github\workflows\deploy.yaml](.github\workflows\deploy.yaml).
+- Release notes automatically generated upon PR merge into `main` by [.github\workflows\releases.yaml](.github\workflows\releases.yaml)
 
 ## Copyright
 

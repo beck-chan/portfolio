@@ -45,8 +45,9 @@ website:
   page-footer:
     background: "#df9a49"
     left:
-      - text: "Changelog"
-        href: changelog.qmd
+      - text: "Releases"
+        href: https://github.com/beck-chan/portfolio/releases
+        target: _blank
     center:
       - text: "{{< fa brands github >}} Report Issue"
         href: https://github.com/beck-chan/portfolio/issues
