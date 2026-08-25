@@ -4,9 +4,9 @@ subtitle: "JavaScript SDK"
 categories: ["Developer Content", "JavaScript SDK", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
 ---
 
-> I owned this entire article from start to finish. 
+> I owned this entire guide from start to finish. 
 >
-> For this endeavour I researched and familiarized myself with [1st-Party Cookies](https://web.dev/articles/first-party-cookie-recipes){target="_blank"}.
+> For this endeavour I researched and familiarized myself with [First-party cookie recipes](https://web.dev/articles/first-party-cookie-recipes){target="_blank"}.
 
 
 As of June 2020, SaaSquatch has enabled the usage of 1st Party Cookies to accommodate a wider industry shift towards the increased protection of end user privacy.

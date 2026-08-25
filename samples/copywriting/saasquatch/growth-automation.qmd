@@ -14,11 +14,27 @@ Consisting of three parts, this guide includes all the resources you need to use
 
 ## Growth Automation and Referral Marketing
 
+:::: {.flex .flex-wrap .justify-around}
+
+::: {.w-70-ns}
+
 As a business, customer lifetime value is no doubt among your top goals. SaaSquatch helps you achieve these goals by recognizing the importance of interacting with your users on an individual level and providing consistent but ever-evolving programs that entice customers to remain with you over a lifetime.
 
 Referral marketing has long been a foundational piece in user engagement and lead generation, but not all customer programs are created equal.
 
 Our Growth Automation platform will allow you to grow those leads into dynamic and individualized relationships with your customer base.
+
+:::
+
+::: {.w-30-ns .tc .flex .items-center .justify-center}
+
+![Program Builder](program-builder.png){.pics}
+
+:::
+
+
+::::
+
 
 Our Growth Automation platform provides a single, affordable solution for marketers to engage with their customers directly and with more relevance than previously possible in an innovative streamlined flow.
 
