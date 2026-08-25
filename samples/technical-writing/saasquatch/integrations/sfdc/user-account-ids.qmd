@@ -1,0 +1,5 @@
+---
+title: "SaaSquatch + SFDC: User & Account IDs"
+subtitle: "SDFC Integration"
+categories: ["Feature Documentation", "User Guides", "Integrations", "Salesforce", "CRMs", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+---

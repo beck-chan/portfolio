@@ -21,25 +21,39 @@ website:
         - section: "SaaSquatch"
           contents:
             - section: "Integrations"
-              href: samples/technical-writing/saasquatch/integrations.qmd
+              href: samples/technical-writing/saasquatch/integrations/index.qmd
               contents:
-              - text: "Tango Card"
-                file: samples/technical-writing/saasquatch/user-guides/tango-card.qmd
+              - section: "Salesforce"
+                contents:
+                - text: "Invocable Methods"
+                  file: samples/technical-writing/saasquatch/integrations/sfdc/invocable-methods.qmd
+                - text: "Integration Guide"
+                  file: samples/technical-writing/saasquatch/integrations/sfdc/integration-guide.qmd
+                - text: "Attribution via Contact"
+                  file: samples/technical-writing/saasquatch/integrations/sfdc/attribution-lookup.qmd
+                - text: "User & Account IDs"
+                  file: samples/technical-writing/saasquatch/integrations/sfdc/user-account-ids.qmd
+              - section: "Other"
+                contents:
+                - text: "Stripe"
+                  file: samples/technical-writing/saasquatch/integrations/stripe.qmd
+                - text: "Tango Card"
+                  file: samples/technical-writing/saasquatch/integrations/recurly.qmd
+                - text: "Recurly"
+                  file: samples/technical-writing/saasquatch/integrations/tango-card.qmd
             - section: "JavaScript SDK"
-              href: samples/technical-writing/saasquatch/sdk.qmd
+              href: samples/technical-writing/saasquatch/sdk/index.qmd
               contents:
               - samples/technical-writing/saasquatch/sdk/key-sjs.qmd
               - text: "`squatch.js` Advanced"
                 file: samples/technical-writing/saasquatch/sdk/sjs-advanced.qmd
               - samples/technical-writing/saasquatch/sdk/tracking-cookies.qmd
             - section: "User Guides"
-              href: samples/technical-writing/saasquatch/user-guides.qmd
+              href: samples/technical-writing/saasquatch/user-guides/index.qmd
               contents:
               - samples/technical-writing/saasquatch/user-guides/sharelinks.qmd
               - text: "CSV Import"
                 file: samples/technical-writing/saasquatch/user-guides/csv-import.qmd
-              - text: "Tango Card"
-                file: samples/technical-writing/saasquatch/user-guides/tango-card.qmd
               - samples/technical-writing/saasquatch/user-guides/message-links.qmd
               - text: "Vanity Share Links & Codes"
                 file: samples/technical-writing/saasquatch/user-guides/vanity-links.qmd

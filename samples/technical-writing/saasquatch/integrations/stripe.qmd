@@ -1,0 +1,5 @@
+---
+title: "Stripe Integration Install Guide"
+subtitle: "Feature Documentation"
+categories: ["Feature Documentation", "User Guides", "Integrations", "Stripe", "Payment Providers", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+---

@@ -45,7 +45,8 @@ website:
   page-footer:
     background: "#df9a49"
     left:
-      - text: "A lovingly handed-coded portfolio, built on <b>Quarto</b>."
+      - text: "Changelog"
+        href: changelog.qmd
     center:
       - text: "{{< fa brands github >}} Report Issue"
         href: https://github.com/beck-chan/portfolio/issues

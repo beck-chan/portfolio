@@ -7,7 +7,7 @@ listing:
     grid-columns: 3
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
       - validmind/jupyter-notebooks.qmd
       - validmind/training.qmd
@@ -19,7 +19,7 @@ listing:
     grid-columns: 3
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
       - atryum/integrations.qmd
       - atryum/user-guides.qmd
@@ -29,11 +29,11 @@ listing:
     grid-columns: 3
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
-      - saasquatch/integrations.qmd
-      - saasquatch/sdk.qmd
-      - saasquatch/user-guides.qmd
+      - saasquatch/integrations/index.qmd
+      - saasquatch/sdk/index.qmd
+      - saasquatch/user-guides/index.qmd
     categories: true
 ---
 
@@ -61,3 +61,5 @@ Below is some of the content I owned:
 
 :::{#saasquatch-technical}
 :::
+
+
