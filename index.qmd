@@ -17,6 +17,62 @@ listing:
     - samples/technical-writing/index.qmd
     - samples/copywriting/index.qmd
     # - samples/developer-advocacy/index.qmd
+  - id: samples-developer
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/technical-writing/validmind/jupyter-notebooks.qmd
+    - samples/technical-writing/saasquatch/sdk/index.qmd
+  - id: samples-training
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/technical-writing/validmind/training.qmd
+  - id: samples-guides
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/technical-writing/validmind/user-guides.qmd
+    - samples/technical-writing/atryum/integrations.qmd
+    - samples/technical-writing/atryum/user-guides.qmd
+    - samples/technical-writing/saasquatch/user-guides/index.qmd
+  - id: samples-tutorials
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/technical-writing/validmind/quickstarts.qmd
+    - samples/technical-writing/atryum/quickstart.qmd
+  - id: samples-enablement
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/technical-writing/validmind/enablement.qmd
+  - id: samples-storytelling
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/copywriting/validmind/honor-the-human.qmd
+    - samples/copywriting/validmind/reduce-culture-risk.qmd
+    - samples/copywriting/validmind/osff-takeaways.qmd
+    - samples/copywriting/saasquatch/growth-automation.qmd
 ---
 
 :::: {.flex .flex-wrap .justify-around}
@@ -63,7 +119,7 @@ listing:
 :::{#samples-type}
 :::
 
-## Samples by topic
+## Samples by format
 
 ::: {.panel-tabset}
 
@@ -87,15 +143,33 @@ Decieve. -->
 
 ### Developer Content
 
+:::{#samples-developer}
+:::
+
 ### Training
+
+:::{#samples-training}
+:::
 
 ### User Guides
 
-### Tutorials 
+:::{#samples-guides}
+:::
+
+### Quickstart Tutorials 
+
+:::{#samples-tutorials}
+:::
 
 ### Content Enablement
 
+:::{#samples-enablement}
+:::
+
 ### Storytelling
+
+:::{#samples-storytelling}
+:::
 
 :::
 

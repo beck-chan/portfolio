@@ -21,9 +21,18 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - atryum/integrations.qmd
-      - atryum/user-guides.qmd
-      - atryum/quickstart.qmd
+    - path: atryum/integrations.qmd
+      title: "Atryum Integrations"
+      subtitle: "Feature Documentation"
+      description: "User guides written for Atryum integrations."
+    - path: atryum/user-guides.qmd
+      title: "Atryum User Guides"
+      subtitle: "Feature Documentation"
+      description: "User guides written for core Atryum functionality."
+    - path: atryum/quickstart.qmd
+      title: "Atryum Quickstart"
+      subtitle: "Tutorial"
+      description: "Quickstart and installation guide for Atryum."
   - id: saasquatch-technical
     type: grid
     grid-columns: 3

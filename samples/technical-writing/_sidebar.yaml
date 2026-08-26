@@ -9,11 +9,16 @@ website:
         - section: "ValidMind"
           href: samples/technical-writing/validmind/index.qmd
           contents:
-            - samples/technical-writing/validmind/jupyter-notebooks.qmd
-            - samples/technical-writing/validmind/training.qmd
-            - samples/technical-writing/validmind/user-guides.qmd
-            - samples/technical-writing/validmind/quickstarts.qmd
-            - samples/technical-writing/validmind/enablement.qmd
+            - text: "Jupyter Notebooks"
+              file: samples/technical-writing/validmind/jupyter-notebooks.qmd
+            - text: "Training"
+              file: samples/technical-writing/validmind/training.qmd
+            - text: "User Guides"
+              file: samples/technical-writing/validmind/user-guides.qmd
+            - text: "Quickstarts"
+              file: samples/technical-writing/validmind/quickstarts.qmd
+            - text: "Enablement Content"
+              file: samples/technical-writing/validmind/enablement.qmd
         - section: "Atryum"
           href: samples/technical-writing/atryum/index.qmd
           contents:

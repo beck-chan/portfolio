@@ -1,5 +1,5 @@
 ---
-title: "User Guides"
-subtitle: "Reference Guides"
+title: "ValidMind User Guides"
+subtitle: "Feature Documentation"
 categories: ["ValidMind"]
 ---

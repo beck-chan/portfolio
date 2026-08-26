@@ -1,5 +1,5 @@
 ---
-title: "Enablement Content"
+title: "ValidMind Enablement Content"
 subtitle: "Content Creation"
 categories: ["ValidMind"]
 ---

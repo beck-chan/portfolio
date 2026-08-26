@@ -1,5 +1,5 @@
 ---
-title: "Quickstarts"
+title: "ValidMind Quickstarts"
 subtitle: "Tutorials"
 categories: ["ValidMind"]
 ---

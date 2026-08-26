@@ -1,5 +1,61 @@
 ---
-title: "Jupyter Notebooks"
+title: "ValidMind Jupyter Notebooks"
 subtitle: "Developer Content"
-categories: ["ValidMind"]
+categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Python Library", "Artficial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
+listing:
+  - id: validmind-notebooks-authored
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/docs/developer/validmind-library.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2076617220766d2e70726f64756374203e7d7d-for-validation
+      title: "ValidMind for validation series"
+      subtitle: "Jupyter Notebook"
+      description: "Created as part of an initiative to highlight our validation features that we previously neglected to showcase."
+    - path: https://validbeck.github.io/docs/notebooks/quickstart/quickstart_validation.html
+      title: "Quickstart for validation"
+      subtitle: "Jupyter Notebook"
+      description: "Created as part of an initiative to highlight our validation features that we previously neglected to showcase."
+  - id: validmind-notebooks-coauthored
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/docs/notebooks/use_cases/validation/validate_application_scorecard.html
+      title: "Validate an application scorecard model"
+      description: "I partnered with our Head of Solutions Architecture to author this intermediate notebook, transforming his domain knowledge into a comprehensive use case sample."
+      subtitle: "Jupyter Notebook"
+    - path: https://validbeck.github.io/docs/notebooks/use_cases/agents/document_agentic_ai.html
+      title: "Document an agentic AI system"
+      subtitle: "Jupyter Notebook"
+      description: "I teamed up with our Lead Machine Learning Engineer to author this intermediate notebook, transforming his domain knowledge into a comprehensive use case sample."
 ---
+
+Use case demonstrations written for ValidMind's Python library ("ValidMind Library") in Jupyter Notebook format.
+
+For the samples below, I've selected only my best work as mny contribution to ValidMind spanned too much content to collate in its entirety. 
+
+::: {.callout}
+Links below will take you to static versions of the notebooks as last edited by Beck.
+
+:::
+
+
+## Authored
+
+I owned the linked notebooks in this section from start to finish. 
+
+:::{#validmind-notebooks-authored}
+:::
+
+
+## Co-authored
+
+I led the creation of these notebooks, supported by another team member as my subject matter expert.
+
+:::{#validmind-notebooks-coauthored}
+:::
