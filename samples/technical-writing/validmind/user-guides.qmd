@@ -1,5 +1,309 @@
 ---
 title: "ValidMind User Guides"
 subtitle: "Feature Documentation"
-categories: ["ValidMind"]
+categories: ["Feature Documentation", "User Guides", "Artficial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
+listing:
+  - id: validmind-guides-workflows-intro
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://validbeck.github.io/docs/guide/workflows/introduction-to-workflows.html
+      title: "Introduction to workflows"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/workflows/workflow-step-types.html
+      title: "Workflow step types"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/workflows/conditional-step-requirements.html
+      title: "Conditional requirements"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/workflows/workflow-states.html
+      title: "Workflow states"
+      subtitle: "User Guides"
+  - id: validmind-guides-workflows-setup
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://validbeck.github.io/docs/guide/workflows/setting-up-workflows.html
+      title: "Setting up workflows"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/workflows/manage-record-stages.html
+      title: "Manage record stages"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/workflows/configure-workflows.html
+      title: "Configure workflows"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/workflows/workflow-configuration-examples.html
+      title: "Workflow configuration examples"
+      subtitle: "User Guides"
+  - id: validmind-guides-workflows-usage
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://validbeck.github.io/docs/guide/workflows/working-with-workflows.html
+      title: "Working with workflows"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/workflows/manage-workflows.html
+      title: "Manage workflows"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/workflows/transition-workflows.html
+      title: "Transition workflows"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/workflows/manage-workflow-tasks.html
+      title: "Manage workflow tasks"
+      subtitle: "User Guides"
+  - id: validmind-guides-validation-manage
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://validbeck.github.io/docs/guide/validation/managing-validation.html
+      title: "Managing validation"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/validation/manage-validation-guidelines.html
+      title: "Manage validation guidelines"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/validation/configure-assessment-options.html
+      title: "Configure assessment options"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/validation/manage-artifact-types.html
+      title: "Manage artifact types"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/validation/manage-artifact-severities.html
+      title: "Manage artifact severities"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/validation/manage-artifact-fields.html
+      title: "Manage artifact fields"
+      subtitle: "User Guides"
+  - id: validmind-guides-validation-usage
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://validbeck.github.io/docs/guide/validation/working-with-artifacts.html
+      title: "Working with artifacts"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/validation/view-filter-artifacts.html
+      title: "View and filter artifacts"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/validation/customize-artifact-layouts.html
+      title: "Customize artifact layouts"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/validation/log-artifacts.html
+      title: "Log artifacts"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/validation/update-artifacts.html
+      title: "Update artifacts"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/validation/customize-artifact-overview-page.html
+      title: "Customize artifact overview page"
+      subtitle: "User Guides"
+  - id: validmind-guides-docs-usage
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://validbeck.github.io/docs/guide/documentation/work-with-test-results.html
+      title: "Work with test results"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/monitoring/work-with-metrics-over-time.html
+      title: "Work with metrics over time"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/documentation/work-with-document-versions.html
+      title: "Work with document versions"
+      subtitle: "User Guides"
+  - id: validmind-guides-docs-manage
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://validbeck.github.io/docs/guide/templates/managing-documents.html
+      title: "Managing documents"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/templates/manage-document-types.html
+      title: "Manage document types"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/templates/manage-documents.html
+      title: "Manage documents"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/templates/customize-document-checker.html
+      title: "Customize ValidMind Document Checker"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/templates/manage-text-block-library.html
+      title: "Manage text block library"
+      subtitle: "User Guides"
+  - id: validmind-guides-inventory
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://validbeck.github.io/docs/guide/inventory/manage-inventory-record-types.html
+      title: "Manage inventory record types"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/inventory/edit-inventory-fields.html
+      title: "Edit inventory fields"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/inventory/configure-record-interdependencies.html
+      title: "Configure record interdependencies"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/inventory/archive-delete-records.html
+      title: "Archive and delete records"
+      subtitle: "User Guides"
+  - id: validmind-guides-reporting
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://validbeck.github.io/docs/guide/reporting/tracking-organization-activity.html 
+      title: "Tracking organization activity"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/reporting/view-record-activity.html
+      title: "View record activity"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/reporting/view-settings-activity.html
+      title: "View settings activity"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/reporting/manage-custom-reports.html
+      title: "Manage custom reports"
+      subtitle: "User Guides"
+  - id: validmind-guides-config
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://validbeck.github.io/docs/guide/access/register-with-validmind.html
+      title: "Register with ValidMind"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/configuration/managing-your-organization.html
+      title: "Managing your organization"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/configuration/manage-platform-notifications.html
+      title: "Manage platform notifications"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/configuration/manage-record-stakeholder-types.html
+      title: "Manage record stakeholder types"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/docs/guide/configuration/customize-your-dashboard.html
+      title: "Customize your dashboard"
+      subtitle: "User Guides"
 ---
+
+User guides produced as documentation and reference for ValidMind's core features.
+
+For the samples below, I've selected only my best work where I authored the bulk of the content as my contribution to ValidMind spanned too much content to collate in its entirety. 
+
+::: {.callout}
+Links below will take you to static versions of the content as last edited by Beck.
+
+:::
+
+## Workflows
+
+As the company subject matter expert for workflows, I owned all of the below guides in their entirety from start to finish.
+
+::: {.panel-tabset}
+
+### Basics
+
+:::{#validmind-guides-workflows-intro}
+:::
+
+### Set up
+
+:::{#validmind-guides-workflows-setup}
+:::
+
+### Usage
+
+:::{#validmind-guides-workflows-usage}
+:::
+
+:::
+
+## Validation
+
+Part of my focus at ValidMind was bringing our validation guidance up to a higher standard, as material showcasing validation capabilities was sorely neglected. 
+
+I owned at least 95% of the content below in the linked iteration — a small portion of the "Usage" tab was based on previous sparse drafts or have received one or two edits from others, but most guides were owned by me from start to finish.
+
+::: {.panel-tabset}
+
+### Management
+
+:::{#validmind-guides-validation-manage}
+:::
+
+### Usage
+
+:::{#validmind-guides-validation-usage}
+:::
+
+:::
+
+## Documentation & Templates
+
+I owned all of the linked guides below from start to finish. 
+
+::: {.panel-tabset}
+
+### Usage
+
+:::{#validmind-guides-docs-usage}
+:::
+
+### Management
+
+:::{#validmind-guides-docs-manage}
+:::
+
+:::
+
+## Inventory
+
+I owned all of the linked guides below from start to finish. 
+
+:::{#validmind-guides-inventory}
+:::
+
+## Reporting
+
+I owned all of the linked guides below from start to finish. 
+
+:::{#validmind-guides-reporting}
+:::
+
+
+## Access & Configuration
+
+I owned all of the linked guides below from start to finish. 
+
+:::{#validmind-guides-config}
+:::
+
+
+## Citations
+
+[{{< fa brands github >}} archive of `validmind/documentation/guide` by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/guide/){target="_blank" .button}
+
