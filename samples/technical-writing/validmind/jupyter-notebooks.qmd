@@ -35,7 +35,7 @@ listing:
       description: "I teamed up with our Lead Machine Learning Engineer to author this intermediate notebook, transforming his domain knowledge into a comprehensive use case sample."
 ---
 
-Use case demonstrations written for ValidMind's Python library ("ValidMind Library") in Jupyter Notebook format.
+Jupyter Notebook use case demonstrations written for ValidMind's Python library.
 
 For the samples below, I've selected only my best work as mny contribution to ValidMind spanned too much content to collate in its entirety. 
 
@@ -59,3 +59,7 @@ I led the creation of these notebooks, supported by another team member as my su
 
 :::{#validmind-notebooks-coauthored}
 :::
+
+## Citations
+
+[{{< fa brands github >}} archive of `validmind/validmind-library` notebooks by Beck](https://github.com/validbeck/validmind-library/tree/main/notebooks){target="_blank" .button}

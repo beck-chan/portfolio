@@ -1,5 +1,65 @@
 ---
 title: "ValidMind Enablement Content"
 subtitle: "Content Creation"
-categories: ["ValidMind"]
+categories: ["Content Enablement", "Artficial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
+listing:
+  - id: validmind-style-guide
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/docs/about/contributing/style-guide/style-guide.html
+      title: "ValidMind style guide"
+      subtitle: "Content Enablement"
+    - path: https://validbeck.github.io/docs/about/contributing/style-guide/voice-and-tone.html
+      title: "Voice and tone"
+      subtitle: "Content Enablement"
+    - path: https://validbeck.github.io/docs/about/contributing/style-guide/conventions.html
+      title: "Conventions"
+      subtitle: "Content Enablement"
+  - id: validmind-notebook-templates
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://github.com/validbeck/validmind-library/tree/main/notebooks/templates
+      title: "Jupyter Notebook template Quickstart"
+      subtitle: "Content Enablement"
+    - path: https://github.com/validbeck/validmind-library/blob/main/notebooks/templates/e2e-notebook.ipynb
+      title: "End-to-end notebook template generation"
+      subtitle: "Content Enablement"
 ---
+
+Content produced to enable other creators to contribute to ValidMind's open-source.
+
+::: {.callout}
+Links below will take you to static versions of the content as last edited by Beck.
+
+:::
+
+## ValidMind Style Guide
+
+One of the first things I did at ValidMind was establish and publish our documentation style guide, based off of a sparse internal draft of general writing guidelines.
+
+:::{#validmind-style-guide}
+:::
+
+## ValidMind Jupyter Notebooks
+
+As Jupyter Notebooks operate as self-contained units, you're unable to easily single-source content that's repeated in other notebooks or documentation. 
+
+To encourage other notebook authors to use our consistent ValidMind notebook structure, I created a Python script and an accompanying interactive notebook that generates a notebook draft with all the right bits and pieces.
+
+:::{#validmind-notebook-templates}
+:::
+
+## Citations
+
+[{{< fa brands github >}} archive of `validmind/documentation` style guide by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/about/contributing/style-guide){target="_blank" .button}
+
+
+
