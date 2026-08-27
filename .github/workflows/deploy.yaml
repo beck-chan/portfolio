@@ -36,9 +36,6 @@ jobs:
         apt_cleanup: "true"
         create_reserve_gb: "3"
 
-    - name: Set up uv
-      uses: astral-sh/setup-uv@v5
-
     - name: Set up Quarto
       uses: quarto-dev/quarto-actions/setup@v2
       with:
