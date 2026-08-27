@@ -52,6 +52,37 @@ $pre-bg:#0b2a12; // Block background color
     }
 
 
+  /* Set up the tab container to host the background filler */
+//   .panel-tabset .nav-tabs {
+//     display: flex;
+//     flex-wrap: wrap;
+//     position: relative;
+//     z-index: 1; /* Keeps tabs layered cleanly on top */
+//   }
+
+//   /* Fills the gap beneath the top tab row with solid color */
+//   .panel-tabset .nav-tabs::after {
+//     content: "";
+//     position: absolute;
+//     left: 0;
+//     right: 0;
+//     bottom: -1px; 
+//     /* Targets the height of your second row of tabs */
+//     height: 45px; 
+//     background-color: #fee3e5;
+//     border-left: 1px solid #ff6162;
+//     border-top: 1px dotted #ff6162;
+//     border-right: 1px solid #ff6162;
+//     z-index: -1; 
+//   }
+
+//   .panel-tabset .nav-tabs .nav-link:not(.active) {
+//     background-color: #fff8f9; 
+//     position: relative;
+//   }
+
+      
+
 
 
 
