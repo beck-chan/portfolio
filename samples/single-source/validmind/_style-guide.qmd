@@ -1,0 +1,1 @@
+One of the first things I did at ValidMind was establish and publish our documentation style guide, based off of a sparse internal draft of general writing guidelines.

@@ -35,9 +35,9 @@ listing:
       description: "I teamed up with our Lead Machine Learning Engineer to author this intermediate notebook, transforming his domain knowledge into a comprehensive use case sample."
 ---
 
-Jupyter Notebook use case demonstrations written for ValidMind's Python library.
+{{< include /samples/single-source/validmind/_jupyter.qmd >}}
 
-For the samples below, I've selected only my best work as my contribution to ValidMind spanned too much content to collate in its entirety. 
+{{< include /samples/single-source/validmind/_best-work.qmd >}}
 
 ::: {.callout}
 Links below will take you to static versions of the notebooks as last edited by Beck.
@@ -47,7 +47,7 @@ Links below will take you to static versions of the notebooks as last edited by 
 
 ## Authored
 
-I owned the linked notebooks in this section from start to finish. 
+{{< include /samples/single-source/validmind/_owned-notebooks.qmd >}} 
 
 :::{#validmind-notebooks-authored}
 :::
@@ -55,7 +55,7 @@ I owned the linked notebooks in this section from start to finish.
 
 ## Co-authored
 
-I led the creation of these notebooks, supported by another team member as my subject matter expert.
+{{< include /samples/single-source/validmind/_created-notebooks.qmd >}}
 
 :::{#validmind-notebooks-coauthored}
 :::

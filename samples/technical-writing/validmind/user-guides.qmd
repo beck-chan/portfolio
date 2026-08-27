@@ -210,9 +210,7 @@ listing:
       subtitle: "User Guides"
 ---
 
-User guides produced as documentation and reference for ValidMind's core features.
-
-For the samples below, I've selected only my best work where I authored the bulk of the content as my contribution to ValidMind spanned too much content to collate in its entirety. 
+{{< include /samples/single-source/validmind/_user-guides.qmd >}}
 
 ::: {.callout}
 Links below will take you to static versions of the content as last edited by Beck.
@@ -221,7 +219,7 @@ Links below will take you to static versions of the content as last edited by Be
 
 ## Workflows
 
-As the company subject matter expert for workflows, I owned all of the below guides in their entirety from start to finish.
+{{< include /samples/single-source/validmind/_workflows.qmd >}}
 
 ::: {.panel-tabset}
 
@@ -244,9 +242,7 @@ As the company subject matter expert for workflows, I owned all of the below gui
 
 ## Validation
 
-Part of my focus at ValidMind was bringing our validation guidance up to a higher standard, as material showcasing validation capabilities was sorely neglected. 
-
-I owned at least 95% of the content below in the linked iteration — a small portion of the "Usage" tab was based on previous sparse drafts or have received one or two edits from others, but most guides were owned by me from start to finish.
+{{< include /samples/single-source/validmind/_validation.qmd >}}
 
 ::: {.panel-tabset}
 
@@ -264,7 +260,7 @@ I owned at least 95% of the content below in the linked iteration — a small po
 
 ## Documentation & Templates
 
-I owned all of the linked guides below from start to finish. 
+{{< include /samples/single-source/validmind/_guides-owned.qmd >}}
 
 ::: {.panel-tabset}
 
@@ -282,14 +278,14 @@ I owned all of the linked guides below from start to finish.
 
 ## Inventory
 
-I owned all of the linked guides below from start to finish. 
+{{< include /samples/single-source/validmind/_guides-owned.qmd >}}
 
 :::{#validmind-guides-inventory}
 :::
 
 ## Reporting
 
-I owned all of the linked guides below from start to finish. 
+{{< include /samples/single-source/validmind/_guides-owned.qmd >}}
 
 :::{#validmind-guides-reporting}
 :::
@@ -297,7 +293,7 @@ I owned all of the linked guides below from start to finish.
 
 ## Access & Configuration
 
-I owned all of the linked guides below from start to finish. 
+{{< include /samples/single-source/validmind/_guides-owned.qmd >}}
 
 :::{#validmind-guides-config}
 :::

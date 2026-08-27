@@ -1,0 +1,3 @@
+As Jupyter Notebooks operate as self-contained units, you're unable to easily single-source content that's repeated in other notebooks or documentation. 
+
+To encourage other notebook authors to use our consistent ValidMind notebook structure, I created a Python script and an accompanying interactive notebook that generates a notebook draft with all the right bits and pieces.

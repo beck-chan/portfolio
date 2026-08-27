@@ -276,7 +276,7 @@ listing:
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}
 
-For the samples below, I've selected only my best work as my contribution to ValidMind spanned too much content to collate in its entirety. 
+{{< include /samples/single-source/validmind/_best-work.qmd >}}
 
 ::: {.callout}
 Links below will take you to static versions of the content as last edited by Beck.
@@ -285,13 +285,13 @@ Links below will take you to static versions of the content as last edited by Be
 
 ## ValidMind Jupyter Notebooks
 
-Jupyter Notebook use case demonstrations written for ValidMind's Python library.
+{{< include /samples/single-source/validmind/_jupyter.qmd >}}
 
 ::: {.panel-tabset}
 
 ### Authored
 
-I owned the linked notebooks in this section from start to finish. 
+{{< include /samples/single-source/validmind/_owned-notebooks.qmd >}}
 
 :::{#validmind-notebooks-author}
 :::
@@ -299,7 +299,7 @@ I owned the linked notebooks in this section from start to finish.
 
 ### Co-authored
 
-I led the creation of these notebooks, supported by another team member as my subject matter expert.
+{{< include /samples/single-source/validmind/_created-notebooks.qmd >}}
 
 :::{#validmind-notebooks-coauthor}
 :::
@@ -308,47 +308,55 @@ I led the creation of these notebooks, supported by another team member as my su
 
 ## ValidMind Training
 
-Comprehensive interactive training cirriculums developed to onboard users onto ValidMind.
-
-For the samples below, I was responsible for everything from cirriculum planning, to content, to design refinement, starting from sparse one-module drafts created by another writer. I included these samples as I owned at least 75% of the content. 
+{{< include /samples/single-source/validmind/_training.qmd >}}
 
 :::{#validmind-academy}
 :::
 
 ## ValidMind User Guides
 
-User guides produced as documentation and reference for ValidMind's core features.
-
-For the samples below, I've selected only my best work where I authored the bulk of the content as my contribution to ValidMind spanned too much content to collate in its entirety. 
+{{< include /samples/single-source/validmind/_user-guides.qmd >}}
 
 ::: {.panel-tabset}
 
 ### Workflows
+
+{{< include /samples/single-source/validmind/_workflows.qmd >}}
 
 :::{#validmind-workflows}
 :::
 
 ### Validation
 
+{{< include /samples/single-source/validmind/_validation.qmd >}}
+
 :::{#validmind-validation}
 :::
 
-### Documentation & Templates
+### Docs & Templates
+
+{{< include /samples/single-source/validmind/_guides-owned.qmd >}}
 
 :::{#validmind-docs}
 :::
 
 ### Inventory
 
+{{< include /samples/single-source/validmind/_guides-owned.qmd >}}
+
 :::{#validmind-inventory}
 :::
 
 ### Reporting
 
+{{< include /samples/single-source/validmind/_guides-owned.qmd >}}
+
 :::{#validmind-reporting}
 :::
 
-### Access & Configuration
+### Access & Config
+
+{{< include /samples/single-source/validmind/_guides-owned.qmd >}}
 
 :::{#validmind-config}
 :::
@@ -358,33 +366,40 @@ For the samples below, I've selected only my best work where I authored the bulk
 
 ## ValidMind Quickstarts
 
-Intuitive quickstart guides developed to onboard users onto ValidMind.
-
-I took a previously jumbled section of fragmented guides, with no clear learning outcomes and missing user role journeys, to a streamlined portal that empowered every type of new user. I owned all of the new quickstart guidance linked below from start to finish.
+{{< include /samples/single-source/validmind/_quickstarts.qmd >}}
 
 :::{#validmind-get-started}
 :::
 
+{{< include /samples/single-source/validmind/_cf-quickstarts.qmd >}}
+
 ## ValidMind Enablement Content
 
-Content produced to enable other creators to contribute to ValidMind's open-source.
+{{< include /samples/single-source/validmind/_enablement.qmd >}}
 
 ::: {.panel-tabset}
 
 ### ValidMind Style Guide
 
-One of the first things I did at ValidMind was establish and publish our documentation style guide, based off of a sparse internal draft of general writing guidelines.
+{{< include /samples/single-source/validmind/_style-guide.qmd >}}
 
 :::{#validmind-style}
 :::
 
 ### ValidMind Jupyter Notebooks
 
-As Jupyter Notebooks operate as self-contained units, you're unable to easily single-source content that's repeated in other notebooks or documentation. 
-
-To encourage other notebook authors to use our consistent ValidMind notebook structure, I created a Python script and an accompanying interactive notebook that generates a notebook draft with all the right bits and pieces.
+{{< include /samples/single-source/validmind/_templates.qmd >}}
 
 :::{#validmind-templates}
 :::
 
 :::
+
+## Citations
+
+[{{< fa brands github >}} archive of `validmind/documentation` by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/){target="_blank" .button}
+
+<!-- ::: {.callout}
+You can learn more about my involvement with ValidMind's documentation and the impact I had on documentation architecture under [Content Engineering](/samples/content-engineering/index.qmd)
+::: -->
+

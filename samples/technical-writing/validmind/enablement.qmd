@@ -43,16 +43,14 @@ Links below will take you to static versions of the content as last edited by Be
 
 ## ValidMind Style Guide
 
-One of the first things I did at ValidMind was establish and publish our documentation style guide, based off of a sparse internal draft of general writing guidelines.
+{{< include /samples/single-source/validmind/_style-guide.qmd >}}
 
 :::{#validmind-style-guide}
 :::
 
 ## ValidMind Jupyter Notebooks
 
-As Jupyter Notebooks operate as self-contained units, you're unable to easily single-source content that's repeated in other notebooks or documentation. 
-
-To encourage other notebook authors to use our consistent ValidMind notebook structure, I created a Python script and an accompanying interactive notebook that generates a notebook draft with all the right bits and pieces.
+{{< include /samples/single-source/validmind/_templates.qmd >}}
 
 :::{#validmind-notebook-templates}
 :::

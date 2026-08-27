@@ -25,7 +25,9 @@ listing:
     categories: true
 ---
 
-Blog posts, feature highlights, marketing copy, and so forth.
+> Driving action and building connection through technical insight.
+>
+> To me, software storytelling goes beyond simple feature highlights — culminating in tangible statements of value for users. 
 
 ## ValidMind
 

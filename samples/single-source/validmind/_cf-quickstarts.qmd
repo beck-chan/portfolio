@@ -1,0 +1,6 @@
+::: {.column-margin}
+**Compare:**
+
+[Previous ValidMind quickstart guides](https://validbeck.github.io/archive/guide/get-started.html){target="_blank" .button .cta}
+
+:::

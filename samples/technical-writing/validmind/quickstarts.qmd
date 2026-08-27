@@ -24,9 +24,7 @@ listing:
       subtitle: "Tutorials"
 ---
 
-Intuitive quickstart guides developed to onboard users onto ValidMind.
-
-I took a previously jumbled section of fragmented guides, with no clear learning outcomes and missing user role journeys, to a streamlined portal that empowered every type of new user. I owned all of the new quickstart guidance linked below from start to finish.
+{{< include /samples/single-source/validmind/_quickstarts.qmd >}}
 
 ::: {.callout}
 Links below will take you to static versions of the quickstarts as last edited by Beck.
@@ -36,12 +34,7 @@ Links below will take you to static versions of the quickstarts as last edited b
 :::{#validmind-quickstarts}
 :::
 
-::: {.column-margin}
-**Compare:**
-
-[Previous ValidMind quickstart guides](https://validbeck.github.io/archive/guide/get-started.html){target="_blank" .button .cta}
-
-:::
+{{< include /samples/single-source/validmind/_cf-quickstarts.qmd >}}
 
 <!-- ::: {.callout}
 You can learn more about my involvement with ValidMind's documentation and the impact I had on training and onboarding architecture under [Content Engineering](/samples/content-engineering/index.qmd)
