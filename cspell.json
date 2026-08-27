@@ -1,0 +1,19 @@
+// Project spellchecker: Requires node.js, npm
+
+// All files
+// npx cspell "**/*"
+
+// Just .qmd
+// npx cspell "**/*.qmd"
+
+// Omitted words:
+
+{
+    "version": "0.2",
+    "language": "en",
+    "words": [
+      "validmind",
+      "saasquatch",
+      "atryum"
+    ]
+  }
