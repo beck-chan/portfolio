@@ -1,7 +1,7 @@
 ---
 title: "ValidMind Enablement Content"
 subtitle: "Content Creation"
-categories: ["Content Enablement", "Artficial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
+categories: ["Content Enablement", "Artificial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
 listing:
   - id: validmind-style-guide
     type: grid

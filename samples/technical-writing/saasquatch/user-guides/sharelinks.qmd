@@ -61,7 +61,7 @@ You can see that the example below groups the sharelinks by Engagement medium an
 | POPUP	| Shown to users via a `PopupWidget`. | 
 | EMBED	| Shown to users via an `EmbedWidget`.| 
 | HOSTED	| Shown to users via a "Hosted" Widget.| 
-| cleanShareLink	| Shown on the user's participant profile in the SaaSquatch adminstrative portal.| 
+| cleanShareLink	| Shown on the user's participant profile in the SaaSquatch administrative portal.| 
 | UNKNOWN	| Set of sharelinks retrieved for a user via a User Details Report.| 
 | EMAIL	| Shown to users via program notification emails. | 
 | MOBILE	| Shown to users via the mobile SDKs.| 

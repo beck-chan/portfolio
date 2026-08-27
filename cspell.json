@@ -1,19 +1,81 @@
 // Project spellchecker: Requires node.js, npm
 
-// All files
-// npx cspell "**/*"
+// Scan all files excluding _output & .quarto directories
+// npx cspell "**/*" --exclude "_output" --exclude ".quarto"
 
-// Just .qmd
-// npx cspell "**/*.qmd"
+// Just .qmd sample files
+// npx cspell "**/*.qmd" --exclude "_output" --exclude ".quarto" --exclude "poetry/*" 
 
 // Omitted words:
 
 {
     "version": "0.2",
+    "caseSensitive": true,
     "language": "en",
+    "ignoreRegExpList": [
+        "/```[\\s\\S]*?```/g",
+        "/(?:\\r?\\n|^)\\s*```[\\s\\S]*?```/g"
+        ],    
     "words": [
-      "validmind",
+      "Académie",
+      "accountabilities",
+      "Alexa",
+      "atryum",
+      "Atryum",
+      "autopopulate",
+      "Caecus",
+      "chan",
+      "colwidths",
+      "Complia",
+      "Configurator",
+      "Contentful",
+      "Develus",
+      "diams",
+      "Eberhardt",
+      "Elementby",
+      "ETID",
+      "Exxxxxxx",
+      "faber",
+      "FINOS",
+      "Fintech",
+      "Française",
+      "Freshdesk",
+      "FRIENDCODE",
+      "fulfilment",
+      "github",
+      "headshot",
+      "jupyter",
+      "lightbox",
+      "linkedin",
+      "Loookup",
+      "mdash",
+      "metamorphosized",
+      "Multitasked",
+      "Nata",
+      "ndash",
+      "operationalizing",
+      "osff",
+      "posthog",
+      "quickstarts",
+      "recurly",
+      "Recurly",
+      "referredby",
+      "RWZEB",
       "saasquatch",
-      "atryum"
+      "SaaSquatch",
+      "sfdc",
+      "SFDC",
+      "sharelink",
+      "sharelinks",
+      "squatch",
+      "squatchjs",
+      "supabase",
+      "tabset",
+      "upserted",
+      "upserting",
+      "Upserting",
+      "Upserts",
+      "validmind",
+      "ValidMind",
     ]
   }

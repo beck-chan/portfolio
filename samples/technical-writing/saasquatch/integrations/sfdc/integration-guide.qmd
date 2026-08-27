@@ -1,5 +1,5 @@
 ---
 title: "Salesforce Integration User Guide"
-subtitle: "SDFC Integration"
+subtitle: "SFDC Integration"
 categories: ["Feature Documentation", "User Guides", "Integrations", "Salesforce", "CRMs", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
 ---

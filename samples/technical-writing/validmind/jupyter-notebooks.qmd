@@ -1,7 +1,7 @@
 ---
 title: "ValidMind Jupyter Notebooks"
 subtitle: "Developer Content"
-categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Python Library", "Artficial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
+categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Python Library", "Artificial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
 listing:
   - id: validmind-notebooks-authored
     type: grid

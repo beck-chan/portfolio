@@ -64,7 +64,7 @@ sidebar: false
 
 **Develus Systems Inc. for Complia Health**
 
-- Led creation of a knowledgebase to empower team members with extensive training and reference materials.
+- Led creation of a knowledge base to empower team members with extensive training and reference materials.
 - Created a mentorship and feedback program, strengthening team cohesion.
 - Triaged, escalated, and owned resolution of product bugs for custom installations using Zendesk.
 
@@ -76,12 +76,12 @@ sidebar: false
 AbeBooks.com, Amazon subsidiary
 
 - Exceeded target metric expectations at 160% while providing technical support in a fast-paced call center. 
-- Initiated improvements to best practices and processes, including documentation for team knowledgebase.
+- Initiated improvements to best practices and processes, including documentation for team knowledge base.
 
 :::
 
 ::: {.event data-label="January 2014 &ndash; July 2016" style="--tl-color-label: #f3be60; --tl-color-dot: #f3be60;"}
-### Optical Technician & Medical Office Assistan
+### Optical Technician & Medical Office Assistant
 
 **Hudson's Bay Optical**
 
@@ -91,11 +91,11 @@ AbeBooks.com, Amazon subsidiary
 :::
 
 ::: {.event data-label="July 2013 &ndash; December 2013" style="--tl-color-label: #0272be; --tl-color-dot: #0272be;"}
-### Medical Office Assitant / Receptionist
+### Medical Office Assistant / Receptionist
 
 **Inner Harbour Optometry**
 
-- Managed confidental medical charts while performing optometic testing and customer support.
+- Managed confidential medical charts while performing optometric testing and customer support.
 - Improved patient re-call system to increase business revenue.
 
 :::
@@ -152,7 +152,7 @@ AbeBooks.com, Amazon subsidiary
 - Freshdesk
 - Zapier
 - Salesforce
-- Hubspot
+- HubSpot
 - Intercom
 - Front
 
@@ -170,11 +170,11 @@ AbeBooks.com, Amazon subsidiary
 
 **Integrations**
 
-- Paypal
+- PayPal
 - Recurly
 - Stripe
 - Branch
-- Appsflyer
+- AppsFlyer
 
 :::
 

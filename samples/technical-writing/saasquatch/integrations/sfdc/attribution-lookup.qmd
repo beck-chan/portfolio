@@ -1,6 +1,6 @@
 ---
-title: "SaaSquatch + SDFC: Attribution via Contact Loookup"
-subtitle: "SDFC Integration"
+title: "SaaSquatch + SFDC: Attribution via Contact Loookup"
+subtitle: "SFDC Integration"
 categories: ["Feature Documentation", "User Guides", "Integrations", "Salesforce", "CRMs", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
 ---
 

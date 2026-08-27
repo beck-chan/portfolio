@@ -1,7 +1,7 @@
 ---
 title: "Atryum Integrations"
 subtitle: "Feature Documentation"
-categories: ["Feature Documentation", "User Guides", "Integrations", "Agentic Orchestration", "Artficial Intelligence (AI)", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Risk Governance", "Software as a Service", "Atryum", "ValidMind"]
+categories: ["Feature Documentation", "User Guides", "Integrations", "Agentic Orchestration", "Artificial Intelligence (AI)", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Risk Governance", "Software as a Service", "Atryum", "ValidMind"]
 listing:
   - id: atryum-integrations
     type: grid

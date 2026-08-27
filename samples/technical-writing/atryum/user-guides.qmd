@@ -1,7 +1,7 @@
 ---
 title: "Atryum User Guides"
 subtitle: "Feature Documentation"
-categories: ["Feature Documentation", "User Guides", "Agentic Orchestration", "Artficial Intelligence (AI)", "AI Risk", "Agents", "Risk Governance", "Software as a Service", "Atryum", "ValidMind"]
+categories: ["Feature Documentation", "User Guides", "Agentic Orchestration", "Artificial Intelligence (AI)", "AI Risk", "Agents", "Risk Governance", "Software as a Service", "Atryum", "ValidMind"]
 listing:
   - id: atryum-guides
     type: grid

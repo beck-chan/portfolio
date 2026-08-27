@@ -1,4 +1,4 @@
-During my tenure at SaaSquatch, I became the company Subject Matter Expert for many of our custom integrations, including our intergration for Salesforce which I helped develop.
+During my tenure at SaaSquatch, I became the company Subject Matter Expert for many of our custom integrations, including our integration for Salesforce which I helped develop.
 
 ::: {.callout}
 

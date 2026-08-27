@@ -54,7 +54,7 @@ listing:
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}
 
-As I authored the bulk of 53% of user content out of many contributors,^[![Statistics snapsnot from validmind/documentation](validmind/beck-contributions.png){.pics}<br><br>Citation: [{{< fa brands github >}} `validmind/documentation` statistic archive](https://github.com/validbeck/validmind-docs/graphs/contributors?from=8%2F24%2F2024&selectedMetric=additions){target="_blank"}] most of ValidMind's documentation saw my influence at some point. I've selected some of my best work to showcase below: 
+As I authored the bulk of 53% of user content out of many contributors,^[![Statistics snapshot from validmind/documentation](validmind/beck-contributions.png){.pics}<br><br>Citation: [{{< fa brands github >}} `validmind/documentation` statistic archive](https://github.com/validbeck/validmind-docs/graphs/contributors?from=8%2F24%2F2024&selectedMetric=additions){target="_blank"}] most of ValidMind's documentation saw my influence at some point. I've selected some of my best work to showcase below: 
 
 :::{#validmind-technical}
 :::

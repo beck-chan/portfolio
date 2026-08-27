@@ -32,7 +32,7 @@ squatch.ready(function () {
 
   squatch.api().squatchReferralCookie().then(function(response) {
 
-    // Define the heirarchy of desired referral codes 
+    // Define the hierarchy of desired referral codes 
     // The following will use `primary-program` as default or `secondary-program` if no cookie is found for the former
     document.getElementById('referralCode').value = response.codes['primary-program'] || response.codes['secondary-program']; 
 

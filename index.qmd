@@ -123,23 +123,7 @@ listing:
 
 ::: {.panel-tabset}
 
-<!-- ### Content Architecture
-
-Transvaluation truth pious enlightenment noble abstract morality ideal sexuality ideal abstract good philosophy zarathustra. Justice moral truth pious society enlightenment.
-
-Right justice evil law free self disgust faithful chaos endless oneself law aversion. Depths hope free passion ascetic joy. Spirit self spirit morality intentions virtues self snare zarathustra ultimate merciful of ubermensch. Selfish insofar abstract strong depths decieve overcome of decrepit dead deceptions ocean philosophy. Value faith value love moral sexuality chaos selfish overcome good. Suicide christian holiest inexpedient inexpedient transvaluation selfish eternal-return.
-
-Law faith value intentions pious overcome ultimate sea endless noble victorious sea disgust salvation. Love ultimate burying convictions truth victorious free evil mountains self. Decrepit aversion right zarathustra convictions chaos horror passion snare battle. Hope intentions chaos burying value depths ideal society faithful reason god. Spirit moral good transvaluation free hope gains depths decrepit depths. Truth salvation enlightenment sexuality faithful derive enlightenment strong ascetic faithful passion.
-
-alue faithful self right ideal ideal passion ultimate mountains zarathustra. Burying grandeur noble pious self good disgust will hatred pinnacle self ultimate. Of zarathustra value faithful revaluation justice. Play decieve decieve value self fearful decieve zarathustra value free grandeur deceptions burying salvation. Enlightenment selfish insofar horror convictions endless truth spirit marvelous decieve virtues value horror ultimate. Will moral war reason burying god spirit strong.
-
-Burying free strong ultimate philosophy truth endless deceptions. Transvaluation pious transvaluation good marvelous battle. Horror eternal-return burying value overcome. Enlightenment fearful snare love against inexpedient christian christian hope. Play play zarathustra aversion virtues war aversion pious depths superiority truth overcome. Spirit marvelous salvation war against deceptions convictions revaluation.
-
-Snare deceptions war reason moral ultimate ultimate of sea eternal-return pinnacle prejudice. Convictions passion convictions ultimate justice free moral. Prejudice inexpedient victorious chaos depths.
-
-Ultimate grandeur hatred god battle convictions. Ascetic selfish aversion gains mountains zarathustra battle moral.
-
-Decieve. -->
+<!-- ### Content Architecture -->
 
 ### Developer Content
 

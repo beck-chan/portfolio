@@ -79,7 +79,7 @@ These are all based on the assumption that the recipient of the reward is linked
 
 
 ### Custom Stripe Reward Units
-The Stripe Integration supports fulfillment of alternative reward units in addition to `CREDIT` as long as it is specificed in the Stripe Configuration and a valid currency code is appended. For example, instead of using `CREDIT/USD` you could use `SPECIAL/USD`.
+The Stripe Integration supports fulfillment of alternative reward units in addition to `CREDIT` as long as it is specified in the Stripe Configuration and a valid currency code is appended. For example, instead of using `CREDIT/USD` you could use `SPECIAL/USD`.
 
 To do so, navigate to the Stripe Configurator in the Integrations tab and select "Custom" rather than "Currency" from the drop-down menu. You can then add `SPECIAL` as the custom unit that accepts all currencies, or `SPECIAL/USD` or `SPECIAL/CAD` if you would like to specify the currency accepted. As with the standard `CREDIT/` unit, custom units will accept any valid ISO 4217 currency code.
 

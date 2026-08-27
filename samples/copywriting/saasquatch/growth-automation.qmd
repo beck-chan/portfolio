@@ -4,7 +4,7 @@ subtitle: "Feature Highlight"
 categories: ["Feature Highlights", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
 ---
 
-> I owned this feature hightlight post from start to finish.
+> I owned this feature highlight post from start to finish.
 > 
 > Any links to guides I did not author have been removed for this archived version.
 
@@ -48,7 +48,7 @@ Your business is extremely varied in what it offers to customers, so we've built
 
 If none of the above offered turnkey programs suit your needs, we can help you design a custom program that rewards your customers on a milestone of your choice. By using our infinitely adaptable API library, you'll be able to send us varied information about your customers' activity within your business — as much or as little as you want — information that is processed by our system in a way that automatically signals when a user should receive a reward.
 
-We call this information custom events, and they can be anything you like — from account information updates to an abritrary action performed by your users within your system. Once a user hits the required amount, or type of event, that will have already been passed through to SaaSquatch upon completion, they will be immediately rewarded without requiring any further action.
+We call this information custom events, and they can be anything you like — from account information updates to an arbitrary action performed by your users within your system. Once a user hits the required amount, or type of event, that will have already been passed through to SaaSquatch upon completion, they will be immediately rewarded without requiring any further action.
 
 These events are entirely adjustable; you can ask our system to reward on a specific accumulation of a type of event or on receipt of a specific type of event. You can even pass additional events for use in future Growth Automation programs you may want to run based on user account history.
 

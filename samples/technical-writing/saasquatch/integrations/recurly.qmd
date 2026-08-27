@@ -19,7 +19,7 @@ SaaSquatch's Recurly integration uses Recurly’s Push Notifications and Recurly
 ## Set up Recurly
 
 ::: {.callout}
-**Test tenant vs. Live tenant** - Your SaaSquatch program provides both a live and test tenant. Test tenants can be used in conjuction with a Recurly Sandbox account to test payments, subscriptions, and reward automation before deploying to your production environment.
+**Test tenant vs. Live tenant** - Your SaaSquatch program provides both a live and test tenant. Test tenants can be used in conjunction with a Recurly Sandbox account to test payments, subscriptions, and reward automation before deploying to your production environment.
 
 :::
 

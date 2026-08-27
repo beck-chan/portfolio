@@ -148,7 +148,7 @@ Note that if you added a JWT during the environment setup, then you don’t need
 
 :::
 
-If you are following along by testing the examples on this page, you'll need to adjust the hardcoded `squatchToken` outined in "Environment setup" for the below call to reflect the user object.
+If you are following along by testing the examples on this page, you'll need to adjust the hardcoded `squatchToken` outlined in "Environment setup" for the below call to reflect the user object.
 
 ```javascript
 // Wait for `squatch.js` to be ready
@@ -213,7 +213,7 @@ Use cases:
 
 - Displaying the referral code in a sign-up form field to your new user to confirm that a referral is taking place.
 - Using the retrieved referral code to perform a Get a user by referral code REST API call to show the Referrer's details to the Referred User.
-- Retrieved then applied as a discount/coupon code with our Hubspot, Stripe and Recurly integrations.
+- Retrieved then applied as a discount/coupon code with our HubSpot, Stripe and Recurly integrations.
 
 ::: {.callout}
 ## Please note that it is NOT recommended to retrieve the referral code from the cookie to pass in explicitly if using `squatch.js` to upsert your users.
@@ -269,7 +269,7 @@ By default, SaaSquatch requires a user object payload JWT to be included with th
 
 :::
 
-If you are following along by testing the examples on this page, you'll need to adjust the hardcoded `squatchToken` outined in "Environment setup" for the below call to reflect the user object.
+If you are following along by testing the examples on this page, you'll need to adjust the hardcoded `squatchToken` outlined in "Environment setup" for the below call to reflect the user object.
 
 ```javascript
 // Wait for `squatch.js` to be ready
