@@ -22,4 +22,4 @@ howling <br>
 
 &emsp;&emsp;&emsp;Home. <br><br><br>
 
-::: {.poetry}
+::: 
