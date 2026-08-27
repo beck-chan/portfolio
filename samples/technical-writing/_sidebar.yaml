@@ -1,0 +1,67 @@
+website:
+  sidebar:
+    - id: technical
+      title: "Technical Writing"
+      contents:
+        - text: "Technical Writing"
+          file: samples/technical-writing/index.qmd
+        - text: "---"
+        - section: "ValidMind"
+          href: samples/technical-writing/validmind/index.qmd
+          contents:
+            - text: "Jupyter Notebooks"
+              file: samples/technical-writing/validmind/jupyter-notebooks.qmd
+            - text: "Training"
+              file: samples/technical-writing/validmind/training.qmd
+            - text: "User Guides"
+              file: samples/technical-writing/validmind/user-guides.qmd
+            - text: "Quickstarts"
+              file: samples/technical-writing/validmind/quickstarts.qmd
+            - text: "Enablement Content"
+              file: samples/technical-writing/validmind/enablement.qmd
+        - section: "Atryum"
+          href: samples/technical-writing/atryum/index.qmd
+          contents:
+            - text: "Integrations"
+              file: samples/technical-writing/atryum/integrations.qmd
+            - text: "User Guides"
+              file: samples/technical-writing/atryum/user-guides.qmd
+            - text: "Quickstart"
+              file: samples/technical-writing/atryum/quickstart.qmd
+        - section: "SaaSquatch"
+          href: samples/technical-writing/saasquatch/index.qmd
+          contents:
+            - section: "Integrations"
+              href: samples/technical-writing/saasquatch/integrations/index.qmd
+              contents:
+              - section: "Salesforce"
+                contents:
+                - text: "Invocable Methods"
+                  file: samples/technical-writing/saasquatch/integrations/sfdc/invocable-methods.qmd
+                - text: "Attribution via Contact"
+                  file: samples/technical-writing/saasquatch/integrations/sfdc/attribution-lookup.qmd
+                - text: "User & Account IDs"
+                  file: samples/technical-writing/saasquatch/integrations/sfdc/user-account-ids.qmd
+                - text: "Integration Guide"
+                  file: samples/technical-writing/saasquatch/integrations/sfdc/integration-guide.qmd
+              - section: "Other"
+                contents:
+                - text: "Stripe"
+                  file: samples/technical-writing/saasquatch/integrations/stripe.qmd
+                - text: "Recurly"
+                  file: samples/technical-writing/saasquatch/integrations/recurly.qmd
+                - text: "Tango Card"
+                  file: samples/technical-writing/saasquatch/integrations/tango-card.qmd
+            - section: "JavaScript SDK"
+              href: samples/technical-writing/saasquatch/sdk/index.qmd
+              contents:
+              - samples/technical-writing/saasquatch/sdk/key-sjs.qmd
+              - text: "`squatch.js` Advanced"
+                file: samples/technical-writing/saasquatch/sdk/sjs-advanced.qmd
+              - samples/technical-writing/saasquatch/sdk/tracking-cookies.qmd
+            - section: "User Guides"
+              href: samples/technical-writing/saasquatch/user-guides/index.qmd
+              contents:
+              - samples/technical-writing/saasquatch/user-guides/sharelinks.qmd
+              - text: "CSV Import"
+                file: samples/technical-writing/saasquatch/user-guides/csv-import.qmd

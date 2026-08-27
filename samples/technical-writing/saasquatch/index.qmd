@@ -1,0 +1,86 @@
+---
+title: "SaaSquatch"
+subtitle: "Technical Writing"
+listing:
+  - id: saasquatch-technical-sfdc
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - integrations/sfdc/invocable-methods.qmd
+      - integrations/sfdc/attribution-lookup.qmd
+      - integrations/sfdc/user-account-ids.qmd
+  - id: saasquatch-technical-integrations
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - integrations/stripe.qmd
+      - integrations/recurly.qmd
+      - integrations/tango-card.qmd
+  - id: saasquatch-technical-sdk
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - sdk/key-sjs.qmd
+      - sdk/sjs-advanced.qmd
+      - sdk/tracking-cookies.qmd
+  - id: saasquatch-technical-guides
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - user-guides/sharelinks.qmd
+      - user-guides/csv-import.qmd
+---
+
+{{< include /samples/single-source/saasquatch/_saasquatch.qmd >}}
+
+{{< include /samples/single-source/saasquatch/_writing.qmd >}}
+
+## SaaSquatch Integrations
+
+{{< include /samples/single-source/saasquatch/_integrations.qmd >}}
+
+::: {.panel-tabset}
+
+### Salesforce
+
+{{< include /samples/single-source/saasquatch/_sfdc.qmd >}}
+
+:::{#saasquatch-technical-sfdc}
+:::
+
+### Other
+
+{{< include /samples/single-source/saasquatch/_other-integrations.qmd >}}
+
+:::{#saasquatch-technical-integrations}
+:::
+
+:::
+
+## SaaSquatch JavaScript SDK
+
+{{< include /samples/single-source/saasquatch/_sdk.qmd >}}
+
+:::{#saasquatch-technical-sdk}
+:::
+
+## SaaSquatch User Guides
+
+{{< include /samples/single-source/saasquatch/_guides.qmd >}}
+
+:::{#saasquatch-technical-guides}
+:::
+
+

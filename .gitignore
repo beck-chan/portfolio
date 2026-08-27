@@ -1,0 +1,6 @@
+/.quarto/
+**/*.quarto_ipynb
+/_output/
+_quarto_internal_scss_error.scss
+site_libs
+wip-notes.md

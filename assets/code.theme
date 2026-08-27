@@ -1,0 +1,36 @@
+{
+  "text-color": "#df9a49",
+  "background-color": "#0b2a12",
+  "line-number-color": "#4a5d4e",
+  "text-styles": {
+    "Normal": { "text-color": "#df9a49" },
+    "Variable": { "text-color": "#df9a49" },
+    "DataType": { "text-color": "#df9a49" },
+    
+    "Comment": { "text-color": "#fee3e5", "italic": true },
+    "Documentation": { "text-color": "#fee3e5", "italic": true },
+    
+    "Keyword": { "text-color": "#ffb3ba", "bold": true },
+    "Import": { "text-color": "#ffb3ba", "bold": true },
+    "ControlFlow": { "text-color": "#ffb3ba", "bold": true },
+    "Operator": { "text-color": "#ffb3ba" },
+    "Attribute": { "text-color": "#ffb3ba" },
+    
+    "Function": { "text-color": "#ff6162", "bold": true },
+    "String": { "text-color": "#ff6162" },
+    "Char": { "text-color": "#ff6162" },
+    "SpecialChar": { "text-color": "#ff6162" },
+    "DecVal": { "text-color": "#ff6162" },
+    "Float": { "text-color": "#ff6162" },
+    "BaseN": { "text-color": "#ff6162" },
+    
+    "Constant": { "text-color": "#df9a49", "bold": true },
+    "BuiltIn": { "text-color": "#ff6162", "italic": true },
+    "Extension": { "text-color": "#ffb3ba" },
+    "Preprocessor": { "text-color": "#ffb3ba" },
+    "Information": { "text-color": "#fee3e5" },
+    "Warning": { "text-color": "#ff6162", "bold": true },
+    "Alert": { "text-color": "#ff6162", "background-color": "#fee3e5", "bold": true },
+    "Error": { "text-color": "#ff6162", "underline": true }
+  }
+}

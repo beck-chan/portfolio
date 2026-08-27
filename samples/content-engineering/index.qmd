@@ -1,0 +1,54 @@
+---
+title: "Content Engineering"
+subtitle: "Samples"
+listing:
+  - id: validmind-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+      - validmind/library.qmd
+      - validmind/releases.qmd
+      - validmind/academy.qmd
+      - validmind/quickstarts.qmd
+  - id: atryum-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+      - validmind/atryum.qmd
+  - id: personal-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+      - personal/portfolio.qmd
+    categories: true
+---
+
+lorem ipsum etc so the preview shows text same here, same listing page 
+
+## ValidMind
+
+{{< include /samples/single-source/validmind/_validmind.qmd >}}
+
+:::{#validmind-content}
+:::
+
+### Atryum
+
+{{< include /samples/single-source/atryum/_atryum.qmd >}}
+
+:::{#atryum-content}
+:::
+
+## Personal
+
+:::{#personal-content}
+:::

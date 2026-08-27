@@ -1,0 +1,100 @@
+---
+title: "Atryum"
+subtitle: "Technical Writing"
+listing:
+  - id: atryum-technical-integrations
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/atryum-docs/documentation/1_integrations/2_connect-agents.html
+      title: "Connect agents"
+      subtitle: "Integrations"
+    - path: https://validbeck.github.io/atryum-docs/documentation/1_integrations/3_connect-mcp-servers.html
+      title: "Connect MCP servers"
+      subtitle: "Integrations"
+    - path: https://validbeck.github.io/atryum-docs/documentation/1_integrations/4_configure-llm-providers.html
+      title: "Configure LLM providers"
+      subtitle: "Integrations"
+    - path: https://validbeck.github.io/atryum-docs/documentation/1_integrations/1_connect-validmind.html
+      title: "Connect ValidMind"
+      subtitle: "Integrations"
+  - id: atryum-technical-guides
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/atryum-docs/documentation/2_invocations.html
+      title: "Invocations"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/atryum-docs/documentation/3_rules.html
+      title: "Rules"
+      subtitle: "User Guides"
+  - id: atryum-technical-quickstart
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/atryum-docs/documentation/1_quickstart.html
+      title: "Quickstart"
+      subtitle: "Tutorial"
+    - path: https://validbeck.github.io/atryum-docs/
+      title: "atryum.org"
+      subtitle: "Landing Page"
+includes:
+  landing: true
+---
+
+{{< include /samples/single-source/atryum/_atryum.qmd >}}
+
+::: {.callout}
+Links below will take you to a static version of the documentation as last edited by Beck.
+
+:::
+
+{{< include /samples/single-source/atryum/_writing.qmd >}}
+
+## Atryum Integrations
+
+{{< include /samples/single-source/atryum/_link-blurb.qmd >}}
+
+:::{#atryum-technical-integrations}
+:::
+
+## Atryum User Guides
+
+{{< include /samples/single-source/atryum/_link-blurb.qmd >}}
+
+:::{#atryum-technical-guides}
+:::
+
+## Atryum Quickstart
+
+{{< include /samples/single-source/atryum/_quickstart.qmd >}}
+
+:::{#atryum-technical-quickstart}
+:::
+
+::: {.column-margin}
+**Compare:**
+
+[Previous Atryum quickstart guide](https://validbeck.github.io/atryum-archive/docs.html){target="_blank" .button .cta}
+
+[Previous Atryum landing page](https://validbeck.github.io/atryum-archive/){target="_blank" .button .cta}
+
+:::
+
+#### Citation
+
+[{{< fa brands github >}} archive of `validmind/atryum` commits by Beck](https://github.com/validbeck/atryum/commits/main/?author=validbeck){target="_blank" .button}
+
+<!-- ::: {.callout}
+You can learn more about my involvement with ValidMind, Atryum, and the impact I had on content and content architecture under [Content Engineering](/samples/content-engineering/index.qmd)
+::: -->
+

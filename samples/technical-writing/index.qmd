@@ -1,0 +1,85 @@
+---
+title: "Technical Writing"
+subtitle: "Samples"
+listing:
+  - id: validmind-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - validmind/jupyter-notebooks.qmd
+      - validmind/training.qmd
+      - validmind/user-guides.qmd
+      - validmind/quickstarts.qmd
+      - validmind/enablement.qmd
+  - id: atryum-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: atryum/integrations.qmd
+      title: "Atryum Integrations"
+      subtitle: "Feature Documentation"
+      description: "User guides written for Atryum integrations."
+    - path: atryum/user-guides.qmd
+      title: "Atryum User Guides"
+      subtitle: "Feature Documentation"
+      description: "User guides written for core Atryum functionality."
+    - path: atryum/quickstart.qmd
+      title: "Atryum Quickstart"
+      subtitle: "Tutorial"
+      description: "Quickstart and installation guide for Atryum."
+  - id: saasquatch-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - saasquatch/integrations/index.qmd
+      - saasquatch/sdk/index.qmd
+      - saasquatch/user-guides/index.qmd
+    categories: true
+---
+
+> Engendering empowered users through effective guidance content.
+> 
+> Along with a love of gratuitous alliteration, I truly enjoy authoring user guidance content. That's because I believe that great guidance content empowers users, and empowered users get excited about product.
+
+## ValidMind
+
+{{< include /samples/single-source/validmind/_validmind.qmd >}}
+
+As I authored the bulk of 53% of user content out of many contributors,^[![Statistics snapshot from validmind/documentation](validmind/beck-contributions.png){.pics}<br><br>Citation: [{{< fa brands github >}} `validmind/documentation` statistic archive](https://github.com/validbeck/validmind-docs/graphs/contributors?from=8%2F24%2F2024&selectedMetric=additions){target="_blank"}] most of ValidMind's documentation saw my influence at some point. I've selected some of my best work to showcase below: 
+
+:::{#validmind-technical}
+:::
+
+### Atryum
+
+{{< include /samples/single-source/atryum/_atryum.qmd >}}
+
+{{< include /samples/single-source/atryum/_writing.qmd >}}
+
+:::{#atryum-technical}
+:::
+
+<!-- ::: {.callout}
+You can learn more about my involvement with ValidMind, Atryum, and the impact I had on content and content architecture under [Content Engineering](/samples/content-engineering/index.qmd)
+::: -->
+
+## SaaSquatch
+
+{{< include /samples/single-source/saasquatch/_saasquatch.qmd >}}
+
+{{< include /samples/single-source/saasquatch/_writing.qmd >}}
+
+:::{#saasquatch-technical}
+:::
+
+
+

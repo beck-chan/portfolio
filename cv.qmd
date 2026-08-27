@@ -1,0 +1,202 @@
+---
+title: "*curriculum vitae*"
+subtitle: "Beck Chan"
+sidebar: false
+---
+
+## Work Experience
+
+::: {.timeline .tl-diamond .tl-label-banner .vertical}
+
+::: {.event data-label="March 2024 &ndash; July 2026" style="--tl-color-label: #de267e; --tl-color-dot: #de267e;"}
+### Senior Technical Writer
+
+**ValidMind, Inc**
+
+- Took features from design to complete release supported by storytelling alongside software engineers in GitHub.
+- Improved documentation and training through quality auditing and comprehensive redesigns using Quarto.
+- Authored 53% of user guidance content, including Jupyter Notebook samples for models and agentic systems.
+- Bridged gap between product design and user experience, verifying feature functionality and applying bug fixes.
+- Contributed to CI/CD infrastructure, open-source code libraries and software frontend built on TypeScript.
+- Designed, standardized, and implemented processes built to scale to close gaps and reduce team workload.
+- Spearheaded the implementation of an extensible custom Zendesk solution.
+
+:::
+
+::: {.event data-label="April 2023 &ndash; January 2024" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;"}
+### Senior Customer Solutions Specialist
+
+**SaaSquatch by impact.com**
+
+- Executed migration of evolving support processes to Freshdesk, resulting in a team 100% CSAT satisfaction rate.
+- Pioneered comprehensive reporting solutions, maintaining systematic report history to identify long-term trends.
+- Created exhaustive documentation, feedback metrics, and learning curriculums to onboard and train new agents.
+- Empowered users to understand and maximize the use of products by auditing and overhauling documentation.
+
+:::
+
+::: {.event data-label="October 2022 &ndash; March 2023" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;"}
+### Senior Technical Specialist
+
+**SaaSquatch by impact.com**
+
+- Designed and led solo migration of support processes to Zendesk built to scale, increasing efficiency by 74%.
+- Managed team escalations from complex technical cases, ensuring delivery of solutions to customers.
+- Proactively identified opportunities for customer growth and product improvements during ticket management.
+- Provided advanced technical support for web and mobile SDKs built on JavaScript, REST API, and GraphQL.
+
+:::
+
+::: {.event data-label="October 2018 &ndash; September 2022" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;"}
+### Solutions Architect
+
+**SaaSquatch by impact.com**
+
+- Streamlined workload by 51% through improvement of implementation processes and onboarding strategies.
+- Proactively created and maintained public documentation, focusing on accuracy, accessibility, and extensibility.
+- Produced tangible results for customers by collaborating cross-functionally to deliver custom features.
+- Designed and executed solutions for custom JavaScript, REST API, and GraphQL software installations.
+
+:::
+
+::: {.event data-label="October 2017 &ndash; August 2018" style="--tl-color-label: #f26b29; --tl-color-dot: #f26b29;"}
+### Customer Support Analyst
+
+**Develus Systems Inc. for Complia Health**
+
+- Led creation of a knowledge base to empower team members with extensive training and reference materials.
+- Created a mentorship and feedback program, strengthening team cohesion.
+- Triaged, escalated, and owned resolution of product bugs for custom installations using Zendesk.
+
+:::
+
+::: {.event data-label="July 2016 &ndash; September 2017" style="--tl-color-label: #cd1727; --tl-color-dot: #cd1727;"}
+### Customer Support Representative
+
+AbeBooks.com, Amazon subsidiary
+
+- Exceeded target metric expectations at 160% while providing technical support in a fast-paced call center. 
+- Initiated improvements to best practices and processes, including documentation for team knowledge base.
+
+:::
+
+::: {.event data-label="January 2014 &ndash; July 2016" style="--tl-color-label: #f3be60; --tl-color-dot: #f3be60;"}
+### Optical Technician & Medical Office Assistant
+
+**Hudson's Bay Optical**
+
+- Multitasked in a fast-paced sales environment to administer and facilitate the sale of prescription glasses. 
+- Managed patient charts, sales reports, office inventory and stock orders.
+
+:::
+
+::: {.event data-label="July 2013 &ndash; December 2013" style="--tl-color-label: #0272be; --tl-color-dot: #0272be;"}
+### Medical Office Assistant / Receptionist
+
+**Inner Harbour Optometry**
+
+- Managed confidential medical charts while performing optometric testing and customer support.
+- Improved patient re-call system to increase business revenue.
+
+:::
+
+::: {.event data-label="July 2010 &ndash; July 2013" style="--tl-color-label: #222e84; --tl-color-dot: #222e84;"}
+
+### Administrative & Teaching Assistant
+
+**Sylvan Learning, Inc.**
+
+- Coached and assisted students on the classroom floor and in 1-on-1 lessons. 
+- Created lesson plans and personalized curriculums tailored to individual student needs.
+
+:::
+
+:::
+
+::: {.column-margin}
+
+### Technical Skills
+
+**Technical Writing**
+
+- Docs-as-code engineering
+- Quarto publishing
+- Jupyter Notebooks
+- Markdown
+- CI/CD workflows
+
+**Software Development**
+
+- GitHub
+- Cursor Code
+- Visual Studio Code
+- Docker
+- Postman
+- HTML
+- CSS
+- TypeScript
+
+**Solutions Architecture & Implementation**
+
+- REST API
+- GraphQL
+- JavaScript
+- JSONata
+- Python
+- SQL
+- FTP
+
+**Support Engineering & Lifecycle Automation**
+
+- Zendesk
+- Freshdesk
+- Zapier
+- Salesforce
+- HubSpot
+- Intercom
+- Front
+
+**Project Management**
+
+- Shortcut
+- Notion
+- Jira
+- Confluence
+- Asana
+- Google Workspace
+- Microsoft 365
+- Adobe Creative Cloud
+
+
+**Integrations**
+
+- PayPal
+- Recurly
+- Stripe
+- Branch
+- AppsFlyer
+
+:::
+
+
+
+
+
+## Education
+
+::: {.timeline .tl-diamond .tl-label-badge .vertical}
+
+::: {.event data-label="Completed 2019" style="--tl-color-label: #ff6068; --tl-color-dot: #ff6068;"}
+### Lighthouse Labs
+Intro to Front-End with JavaScript
+:::
+
+::: {.event data-label="Graduated 2013" style="--tl-color-label: #0272be; --tl-color-dot: #0272be;"}
+### University of Victoria
+***cum laude***
+
+Bachelor of Arts, English Literature & Japanese Studies 
+:::
+
+:::
+

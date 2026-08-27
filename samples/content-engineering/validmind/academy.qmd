@@ -1,0 +1,4 @@
+---
+title: "ValidMind Academy"
+subtitle: "Content Engineering"
+---

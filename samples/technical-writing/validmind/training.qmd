@@ -1,0 +1,40 @@
+---
+title: "ValidMind Training"
+subtitle: "Onboarding & Education"
+categories: ["User Guides", "Training & Onboarding", "Artificial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
+listing:
+  - id: validmind-training
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/docs/training/developer-fundamentals/developer-fundamentals-register.html
+      title: "Developer Fundamentals for ValidMind"
+      subtitle: "Training"
+    - path: https://validbeck.github.io/docs/training/validator-fundamentals/validator-fundamentals-register.html
+      title: "Validator Fundamentals for ValidMind"
+      subtitle: "Training"
+    - path: https://validbeck.github.io/docs/training/administrator-fundamentals/administrator-fundamentals-register.html
+      title: "Administrator Fundamentals for ValidMind"
+      subtitle: "Training"
+---
+
+{{< include /samples/single-source/validmind/_training.qmd >}}
+
+::: {.callout}
+Links below will take you to static versions of the training courses as last edited by Beck.
+
+:::
+
+:::{#validmind-training}
+:::
+
+<!-- ::: {.callout}
+You can learn more about my involvement with ValidMind Academy and the impact I had on training and onboarding architecture under [Content Engineering](/samples/content-engineering/index.qmd)
+::: -->
+
+## Citations
+
+[{{< fa brands github >}} archive of `validmind/documentation` training by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/training){target="_blank" .button}

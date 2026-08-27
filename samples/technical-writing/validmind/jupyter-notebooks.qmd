@@ -1,0 +1,65 @@
+---
+title: "ValidMind Jupyter Notebooks"
+subtitle: "Developer Content"
+categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Python Library", "Artificial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
+listing:
+  - id: validmind-notebooks-authored
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/docs/developer/validmind-library.html#b58fc729-690b-4000-b19f-365a4093b2ff7b7b3c2076617220766d2e70726f64756374203e7d7d-for-validation
+      title: "ValidMind for validation series"
+      subtitle: "Jupyter Notebook"
+      description: "Created as part of an initiative to highlight our validation features that we previously neglected to showcase."
+    - path: https://validbeck.github.io/docs/notebooks/quickstart/quickstart_validation.html
+      title: "Quickstart for validation"
+      subtitle: "Jupyter Notebook"
+      description: "Created as part of an initiative to highlight our validation features that we previously neglected to showcase."
+  - id: validmind-notebooks-coauthored
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/docs/notebooks/use_cases/validation/validate_application_scorecard.html
+      title: "Validate an application scorecard model"
+      description: "I partnered with our Head of Solutions Architecture to author this intermediate notebook, transforming his domain knowledge into a comprehensive use case sample."
+      subtitle: "Jupyter Notebook"
+    - path: https://validbeck.github.io/docs/notebooks/use_cases/agents/document_agentic_ai.html
+      title: "Document an agentic AI system"
+      subtitle: "Jupyter Notebook"
+      description: "I teamed up with our Lead Machine Learning Engineer to author this intermediate notebook, transforming his domain knowledge into a comprehensive use case sample."
+---
+
+{{< include /samples/single-source/validmind/_jupyter.qmd >}}
+
+{{< include /samples/single-source/validmind/_best-work.qmd >}}
+
+::: {.callout}
+Links below will take you to static versions of the notebooks as last edited by Beck.
+
+:::
+
+
+## Authored
+
+{{< include /samples/single-source/validmind/_owned-notebooks.qmd >}} 
+
+:::{#validmind-notebooks-authored}
+:::
+
+
+## Co-authored
+
+{{< include /samples/single-source/validmind/_created-notebooks.qmd >}}
+
+:::{#validmind-notebooks-coauthored}
+:::
+
+## Citations
+
+[{{< fa brands github >}} archive of `validmind/validmind-library` notebooks by Beck](https://github.com/validbeck/validmind-library/tree/main/notebooks){target="_blank" .button}

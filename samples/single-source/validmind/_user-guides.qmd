@@ -1,0 +1,3 @@
+User guides produced as documentation and reference for ValidMind's core features.
+
+For the samples below, I've selected only my best work where I authored the bulk of the content as my contribution to ValidMind spanned too much content to collate in its entirety. 

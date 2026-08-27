@@ -1,0 +1,254 @@
+// TOC links
+nav#TOC {
+    border-left: 3px solid #ffb3ba
+    ;
+    background-color: #fff4f5;
+    padding: 1rem;
+    
+    ul {
+      border-left: none !important;
+      padding-left: 0; 
+      
+      ul {
+        padding-left: 0.6rem; 
+      }
+      
+      li a.nav-link {
+        color: #0b2a12 !important;
+        text-decoration: none;
+        border-left: 1px solid transparent !important;
+        margin-left: 0 !important;
+        padding-left: 0.5rem !important;
+        position: relative;
+        
+        &:hover {
+          color: #ff6162 !important;
+        }
+        
+        &.active {
+          color: #ff6162 !important;
+          font-weight: 400 !important;
+          
+          &::before {
+            content: "";
+            position: absolute;
+            left: -0.1rem; 
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+            width: 6px;
+            height: 6px;
+            border-top: 2px solid #0b2a12;
+            border-right: 2px solid #0b2a12;
+            background-color: transparent;
+            z-index: 10;
+          }
+        }
+      }
+    }
+  
+    #quarto-sidebar-toc-header, h2, h3 {
+      color: #0b2a12 !important;
+    }
+  
+    .toc-actions ul li a.toc-action {
+      color: #0b2a12;
+      text-decoration: none;
+      font-size: 0.9em;
+      margin-right: 1em;
+    }
+}
+  
+#quarto-sidebar-toc-header, 
+  nav#TOC > h2, 
+  nav#TOC > h3 {
+    color: #0b2a1290 !important;
+  }
+  
+nav#TOC ul li a.nav-link,
+nav#TOC ul li a.nav-link.active,
+nav#TOC ul li a.nav-link:hover {
+    border-left: 0px none transparent !important;
+    margin-left: 0 !important;
+    padding-left: 1rem !important; 
+    position: relative;
+    }
+  
+  
+nav#TOC ul > li > a.nav-link.active::before {
+    content: "";
+    position: absolute;
+    left: 0;   
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg); 
+    width: 6px;
+    height: 6px;
+    border-top: 2px solid #0b2a12; 
+    border-right: 2px solid #0b2a12;
+    background-color: transparent; 
+    margin-left: -0.1rem; 
+    z-index: 10; 
+    }
+  
+nav#TOC ul > li > a.nav-link.active {
+    color: #0b2a12 !important; 
+    font-weight: 400 !important;
+    text-decoration: none;
+    }
+  
+nav#TOC ul {
+    border-left: none !important;
+    }
+  
+nav#TOC ul > li > a.nav-link:not(.active) {
+    border-left: 1px solid transparent !important;
+    }
+  
+nav#TOC ul > li > a.nav-link {
+    color: #ff6162 !important;
+    text-decoration: none;
+    }
+  
+nav#TOC ul > li > a.nav-link {
+    color: #ff6162 !important;
+    text-decoration: none;
+    }
+    
+nav#TOC ul > li > a.nav-link:hover,
+nav#TOC ul > li > a.nav-link.active:hover {
+    color: #0b2a12 !important;
+    text-decoration: none;
+    }
+    
+nav#TOC ul > li > a.nav-link.active, nav#TOC ul > li > a.nav-link.active:hover {
+    color: #0b2a12 !important;
+    font-weight: 400 !important;
+    text-decoration: none;
+    }
+    
+nav#TOC .toc-actions ul li a.toc-action {
+    color: #0b2a12;
+    text-decoration: none;
+    font-size: 0.9em;
+    margin-right: 1em;
+    }
+  
+
+// Category tags & filtering
+.quarto-categories .quarto-category {
+    opacity: 1 !important;        
+    background-color: #fee3e5 !important; 
+    border: 1px solid #ff6162 !important; 
+    display: inline-block; 
+    border-radius: 50px !important;    
+    padding: 0.4em 1em !important;      
+    display: inline-block !important;   
+    line-height: 1 !important;          
+    }
+
+.quarto-categories .quarto-category a {
+    pointer-events: none; // Disable links
+    cursor: default;
+    color: #ff6162 !important;      
+    text-decoration: none !important;
+    border-bottom: none !important; 
+    opacity: 1 !important;         
+    }
+
+.quarto-categories .quarto-category a:hover,
+.quarto-categories .quarto-category a:active {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    }
+
+
+#quarto-margin-sidebar .quarto-listing-category-title {
+    // color: #0b2a12 !important;
+    font-weight: 400;
+    margin: 1rem 0 0 1rem !important;
+    padding: 0.5rem 0 0.25rem  !important;  
+    display: block !important;
+    font-size: 0 !important; 
+}
+
+/* 2. Inject your new replacement text */
+#quarto-margin-sidebar .quarto-listing-category-title::after {
+    content: "filter by category"; 
+    font-variant: small-caps;
+    font-size: 1rem !important;  
+    color: #ff6162 !important;      
+}
+
+#quarto-margin-sidebar .quarto-listing-category {   
+    border: 1px solid #ffb3ba !important; 
+    border-top: 2px solid #ffb3ba !important; 
+    margin: 0 !important;                     
+    padding: 1rem !important;
+    display: block !important;
+    }
+
+#quarto-margin-sidebar .quarto-listing-category .category {
+    position: relative !important;
+    display: block !important;
+    color: #0b2a1290 !important;               
+    font-size: 0.9em !important;             
+    padding-left: 1rem !important;            
+    margin: 0 0 0.35rem 0 !important;         
+    cursor: pointer !important;                
+    border-bottom: none !important;           
+    text-decoration: none !important;
+    font-size: 0.8rem !important;
+    }
+
+#quarto-margin-sidebar .quarto-listing-category .category:hover {
+    color: #0b2a12 !important;                
+    }
+
+
+#quarto-margin-sidebar .quarto-listing-category .category.active {
+    color: #0b2a12 !important;                
+    font-weight: 400 !important;               
+    }
+
+#quarto-margin-sidebar .quarto-listing-category .category.active::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;                        
+    top: 50% !important;                      
+    transform: translateY(-50%) rotate(45deg) !important; 
+    width: 6px !important;
+    height: 6px !important;
+    border-top: 2px solid #0b2a12 !important; 
+    border-right: 2px solid #0b2a12 !important;
+    background-color: transparent !important; 
+    margin-left: 0rem !important;
+    z-index: 10 !important;
+    }
+
+#quarto-margin-sidebar .quarto-listing-category .category .quarto-category-count {
+    color: inherit !important;
+    }
+
+
+// Margin content
+
+main.content p,
+main.content ul, 
+main.content li {
+  color: #2c3e50 !important;  
+}
+
+main.content li::marker {
+  color: #2c3e50 !important;  
+}
+main.content li a {
+  font-family: "Your Font Name", system-ui, sans-serif !important;
+  color: #2c3e50 !important;
+}
+  
+  
+  
+  
+  
+
+    
+    

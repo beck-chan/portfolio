@@ -1,0 +1,4 @@
+format:
+  html:
+    sidebar: developer
+    search: false

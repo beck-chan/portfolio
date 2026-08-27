@@ -1,0 +1,26 @@
+---
+title: "Atryum User Guides"
+subtitle: "Feature Documentation"
+categories: ["Feature Documentation", "User Guides", "Agentic Orchestration", "Artificial Intelligence (AI)", "AI Risk", "Agents", "Risk Governance", "Software as a Service", "Atryum", "ValidMind"]
+listing:
+  - id: atryum-guides
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/atryum-docs/documentation/2_invocations.html
+      title: "Invocations"
+      subtitle: "User Guides"
+    - path: https://validbeck.github.io/atryum-docs/documentation/3_rules.html
+      title: "Rules"
+      subtitle: "User Guides"
+---
+
+{{< include /samples/single-source/atryum/_link-blurb.qmd >}}
+
+:::{#atryum-guides}
+:::
+
+{{< include /samples/single-source/atryum/_github-citation.qmd >}}

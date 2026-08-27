@@ -1,0 +1,78 @@
+project:
+  type: website
+  output-dir: _output
+  render:
+    - "**/*.qmd"
+    - "**/*.ipynb"
+
+metadata-files:
+  - samples/content-engineering/_sidebar.yaml
+  - samples/technical-writing/_sidebar.yaml
+  - samples/copywriting/_sidebar.yaml
+  - samples/developer-advocacy/_sidebar.yaml
+
+website:
+  title: "Portfolio"
+  favicon: assets/headshot.png
+  page-navigation: true
+  navbar:
+    left:
+      # - samples/content-engineering/index.qmd
+      - samples/technical-writing/index.qmd
+      - samples/copywriting/index.qmd
+      # - samples/developer-advocacy/index.qmd
+    right:
+      - cv.qmd
+      - text: "{{< fa brands github >}}"
+        target: _blank
+        href: https://github.com/beck-chan
+      - text: "{{< fa brands linkedin >}}"
+        target: _blank
+        href: https://linkedin.com/in/beck-chan
+      - text: "{{< fa envelope >}}"
+        href: mailto:rebecca.ht.chan@gmail.com
+        target: _blank
+      - text: "{{< fa feather >}}"
+        href: poetry/index.qmd
+
+  sidebar: 
+    style: docked
+    border: false
+
+  search:
+    location: navbar
+
+  page-footer:
+    background: "#df9a49"
+    left:
+      - text: "Releases"
+        href: https://github.com/beck-chan/portfolio/releases
+        target: _blank
+    center:
+      - text: "{{< fa brands github >}} Report Issue"
+        href: https://github.com/beck-chan/portfolio/issues
+        target: _blank
+    right:
+      - text: "&#169; 2026 <b>Beck Chan</b>. All rights reserved."
+
+format:
+  html:
+    page-layout: full
+    grid:
+      body-width: 1000px
+      sidebar-width: 400px
+      margin-width: 500px
+    theme:
+      light: assets/styles.scss
+    highlight-style: assets/code.theme
+    code-overflow: wrap
+    toc: true
+    toc-depth: 5
+    link-external-newwindow: true
+    reference-location: margin
+    footnotes-hover: true
+    lightbox: true
+  
+filters:
+  - timeline
+  - tachyons

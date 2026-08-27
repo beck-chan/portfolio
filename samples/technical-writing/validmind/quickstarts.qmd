@@ -1,0 +1,45 @@
+---
+title: "ValidMind Quickstarts"
+subtitle: "Tutorials"
+categories: ["User Guides", "Training & Onboarding", "Artificial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
+listing:
+  - id: validmind-quickstarts
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://validbeck.github.io/docs/get-started/get-started.html
+      title: "Get started with ValidMind"
+      subtitle: "Tutorials"
+    - path: https://validbeck.github.io/docs/get-started/developer/quickstart-developer.html
+      title: "Quickstart — Development"
+      subtitle: "Tutorials"
+    - path: https://validbeck.github.io/docs/get-started/validator/quickstart-validator.html
+      title: "Quickstart — Validation"
+      subtitle: "Tutorials"
+    - path: https://validbeck.github.io/docs/get-started/administrator/quickstart-administrator.html
+      title: "Quickstart — Setup & Administration"
+      subtitle: "Tutorials"
+---
+
+{{< include /samples/single-source/validmind/_quickstarts.qmd >}}
+
+::: {.callout}
+Links below will take you to static versions of the quickstarts as last edited by Beck.
+
+:::
+
+:::{#validmind-quickstarts}
+:::
+
+{{< include /samples/single-source/validmind/_cf-quickstarts.qmd >}}
+
+<!-- ::: {.callout}
+You can learn more about my involvement with ValidMind's documentation and the impact I had on training and onboarding architecture under [Content Engineering](/samples/content-engineering/index.qmd)
+::: -->
+
+## Citations
+
+[{{< fa brands github >}} archive of `validmind/documentation` quickstarts by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/get-started){target="_blank" .button}

@@ -1,0 +1,103 @@
+/* THEME */
+// Dark green: #0b2a12
+// Gold: #df9a49
+// Coral: #ff6162
+// Pink: #ffb3ba
+// Light pink: #fee3e5 
+// Lightest pink: #fff4f5 
+// Almost white: #fff8f9
+
+/*-- scss:defaults --*/
+
+// Foundations
+$body-bg: #fff8f9; // Page colour
+$body-color: #0b2a12; // Font colour
+$navbar-bg: #0b2a12; // Top nav bg colour
+$sidebar-bg: #fee3e5; // Side nav bg colour
+$navbar-padding-y: 1rem; // Top nav padding
+$sidebar-padding-y: 1rem; // Top nav padding
+
+// Links
+
+$primary: #ff6162; // Base link colour
+$navbar-fg: #df9a49; // Top nav font colour 
+$navbar-hl: #ff6162; // Top nav hover colour
+$sidebar-fg: #0b2a12; // Side nav font colour 
+$sidebar-hl: #ff6162; // Side nav hover colour
+$breadcrumb-active-color: #ff6162;; // Active breadcrumb colour
+
+// Headings
+$headings-color:        #ff6162 !default; 
+$headings-font-weight:  700 !default;     
+
+// Code styling
+$code-color: #0b2a12; // Inline text color 
+$code-bg:#ffb3ba; // Inline background color 
+$pre-color:#df9a49; // Block text color 
+$pre-bg:#0b2a12; // Block background color 
+
+
+/*-- scss:rules --*/
+
+/* Import modular SCSS files */
+@import '_styles/links';
+@import '_styles/nav';
+@import '_styles/content';
+@import '_styles/margin';
+@import '_styles/mobile';
+
+.poetry {
+    line-height: 1.25 !important; 
+    padding-left: 20px;
+    }
+
+
+  /* Set up the tab container to host the background filler */
+//   .panel-tabset .nav-tabs {
+//     display: flex;
+//     flex-wrap: wrap;
+//     position: relative;
+//     z-index: 1; /* Keeps tabs layered cleanly on top */
+//   }
+
+//   /* Fills the gap beneath the top tab row with solid color */
+//   .panel-tabset .nav-tabs::after {
+//     content: "";
+//     position: absolute;
+//     left: 0;
+//     right: 0;
+//     bottom: -1px; 
+//     /* Targets the height of your second row of tabs */
+//     height: 45px; 
+//     background-color: #fee3e5;
+//     border-left: 1px solid #ff6162;
+//     border-top: 1px dotted #ff6162;
+//     border-right: 1px solid #ff6162;
+//     z-index: -1; 
+//   }
+
+//   .panel-tabset .nav-tabs .nav-link:not(.active) {
+//     background-color: #fff8f9; 
+//     position: relative;
+//   }
+
+      
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+
+
+
+

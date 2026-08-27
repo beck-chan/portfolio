@@ -1,0 +1,42 @@
+---
+title: "SaaSquatch Integrations"
+subtitle: "Feature Documentation"
+categories: ["Feature Documentation", "User Guides", "Integrations", "Salesforce", "CRMs", "Stripe", "Recurly", "Tango Card", "Payment Providers", "Reward Providers", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+listing:
+  - id: saasquatch-sfdc
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - sfdc/invocable-methods.qmd
+      - sfdc/attribution-lookup.qmd
+      - sfdc/user-account-ids.qmd
+  - id: saasquatch-integrations
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - stripe.qmd
+      - recurly.qmd
+      - tango-card.qmd
+---
+
+{{< include /samples/single-source/saasquatch/_integrations.qmd >}}
+
+## Salesforce 
+
+{{< include /samples/single-source/saasquatch/_sfdc.qmd >}}
+
+:::{#saasquatch-sfdc}
+:::
+
+## Other
+
+{{< include /samples/single-source/saasquatch/_other-integrations.qmd >}}
+
+:::{#saasquatch-integrations}
+:::

@@ -1,0 +1,159 @@
+---
+title: "Beck Chan"
+subtitle: "Content Engineer &diams; Solutions Architect"
+lightbox: false
+page-layout: full
+sidebar: false
+toc: false
+listing:
+  - id: samples-type
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, description]
+    contents:
+    # - samples/content-engineering/index.qmd
+    - samples/technical-writing/index.qmd
+    - samples/copywriting/index.qmd
+    # - samples/developer-advocacy/index.qmd
+  - id: samples-developer
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/technical-writing/validmind/jupyter-notebooks.qmd
+    - samples/technical-writing/saasquatch/sdk/index.qmd
+  - id: samples-training
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/technical-writing/validmind/training.qmd
+  - id: samples-guides
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/technical-writing/validmind/user-guides.qmd
+    - samples/technical-writing/atryum/integrations.qmd
+    - samples/technical-writing/atryum/user-guides.qmd
+    - samples/technical-writing/saasquatch/user-guides/index.qmd
+  - id: samples-tutorials
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/technical-writing/validmind/quickstarts.qmd
+    - samples/technical-writing/atryum/quickstart.qmd
+  - id: samples-enablement
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/technical-writing/validmind/enablement.qmd
+  - id: samples-storytelling
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/copywriting/validmind/honor-the-human.qmd
+    - samples/copywriting/validmind/reduce-culture-risk.qmd
+    - samples/copywriting/validmind/osff-takeaways.qmd
+    - samples/copywriting/saasquatch/growth-automation.qmd
+---
+
+:::: {.flex .flex-wrap .justify-around}
+
+::: {.w-20-ns .tc .mb3 .flex .items-center .justify-center}
+
+![](assets/headshot.png){width=90% .pfp}
+
+:::
+
+::: {.w-80-ns}
+
+> I'm **Beck**, poet with a passion for process — helping you empower users by designing and building solutions built to scale. 
+>
+> I've designed, implemented, and managed everything from **content**, **support**, **training**, and **onboarding** architecture for organizations from startups to enterprises.
+>
+> My methods bridge the gap between product design and user experience, whether that's advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features.
+
+:::: {.flex .flex-wrap .justify-around}
+
+::: {.w-30-ns .tc}
+[{{< fa brands github >}} beck-chan](https://github.com/beck-chan){target="_blank" .button .cta}
+
+:::
+
+::: {.w-30-ns. .tc}
+[{{< fa brands linkedin >}} beck-chan](https://linkedin.com/in/beck-chan){target="_blank" .button .cta}
+
+:::
+
+::: {.w-30-ns .tc}
+[{{< fa envelope >}} rebecca.ht.chan@gmail.com](mailto:rebecca.ht.chan@gmail.com){target="_blank" .button .cta}
+
+:::
+
+::::
+
+:::
+
+::::
+
+## Samples by type
+
+:::{#samples-type}
+:::
+
+## Samples by format
+
+::: {.panel-tabset}
+
+<!-- ### Content Architecture -->
+
+### Developer Content
+
+:::{#samples-developer}
+:::
+
+### Training
+
+:::{#samples-training}
+:::
+
+### User Guides
+
+:::{#samples-guides}
+:::
+
+### Quickstart Tutorials 
+
+:::{#samples-tutorials}
+:::
+
+### Content Enablement
+
+:::{#samples-enablement}
+:::
+
+### Storytelling
+
+:::{#samples-storytelling}
+:::
+
+:::
+

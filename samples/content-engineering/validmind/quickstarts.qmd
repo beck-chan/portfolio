@@ -1,0 +1,4 @@
+---
+title: "ValidMind Quickstart Guides"
+subtitle: "Content Engineering"
+---

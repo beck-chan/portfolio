@@ -1,0 +1,7 @@
+During my tenure at SaaSquatch, I became the company Subject Matter Expert for many of our custom integrations, including our integration for Salesforce which I helped develop.
+
+::: {.callout}
+
+Please note that these guides were written between 2018 &ndash; 2022, and as such, the archived documentation below may not reflect the current functionality of the third-party software.
+
+:::

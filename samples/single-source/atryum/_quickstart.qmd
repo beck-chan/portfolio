@@ -1,0 +1,19 @@
+:::: {.content-visible when-format="html" when-meta="includes.landing"}
+I owned the linked quickstart in this section from start to finish. 
+
+This quickstart is special because I also designed the landing page installation script for Atryum.
+::::
+
+
+:::: {.content-visible when-format="html" unless-meta="includes.landing"}
+I owned the linked quickstart in this section from start to finish. 
+
+This quickstart is special because I also designed the landing page installation script for Atryum.
+
+::: {.callout}
+The links below will take you to a static version of the documentation as last edited by Beck.
+
+:::
+
+
+::::

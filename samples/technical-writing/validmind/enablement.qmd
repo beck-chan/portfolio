@@ -1,0 +1,63 @@
+---
+title: "ValidMind Enablement Content"
+subtitle: "Content Creation"
+categories: ["Content Enablement", "Artificial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
+listing:
+  - id: validmind-style-guide
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://validbeck.github.io/docs/about/contributing/style-guide/style-guide.html
+      title: "ValidMind style guide"
+      subtitle: "Content Enablement"
+    - path: https://validbeck.github.io/docs/about/contributing/style-guide/voice-and-tone.html
+      title: "Voice and tone"
+      subtitle: "Content Enablement"
+    - path: https://validbeck.github.io/docs/about/contributing/style-guide/conventions.html
+      title: "Conventions"
+      subtitle: "Content Enablement"
+  - id: validmind-notebook-templates
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://github.com/validbeck/validmind-library/tree/main/notebooks/templates
+      title: "Jupyter Notebook template Quickstart"
+      subtitle: "Content Enablement"
+    - path: https://github.com/validbeck/validmind-library/blob/main/notebooks/templates/e2e-notebook.ipynb
+      title: "End-to-end notebook template generation"
+      subtitle: "Content Enablement"
+---
+
+Content produced to enable other creators to contribute to ValidMind's open-source.
+
+::: {.callout}
+Links below will take you to static versions of the content as last edited by Beck.
+
+:::
+
+## ValidMind Style Guide
+
+{{< include /samples/single-source/validmind/_style-guide.qmd >}}
+
+:::{#validmind-style-guide}
+:::
+
+## ValidMind Jupyter Notebooks
+
+{{< include /samples/single-source/validmind/_templates.qmd >}}
+
+:::{#validmind-notebook-templates}
+:::
+
+## Citations
+
+[{{< fa brands github >}} archive of `validmind/documentation` style guide by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/about/contributing/style-guide){target="_blank" .button}
+
+
+

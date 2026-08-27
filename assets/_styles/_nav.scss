@@ -1,0 +1,125 @@
+/* Navbar styling */
+// Navbar title text
+.navbar-title { 
+    text-transform: uppercase;
+    font-weight: bold;
+    }
+
+// Active link
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+  }
+
+
+// Fixed top nav
+#quarto-header, 
+#quarto-header nav.navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 1040 !important; 
+}
+
+#quarto-content {
+  margin-top: 75px !important; 
+}
+
+/* Sidebar styling */
+
+// Padding
+#quarto-sidebar, 
+.quarto-sidebar,
+.sidebar-navigation {
+    padding: 1.5rem !important;    
+    }
+
+// Divider spacing & color
+.sidebar-navigation .sidebar-divider {
+    margin-top: 1rem;
+    color: #ff6162;
+    border-top: 1px dotted #ffb3ba !important; 
+    opacity: 1 !important;    
+    }
+
+// Line padding
+  
+.sidebar-item {
+    padding-top: .3rem;
+    line-height: 1.3;
+    }
+
+// Sidebar link hover 
+.sidebar-item a:hover .menu-text {
+    text-transform: none;
+    color: #ff6162 !important;
+    }
+
+// Sidebar active link highlights
+.sidebar-item .sidebar-item-container .sidebar-link.active .menu-text {
+    color: #ff6162 !important;
+    font-weight: 500;
+    padding-left: 1rem;
+    }
+
+.sidebar-item-container .active {
+    position: relative;
+    }
+
+.sidebar-item-container .active::before {
+    content: "";
+    position: absolute;
+    left: 0;   
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg); 
+    width: 6px;
+    height: 6px;
+    border-top: 2px solid #ff6162;
+    border-right: 2px solid #ff6162;
+    background-color: transparent; 
+    margin-left: -0.1rem;
+    }
+
+/* Footer */
+footer.footer,
+.nav-footer,
+.nav-footer-left,
+.nav-footer-center,
+.nav-footer-right,
+.nav-footer p,
+.nav-footer span,
+.nav-footer div {
+  color: #0b2a12 !important; 
+  padding-top: 0.85rem;
+  margin-top: -0.5rem !important;  
+  position: relative !important;
+  z-index: 100 !important;       
+}
+
+.nav-footer-left,
+.nav-footer-center,
+.nav-footer-right {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+.nav-footer a,
+.nav-footer a *,
+footer.footer a,
+footer.footer a * {
+  color: #0b2a12 !important; 
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  --bs-link-color: #0b2a12 !important;;
+}
+
+
+.nav-footer a:hover,
+.nav-footer a:hover *,
+footer.footer a:hover,
+footer.footer a:hover * {
+  color: #0b2a1280 !important; 
+  --bs-link-hover-color: #0b2a1280 !important;
+}
+

@@ -1,0 +1,3 @@
+Before I worked at SaaSquatch, I had never used Salesforce (SFDC). Very quickly after onboarding, I helped develop our SFDC integration during my time as a **Solutions Architect** as part of custom work for a client. 
+
+Below are a few samples of the guides I produced to assist with custom implementations utilizing our SFDC integration:

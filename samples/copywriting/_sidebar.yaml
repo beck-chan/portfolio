@@ -1,0 +1,20 @@
+website:
+  sidebar:
+    - id: copywriting
+      title: "Copywriting"
+      contents:
+        - text: "Copywriting"
+          file: samples/copywriting/index.qmd
+        - text: "---"
+        - text: "ValidMind"
+          contents:
+            - text: "Honor the Human"
+              file: samples/copywriting/validmind/honor-the-human.qmd
+            - text: "Reduce Culture Risk"
+              file: samples/copywriting/validmind/reduce-culture-risk.qmd
+            - text: "OSFF Takeaways"
+              file: samples/copywriting/validmind/osff-takeaways.qmd
+        - text: "SaaSquatch"
+          contents:
+            - text: "Growth Automation"
+              file: samples/copywriting/saasquatch/growth-automation.qmd
