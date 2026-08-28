@@ -1,0 +1,46 @@
+---
+title: "Beck Chan"
+subtitle: "Content Engineer &diams; Solutions Architect"
+lightbox: false
+page-layout: full
+sidebar: false
+toc: false
+listing:
+  - id: samples-type
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, description]
+    contents:
+    # - samples/content-engineering/index.qmd
+    - samples/technical-writing/index.qmd
+    - samples/copywriting/index.qmd
+    # - samples/developer-advocacy/index.qmd
+---
+
+# one
+
+[link](https://www.google.com) **inline** *link* dshjkghsdkughskjghskjgh [link](https://www.google.com) hdsjkfsgf wafda ughgsfssfsffafa
+
+## two
+
+[button](https://www.google.com){.button .cta} [button](https://www.google.com){.button}
+
+### three
+
+#### four
+
+##### five
+
+::: {.panel-tabset}
+
+### one
+
+### two
+
+:::
+
+::: {.callout}
+testing testing
+:::
