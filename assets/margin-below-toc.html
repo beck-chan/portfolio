@@ -5,7 +5,8 @@
   (() => {
     const MARGIN_SEL =
       ".column-margin.column-container > *, .margin-caption, .aside";
-    const GAP_AFTER_SIDEBAR = "4rem";
+    const GAP_AFTER_SIDEBAR = "1rem";
+    const READY_CLASS = "margin-below-toc-ready";
 
     const gapPx = () => {
       const root = window.getComputedStyle(document.documentElement);
@@ -54,14 +55,25 @@
       }
     };
 
+    const reveal = () => {
+      document.documentElement.classList.add(READY_CLASS);
+    };
+
+    const layoutAndReveal = () => {
+      layoutMarginBelowToc();
+      reveal();
+    };
+
     // Run after Quarto's own throttled layoutMarginEls (50ms).
     const schedule = () => {
       clearTimeout(schedule._timer);
-      schedule._timer = setTimeout(layoutMarginBelowToc, 60);
+      schedule._timer = setTimeout(layoutAndReveal, 60);
     };
 
     window.document.addEventListener("DOMContentLoaded", () => {
       schedule();
+      // Failsafe: never leave footnotes hidden if layout is delayed.
+      setTimeout(reveal, 1500);
       window.document.querySelectorAll(".column-margin img").forEach((img) => {
         if (!img.complete) img.addEventListener("load", schedule, { once: true });
       });

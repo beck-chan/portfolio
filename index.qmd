@@ -77,9 +77,9 @@ listing:
 
 :::: {.flex .flex-wrap .justify-around}
 
-::: {.w-100-m .w-20-l .tc .mb3 .flex .items-center .justify-center}
+::: {.w-100-m .w-20-l .tc .flex .items-center .justify-center}
 
-![](assets/headshot.png){width=90% .pfp}
+![](assets/headshot.png){width=80% .pfp}
 
 :::
 
@@ -89,16 +89,60 @@ listing:
 >
 > I've designed, implemented, and managed everything from **content**, **support**, **training**, and **onboarding** architecture for organizations from startups to enterprises.
 >
-> My methods bridge the gap between product design and user experience, whether that's advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features.
+> My methods bridge the gap between product design and user experience, whether that's advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features. 
 
-:::: {.flex .flex-wrap .justify-around}
+:::
 
-::: {.w-25-ns .w-30-l .tc}
+::::
+
+
+:::: {.flex .flex-wrap .items-center .justify-around .mb4 .cta-bar}
+
+::: {.w-25-ns .w-20-l .tc}
+```{=html}
+<div class="inline-quarto-search">
+  <button
+    type="button"
+    class="inline-quarto-search__trigger"
+    id="open-quarto-search"
+    aria-haspopup="dialog"
+    aria-controls="quarto-search"
+  >
+    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+    <span class="inline-quarto-search__label">Search Portfolio</span>
+    <kbd class="inline-quarto-search__hint">/</kbd>
+  </button>
+</div>
+<script>
+  (() => {
+    const openQuartoSearch = () => {
+      const detached = document.querySelector(
+        "#quarto-search .aa-DetachedSearchButton"
+      );
+      if (detached) {
+        detached.click();
+        return;
+      }
+      document.querySelector("#quarto-search input.aa-Input")?.focus();
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document
+        .getElementById("open-quarto-search")
+        ?.addEventListener("click", openQuartoSearch);
+    });
+  })();
+</script>
+```
+
+:::
+
+::: {.w-25-ns .w-20-l .tc}
 [{{< fa brands github >}} beck-chan](https://github.com/beck-chan){target="_blank" .button .cta}
 
 :::
 
-::: {.w-25-ns .w-30-l .tc}
+::: {.w-25-ns .w-20-l .tc}
 [{{< fa brands linkedin >}} beck-chan](https://linkedin.com/in/beck-chan){target="_blank" .button .cta}
 
 :::
@@ -110,9 +154,6 @@ listing:
 
 ::::
 
-:::
-
-::::
 
 ## Samples by type
 
@@ -157,3 +198,38 @@ listing:
 
 :::
 
+<!-- ```{=html}
+<div class="inline-quarto-search">
+  <button
+    type="button"
+    class="inline-quarto-search__trigger"
+    id="open-quarto-search"
+    aria-haspopup="dialog"
+    aria-controls="quarto-search"
+  >
+    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+    <span class="inline-quarto-search__label">Search Portfolio</span>
+    <kbd class="inline-quarto-search__hint">/</kbd>
+  </button>
+</div>
+<script>
+  (() => {
+    const openQuartoSearch = () => {
+      const detached = document.querySelector(
+        "#quarto-search .aa-DetachedSearchButton"
+      );
+      if (detached) {
+        detached.click();
+        return;
+      }
+      document.querySelector("#quarto-search input.aa-Input")?.focus();
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document
+        .getElementById("open-quarto-search")
+        ?.addEventListener("click", openQuartoSearch);
+    });
+  })();
+</script>
+``` -->

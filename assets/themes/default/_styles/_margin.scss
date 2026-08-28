@@ -1,4 +1,4 @@
-// Footenote spacing
+// Footnote spacing
 div[id^="fn"] {
   margin-bottom: 1.5rem !important; 
   padding: 1rem 0;
@@ -22,6 +22,9 @@ div[id^="fn"] {
   display: none !important;
 }
 
+html:not(.margin-below-toc-ready) main.content .column-margin.column-container {
+  visibility: hidden;
+}
 
 // TOC links
 nav#TOC {

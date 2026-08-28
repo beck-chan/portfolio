@@ -8,6 +8,9 @@ project:
 language:
   toggle-dark-mode: "Toggle Theme"
   toc-title-website: "Table of Contents"
+  listing-page-no-matches: "No Matches Found"
+  search-no-results-text: "No Results Found"
+  search-text-placeholder: "Search Portfolio"
 
 metadata-files:
   - samples/content-engineering/_sidebar.yaml

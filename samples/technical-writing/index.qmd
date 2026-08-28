@@ -80,6 +80,3 @@ You can learn more about my involvement with ValidMind, Atryum, and the impact I
 
 :::{#saasquatch-technical}
 :::
-
-
-
