@@ -1,0 +1,75 @@
+/* THEME */
+// Black: #212121
+// Mid grey: #a3a3a3
+// Accent grey: #838383
+// Light grey: #c4c4c4
+// Lighter grey: #e9e9e9
+// Lightest grey: #f6f6f6
+// Almost white: #f9f9f9
+
+/*-- scss:defaults --*/
+
+// Foundations
+$body-bg: #FFFFFF; // Page colour
+$body-color: #212121; // Font colour
+$navbar-bg: #000000; // Top nav bg colour
+$sidebar-bg: #e9e9e9; // Side nav bg colour
+$navbar-padding-y: 1rem; // Top nav padding
+$sidebar-padding-y: 1rem; // Top nav padding
+
+// Links
+$primary: #000000; // Base link colour
+$navbar-fg: #FFFFFF; // Top nav font colour 
+$navbar-hl: #a3a3a3; // Top nav hover colour
+$sidebar-fg: #212121; // Side nav font colour 
+$sidebar-hl: #838383; // Side nav hover colour
+$breadcrumb-active-color: #838383;; // Active breadcrumb colour
+
+// Headings
+$headings-color:        #838383 !default; 
+$headings-font-weight:  700 !default;     
+
+// Code styling
+$code-color: #212121; // Inline text color 
+$code-bg:#e9e9e9; // Inline background color 
+$pre-color:#a3a3a3; // Block text color 
+$code-block-bg: #212121; // Block background color 
+
+
+/*-- scss:rules --*/
+
+/* Import modular SCSS files (paths unique so Quarto does not pick assets/_styles) */
+@import '_styles/links-min';
+@import '_styles/nav-min';
+@import '_styles/content-min';
+@import '_styles/margin-min';
+@import '_styles/mobile-min';
+
+.poetry {
+    line-height: 1.25 !important; 
+    padding-left: 20px;
+    }
+
+
+
+
+      
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+  
+
+
+

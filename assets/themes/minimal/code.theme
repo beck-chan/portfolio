@@ -1,0 +1,46 @@
+{
+  "text-color": "#c2a077",
+  "background-color": "#212121",
+  "line-number-color": "#505952",
+  "text-styles": {
+    "Normal": { "text-color": "#c2a077" },
+    "Variable": { "text-color": "#c2a077" },
+    "Other": { "text-color": "#d0b491" },
+
+    "DataType": { "text-color": "#ad8d66", "bold": true },
+    "Constant": { "text-color": "#d0b491", "bold": true },
+
+    "Comment": { "text-color": "#f4e7e8", "italic": true },
+    "Documentation": { "text-color": "#e8d6d7", "italic": true },
+    "Annotation": { "text-color": "#c4acae", "italic": true },
+    "CommentVar": { "text-color": "#e8d6d7", "bold": true },
+    "RegionMarker": { "text-color": "#c4acae" },
+
+    "Keyword": { "text-color": "#e4bec2", "bold": true },
+    "Import": { "text-color": "#e4bec2", "bold": true },
+    "ControlFlow": { "text-color": "#d4a8ac", "bold": true },
+    "Operator": { "text-color": "#cfabaf" },
+    "Attribute": { "text-color": "#cfabaf" },
+    "Extension": { "text-color": "#d4a8ac" },
+    "Preprocessor": { "text-color": "#ecd0d4" },
+
+    "Function": { "text-color": "#c87879", "bold": true },
+    "BuiltIn": { "text-color": "#b46b6c", "italic": true },
+
+    "String": { "text-color": "#d08e8e" },
+    "VerbatimString": { "text-color": "#d79e9f" },
+    "SpecialString": { "text-color": "#d79e9f", "bold": true },
+    "Char": { "text-color": "#d08e8e" },
+    "SpecialChar": { "text-color": "#d8a68e" },
+
+    "DecVal": { "text-color": "#d4b098" },
+    "Float": { "text-color": "#d4b098" },
+    "BaseN": { "text-color": "#c9a189" },
+
+    "Information": { "text-color": "#f7ecec" },
+    "Warning": { "text-color": "#d8a68e", "bold": true },
+    "Alert": { "text-color": "#c87879", "background-color": "#f4e7e8", "bold": true },
+    "Error": { "text-color": "#c87879", "underline": true },
+    "ErrorMsg": { "text-color": "#c87879", "bold": true, "underline": true }
+  }
+}

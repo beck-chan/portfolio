@@ -10,7 +10,7 @@ article.content {
 // Subtitle
 .subtitle, 
 header .subtitle {
-  color: #0b2a1290 !important;       
+  color: #21212190 !important;       
   font-size: 1.25rem !important;   
   font-weight: 400 !important;
   margin-top: 0.5rem !important;   
@@ -21,7 +21,7 @@ strong, b {
     margin: 0.10rem;
     border-radius: 3px;   
     font-weight: 500 !important;     
-    color: #0b2a1290 !important;
+    color: #21212190 !important;
 }
 
 // Profile pic
@@ -29,17 +29,18 @@ strong, b {
 div.quarto-post .thumbnail img {
   border-radius: 50%;
   border: none !important;
-  box-shadow: 4px 4px 0px 0px #ffb3ba !important;
+  box-shadow: 4px 4px 0px 0px #000000 !important;
   pointer-events: none !important; 
   cursor: default !important;
+  filter: grayscale(100%);
 }
 
 // Callouts
 div.callout.callout {
-    border: 1px solid #0b2a1280;
-    border-right: 2px solid #0b2a12;
-    border-bottom: 2px solid #0b2a12;
-    background-color: #fff4f5;
+    border: 1px solid #21212180;
+    border-right: 2px solid #212121;
+    border-bottom: 2px solid #212121;
+    background-color: #f6f6f6;
     margin: 1.5rem 2rem 1.5rem 2rem !important; 
     padding: 1rem;
   }
@@ -60,19 +61,19 @@ div.callout.callout {
 div.callout-header {
     background-color: transparent !important;
     background: transparent !important;
-    color: #0b2a1290;
+    color: #21212190;
     }
     
 
 .callout-style-default .callout-title-container {
-    color: #ff6162 !important;
+    color: #838383 !important;
     padding-left: 0 !important;
     }
     
 .callout-style-default .callout-toggle {
     background-image: var(--quarto-callout-toggle-img) !important; 
     display: inline-block !important;
-    filter: invert(57%) sepia(51%) saturate(3501%) hue-rotate(324deg) brightness(101%) contrast(101%) !important;
+    filter: grayscale(100%) brightness(0.55) !important;
     }
     
 
@@ -81,37 +82,38 @@ h1 {
     font-size: 2rem !important;
     text-transform: uppercase;
     font-weight: bold;
+    color: #000000;
 }
 
 h2 {
     font-size: 1.75rem;
     font-weight: 500;
     margin-top: 1rem;
-    color: #ff6162; 
-    border-bottom: 4px dotted #ffb3ba;
+    color: #000000; 
+    border-bottom: 4px dotted #a3a3a3;
 }
 
 h3 {
     font-size: 1.75rem;
     font-weight: 500;
     margin-top: 1rem;
-    color: #ff6162;
+    color: #000000;
 }
 
 h4 {
     font-size: 1.5rem;
     font-weight: 500;
     margin: 0.5rem 0 0.5rem 0;
-    color: #0b2a1290;
+    color: #a3a3a3;
     padding-bottom: 0.5rem;
-    border-bottom: 2px dotted #083E4480;
+    border-bottom: 2px dotted #838383;
 }
 
 // Also listing tile headings!!
 h5 {
     font-size: 1.5rem;
     font-weight: 500;
-    color: #0b2a1290;
+    color: #a3a3a3;
     margin: 0.5rem 0 0.5rem 0;
 }
 
@@ -129,7 +131,7 @@ ul.task-list {
     li {
 
       &:has(input[type="checkbox"]:checked) {
-        color: #ff6162 !important;          
+        color: #838383 !important;          
         text-decoration: line-through;  
         font-weight: 400;    
       }
@@ -145,12 +147,12 @@ ul.task-list {
         position: relative !important;
         opacity: 1 !important; 
         cursor: default !important;      
-        border: 2px solid #ffb3ba !important;           
+        border: 2px solid #c4c4c4 !important;           
         border-radius: 0 !important;
 
         &:checked {
-          background-color: #ffb3ba !important;         
-          border-color: #ffb3ba !important;
+          background-color: #c4c4c4 !important;         
+          border-color: #c4c4c4 !important;
           border-radius: 0 !important; 
 
           &::after {
@@ -160,7 +162,7 @@ ul.task-list {
               top: 10% !important;
               width: 30% !important;
               height: 60% !important;
-              border: solid #ff6162 !important; 
+              border: solid #838383 !important; 
               border-width: 0 2px 2px 0 !important;
               transform: rotate(45deg) !important;
           }
@@ -177,13 +179,13 @@ blockquote {
     position: relative !important;        
     padding: 0 !important;                
     margin: 3rem 6rem 3rem 6rem !important;
-    color: #0b2a1290 !important;            
+    color: #21212190 !important;            
     font-style: italic !important;        
   }
 
 blockquote strong, 
 blockquote b {
-  color: #0b2a12 !important; 
+  color: #212121 !important; 
 }
 
   
@@ -195,7 +197,7 @@ blockquote::before {
     font-family: Georgia, serif !important; 
     font-size: 3.5rem !important;         
     line-height: 1 !important;
-    color: #ffb3ba !important;            
+    color: #a3a3a3 !important;            
   }
   
 blockquote::after {
@@ -206,14 +208,14 @@ blockquote::after {
     font-family: Georgia, serif !important;
     font-size: 2.5rem !important;        
     line-height: 1 !important;
-    color: #ffb3ba !important;          
+    color: #c4c4c4 !important;          
   }
 
 // Lightbox
 figcaption {
   font-family: "Your Font Name", system-ui, sans-serif !important;
   font-size: 0.85rem !important;     
-  color: #0b2a1280 !important;          
+  color: #21212180 !important;          
   text-align: center !important;     
   margin-top: 0.75rem !important;   
 }
@@ -222,6 +224,73 @@ figcaption {
 
 .pics,
 div.quarto-post .thumbnail img {
-  border: 1px solid #ffb3ba;
-  box-shadow: 4px 4px 0px 0px #ffb3ba !important;
+  border: 1px solid #c4c4c4;
+  box-shadow: 4px 4px 0px 0px #c4c4c4 !important;
+}
+
+// Inline trigger for native Quarto navbar search overlay
+// Sized to match .button so it can sit in a flex row with CTAs
+.inline-quarto-search {
+  display: inline-flex;
+  vertical-align: middle;
+  margin: 0.5rem;
+  max-width: 100%;
+}
+
+.inline-quarto-search__trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 12rem;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  color: #21212190;
+  background-color: #f6f6f6;
+  border: 2px solid #c4c4c4;
+  border-radius: 5px;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.15s ease-in, background-color 0.15s ease-in,
+    border-color 0.15s ease-in;
+
+  &:hover,
+  &:focus-visible {
+    color: #212121;
+    background-color: #e9e9e9;
+    border-color: #838383;
+    outline: none;
+  }
+}
+
+.inline-quarto-search__label {
+  flex: 1;
+}
+
+.inline-quarto-search__hint {
+  margin: 0;
+  padding: 0 0.35rem;
+  color: #21212180;
+  background-color: #ffffff;
+  border: 1px solid #c4c4c4;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+// Homepage search + social CTA row: kill Quarto <p> margins that lift buttons
+.cta-bar {
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  p {
+    margin: 0;
+  }
 }

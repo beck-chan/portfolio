@@ -1,7 +1,6 @@
 ---
 title: "Copywriting"
 subtitle: "Samples"
-toc: false
 listing:
   - id: validmind-copywriting
     type: grid
@@ -27,7 +26,7 @@ listing:
 
 > Driving action and building connection through technical insight.
 >
-> To me, software storytelling goes beyond simple feature highlights — culminating in tangible statements of value for users. 
+> To me, software storytelling goes beyond simple feature highlights &mdash; culminating in tangible statements of value for users. 
 
 ## ValidMind
 

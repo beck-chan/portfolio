@@ -1,0 +1,44 @@
+<script>
+  // Quarto sticky sidenav still scrolls with the page (min-height:100% + sticky
+  // containing block). Pin it fixed on desktop; lock width from the in-flow
+  // layout first so the grid column and nav stay aligned.
+  (() => {
+    const MQ = "(min-width: 992px)";
+    const CLASS = "is-pinned-sidenav";
+
+    const sidebar = () => document.getElementById("quarto-sidebar");
+
+    const unpin = (el) => {
+      el.classList.remove(CLASS);
+      el.style.removeProperty("width");
+    };
+
+    const pin = () => {
+      const el = sidebar();
+      if (!el) return;
+
+      if (!window.matchMedia(MQ).matches) {
+        unpin(el);
+        return;
+      }
+
+      // Measure while in normal flow so width matches the grid column.
+      unpin(el);
+      const width = el.getBoundingClientRect().width;
+      if (width > 0) el.style.width = `${width}px`;
+      el.classList.add(CLASS);
+    };
+
+    let resizeTimer = 0;
+    const schedule = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(pin, 50);
+    };
+
+    window.document.addEventListener("DOMContentLoaded", pin);
+    window.addEventListener("resize", schedule);
+    if (window.matchMedia) {
+      window.matchMedia(MQ).addEventListener("change", pin);
+    }
+  })();
+</script>

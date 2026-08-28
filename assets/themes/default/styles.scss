@@ -16,6 +16,7 @@ $navbar-bg: #0b2a12; // Top nav bg colour
 $sidebar-bg: #fee3e5; // Side nav bg colour
 $navbar-padding-y: 1rem; // Top nav padding
 $sidebar-padding-y: 1rem; // Top nav padding
+$footer-bg: #df9a49; // Footer bg
 
 // Links
 
@@ -34,12 +35,12 @@ $headings-font-weight:  700 !default;
 $code-color: #0b2a12; // Inline text color 
 $code-bg:#ffb3ba; // Inline background color 
 $pre-color:#df9a49; // Block text color 
-$pre-bg:#0b2a12; // Block background color 
+$code-block-bg: #0b2a12; // Block background color 
 
 
 /*-- scss:rules --*/
 
-/* Import modular SCSS files */
+/* Import modular SCSS files (paths unique so Quarto does not pick assets/_styles) */
 @import '_styles/links';
 @import '_styles/nav';
 @import '_styles/content';
@@ -52,34 +53,6 @@ $pre-bg:#0b2a12; // Block background color
     }
 
 
-  /* Set up the tab container to host the background filler */
-//   .panel-tabset .nav-tabs {
-//     display: flex;
-//     flex-wrap: wrap;
-//     position: relative;
-//     z-index: 1; /* Keeps tabs layered cleanly on top */
-//   }
-
-//   /* Fills the gap beneath the top tab row with solid color */
-//   .panel-tabset .nav-tabs::after {
-//     content: "";
-//     position: absolute;
-//     left: 0;
-//     right: 0;
-//     bottom: -1px; 
-//     /* Targets the height of your second row of tabs */
-//     height: 45px; 
-//     background-color: #fee3e5;
-//     border-left: 1px solid #ff6162;
-//     border-top: 1px dotted #ff6162;
-//     border-right: 1px solid #ff6162;
-//     z-index: -1; 
-//   }
-
-//   .panel-tabset .nav-tabs .nav-link:not(.active) {
-//     background-color: #fff8f9; 
-//     position: relative;
-//   }
 
       
 

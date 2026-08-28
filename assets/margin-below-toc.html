@@ -1,0 +1,146 @@
+<script>
+  // Quarto's layoutMarginEls only separates margin notes from each other.
+  // Seed that same cascade with the TOC/category panel bottom so footnotes
+  // start below #quarto-margin-sidebar instead of overlapping it.
+  // When notes stack taller than the body, pad main.content so the
+  // footer clears the last footnote. Padding the main grid row (not
+  // #quarto-content) also stretches the docked sidebar with it.
+  (() => {
+    const MARGIN_SEL =
+      ".column-margin.column-container > *, .margin-caption, .aside";
+    const GAP_AFTER_SIDEBAR = "0.5rem";
+    const GAP_BEFORE_FOOTER = "1.5rem";
+    const READY_CLASS = "margin-below-toc-ready";
+
+    const remPx = (raw) => {
+      const root = window.getComputedStyle(document.documentElement);
+      const fontSize = parseFloat(root.fontSize) || 16;
+      const value = String(raw).trim();
+      if (value.endsWith("rem")) return (parseFloat(value) || 0) * fontSize;
+      if (value.endsWith("px")) return parseFloat(value) || 0;
+      return parseFloat(value) || 0;
+    };
+
+    const contentHost = () =>
+      document.querySelector("main.content") ||
+      document.getElementById("quarto-document-content");
+
+    const sidebarContentBottom = () => {
+      const sidebar = document.getElementById("quarto-margin-sidebar");
+      if (!sidebar) return 0;
+
+      let bottom = 0;
+      for (const child of sidebar.children) {
+        if (child.classList.contains("quarto-sidebar-toggle")) continue;
+        if (window.getComputedStyle(child).display === "none") continue;
+        const rect = child.getBoundingClientRect();
+        if (rect.height === 0) continue;
+        bottom = Math.max(bottom, rect.bottom + window.scrollY);
+      }
+      return bottom > 0 ? bottom + remPx(GAP_AFTER_SIDEBAR) : 0;
+    };
+
+    // Expand the main column (grid row), not #quarto-content padding —
+    // container padding sits outside the tracks and leaves a gap under
+    // the docked sidebar background.
+    // Theme sets padding-bottom with !important, so we must too.
+    const expandContentForMargins = (lastBottom) => {
+      const host = contentHost();
+      const legacy = document.getElementById("quarto-content");
+      // Clear older pad target if a previous version set it.
+      if (legacy && legacy !== host) {
+        legacy.style.removeProperty("padding-bottom");
+      }
+      if (!host) return;
+
+      if (!(lastBottom > 0)) {
+        host.style.removeProperty("padding-bottom");
+        return;
+      }
+
+      const computedPad =
+        parseFloat(window.getComputedStyle(host).paddingBottom) || 0;
+      const marginBottom =
+        parseFloat(window.getComputedStyle(host).marginBottom) || 0;
+      // Border-box bottom minus padding = content edge; negative
+      // margin-bottom pulls the footer up, so add it back into need.
+      const contentEdge =
+        host.getBoundingClientRect().bottom + window.scrollY - computedPad;
+      const needed = Math.ceil(
+        lastBottom + remPx(GAP_BEFORE_FOOTER) - contentEdge - marginBottom
+      );
+      const themeMin = remPx("2rem");
+      if (needed <= themeMin) {
+        host.style.removeProperty("padding-bottom");
+        return;
+      }
+
+      const next = `${needed}px`;
+      if (host.style.getPropertyValue("padding-bottom") !== next) {
+        host.style.setProperty("padding-bottom", next, "important");
+      }
+    };
+
+    const layoutMarginBelowToc = () => {
+      const marginChildren = document.querySelectorAll(MARGIN_SEL);
+      if (!marginChildren.length) {
+        expandContentForMargins(0);
+        return;
+      }
+
+      let lastBottom = sidebarContentBottom();
+      for (const el of marginChildren) {
+        if (el.offsetParent === null) continue;
+
+        el.style.marginTop = null;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        if (lastBottom > 0 && top < lastBottom) {
+          const marginBottom =
+            parseFloat(window.getComputedStyle(el).marginBottom) || 0;
+          el.style.marginTop = `${lastBottom - top + marginBottom}px`;
+        }
+
+        const marginTop =
+          parseFloat(window.getComputedStyle(el).marginTop) || 0;
+        const height = el.getBoundingClientRect().height;
+        lastBottom = top + height + marginTop;
+      }
+
+      expandContentForMargins(lastBottom);
+    };
+
+    const reveal = () => {
+      document.documentElement.classList.add(READY_CLASS);
+    };
+
+    const layoutAndReveal = () => {
+      layoutMarginBelowToc();
+      reveal();
+    };
+
+    // Run after Quarto's own throttled layoutMarginEls (50ms).
+    const schedule = () => {
+      clearTimeout(schedule._timer);
+      schedule._timer = setTimeout(layoutAndReveal, 60);
+    };
+
+    window.document.addEventListener("DOMContentLoaded", () => {
+      schedule();
+      // Failsafe: never leave footnotes hidden if layout is delayed.
+      setTimeout(reveal, 1500);
+      window.document.querySelectorAll(".column-margin img").forEach((img) => {
+        if (!img.complete) img.addEventListener("load", schedule, { once: true });
+      });
+      if (window.ResizeObserver) {
+        const ro = new ResizeObserver(schedule);
+        ro.observe(window.document.body);
+        const sidebar = window.document.getElementById("quarto-margin-sidebar");
+        if (sidebar) ro.observe(sidebar);
+        const margin = window.document.querySelector(
+          ".column-margin.column-container"
+        );
+        if (margin) ro.observe(margin);
+      }
+    });
+  })();
+</script>

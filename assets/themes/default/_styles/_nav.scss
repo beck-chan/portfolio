@@ -25,7 +25,26 @@
   margin-top: 75px !important; 
 }
 
+#quarto-document-content,
+.page-layout-article main {
+  margin-top: 25px !important; 
+}
+
 /* Sidebar styling */
+
+// Fixed sidenav
+  #quarto-sidebar.sidebar-navigation.is-pinned-sidenav {
+    position: fixed !important;
+    top: 75px !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    z-index: 1020;
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 
 // Padding
 #quarto-sidebar, 
