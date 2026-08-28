@@ -1,0 +1,4 @@
+---
+title: "ValidMind Documentation Redesign"
+subtitle: "Content Engineering"
+---

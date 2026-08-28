@@ -32,7 +32,9 @@ listing:
     categories: true
 ---
 
-lorem ipsum etc so the preview shows text same here, same listing page 
+> lorem ipsum etc so the preview shows text same here, same listing page 
+>
+> Gotta update as to why content engineering is important
 
 ## ValidMind
 
