@@ -272,6 +272,8 @@ listing:
     - path: https://validbeck.github.io/docs/guide/configuration/customize-your-dashboard.html
       title: "Customize your dashboard"
       subtitle: "User Guides"
+includes:
+  landing: true
 ---
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}

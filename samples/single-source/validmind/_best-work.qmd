@@ -1,1 +1,19 @@
-For the samples below, I've selected only my best work as my contribution to ValidMind spanned too much content to collate in its entirety. 
+
+:::: {.content-visible when-format="html" when-meta="includes.landing"}
+As I authored the bulk of 53% of user content out of many contributors,[^validmind] most of ValidMind's documentation saw my influence at some point. For the samples below, I've selected only my best work as my contribution to ValidMind spanned too much content to collate in its entirety. 
+::::
+
+
+:::: {.content-visible when-format="html" unless-meta="includes.landing"}
+As I authored the bulk of 53% of user content out of many contributors,[^validmind] most of ValidMind's documentation saw my influence at some point. I've selected some of my best work to showcase below: 
+
+::::
+
+[^validmind]: Citation: [{{< fa brands github >}} `validmind/documentation` statistic archive](https://github.com/validbeck/validmind-docs/graphs/contributors?from=8%2F24%2F2024&selectedMetric=additions){target="_blank"}
+
+    ::: {.mobile}
+    <br><br>
+    ![Statistics snapshot from validmind/documentation](/samples/technical-writing/validmind/beck-contributions.png){.pics width="90%"}
+    :::
+
+

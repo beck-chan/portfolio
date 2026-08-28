@@ -1,3 +1,9 @@
+// Fixing annoying margin dupe scroll
+#quarto-margin-sidebar {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
 // TOC links
 nav#TOC {
     border-left: 3px solid #ffb3ba

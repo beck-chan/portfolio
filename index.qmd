@@ -77,13 +77,13 @@ listing:
 
 :::: {.flex .flex-wrap .justify-around}
 
-::: {.w-20-ns .tc .mb3 .flex .items-center .justify-center}
+::: {.w-100-m .w-20-l .tc .mb3 .flex .items-center .justify-center}
 
 ![](assets/headshot.png){width=90% .pfp}
 
 :::
 
-::: {.w-80-ns}
+::: {.w-100-m .w-80-l}
 
 > I'm **Beck**, poet with a passion for process &mdash; helping you empower users by designing and building solutions built to scale. 
 >
@@ -93,17 +93,17 @@ listing:
 
 :::: {.flex .flex-wrap .justify-around}
 
-::: {.w-30-ns .tc}
+::: {.w-25-ns .w-30-l .tc}
 [{{< fa brands github >}} beck-chan](https://github.com/beck-chan){target="_blank" .button .cta}
 
 :::
 
-::: {.w-30-ns. .tc}
+::: {.w-25-ns .w-30-l .tc}
 [{{< fa brands linkedin >}} beck-chan](https://linkedin.com/in/beck-chan){target="_blank" .button .cta}
 
 :::
 
-::: {.w-30-ns .tc}
+::: {.w-50-ns .w-30-l .tc}
 [{{< fa envelope >}} beckchan.tech@gmail.com](mailto:beckchan.tech@gmail.com){target="_blank" .button .cta}
 
 :::
