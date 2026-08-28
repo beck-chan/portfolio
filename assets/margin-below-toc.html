@@ -1,0 +1,76 @@
+<script>
+  // Quarto's layoutMarginEls only separates margin notes from each other.
+  // Seed that same cascade with the TOC/category panel bottom so footnotes
+  // start below #quarto-margin-sidebar instead of overlapping it.
+  (() => {
+    const MARGIN_SEL =
+      ".column-margin.column-container > *, .margin-caption, .aside";
+    const GAP_AFTER_SIDEBAR = "4rem";
+
+    const gapPx = () => {
+      const root = window.getComputedStyle(document.documentElement);
+      const fontSize = parseFloat(root.fontSize) || 16;
+      const raw = GAP_AFTER_SIDEBAR.trim();
+      if (raw.endsWith("rem")) return (parseFloat(raw) || 0) * fontSize;
+      if (raw.endsWith("px")) return parseFloat(raw) || 0;
+      return parseFloat(raw) || 0;
+    };
+
+    const sidebarContentBottom = () => {
+      const sidebar = document.getElementById("quarto-margin-sidebar");
+      if (!sidebar) return 0;
+
+      let bottom = 0;
+      for (const child of sidebar.children) {
+        if (child.classList.contains("quarto-sidebar-toggle")) continue;
+        if (window.getComputedStyle(child).display === "none") continue;
+        const rect = child.getBoundingClientRect();
+        if (rect.height === 0) continue;
+        bottom = Math.max(bottom, rect.bottom + window.scrollY);
+      }
+      return bottom > 0 ? bottom + gapPx() : 0;
+    };
+
+    const layoutMarginBelowToc = () => {
+      const marginChildren = document.querySelectorAll(MARGIN_SEL);
+      if (!marginChildren.length) return;
+
+      let lastBottom = sidebarContentBottom();
+      for (const el of marginChildren) {
+        if (el.offsetParent === null) continue;
+
+        el.style.marginTop = null;
+        const top = el.getBoundingClientRect().top + window.scrollY;
+        if (lastBottom > 0 && top < lastBottom) {
+          const marginBottom =
+            parseFloat(window.getComputedStyle(el).marginBottom) || 0;
+          el.style.marginTop = `${lastBottom - top + marginBottom}px`;
+        }
+
+        const marginTop =
+          parseFloat(window.getComputedStyle(el).marginTop) || 0;
+        const height = el.getBoundingClientRect().height;
+        lastBottom = top + height + marginTop;
+      }
+    };
+
+    // Run after Quarto's own throttled layoutMarginEls (50ms).
+    const schedule = () => {
+      clearTimeout(schedule._timer);
+      schedule._timer = setTimeout(layoutMarginBelowToc, 60);
+    };
+
+    window.document.addEventListener("DOMContentLoaded", () => {
+      schedule();
+      window.document.querySelectorAll(".column-margin img").forEach((img) => {
+        if (!img.complete) img.addEventListener("load", schedule, { once: true });
+      });
+      if (window.ResizeObserver) {
+        const ro = new ResizeObserver(schedule);
+        ro.observe(window.document.body);
+        const sidebar = window.document.getElementById("quarto-margin-sidebar");
+        if (sidebar) ro.observe(sidebar);
+      }
+    });
+  })();
+</script>

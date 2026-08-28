@@ -78,6 +78,7 @@ format:
     reference-location: margin
     footnotes-hover: true
     lightbox: true
+    include-after-body: assets/margin-below-toc.html
   
 filters:
   - timeline

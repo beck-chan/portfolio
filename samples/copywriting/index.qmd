@@ -1,7 +1,6 @@
 ---
 title: "Copywriting"
 subtitle: "Samples"
-toc: false
 listing:
   - id: validmind-copywriting
     type: grid

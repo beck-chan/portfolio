@@ -1,7 +1,25 @@
+// Footenote spacing
+div[id^="fn"] {
+  margin-bottom: 1.5rem !important; 
+  padding: 1rem 0;
+}
+
 // Fixing annoying margin dupe scroll
 #quarto-margin-sidebar {
   max-height: none !important;
   overflow: visible !important;
+  pointer-events: none;
+}
+
+// Fixing hidden TOC/category panel
+#quarto-margin-sidebar > * {
+  opacity: 1 !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
+}
+
+#quarto-toc-toggle.quarto-sidebar-toggle {
+  display: none !important;
 }
 
 // TOC links
