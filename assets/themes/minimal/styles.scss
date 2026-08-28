@@ -10,18 +10,17 @@
 /*-- scss:defaults --*/
 
 // Foundations
-$body-bg: #f9f9f9; // Page colour
+$body-bg: #FFFFFF; // Page colour
 $body-color: #212121; // Font colour
-$navbar-bg: #212121; // Top nav bg colour
+$navbar-bg: #000000; // Top nav bg colour
 $sidebar-bg: #e9e9e9; // Side nav bg colour
 $navbar-padding-y: 1rem; // Top nav padding
 $sidebar-padding-y: 1rem; // Top nav padding
 
 // Links
-
-$primary: #838383; // Base link colour
-$navbar-fg: #a3a3a3; // Top nav font colour 
-$navbar-hl: #838383; // Top nav hover colour
+$primary: #000000; // Base link colour
+$navbar-fg: #FFFFFF; // Top nav font colour 
+$navbar-hl: #a3a3a3; // Top nav hover colour
 $sidebar-fg: #212121; // Side nav font colour 
 $sidebar-hl: #838383; // Side nav hover colour
 $breadcrumb-active-color: #838383;; // Active breadcrumb colour
@@ -32,7 +31,7 @@ $headings-font-weight:  700 !default;
 
 // Code styling
 $code-color: #212121; // Inline text color 
-$code-bg:#c4c4c4; // Inline background color 
+$code-bg:#e9e9e9; // Inline background color 
 $pre-color:#a3a3a3; // Block text color 
 $code-block-bg: #212121; // Block background color 
 

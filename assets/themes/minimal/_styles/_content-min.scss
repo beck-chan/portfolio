@@ -29,9 +29,10 @@ strong, b {
 div.quarto-post .thumbnail img {
   border-radius: 50%;
   border: none !important;
-  box-shadow: 4px 4px 0px 0px #c4c4c4 !important;
+  box-shadow: 4px 4px 0px 0px #000000 !important;
   pointer-events: none !important; 
   cursor: default !important;
+  filter: grayscale(100%);
 }
 
 // Callouts
@@ -81,37 +82,38 @@ h1 {
     font-size: 2rem !important;
     text-transform: uppercase;
     font-weight: bold;
+    color: #000000;
 }
 
 h2 {
     font-size: 1.75rem;
     font-weight: 500;
     margin-top: 1rem;
-    color: #838383; 
-    border-bottom: 4px dotted #c4c4c4;
+    color: #000000; 
+    border-bottom: 4px dotted #a3a3a3;
 }
 
 h3 {
     font-size: 1.75rem;
     font-weight: 500;
     margin-top: 1rem;
-    color: #838383;
+    color: #000000;
 }
 
 h4 {
     font-size: 1.5rem;
     font-weight: 500;
     margin: 0.5rem 0 0.5rem 0;
-    color: #21212190;
+    color: #a3a3a3;
     padding-bottom: 0.5rem;
-    border-bottom: 2px dotted #33333380;
+    border-bottom: 2px dotted #838383;
 }
 
 // Also listing tile headings!!
 h5 {
     font-size: 1.5rem;
     font-weight: 500;
-    color: #21212190;
+    color: #a3a3a3;
     margin: 0.5rem 0 0.5rem 0;
 }
 
@@ -195,7 +197,7 @@ blockquote::before {
     font-family: Georgia, serif !important; 
     font-size: 3.5rem !important;         
     line-height: 1 !important;
-    color: #c4c4c4 !important;            
+    color: #a3a3a3 !important;            
   }
   
 blockquote::after {

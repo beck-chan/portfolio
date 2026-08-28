@@ -5,6 +5,10 @@ project:
     - "**/*.qmd"
     - "**/*.ipynb"
 
+language:
+  toggle-dark-mode: "Toggle Theme"
+  toc-title-website: "Table of Contents"
+
 metadata-files:
   - samples/content-engineering/_sidebar.yaml
   - samples/technical-writing/_sidebar.yaml
