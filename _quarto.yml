@@ -81,7 +81,9 @@ format:
     reference-location: margin
     footnotes-hover: true
     lightbox: true
-    include-after-body: assets/margin-below-toc.html
+    include-after-body:
+      - assets/margin-below-toc.html
+      - assets/pin-sidenav.html
   
 filters:
   - timeline

@@ -13,7 +13,7 @@ As I authored the bulk of 53% of user content out of many contributors,[^validmi
 
     ::: {.mobile}
     <br>
-    ![Statistics snapshot from validmind/documentation](/samples/technical-writing/validmind/beck-contributions.png){.pics width="90%"}
+    ![Statistics snapshot from validmind/documentation](/samples/technical-writing/validmind/beck-contributions.png){.pics}
     :::
 
 
