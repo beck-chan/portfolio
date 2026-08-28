@@ -43,7 +43,6 @@ website:
     location: navbar
 
   page-footer:
-    background: "#df9a49"
     left:
       - text: "Releases"
         href: https://github.com/beck-chan/portfolio/releases
@@ -63,8 +62,11 @@ format:
       sidebar-width: 400px
       margin-width: 500px
     theme:
-      light: assets/styles.scss
-    highlight-style: assets/code.theme
+      light: assets/themes/default/styles.scss
+      dark: assets/themes/minimal/styles.scss
+    syntax-highlighting:
+      light: assets/themes/default/code.theme
+      dark: assets/themes/minimal/code.theme
     code-overflow: wrap
     toc: true
     toc-depth: 5
