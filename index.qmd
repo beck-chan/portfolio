@@ -104,7 +104,7 @@ listing:
 :::
 
 ::: {.w-30-ns .tc}
-[{{< fa envelope >}} beckchan.250@gmail.com](mailto:beckchan.250@gmail.com){target="_blank" .button .cta}
+[{{< fa envelope >}} beckchan.tech@gmail.com](mailto:beckchan.tech@gmail.com){target="_blank" .button .cta}
 
 :::
 
