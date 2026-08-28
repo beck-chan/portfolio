@@ -59,13 +59,13 @@ listing:
       title: "Get started with ValidMind"
       subtitle: "Tutorials"
     - path: https://validbeck.github.io/docs/get-started/developer/quickstart-developer.html
-      title: "Quickstart — Development"
+      title: "Quickstart &mdash; Development"
       subtitle: "Tutorials"
     - path: https://validbeck.github.io/docs/get-started/validator/quickstart-validator.html
-      title: "Quickstart — Validation"
+      title: "Quickstart &mdash; Validation"
       subtitle: "Tutorials"
     - path: https://validbeck.github.io/docs/get-started/administrator/quickstart-administrator.html
-      title: "Quickstart — Setup & Administration"
+      title: "Quickstart &mdash; Setup & Administration"
       subtitle: "Tutorials"
   - id: validmind-style
     type: grid

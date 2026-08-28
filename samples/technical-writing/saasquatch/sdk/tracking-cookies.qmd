@@ -13,7 +13,7 @@ categories: ["Developer Content", "JavaScript SDK", "Referrals & Attributions", 
 
 As of June 2020, SaaSquatch has enabled the usage of 1st Party Cookies to accommodate a wider industry shift towards the increased protection of end user privacy.
 
-SaaSquatch uses first-party cookies for referral attribution—the process of connecting a referred participant to the person who made the referral. The cookies are based on UTM parameters passed through the URL. By placing `squatch.js` on your landing page, it is able to read the UTM parameters and create a valid first-party cookie that’s in compliance with all browsers.
+SaaSquatch uses first-party cookies for referral attribution&mdash;the process of connecting a referred participant to the person who made the referral. The cookies are based on UTM parameters passed through the URL. By placing `squatch.js` on your landing page, it is able to read the UTM parameters and create a valid first-party cookie that’s in compliance with all browsers.
 
 ## Set up first-party cookies
 

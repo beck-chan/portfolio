@@ -85,7 +85,7 @@ listing:
 
 ::: {.w-80-ns}
 
-> I'm **Beck**, poet with a passion for process — helping you empower users by designing and building solutions built to scale. 
+> I'm **Beck**, poet with a passion for process &mdash; helping you empower users by designing and building solutions built to scale. 
 >
 > I've designed, implemented, and managed everything from **content**, **support**, **training**, and **onboarding** architecture for organizations from startups to enterprises.
 >

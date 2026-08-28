@@ -1,0 +1,24 @@
+---
+title: "404"
+subtitle: "Page Not Found"
+page-layout: full
+sidebar: false
+toc: false
+listing:
+  - id: samples
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, description]
+    contents:
+    # - samples/content-engineering/index.qmd
+    - samples/technical-writing/index.qmd
+    - samples/copywriting/index.qmd
+    # - samples/developer-advocacy/index.qmd
+---
+
+Whoops! You've stumbled upon a page that doesn't exist. Perhaps try browsing:
+
+:::{#samples}
+:::
