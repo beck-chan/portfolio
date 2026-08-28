@@ -26,7 +26,7 @@ jobs:
         id: spellcheck
         run: |
           set +e
-          npx --yes cspell "**/*.qmd" --exclude "_output" --exclude ".quarto" > cspell-output.txt
+          npx --yes cspell "**/*.qmd" --exclude "_output" --exclude ".quarto" --exclude "poetry/random/*" > cspell-output.txt
           status=$?
           set -e
           cat cspell-output.txt
