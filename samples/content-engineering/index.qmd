@@ -4,7 +4,7 @@ subtitle: "Samples"
 listing:
   - id: validmind-content
     type: grid
-    grid-columns: 2
+    grid-columns: 3
     max-description-length: 250
     sort: false
     fields: [title, subtitle]
@@ -13,6 +13,7 @@ listing:
       - validmind/releases.qmd
       - validmind/academy.qmd
       - validmind/quickstarts.qmd
+      - validmind/redesign.qmd
   - id: atryum-content
     type: grid
     grid-columns: 2
@@ -20,7 +21,7 @@ listing:
     sort: false
     fields: [title, subtitle]
     contents:
-      - validmind/atryum.qmd
+      - atryum/index.qmd
   - id: personal-content
     type: grid
     grid-columns: 2
@@ -30,11 +31,12 @@ listing:
     contents:
       - personal/portfolio.qmd
     categories: true
+categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Release Notes", "Quarto", "GitHub Pages", "Netlify", "CI/CD Workflows", "Frontend Development"]
 ---
 
-> lorem ipsum etc so the preview shows text same here, same listing page 
+> Delivering content as an integrated and integral part of product.
 >
-> Gotta update as to why content engineering is important
+> Docs-as-code goes beyond just producing documentation in the same development ecosystem as features &mdash; thinking of content as product that's part of product, a dedication to intuitive content architecture on top of immaculate user resources, and wrapping content and feature storytelling into the definition of done.
 
 ## ValidMind
 
@@ -51,6 +53,8 @@ listing:
 :::
 
 ## Personal
+
+Some behind-the-scenes insights into how I built this portfolio site.
 
 :::{#personal-content}
 :::

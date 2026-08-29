@@ -1,18 +1,25 @@
 ---
 title: "Developer Advocacy"
 subtitle: "Samples"
-listing:
-  - id: developer
-    type: grid
-    grid-columns: 2
-    max-description-length: 250
-    sort: false
-    fields: [title, subtitle, description]
-    contents:
-    - supabase/index.qmd
-    - posthog/index.qmd
-    - quarto/index.qmd
-    - google-sheets/index.qmd
+# listing:
+#   - id: developer
+#     type: grid
+#     grid-columns: 2
+#     max-description-length: 250
+#     sort: false
+#     fields: [title, subtitle, description]
+#     contents:
+#     - supabase/index.qmd
+#     - posthog/index.qmd
+#     - quarto/index.qmd
+#     - google-sheets/index.qmd
 ---
 
 lorem ipsum etc so the preview shows text
+
+some notes:
+
+2. Build and deploy static Quarto websites (GitHub Pages, Netlify, CI/CD)
+3. Track user activity with Google Sheets Apps (Google Sheets API, JavaScript)
+4. Gain website traffic insights with PostHog
+1. Build interactive commenting interface with Next.js (Supabase, Vercel, PostHog: In-App User Surveys, Direct SQL Querying via HogQL, A/B Testing on Server-Rendered Components)

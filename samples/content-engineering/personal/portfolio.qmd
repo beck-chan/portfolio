@@ -1,4 +1,524 @@
 ---
 title: "Portfolio"
 subtitle: "Content Engineering"
+categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "CI/CD Workflows", "Frontend Development"]
+includes:
+    portfolio: true
 ---
+
+How [https://beck-chan.github.io/](https://beck-chan.github.io/) is built and maintained, more or less.
+
+## Framework
+
+This static portfolio site is built using Quarto^[[Quarto](https://quarto.org/){target="_blank"}] and hosted on GitHub Pages.^[[GitHub Pages](https://pages.github.com/){target="_blank"}]
+
+::: {.callout-tip collapse="true"}
+## What is Quarto?
+
+Quarto is not a traditional Content Management System (CMS), but an open-source publication framework. 
+
+From your variety of source files, Quarto can build file formats such as `.html` or `.pdf`, and can natively run code within your content in languages such as Python or R to include live outputs.
+
+:::
+
+### Authoring
+
+I choose Quarto because Quarto is extensible, but simple to use:
+
+#### Content
+
+::: {.panel-tabset}
+
+##### Independent Pages
+
+Portfolio content is written in `.qmd` files, Quarto's version of Markdown where you specify metadata in a YAML frontmatter block.
+
+Take this page for example, this is the first few lines of the file:
+
+```markdown
+---
+title: "Portfolio"
+subtitle: "Content Engineering"
+categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "CI/CD Workflows", "Frontend Development"]
+---
+
+How [https://beck-chan.github.io/](https://beck-chan.github.io/) is built and maintained.
+```
+
+##### Single-Sourced Content
+
+Content that is shared across multiple pages can be single-sourced from `_*.qmd` files, allowing for updates to the content across multiple pages without having to manually update each page. 
+
+Quarto Includes are not rendered as pages independently. For example, my introduction for one of the organizations I've worked with, ValidMind:
+
+```markdown
+{{</* include /samples/single-source/validmind/_validmind.qmd */>}}
+```
+
+Renders as the below snippet everywhere it's embedded:
+
+{{< include /samples/single-source/validmind/_validmind.qmd >}}
+
+##### Searching Content
+
+Quarto includes built-in indexing and searching capabilities,^[**Quarto:**[ Website Search](https://quarto.org/docs/websites/website-search.html){target="_blank"}] included in the top navigation in a top-level `_quarto.yml`
+
+```yaml
+  search:
+    location: navbar
+```
+
+I've also written a quick script to embed the same search within a page's content itself for ease of access:^[{{< fa brands github >}} beck-chan/portfolio: [index.html](https://github.com/beck-chan/portfolio/blob/8a5a018b194ea9529c06c044147c2ba9d14a3dda/index.qmd#L102){target="_blank"}]
+
+::: {.tc}
+
+```{=html}
+<div class="inline-quarto-search">
+<button
+    type="button"
+    class="inline-quarto-search__trigger"
+    id="open-quarto-search"
+    aria-haspopup="dialog"
+    aria-controls="quarto-search"
+>
+    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+    <span class="inline-quarto-search__label">Search Portfolio</span>
+    <kbd class="inline-quarto-search__hint">/</kbd>
+</button>
+</div>
+<script>
+(() => {
+    const openQuartoSearch = () => {
+    const detached = document.querySelector(
+        "#quarto-search .aa-DetachedSearchButton"
+    );
+    if (detached) {
+        detached.click();
+        return;
+    }
+    document.querySelector("#quarto-search input.aa-Input")?.focus();
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+    document
+        .getElementById("open-quarto-search")
+        ?.addEventListener("click", openQuartoSearch);
+    });
+})();
+</script>
+```
+
+:::
+
+
+:::
+
+#### Navigation
+
+Navigation is defined by directory structure, and then specified in the site layout via `_*.yml` files.[^samples]
+
+[^samples]: Take the `samples` directory for example, where the work I'm showcasing is organized:
+
+    ```{.markdown fold=true}
+    samples/
+    ├── content-engineering/
+    │   ├── atryum/
+    │   ├── personal/
+    │   └── validmind/
+    ├── copywriting/
+    │   ├── saasquatch/
+    │   └── validmind/
+    ├── organizations/
+    ├── single-source/
+    │   ├── atryum/
+    │   ├── saasquatch/
+    │   └── validmind/
+    └── technical-writing/
+        ├── atryum/
+        ├── saasquatch/
+        │   ├── integrations/
+        │   │   └── sfdc/
+        │   ├── sdk/
+        │   └── user-guides/
+        └── validmind/
+    ```
+
+    <!-- ```markdown
+    samples/
+    ├── content-engineering/
+    │   ├── atryum/
+    │   ├── personal/
+    │   └── validmind/
+    ├── copywriting/
+    │   ├── saasquatch/
+    │   └── validmind/
+    ├── developer-advocacy/
+    │   ├── google-sheets/
+    │   ├── posthog/
+    │   ├── quarto/
+    │   └── supabase/
+    ├── organizations/
+    ├── single-source/
+    │   ├── atryum/
+    │   ├── saasquatch/
+    │   └── validmind/
+    └── technical-writing/
+        ├── atryum/
+        ├── saasquatch/
+        │   ├── integrations/
+        │   │   └── sfdc/
+        │   ├── sdk/
+        │   └── user-guides/
+        └── validmind/
+    ``` -->
+
+::: {.panel-tabset}
+
+##### Top Navigation
+
+The consistent top navigation bar is defined in the root directory with our top-level `_quarto.yml`:
+
+```{.yaml shortcodes=false}
+# Include the independent directory _sidebar.yaml files to display the correct sidenavs 
+metadata-files:
+  - samples/content-engineering/_sidebar.yaml
+  - samples/technical-writing/_sidebar.yaml
+  - samples/copywriting/_sidebar.yaml
+
+# Define the top navigation bar
+website:
+  title: "Portfolio"
+  favicon: assets/headshot.png
+  page-navigation: true
+  navbar:
+    left:
+      - samples/content-engineering/index.qmd
+      - samples/technical-writing/index.qmd
+      - samples/copywriting/index.qmd
+    right:
+      - cv.qmd
+      - text: "{{< fa brands github >}}"
+        target: _blank
+        href: https://github.com/beck-chan
+      - text: "{{< fa brands linkedin >}}"
+        target: _blank
+        href: https://linkedin.com/in/beck-chan
+      - text: "{{< fa envelope >}}"
+        href: mailto:beckchan.tech@gmail.com
+        target: _blank
+      - text: "{{< fa feather >}}"
+        href: poetry/index.qmd
+```
+
+
+<!-- ```yaml
+# Include the independent directory _sidebar.yaml files to display the correct sidenavs 
+metadata-files:
+  - samples/content-engineering/_sidebar.yaml
+  - samples/technical-writing/_sidebar.yaml
+  - samples/copywriting/_sidebar.yaml
+  - samples/developer-advocacy/_sidebar.yaml
+
+# Define the top navigation bar
+website:
+  title: "Portfolio"
+  favicon: assets/headshot.png
+  page-navigation: true
+  navbar:
+    left:
+      - samples/content-engineering/index.qmd
+      - samples/technical-writing/index.qmd
+      - samples/copywriting/index.qmd
+      - samples/developer-advocacy/index.qmd
+    right:
+      - cv.qmd
+      - text: "{{< fa brands github >}}"
+        target: _blank
+        href: https://github.com/beck-chan
+      - text: "{{< fa brands linkedin >}}"
+        target: _blank
+        href: https://linkedin.com/in/beck-chan
+      - text: "{{< fa envelope >}}"
+        href: mailto:beckchan.tech@gmail.com
+        target: _blank
+      - text: "{{< fa feather >}}"
+        href: poetry/index.qmd
+``` -->
+
+##### Sidebars
+
+Each directory has its own `_sidebar.yml` and `_metadata.yml` files that defines the sidebar navigation for that directory. 
+
+For this directory, `content-engineering/`, the contents of those two files are:
+
+```yaml
+# _sidebar.yaml
+website:
+  sidebar:
+    - id: content
+      title: "Content Engineering"
+      contents:
+        - text: "Content Engineering"
+          file: samples/content-engineering/index.qmd
+        - text: "---"
+        - section: "ValidMind"
+          href: samples/content-engineering/validmind/index.qmd
+          contents:
+            - text: "Developer Library"
+              file: samples/content-engineering/validmind/library.qmd
+            - text: "Training"
+              file: samples/content-engineering/validmind/academy.qmd
+            - text: "Release Notes"
+              file: samples/content-engineering/validmind/releases.qmd
+            - text: "Quickstarts"
+              file: samples/content-engineering/validmind/quickstarts.qmd
+            - text: "Documentation Redesign"
+              file: samples/content-engineering/validmind/redesign.qmd
+        - samples/content-engineering/atryum/index.qmd
+        - samples/content-engineering/personal/portfolio.qmd
+```
+
+<!-- ```yaml
+# _sidebar.yaml
+website:
+  sidebar:
+    - id: content
+      title: "Content Engineering"
+      contents:
+        - text: "Content Engineering"
+          file: samples/content-engineering/index.qmd
+        - text: "---"
+        - section: "ValidMind"
+          href: samples/content-engineering/validmind/index.qmd
+          contents:
+            - text: "Developer Library"
+              file: samples/content-engineering/validmind/library.qmd
+            - text: "Training"
+              file: samples/content-engineering/validmind/academy.qmd
+            - text: "Release Notes"
+              file: samples/content-engineering/validmind/releases.qmd
+            - text: "Quickstarts"
+              file: samples/content-engineering/validmind/quickstarts.qmd
+            - text: "Documentation Redesign"
+              file: samples/content-engineering/validmind/redesign.qmd
+        - samples/content-engineering/atryum/index.qmd
+        - section: "Personal"
+          contents:
+            - samples/content-engineering/personal/portfolio.qmd
+            - samples/content-engineering/personal/guestbook.qmd
+``` -->
+
+```yaml
+# _metadata.yml
+format:
+  html:
+    sidebar: content
+```
+
+##### Footer
+
+Similarly, the footer is also defined in `_quarto.yml`:
+
+```{.yaml shortcodes=false}
+  page-footer:
+    left:
+      - text: "Releases"
+        href: https://github.com/beck-chan/portfolio/releases
+        target: _blank
+    center:
+      - text: "{{< fa brands github >}} Report Issue"
+        href: https://github.com/beck-chan/portfolio/issues
+        target: _blank
+    right:
+      - text: "&#169; 2026 <b>Beck Chan</b>. All rights reserved."
+```
+
+:::
+
+### Styling
+
+Quarto offers a few built-in themes, but I chose define custom themes using Bootstrap (`.scss`).
+
+#### Core Theming
+
+These are defined in the root directory with our top-level `_quarto.yml`:
+
+```yaml
+    theme:
+    # default theme
+      light: assets/themes/default/styles.scss
+    # monochrome theme
+      dark: assets/themes/minimal/styles.scss
+    syntax-highlighting:
+    # default theme
+      light: assets/themes/default/code.theme
+    # muted theme
+      dark: assets/themes/minimal/code.theme
+```
+
+::: {.panel-tabset}
+
+##### Full Colour Theme
+
+Default theme users see when they load the portfolio. 
+
+Defined in `assets/themes/default/styles.scss`:^[{{< fa brands github >}} beck-chan/portfolio/assets: [styles.scss](https://github.com/beck-chan/portfolio/blob/main/assets/themes/default/styles.scss){target="_blank"}]
+
+```scss
+/*-- scss:defaults --*/
+
+// Foundations
+$body-bg: #fff8f9; // Page colour
+$body-color: #0b2a12; // Font colour
+$navbar-bg: #0b2a12; // Top nav bg colour
+$sidebar-bg: #fee3e5; // Side nav bg colour
+$navbar-padding-y: 1rem; // Top nav padding
+$sidebar-padding-y: 1rem; // Top nav padding
+$footer-bg: #df9a49; // Footer bg
+
+// And so on
+
+
+/*-- scss:rules --*/
+
+/* Import modular SCSS files */
+@import '_styles/links';
+@import '_styles/nav';
+@import '_styles/content';
+@import '_styles/margin';
+@import '_styles/mobile';
+```
+
+And code styling is defined in `assets/themes/default/code.theme`:^[{{< fa brands github >}} beck-chan/portfolio/assets: [code.theme](https://github.com/beck-chan/portfolio/blob/main/assets/themes/default/code.theme){target="_blank"}]
+
+```json
+{
+  "text-color": "#df9a49",
+  "background-color": "#0b2a12",
+  "line-number-color": "#4a5d4e",
+  "text-styles": {
+    "Normal": { "text-color": "#df9a49" },
+    "Variable": { "text-color": "#df9a49" },
+    "Other": { "text-color": "#e8b06a" },
+
+    // And so on ...
+
+  }
+}
+```
+
+##### Monochrome Theme
+
+You can toggle this theme in the top navigation bar by clicking **{{< fa toggle-on >}}**. 
+
+Defined in `assets/themes/minimal/styles.scss`:^[{{< fa brands github >}} beck-chan/portfolio/assets: [styles.scss](https://github.com/beck-chan/portfolio/blob/main/assets/themes/minimal/styles.scss){target="_blank"}]
+
+```scss
+/*-- scss:defaults --*/
+
+// Foundations
+$body-bg: #FFFFFF; // Page colour
+$body-color: #212121; // Font colour
+$navbar-bg: #000000; // Top nav bg colour
+$sidebar-bg: #e9e9e9; // Side nav bg colour
+$navbar-padding-y: 1rem; // Top nav padding
+$sidebar-padding-y: 1rem; // Top nav padding
+
+// And so on
+
+
+/*-- scss:rules --*/
+
+/* Import modular SCSS files */
+@import '_styles/links-min';
+@import '_styles/nav-min';
+@import '_styles/content-min';
+@import '_styles/margin-min';
+@import '_styles/mobile-min';
+```
+
+And code styling is defined in `assets/themes/minimal/code.theme`:^[{{< fa brands github >}} beck-chan/portfolio/assets: [code.theme](https://github.com/beck-chan/portfolio/blob/main/assets/themes/minimal/code.theme){target="_blank"}]
+
+```json
+{
+  "text-color": "#c2a077",
+  "background-color": "#212121",
+  "line-number-color": "#505952",
+  "text-styles": {
+    "Normal": { "text-color": "#c2a077" },
+    "Variable": { "text-color": "#c2a077" },
+    "Other": { "text-color": "#d0b491" },
+
+    // And so on ...
+
+}
+```
+
+:::
+
+#### Custom Adjustments
+
+There's a limit to what you can adjust with CSS due to Quarto's quirks, so additionally I have some custom adjustments set in `_quarto.yml` under `include-after-body`:
+
+```yaml
+    include-after-body:
+      - assets/margin-below-toc.html
+      - assets/pin-sidenav.html
+```
+
+::: {.panel-tabset}
+
+##### Pinned Side Navigation
+
+Quarto's left sidebar uses sticky positioning inside a tall containing block, so it still scrolls away with the page instead of staying fixed. CSS alone can't pin it reliably without breaking the grid column width.
+
+`assets/pin-sidenav.html`^[{{< fa brands github >}} beck-chan/portfolio/assets: [pin-sidenav.html](https://github.com/beck-chan/portfolio/blob/main/assets/pin-sidenav.html){target="_blank"}] measures the sidebar's in-flow width on desktop, locks that width, then adds an `is-pinned-sidenav` class that the theme styles as `position: fixed`. 
+
+On mobile or resize it unpins so Quarto's normal drawer behavior still works.
+
+##### Margin Below Table of Contents
+
+Footnotes are positioned in the right margin as a matter of personal preference, which means that they can overlap with the table of contents and any category filtering options.
+
+Quarto's built-in `layoutMarginEls` only spaces margin notes relative to each other, so notes can overlap the table of contents, collide with the footer when footnotes stack tall, and break layout inside tabsets that nest a full page-columns grid.
+
+`assets/margin-below-toc.html`^[{{< fa brands github >}} beck-chan/portfolio/assets: [margin-below-toc.html](https://github.com/beck-chan/portfolio/blob/main/assets/margin-below-toc.html){target="_blank"}] cascades notes below the table of contents, pads `main.content` when notes outgrow the body so the footer clears them, and hoists tabset margin notes into a sibling container. 
+
+The themes also hide margin notes until a `margin-below-toc-ready` class is set, avoiding a flash of overlapping footnotes before layout runs.
+
+:::
+
+### Publishing
+
+I've chosen to automate the publishing process using GitHub Actions, instead of rendering the output files locally then committing them. 
+
+#### Output
+
+#### Pull Requests
+
+#### Release Notes
+
+- PRs merged into main
+- spellchecker
+- release notes
+
+## Deployment
+
+### Staging
+
+- preview-site.yaml
+
+### Production
+
+- deploy-site.yaml
+
+## Analytics
+
+- posthog, share dashboard here?
+
+#### Citation
+
+[{{< fa brands github >}} beck-chan/portfolio](https://github.com/beck-chan/portfolio){target="_blank" .button}
+
+
+

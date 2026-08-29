@@ -26,6 +26,25 @@ html:not(.margin-below-toc-ready) main.content .column-margin.column-container {
   visibility: hidden;
 }
 
+// Quarto nests a full page-columns grid inside tabsets that contain
+// margin footnotes, which squeezes the tab body and floats the note
+// across a wide empty gutter. Keep tabsets as normal block layout;
+// margin-below-toc.html hoists the notes into .tabset-margin-container.
+.panel-tabset.page-columns,
+.panel-tabset .tab-content.page-columns {
+  display: block !important;
+  grid-template-columns: none !important;
+}
+
+.panel-tabset .tab-content > .tab-pane.page-columns.active {
+  display: block !important;
+}
+
+.panel-tabset.page-full,
+.panel-tabset .page-full {
+  grid-column: auto !important;
+}
+
 // TOC links
 nav#TOC {
     border-left: 3px solid #c4c4c4

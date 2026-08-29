@@ -81,7 +81,59 @@
       }
     };
 
+    // Quarto leaves margin footnotes inside tab panes and marks the
+    // tabset with page-columns/page-full, nesting a full page grid in
+    // the body column. Move those notes into the sibling
+    // .tabset-margin-container so the tabset can lay out normally and
+    // Quarto's shown.bs.tab handler can toggle note visibility.
+    const hoistTabsetMargins = () => {
+      document.querySelectorAll(".panel-tabset").forEach((tabset) => {
+        const margins = [
+          ...tabset.querySelectorAll(".column-margin.column-container"),
+        ];
+        if (!margins.length) return;
+
+        let container = tabset.previousElementSibling;
+        if (!container?.classList.contains("tabset-margin-container")) {
+          container = document.createElement("div");
+          container.className = "tabset-margin-container";
+          tabset.parentElement?.insertBefore(container, tabset);
+        }
+
+        // Sit in the parent section's page grid as the margin column.
+        container.classList.add(
+          "column-margin",
+          "column-container",
+          "no-row-height"
+        );
+
+        margins.forEach((margin) => {
+          const pane = margin.closest(".tab-pane");
+          const tabBtnId =
+            pane?.getAttribute("aria-labelledby") ||
+            (pane?.id ? `${pane.id}-tab` : null);
+          const wrap = document.createElement("div");
+          wrap.className = "tabset-margin-content";
+          if (tabBtnId) wrap.classList.add(`${tabBtnId}-margin-content`);
+          if (!pane?.classList.contains("active")) {
+            wrap.classList.add("collapse");
+          }
+          while (margin.firstChild) wrap.appendChild(margin.firstChild);
+          container.appendChild(wrap);
+          margin.remove();
+        });
+
+        const strip = (el) => {
+          el.classList.remove("page-columns", "page-full");
+        };
+        strip(tabset);
+        tabset.querySelectorAll(".page-columns, .page-full").forEach(strip);
+      });
+    };
+
     const layoutMarginBelowToc = () => {
+      hoistTabsetMargins();
+
       const marginChildren = document.querySelectorAll(MARGIN_SEL);
       if (!marginChildren.length) {
         expandContentForMargins(0);
@@ -128,6 +180,10 @@
       schedule();
       // Failsafe: never leave footnotes hidden if layout is delayed.
       setTimeout(reveal, 1500);
+      // Re-cascade when Quarto toggles tabset margin note visibility.
+      window.document.querySelectorAll('.panel-tabset a[data-bs-toggle="tab"]').forEach((tab) => {
+        tab.addEventListener("shown.bs.tab", schedule);
+      });
       window.document.querySelectorAll(".column-margin img").forEach((img) => {
         if (!img.complete) img.addEventListener("load", schedule, { once: true });
       });

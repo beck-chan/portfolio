@@ -40,7 +40,7 @@ $code-block-bg: #0b2a12; // Block background color
 
 /*-- scss:rules --*/
 
-/* Import modular SCSS files (paths unique so Quarto does not pick assets/_styles) */
+/* Import modular SCSS files */
 @import '_styles/links';
 @import '_styles/nav';
 @import '_styles/content';

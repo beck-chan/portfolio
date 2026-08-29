@@ -19,7 +19,7 @@ website:
               file: samples/content-engineering/validmind/quickstarts.qmd
             - text: "Documentation Redesign"
               file: samples/content-engineering/validmind/redesign.qmd
-        - samples/content-engineering/validmind/atryum.qmd
+        - samples/content-engineering/atryum/index.qmd
         - samples/content-engineering/personal/portfolio.qmd
         # - section: "Personal"
         #   contents:

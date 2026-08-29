@@ -9,14 +9,24 @@ listing:
   - id: samples-type
     type: grid
     max-description-length: 250
-    grid-columns: 2
+    grid-columns: 3
     sort: false
     fields: [title, description]
     contents:
-    # - samples/content-engineering/index.qmd
+    - samples/content-engineering/index.qmd
     - samples/technical-writing/index.qmd
     - samples/copywriting/index.qmd
     # - samples/developer-advocacy/index.qmd
+  - id: samples-content
+    type: grid
+    max-description-length: 250
+    grid-columns: 3
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/content-engineering/validmind/index.qmd
+    - samples/content-engineering/atryum/index.qmd
+    - samples/content-engineering/personal/portfolio.qmd
   - id: samples-developer
     type: grid
     max-description-length: 250
@@ -164,7 +174,11 @@ listing:
 
 ::: {.panel-tabset}
 
-<!-- ### Content Architecture -->
+### Content Architecture
+
+:::{#samples-content}
+:::
+
 
 ### Developer Content
 

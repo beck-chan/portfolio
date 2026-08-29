@@ -1,4 +1,5 @@
 ---
 title: "ValidMind Quickstart Guides"
 subtitle: "Content Engineering"
+categories: ["Content Architecture", "Training & Onboarding", "Quarto", "Frontend Development"]
 ---
