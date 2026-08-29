@@ -5,6 +5,9 @@ project:
     - "**/*.qmd"
     - "**/*.ipynb"
 
+profile:
+  default: custom
+
 language:
   toggle-dark-mode: "Toggle Theme"
   toc-title-website: "Table of Contents"
@@ -82,11 +85,7 @@ format:
     reference-location: margin
     footnotes-hover: true
     lightbox: true
-    include-after-body:
-      - assets/margin-below-toc.html
-      - assets/sticky-toc-toggle.html
-      - assets/pin-sidenav.html
-  
+
 filters:
   - timeline
   - tachyons

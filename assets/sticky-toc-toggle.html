@@ -1,12 +1,18 @@
 <script>
-  // Always-on fixed TOC dropdown for pages with nav#TOC (desktop).
+  // Fixed TOC dropdown once the in-flow nav#TOC scrolls under the navbar.
+  // Uses a scrollY threshold captured at page top so detection still works
+  // if the margin sidebar goes sticky, and ignores brief TOC height=0
+  // blips during margin-below-toc footnote layout.
   (() => {
     const MQ = "(min-width: 992px)";
     const TOGGLE_ID = "portfolio-toc-toggle";
     const NAVBAR_FALLBACK = 75;
+    const ROLLED_CLASS = "portfolio-toc-rolled-up";
 
     let lastScrollY = 0;
     let seenToc = false;
+    // scrollY at which the TOC top meets the navbar — captured at rest only.
+    let showAfterY = null;
 
     const marginSidebar = () =>
       document.getElementById("quarto-margin-sidebar");
@@ -32,33 +38,59 @@
       return (heading?.textContent || "Table of Contents").trim();
     };
 
+    // Only capture near the top so sticky/visual offsets can't corrupt it.
+    const captureThreshold = () => {
+      const toc = tocNav();
+      if (!toc || toc.offsetHeight <= 0) return;
+      if (window.scrollY > 40) return;
+      const docTop = toc.getBoundingClientRect().top + window.scrollY;
+      showAfterY = Math.max(0, docTop - navbarOffset());
+    };
+
+    // true / false / null (layout glitch — keep current visibility)
+    const pastInlineToc = () => {
+      if (!desktop()) return false;
+      const toc = tocNav();
+      if (!toc && !seenToc) return false;
+      if (!toc) return null;
+
+      if (showAfterY != null) {
+        return window.scrollY >= showAfterY;
+      }
+
+      // Threshold not ready yet (footnote layout still settling).
+      if (toc.offsetHeight <= 0) return null;
+      return toc.getBoundingClientRect().top <= navbarOffset();
+    };
+
     const positionToggle = (el) => {
       if (!el) return;
       const sidebar = marginSidebar();
       const toc = tocNav();
-      // Prefer the TOC box itself — sidebar width can be briefly 0 while
-      // margin-below-toc.html is cascading footnotes.
-      const box =
-        toc?.getBoundingClientRect().width > 0
-          ? toc
-          : sidebar?.offsetWidth > 0
-            ? sidebar
-            : null;
-      if (!box) return;
-      const rect = box.getBoundingClientRect();
-      // When the in-flow TOC has scrolled away, left/width may be stale;
-      // fall back to the margin sidebar column.
-      let left = rect.left;
-      let width = rect.width;
-      if (!(width > 0) && sidebar?.offsetWidth > 0) {
+      // Margin column is the stable anchor (TOC may be rolled up / off-screen).
+      let left = null;
+      let width = null;
+      if (sidebar && sidebar.offsetWidth > 0) {
         const sb = sidebar.getBoundingClientRect();
         left = sb.left;
         width = sb.width;
+      } else if (toc) {
+        const tr = toc.getBoundingClientRect();
+        if (tr.width > 0) {
+          left = tr.left;
+          width = tr.width;
+        }
       }
-      if (!(width > 0)) return;
+      if (!(width > 0) || left == null) return;
       el.style.left = `${Math.round(left)}px`;
       el.style.width = `${Math.round(width)}px`;
       el.style.top = `${navbarOffset()}px`;
+    };
+
+    const setInlineRolled = (rolled) => {
+      const toc = tocNav();
+      if (!toc) return;
+      toc.classList.toggle(ROLLED_CLASS, rolled);
     };
 
     const closeToggle = (el) => {
@@ -78,7 +110,7 @@
 
       const clone = toc.cloneNode(true);
       clone.removeAttribute("id");
-      clone.classList.remove("portfolio-toc-rolled-up");
+      clone.classList.remove(ROLLED_CLASS);
       clone.classList.add("portfolio-toc-panel");
       clone.querySelectorAll("[id]").forEach((node) => {
         node.removeAttribute("id");
@@ -170,25 +202,45 @@
       return el;
     };
 
+    const setVisible = (visible) => {
+      const el = ensureToggle();
+      if (!el) return;
+
+      if (!visible) {
+        closeToggle(el);
+        el.hidden = true;
+        setInlineRolled(false);
+        return;
+      }
+
+      el.hidden = false;
+      setInlineRolled(true);
+      positionToggle(el);
+    };
+
     const sync = () => {
       const toc = tocNav();
       if (toc) seenToc = true;
 
+      captureThreshold();
+
       const el = ensureToggle();
       if (!el) return;
 
-      // Only hide when the layout is clearly not desktop. Do not hide just
-      // because TOC height is briefly 0 during margin-footnote layout.
       if (!desktop() || (!toc && !seenToc)) {
-        closeToggle(el);
-        el.hidden = true;
+        setVisible(false);
         return;
       }
 
       if (!toc) return;
 
-      el.hidden = false;
-      positionToggle(el);
+      const past = pastInlineToc();
+      if (past === null) {
+        if (!el.hidden) positionToggle(el);
+        return;
+      }
+
+      setVisible(past);
     };
 
     let tick = 0;
@@ -200,7 +252,7 @@
         const dy = Math.abs(window.scrollY - lastScrollY);
         lastScrollY = window.scrollY;
         if (dy > 8 && el?.dataset.open === "true") closeToggle(el);
-        if (el && !el.hidden) positionToggle(el);
+        sync();
       });
     };
 
@@ -212,17 +264,30 @@
       sync();
 
       window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", sync);
+      window.addEventListener("resize", () => {
+        if (window.scrollY <= 40) showAfterY = null;
+        sync();
+      });
       requestAnimationFrame(sync);
       window.addEventListener("load", sync, { once: true });
-      // margin-below-toc.html layouts footnotes shortly after load — re-sync.
+      // Remeasure after margin-below-toc footnote cascade settles.
       setTimeout(sync, 100);
       setTimeout(sync, 400);
       setTimeout(sync, 1000);
 
+      if (window.IntersectionObserver) {
+        const toc = tocNav();
+        if (toc) {
+          const io = new IntersectionObserver(() => sync(), {
+            root: null,
+            threshold: [0, 0.01, 1],
+          });
+          io.observe(toc);
+        }
+      }
+
       if (window.ResizeObserver) {
         const ro = new ResizeObserver(() => {
-          // Debounce: footnote cascade fires many resizes.
           clearTimeout(ro._t);
           ro._t = setTimeout(sync, 50);
         });

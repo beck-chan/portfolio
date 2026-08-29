@@ -5,12 +5,16 @@ div[id^="fn"] {
 }
 
 // Fixing annoying margin dupe scroll. Quarto's .sidebar { position: sticky }
-// keeps a short TOC stuck in view, which blocks the scroll-aware dropdown —
-// pin it in normal flow so the TOC scrolls away like the rest of the column.
-#quarto-margin-sidebar {
+// keeps a short TOC stuck in view on long footnote pages (tall grid row),
+// which blocks scroll-past detection — force normal flow.
+#quarto-margin-sidebar,
+#quarto-margin-sidebar.sidebar,
+#quarto-margin-sidebar.margin-sidebar {
   max-height: none !important;
   overflow: visible !important;
   position: static !important;
+  top: auto !important;
+  bottom: auto !important;
   pointer-events: none;
 }
 
@@ -29,9 +33,9 @@ div[id^="fn"] {
 // nav#TOC as nav.portfolio-toc-panel so styles match 1:1.
 #portfolio-toc-toggle.portfolio-toc-toggle {
   position: fixed;
-  // Above page content / sidenav (1020); below isn't required if we sit
-  // under the navbar geometrically, but keep it high so nothing covers it.
-  z-index: 1060;
+  // Above sidenav (1020), navbar stays 1040 geometrically above via top offset.
+  z-index: 1080 !important;
+  opacity: 1 !important;
   box-sizing: border-box;
   overflow: hidden;
   pointer-events: auto;
@@ -60,7 +64,7 @@ div[id^="fn"] {
   color: #21212190;
   cursor: pointer;
   font-weight: 400;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   text-align: left;
 }
 
@@ -107,6 +111,11 @@ div[id^="fn"] {
   pointer-events: none;
 }
 
+// Hide the in-flow TOC while the fixed dropdown is covering that role.
+nav#TOC.portfolio-toc-rolled-up {
+  visibility: hidden !important;
+}
+
 html:not(.margin-below-toc-ready) main.content .column-margin.column-container {
   visibility: hidden;
 }
@@ -136,25 +145,34 @@ nav#TOC,
     border-left: 3px solid #c4c4c4;
     background-color: #f6f6f6;
     padding: 1rem;
+    // Match Quarto $toc-font-size (sidebar rule doesn't apply to the clone).
+    font-size: 0.875rem;
 
     ul {
       list-style: none !important;
       border-left: none !important;
       padding-left: 0;
       margin-bottom: 0;
+      font-size: 0.875rem;
 
       ul {
         padding-left: 0.6rem;
       }
 
+      // Spacing mirrors Quarto `.sidebar nav[role=doc-toc]>ul li a`
+      // (clone is outside .sidebar, so it misses those rules).
       li a.nav-link {
         color: #838383 !important;
         text-decoration: none !important;
         border-left: 0 none transparent !important;
         margin-left: 0 !important;
         padding-left: 1rem !important;
+        padding-top: 0.2rem !important;
+        padding-bottom: 0.2rem !important;
         position: relative;
         font-weight: 400 !important;
+        font-size: 0.875rem !important;
+        line-height: 1.1rem !important;
 
         &:hover {
           color: #212121 !important;
@@ -183,7 +201,7 @@ nav#TOC,
 
     #quarto-sidebar-toc-header, h2, h3 {
       color: #21212190 !important;
-      font-size: 0.9rem !important;
+      font-size: 0.875rem !important;
       font-weight: 400 !important;
     }
 

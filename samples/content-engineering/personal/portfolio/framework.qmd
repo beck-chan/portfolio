@@ -364,11 +364,13 @@ Quarto's built-in `layoutMarginEls` only spaces margin notes relative to each ot
 
 The themes also hide margin notes until a `margin-below-toc-ready` class is set, avoiding a flash of overlapping footnotes before layout runs.
 
-#### Sticky Table of Contents Toggle
+#### Sticky Table of Contents 
 
-Quarto's native `#quarto-toc-toggle` only appears when margin notes overlap the TOC. Cascading footnotes below the TOC intentionally avoids that overlap, so the built-in dropdown never shows — and the themes hide it anyway.
+Quarto's native `#quarto-toc-toggle` only appears when margin notes overlap the table of contents, but we solved that issue by cascading footnotes below the table of contents intentionally so the built-in dropdown never shows.
 
-`assets/sticky-toc-toggle.html`^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [sticky-toc-toggle.html](https://github.com/beck-chan/portfolio/blob/main/assets/sticky-toc-toggle.html){target="_blank"}] shows a fixed TOC dropdown under the navbar on desktop whenever `nav#TOC` is present — no need to scroll past the in-flow TOC first. Expanding it clones the current TOC (including active-section highlighting); scrolling the page or following a link collapses it again. Category filters stay in the in-flow sidebar and are left alone.
+`assets/sticky-toc-toggle.html`^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [sticky-toc-toggle.html](https://github.com/beck-chan/portfolio/blob/main/assets/sticky-toc-toggle.html){target="_blank"}] shows a fixed table of contents dropdown under the navbar on desktop once `nav#TOC` scrolls under the header. 
+
+Expanding it clones the inline table of contents, and scrolling the page or following a link collapses it again. The inline table of contents is hidden while the dropdown is up so the two don't stack.
 
 :::
 

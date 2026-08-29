@@ -1,9 +1,5 @@
-project:
-  type: website
-
 format:
   html:
-    include-in-header: assets/posthog-tracking.html
     include-after-body:
       - assets/margin-below-toc.html
       - assets/sticky-toc-toggle.html
