@@ -3,4 +3,4 @@ project:
 
 format:
   html:
-    include-in-header: posthog-tracking.html 
+    include-in-header: assets/posthog-tracking.html 
