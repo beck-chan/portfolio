@@ -1,0 +1,244 @@
+<script>
+  // Always-on fixed TOC dropdown for pages with nav#TOC (desktop).
+  (() => {
+    const MQ = "(min-width: 992px)";
+    const TOGGLE_ID = "portfolio-toc-toggle";
+    const NAVBAR_FALLBACK = 75;
+
+    let lastScrollY = 0;
+    let seenToc = false;
+
+    const marginSidebar = () =>
+      document.getElementById("quarto-margin-sidebar");
+    const tocNav = () => document.getElementById("TOC");
+    const toggleEl = () => document.getElementById(TOGGLE_ID);
+
+    const desktop = () =>
+      !!(window.matchMedia && window.matchMedia(MQ).matches);
+
+    const navbarOffset = () => {
+      const nav =
+        document.querySelector("#quarto-header nav.navbar") ||
+        document.querySelector("#quarto-header") ||
+        document.querySelector("nav.navbar");
+      if (!nav) return NAVBAR_FALLBACK;
+      const bottom = nav.getBoundingClientRect().bottom;
+      return bottom > 0 ? Math.ceil(bottom) : NAVBAR_FALLBACK;
+    };
+
+    const titleText = () => {
+      const toc = tocNav();
+      const heading = toc?.querySelector("#toc-title, h2, h3");
+      return (heading?.textContent || "Table of Contents").trim();
+    };
+
+    const positionToggle = (el) => {
+      if (!el) return;
+      const sidebar = marginSidebar();
+      const toc = tocNav();
+      // Prefer the TOC box itself — sidebar width can be briefly 0 while
+      // margin-below-toc.html is cascading footnotes.
+      const box =
+        toc?.getBoundingClientRect().width > 0
+          ? toc
+          : sidebar?.offsetWidth > 0
+            ? sidebar
+            : null;
+      if (!box) return;
+      const rect = box.getBoundingClientRect();
+      // When the in-flow TOC has scrolled away, left/width may be stale;
+      // fall back to the margin sidebar column.
+      let left = rect.left;
+      let width = rect.width;
+      if (!(width > 0) && sidebar?.offsetWidth > 0) {
+        const sb = sidebar.getBoundingClientRect();
+        left = sb.left;
+        width = sb.width;
+      }
+      if (!(width > 0)) return;
+      el.style.left = `${Math.round(left)}px`;
+      el.style.width = `${Math.round(width)}px`;
+      el.style.top = `${navbarOffset()}px`;
+    };
+
+    const closeToggle = (el) => {
+      if (!el) return;
+      el.classList.remove("expanded");
+      const contents = el.querySelector(".portfolio-toc-toggle-contents");
+      if (contents) contents.style.height = "0px";
+      el.dataset.open = "false";
+      const btn = el.querySelector(".portfolio-toc-toggle-title");
+      if (btn) btn.setAttribute("aria-expanded", "false");
+    };
+
+    const fillContents = (el) => {
+      const toc = tocNav();
+      const contents = el.querySelector(".portfolio-toc-toggle-contents");
+      if (!toc || !contents) return;
+
+      const clone = toc.cloneNode(true);
+      clone.removeAttribute("id");
+      clone.classList.remove("portfolio-toc-rolled-up");
+      clone.classList.add("portfolio-toc-panel");
+      clone.querySelectorAll("[id]").forEach((node) => {
+        node.removeAttribute("id");
+      });
+
+      const heading = clone.querySelector("h2, h3");
+      if (heading) {
+        heading.classList.add("portfolio-toc-panel-heading");
+        const icon = document.createElement("i");
+        icon.className = "portfolio-toc-toggle-icon bi bi-caret-up-fill";
+        icon.setAttribute("aria-hidden", "true");
+        heading.append(icon);
+        heading.setAttribute("role", "button");
+        heading.setAttribute("tabindex", "0");
+        heading.setAttribute("aria-expanded", "true");
+        const collapse = (event) => {
+          event.preventDefault();
+          closeToggle(el);
+        };
+        heading.addEventListener("click", collapse);
+        heading.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") collapse(event);
+        });
+      }
+
+      contents.replaceChildren(clone);
+      contents.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", () => closeToggle(el));
+      });
+    };
+
+    const openToggle = (el) => {
+      fillContents(el);
+      el.classList.add("expanded");
+      const contents = el.querySelector(".portfolio-toc-toggle-contents");
+      if (contents) {
+        contents.style.height = null;
+        contents.style.maxHeight = `calc(100vh - ${navbarOffset() + 24}px)`;
+      }
+      el.dataset.open = "true";
+      const btn = el.querySelector(".portfolio-toc-toggle-title");
+      if (btn) btn.setAttribute("aria-expanded", "true");
+    };
+
+    const ensureToggle = () => {
+      let el = toggleEl();
+      if (el) return el;
+      if (!tocNav()) return null;
+
+      el = document.createElement("div");
+      el.id = TOGGLE_ID;
+      el.className = "portfolio-toc-toggle zindex-over-content";
+      el.hidden = true;
+      el.dataset.open = "false";
+      el.setAttribute("role", "navigation");
+      el.setAttribute("aria-label", titleText());
+
+      const titleBtn = document.createElement("button");
+      titleBtn.type = "button";
+      titleBtn.className = "portfolio-toc-toggle-title";
+      titleBtn.setAttribute("aria-expanded", "false");
+      titleBtn.setAttribute("aria-controls", `${TOGGLE_ID}-contents`);
+
+      const label = document.createElement("span");
+      label.className = "portfolio-toc-toggle-label";
+      label.textContent = titleText();
+
+      const icon = document.createElement("i");
+      icon.className = "portfolio-toc-toggle-icon bi bi-caret-down-fill";
+      icon.setAttribute("aria-hidden", "true");
+
+      titleBtn.append(label, icon);
+
+      const contents = document.createElement("div");
+      contents.id = `${TOGGLE_ID}-contents`;
+      contents.className = "portfolio-toc-toggle-contents";
+      contents.style.height = "0px";
+
+      el.append(titleBtn, contents);
+      document.body.append(el);
+
+      titleBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (el.dataset.open === "true") closeToggle(el);
+        else openToggle(el);
+      });
+
+      return el;
+    };
+
+    const sync = () => {
+      const toc = tocNav();
+      if (toc) seenToc = true;
+
+      const el = ensureToggle();
+      if (!el) return;
+
+      // Only hide when the layout is clearly not desktop. Do not hide just
+      // because TOC height is briefly 0 during margin-footnote layout.
+      if (!desktop() || (!toc && !seenToc)) {
+        closeToggle(el);
+        el.hidden = true;
+        return;
+      }
+
+      if (!toc) return;
+
+      el.hidden = false;
+      positionToggle(el);
+    };
+
+    let tick = 0;
+    const onScroll = () => {
+      if (tick) return;
+      tick = requestAnimationFrame(() => {
+        tick = 0;
+        const el = toggleEl();
+        const dy = Math.abs(window.scrollY - lastScrollY);
+        lastScrollY = window.scrollY;
+        if (dy > 8 && el?.dataset.open === "true") closeToggle(el);
+        if (el && !el.hidden) positionToggle(el);
+      });
+    };
+
+    const boot = () => {
+      if (!tocNav()) return;
+
+      lastScrollY = window.scrollY;
+      ensureToggle();
+      sync();
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", sync);
+      requestAnimationFrame(sync);
+      window.addEventListener("load", sync, { once: true });
+      // margin-below-toc.html layouts footnotes shortly after load — re-sync.
+      setTimeout(sync, 100);
+      setTimeout(sync, 400);
+      setTimeout(sync, 1000);
+
+      if (window.ResizeObserver) {
+        const ro = new ResizeObserver(() => {
+          // Debounce: footnote cascade fires many resizes.
+          clearTimeout(ro._t);
+          ro._t = setTimeout(sync, 50);
+        });
+        const toc = tocNav();
+        const sidebar = marginSidebar();
+        const main = document.querySelector("main.content");
+        if (toc) ro.observe(toc);
+        if (sidebar) ro.observe(sidebar);
+        if (main) ro.observe(main);
+      }
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", boot);
+    } else {
+      boot();
+    }
+  })();
+</script>

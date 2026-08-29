@@ -3,3 +3,7 @@ title: "ValidMind Academy"
 subtitle: "Content Engineering"
 categories: ["Content Architecture", "Jupyter Notebooks", "Training & Onboarding", "Quarto", "CI/CD Workflows", "Frontend Development"]
 ---
+
+## Situation
+
+## Solution

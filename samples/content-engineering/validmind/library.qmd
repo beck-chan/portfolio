@@ -3,3 +3,7 @@ title: "ValidMind Developer Library"
 subtitle: "Content Engineering"
 categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Quarto",  "Frontend Development"]
 ---
+
+## Situation
+
+## Solution

@@ -3,3 +3,7 @@ title: "Atryum Documentation"
 subtitle: "Content Engineering"
 categories: ["Content Architecture", "Feature Documentation", "User Guides", "Training & Onboarding"]
 ---
+
+## Situation
+
+## Solution

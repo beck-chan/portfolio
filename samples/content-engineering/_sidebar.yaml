@@ -27,5 +27,3 @@ website:
               file: samples/content-engineering/personal/portfolio/framework.qmd
             - text: "Deployment"
               file: samples/content-engineering/personal/portfolio/deployment.qmd
-            - text: "Analytics"
-              file: samples/content-engineering/personal/portfolio/analytics.qmd

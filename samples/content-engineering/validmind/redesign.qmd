@@ -3,3 +3,7 @@ title: "ValidMind Documentation Redesign"
 subtitle: "Content Engineering"
 categories: ["Content Architecture", "Quarto", "Frontend Development"]
 ---
+
+## Situation
+
+## Solution

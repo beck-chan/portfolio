@@ -3,3 +3,7 @@ title: "ValidMind Release Notes"
 subtitle: "Content Engineering"
 categories: ["Content Architecture", "Release Notes", "Quarto", "CI/CD Workflows"]
 ---
+
+## Situation
+
+## Solution

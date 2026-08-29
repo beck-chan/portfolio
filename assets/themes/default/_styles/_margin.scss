@@ -4,10 +4,13 @@ div[id^="fn"] {
   padding: 1rem 0;
 }
 
-// Fixing annoying margin dupe scroll
+// Fixing annoying margin dupe scroll. Quarto's .sidebar { position: sticky }
+// keeps a short TOC stuck in view, which blocks the scroll-aware dropdown —
+// pin it in normal flow so the TOC scrolls away like the rest of the column.
 #quarto-margin-sidebar {
   max-height: none !important;
   overflow: visible !important;
+  position: static !important;
   pointer-events: none;
 }
 
@@ -20,6 +23,88 @@ div[id^="fn"] {
 
 #quarto-toc-toggle.quarto-sidebar-toggle {
   display: none !important;
+}
+
+// Scroll-aware TOC dropdown (sticky-toc-toggle.html). Expanded state clones
+// nav#TOC as nav.portfolio-toc-panel so styles match 1:1.
+#portfolio-toc-toggle.portfolio-toc-toggle {
+  position: fixed;
+  // Above page content / sidenav (1020); below isn't required if we sit
+  // under the navbar geometrically, but keep it high so nothing covers it.
+  z-index: 1060;
+  box-sizing: border-box;
+  overflow: hidden;
+  pointer-events: auto;
+  background: transparent;
+}
+
+#portfolio-toc-toggle[hidden] {
+  display: none !important;
+}
+
+// Collapsed affordance only — expanded chrome comes from the cloned panel.
+#portfolio-toc-toggle:not(.expanded) {
+  border-left: 3px solid #ffb3ba;
+  background-color: #fff4f5;
+}
+
+#portfolio-toc-toggle .portfolio-toc-toggle-title {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.75rem 1.75rem 0.65rem 1rem;
+  border: 0;
+  border-bottom: 1px dotted #ffb3ba;
+  background: transparent;
+  color: #0b2a1290;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+#portfolio-toc-toggle.expanded .portfolio-toc-toggle-title {
+  display: none;
+}
+
+#portfolio-toc-toggle .portfolio-toc-toggle-icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  color: #ffb3ba;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+#portfolio-toc-toggle .portfolio-toc-toggle-contents {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#portfolio-toc-toggle:not(.expanded) .portfolio-toc-toggle-contents {
+  padding: 0 !important;
+}
+
+#portfolio-toc-toggle nav.portfolio-toc-panel .portfolio-toc-panel-heading {
+  position: relative;
+  padding-right: 1.75rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dotted #ffb3ba;
+  cursor: pointer;
+}
+
+#portfolio-toc-toggle nav.portfolio-toc-panel .portfolio-toc-panel-heading .portfolio-toc-toggle-icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  color: #ffb3ba;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 html:not(.margin-below-toc-ready) main.content .column-margin.column-container {
@@ -45,41 +130,44 @@ html:not(.margin-below-toc-ready) main.content .column-margin.column-container {
   grid-column: auto !important;
 }
 
-// TOC links
-nav#TOC {
-    border-left: 3px solid #ffb3ba
-    ;
+// TOC links — shared by in-flow nav#TOC and sticky dropdown clone
+nav#TOC,
+#portfolio-toc-toggle nav.portfolio-toc-panel {
+    border-left: 3px solid #ffb3ba;
     background-color: #fff4f5;
     padding: 1rem;
-    
+
     ul {
+      list-style: none !important;
       border-left: none !important;
-      padding-left: 0; 
-      
+      padding-left: 0;
+      margin-bottom: 0;
+
       ul {
-        padding-left: 0.6rem; 
+        padding-left: 0.6rem;
       }
-      
+
+      // All depths: coral links, dark active + diamond
       li a.nav-link {
-        color: #0b2a12 !important;
-        text-decoration: none;
-        border-left: 1px solid transparent !important;
+        color: #ff6162 !important;
+        text-decoration: none !important;
+        border-left: 0 none transparent !important;
         margin-left: 0 !important;
-        padding-left: 0.5rem !important;
+        padding-left: 1rem !important;
         position: relative;
-        
+        font-weight: 400 !important;
+
         &:hover {
-          color: #ff6162 !important;
+          color: #0b2a12 !important;
         }
-        
+
         &.active {
-          color: #ff6162 !important;
-          font-weight: 400 !important;
-          
+          color: #0b2a12 !important;
+
           &::before {
             content: "";
             position: absolute;
-            left: -0.1rem; 
+            left: 0;
             top: 50%;
             transform: translateY(-50%) rotate(45deg);
             width: 6px;
@@ -87,16 +175,19 @@ nav#TOC {
             border-top: 2px solid #0b2a12;
             border-right: 2px solid #0b2a12;
             background-color: transparent;
+            margin-left: -0.1rem;
             z-index: 10;
           }
         }
       }
     }
-  
+
     #quarto-sidebar-toc-header, h2, h3 {
-      color: #0b2a12 !important;
+      color: #0b2a1290 !important;
+      font-size: 0.9rem !important;
+      font-weight: 400 !important;
     }
-  
+
     .toc-actions ul li a.toc-action {
       color: #0b2a12;
       text-decoration: none;
@@ -104,80 +195,35 @@ nav#TOC {
       margin-right: 1em;
     }
 }
-  
-#quarto-sidebar-toc-header, 
-  nav#TOC > h2, 
-  nav#TOC > h3 {
+
+#quarto-sidebar-toc-header,
+nav#TOC > h2,
+nav#TOC > h3,
+#portfolio-toc-toggle nav.portfolio-toc-panel > h2,
+#portfolio-toc-toggle nav.portfolio-toc-panel > h3 {
     color: #0b2a1290 !important;
-  }
-  
-nav#TOC ul li a.nav-link,
-nav#TOC ul li a.nav-link.active,
-nav#TOC ul li a.nav-link:hover {
-    border-left: 0px none transparent !important;
-    margin-left: 0 !important;
-    padding-left: 1rem !important; 
-    position: relative;
-    }
-  
-  
-nav#TOC ul > li > a.nav-link.active::before {
-    content: "";
-    position: absolute;
-    left: 0;   
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg); 
-    width: 6px;
-    height: 6px;
-    border-top: 2px solid #0b2a12; 
-    border-right: 2px solid #0b2a12;
-    background-color: transparent; 
-    margin-left: -0.1rem; 
-    z-index: 10; 
-    }
-  
-nav#TOC ul > li > a.nav-link.active {
-    color: #0b2a12 !important; 
-    font-weight: 400 !important;
-    text-decoration: none;
-    }
-  
-nav#TOC ul {
+}
+
+nav#TOC > h2,
+nav#TOC > h3 {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dotted #ffb3ba;
+}
+
+nav#TOC ul,
+#portfolio-toc-toggle nav.portfolio-toc-panel ul {
     border-left: none !important;
-    }
-  
-nav#TOC ul > li > a.nav-link:not(.active) {
-    border-left: 1px solid transparent !important;
-    }
-  
-nav#TOC ul > li > a.nav-link {
-    color: #ff6162 !important;
-    text-decoration: none;
-    }
-  
-nav#TOC ul > li > a.nav-link {
-    color: #ff6162 !important;
-    text-decoration: none;
-    }
-    
-nav#TOC ul > li > a.nav-link:hover,
-nav#TOC ul > li > a.nav-link.active:hover {
-    color: #0b2a12 !important;
-    text-decoration: none;
-    }
-    
-nav#TOC ul > li > a.nav-link.active, nav#TOC ul > li > a.nav-link.active:hover {
-    color: #0b2a12 !important;
-    font-weight: 400 !important;
-    text-decoration: none;
-    }
-    
-nav#TOC .toc-actions ul li a.toc-action {
+    list-style: none !important;
+}
+
+nav#TOC .toc-actions ul li a.toc-action,
+#portfolio-toc-toggle nav.portfolio-toc-panel .toc-actions ul li a.toc-action {
     color: #0b2a12;
     text-decoration: none;
     font-size: 0.9em;
     margin-right: 1em;
-    }
+}
   
 
 // Category tags & filtering

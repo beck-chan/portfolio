@@ -19,7 +19,7 @@ website:
           href: samples/organizations/atryum.qmd
           contents:
             - text: "Content Engineering"
-              file: samples/content-engineering/validmind/atryum.qmd
+              file: samples/content-engineering/atryum/index.qmd
             - text: "Technical Writing"
               file: samples/technical-writing/atryum/index.qmd
         - section: "SaaSquatch"

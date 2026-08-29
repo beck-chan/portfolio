@@ -1,7 +1,7 @@
 ---
 title: "Portfolio Deployment"
 subtitle: "Content Engineering"
-categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "CI/CD Workflows", "Frontend Development"]
+categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "PostHog", "CI/CD Workflows", "Frontend Development"]
 ---
 
 ::: {.hidden}
@@ -14,23 +14,10 @@ Static `.html` pages are rendered by GitHub Workflows^[**GitHub:**[Workflows](ht
 
 ### Staging
 
-Each PR is rendered and deployed to Netlify at [https://beckchan-staging.netlify.app/](https://beckchan-staging.netlify.app/){target="_blank"} and a comment with a link to the staging preview site is added to the PR when the workflow completes by `.github/workflows/preview-site.yaml`:^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [preview-site.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/preview-site.yaml){target="_blank"}]
+Each pull request (PR) is rendered and deployed to Netlify^[[https://beckchan-staging.netlify.app/](https://beckchan-staging.netlify.app/){target="_blank"}] and a comment with a link to the staging preview site is added to the PR when the workflow completes by `.github/workflows/preview-site.yaml`:^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [preview-site.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/preview-site.yaml){target="_blank"}]
 
-```{.yaml fold=true}
-jobs:
-  preview:
-    name: Render & deploy preview
-    runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          version: pre-release
+```yaml
+        # Set up steps ...
 
       - name: Render static files
         run: |
@@ -93,14 +80,9 @@ jobs:
 When a PR is merged or closed, the same workflow removes the preview site from the staging URL and a redirect to the production site is added:
 
 
-```{.yaml fold=true}
-jobs:
-  cleanup:
-    name: Clear preview (redirect to production)
-    runs-on: ubuntu-latest
-    if: github.event.action == 'closed'
+```yaml
+        # Set up steps ...
 
-    steps:
       - name: Deploy redirect to GitHub Pages
         env:
           NETLIFY_PAT: ${{ secrets.NETLIFY_PAT }}
@@ -155,4 +137,148 @@ jobs:
 
 ### Production
 
+When a PR is merged into `main`, the site is rendered with the production Quarto profile that adds a PostHog tracking snippet^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [posthog-snippet.html](https://github.com/beck-chan/portfolio/blob/main/assets/posthog-snippet.html){target="_blank"}] and deployed to GitHub Pages^[[https://beck-chan.github.io/](https://beck-chan.github.io/){target="_blank"}] by `.github/workflows/deploy-site.yaml`:^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [deploy-site.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/deploy-site.yaml){target="_blank"}]
+
+
+```yaml
+project:
+  type: website
+
+format:
+  html:
+    include-in-header: assets/posthog-tracking.html 
+```
+
+```yaml
+     # Set up steps ...
+
+    - name: Render static files
+      run: |
+          set -o pipefail
+          quarto render --profile production 2>&1 | tee render_errors.log || {
+          echo "Quarto render failed immediately";
+          cat render_errors.log;
+          exit 1;
+          }
+
+    - name: Copies static files to website
+      env:
+        TOKEN: ${{ secrets.PORTFOLIO }}
+      run: |
+        set -euo pipefail
+        if [ ! -d _output ]; then
+          echo "Quarto output directory _output/ is missing"
+          exit 1
+        fi
+        dest="$(mktemp -d)"
+        git clone --depth 1 --branch main \
+          "https://x-access-token:${TOKEN}@github.com/beck-chan/beck-chan.github.io.git" \
+          "$dest"
+        rsync -a --delete --exclude '.git' _output/ "$dest/"
+        cd "$dest"
+        git config user.email "actions@github.com"
+        git config user.name "GitHub Actions Bot"
+        git add -A
+        if git diff --staged --quiet; then
+          echo "No changes to deploy"
+        else
+          git commit -m "Automated file sync from portfolio"
+          git push origin main
+        fi
+```
+
+The workflow checks out the merge commit, renders the static site files into `_output/`, then syncs that directory into the `beck-chan/beck-chan.github.io`^[**{{< fa brands github >}} beck-chan:** [beck-chan.github.io](https://github.com/beck-chan/beck-chan.github.io){target="_blank"}] repository, committing and pushing only when the rendered files actually changed.
+
 ### Release Notes
+
+When a PR is merged into `main` and tagged with a [major]{.bubble}, [minor]{.bubble}, or [patch]{.bubble} label, `.github/workflows/generate-release.yaml`^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [generate-release.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/generate-release.yaml){target="_blank"}] bumps the latest semver tag, extracts the `## Release notes` section from the PR body, and publishes a release:^[**{{< fa brands github >}} beck-chan/portfolio/:** [Releases](https://github.com/beck-chan/portfolio/releases){target="_blank"}]
+
+
+```yaml
+      - name: Create tagged GitHub release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const labels = (pr.labels || []).map((label) => label.name.toLowerCase());
+            const bump = labels.includes('major')
+              ? 'major'
+              : labels.includes('minor')
+                ? 'minor'
+                : labels.includes('patch')
+                  ? 'patch'
+                  : null;
+
+            if (!bump) {
+              core.info('No major/minor/patch label on the merged PR; skipping release generation.');
+              return;
+            }
+
+            if (!pr.merge_commit_sha) {
+              throw new Error('PR is merged but merge_commit_sha is missing.');
+            }
+
+            const parseSemver = (tag) => {
+              const match = String(tag).match(/^v?(\d+)\.(\d+)\.(\d+)$/);
+              return match
+                ? { major: Number(match[1]), minor: Number(match[2]), patch: Number(match[3]) }
+                : null;
+            };
+
+            const tags = await github.paginate(github.rest.repos.listTags, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100,
+            });
+
+            let latest = { major: 0, minor: 0, patch: 0 };
+            for (const tag of tags) {
+              const version = parseSemver(tag.name);
+              if (!version) continue;
+              const isNewer =
+                version.major > latest.major ||
+                (version.major === latest.major && version.minor > latest.minor) ||
+                (version.major === latest.major && version.minor === latest.minor && version.patch > latest.patch);
+              if (isNewer) latest = version;
+            }
+
+            if (bump === 'major') {
+              latest = { major: latest.major + 1, minor: 0, patch: 0 };
+            } else if (bump === 'minor') {
+              latest = { major: latest.major, minor: latest.minor + 1, patch: 0 };
+            } else {
+              latest = { major: latest.major, minor: latest.minor, patch: latest.patch + 1 };
+            }
+
+            const newTag = `v${latest.major}.${latest.minor}.${latest.patch}`;
+            if (tags.some((tag) => tag.name === newTag)) {
+              throw new Error(`Tag ${newTag} already exists.`);
+            }
+
+            const body = pr.body || '';
+            const notesMatch = body.match(
+              /##\s*Release notes\s*\r?\n([\s\S]*?)(?=\r?\n##\s|$)/i
+            );
+            let notes = notesMatch ? notesMatch[1] : '';
+            notes = notes.replace(/<!--[\s\S]*?-->/g, '').trim();
+            if (!notes) {
+              notes = 'No public-facing release notes.';
+            }
+
+            await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: newTag,
+              name: `Release ${newTag}`,
+              body: notes,
+              target_commitish: pr.merge_commit_sha,
+              draft: false,
+              prerelease: false,
+            });
+
+            core.info(`Created release ${newTag} from ${bump} label.`);
+```
+
+Label precedence matches the PR template (1. [major]{.bubble}, 2. [minor]{.bubble}, 3. [patch]{.bubble}). Release body text comes from under `## Release notes` in the PR. 
+
+Comments are stripped, and an empty section falls back to "No public-facing release notes." PRs without one of those labels skip release generation.

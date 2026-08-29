@@ -1,5 +1,0 @@
----
-title: "Portfolio Analytics"
-subtitle: "Content Engineering"
-categories: ["Content Architecture", "Quarto", "GitHub Pages", "PostHog", "Frontend Development"]
----

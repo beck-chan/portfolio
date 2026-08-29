@@ -116,33 +116,7 @@ I've also written a quick script to embed the same search within a page's conten
 
 ### Navigation
 
-Navigation is defined by directory structure, and then specified in the site layout via `_*.yml` files.[^samples]
-
-[^samples]: Take the `samples` directory for example, where the work I'm showcasing is organized:
-
-    ```{.markdown fold=true}
-    samples/
-    ├── content-engineering/
-    │   ├── atryum/
-    │   ├── personal/
-    │   └── validmind/
-    ├── copywriting/
-    │   ├── saasquatch/
-    │   └── validmind/
-    ├── organizations/
-    ├── single-source/
-    │   ├── atryum/
-    │   ├── saasquatch/
-    │   └── validmind/
-    └── technical-writing/
-        ├── atryum/
-        ├── saasquatch/
-        │   ├── integrations/
-        │   │   └── sfdc/
-        │   ├── sdk/
-        │   └── user-guides/
-        └── validmind/
-    ```
+Navigation is defined by directory structure, and then display of links specified in the site layout via `_*.yml` files.
 
 ::: {.panel-tabset}
 
@@ -269,7 +243,7 @@ These are defined in the root directory with our top-level `_quarto.yml`:
 
 Default theme users see when they load the portfolio. Defined in `assets/themes/default/styles.scss`:^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [styles.scss](https://github.com/beck-chan/portfolio/blob/main/assets/themes/default/styles.scss){target="_blank"}]
 
-```{.scss fold=true}
+```scss
 /*-- scss:defaults --*/
 
 // Foundations
@@ -316,7 +290,7 @@ And code styling is defined in `assets/themes/default/code.theme`:^[**{{< fa bra
 
 You can toggle this theme in the top navigation bar by clicking **{{< fa toggle-on >}}**. Defined in `assets/themes/minimal/styles.scss`:^[**{{< fa brands github >}} beck-chan/portfolio/assets: **[styles.scss](https://github.com/beck-chan/portfolio/blob/main/assets/themes/minimal/styles.scss){target="_blank"}]
 
-```{.scss fold=true}
+```scss
 /*-- scss:defaults --*/
 
 // Foundations
@@ -366,6 +340,7 @@ There's a limit to what you can adjust with CSS due to Quarto's quirks, so addit
 ```yaml
     include-after-body:
       - assets/margin-below-toc.html
+      - assets/sticky-toc-toggle.html
       - assets/pin-sidenav.html
 ```
 
@@ -388,6 +363,12 @@ Quarto's built-in `layoutMarginEls` only spaces margin notes relative to each ot
 `assets/margin-below-toc.html`^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [margin-below-toc.html](https://github.com/beck-chan/portfolio/blob/main/assets/margin-below-toc.html){target="_blank"}] cascades notes below the table of contents, pads `main.content` when notes outgrow the body so the footer clears them, and hoists tabset margin notes into a sibling container. 
 
 The themes also hide margin notes until a `margin-below-toc-ready` class is set, avoiding a flash of overlapping footnotes before layout runs.
+
+#### Sticky Table of Contents Toggle
+
+Quarto's native `#quarto-toc-toggle` only appears when margin notes overlap the TOC. Cascading footnotes below the TOC intentionally avoids that overlap, so the built-in dropdown never shows — and the themes hide it anyway.
+
+`assets/sticky-toc-toggle.html`^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [sticky-toc-toggle.html](https://github.com/beck-chan/portfolio/blob/main/assets/sticky-toc-toggle.html){target="_blank"}] shows a fixed TOC dropdown under the navbar on desktop whenever `nav#TOC` is present — no need to scroll past the in-flow TOC first. Expanding it clones the current TOC (including active-section highlighting); scrolling the page or following a link collapses it again. Category filters stay in the in-flow sidebar and are left alone.
 
 :::
 
@@ -458,20 +439,8 @@ Utilizing pull requests allows me to streamline a few additional things with Git
 
 `.github/workflows/spellcheck.yaml`^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [spellcheck.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/spellcheck.yaml){target="_blank"}] runs when a PR is opened, or when a commit is sent up to the PR's branch, checking for spelling errors in the PR's files and adding a comment with the results when complete:
 
-```{.yaml fold=true}
-jobs:
-  cspell:
-    name: Run cspell
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+```yaml
+        # Set up steps ...
 
       - name: Run spell checker
         id: spellcheck

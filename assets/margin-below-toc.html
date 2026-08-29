@@ -32,6 +32,8 @@
       let bottom = 0;
       for (const child of sidebar.children) {
         if (child.classList.contains("quarto-sidebar-toggle")) continue;
+        if (child.id === "portfolio-toc-toggle") continue;
+        if (child.id === "portfolio-toc-sentinel") continue;
         if (window.getComputedStyle(child).display === "none") continue;
         const rect = child.getBoundingClientRect();
         if (rect.height === 0) continue;
