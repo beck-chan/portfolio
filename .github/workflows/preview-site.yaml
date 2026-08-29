@@ -1,0 +1,143 @@
+name: Preview portfolio on Netlify
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  preview:
+    name: Render & deploy preview
+    runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: pre-release
+
+      - name: Render static files
+        run: |
+          set -o pipefail
+          quarto render 2>&1 | tee render_errors.log || {
+            echo "Quarto render failed immediately";
+            cat render_errors.log;
+            exit 1;
+          }
+
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_PAT: ${{ secrets.NETLIFY_PAT }}
+          NETLIFY_PROJECT: ${{ secrets.NETLIFY_PROJECT }}
+        run: |
+          set -euo pipefail
+          if [ ! -d _output ]; then
+            echo "Quarto output directory _output/ is missing"
+            exit 1
+          fi
+          npx --yes netlify-cli deploy \
+            --prod \
+            --dir=_output \
+            --message="portfolio-pr-${{ github.event.number }}" \
+            --auth="$NETLIFY_PAT" \
+            --site="$NETLIFY_PROJECT"
+
+      - name: Comment preview link on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker = '<!-- netlify-preview-pr-comment -->';
+            const body = `${marker}\n### Preview: https://beckchan-staging.netlify.app/`;
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find((c) => c.body?.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+  cleanup:
+    name: Clear preview (redirect to production)
+    runs-on: ubuntu-latest
+    if: github.event.action == 'closed'
+
+    steps:
+      - name: Deploy redirect to GitHub Pages
+        env:
+          NETLIFY_PAT: ${{ secrets.NETLIFY_PAT }}
+          NETLIFY_PROJECT: ${{ secrets.NETLIFY_PROJECT }}
+        run: |
+          set -euo pipefail
+          dir="$(mktemp -d)"
+          printf '%s\n' '/*    https://beck-chan.github.io/    302' > "$dir/_redirects"
+          printf '%s\n' \
+            '<!doctype html>' \
+            '<meta http-equiv="refresh" content="0;url=https://beck-chan.github.io/">' \
+            '<title>Redirecting…</title>' \
+            '<p>No active preview. <a href="https://beck-chan.github.io/">Go to portfolio</a>.</p>' \
+            > "$dir/index.html"
+          npx --yes netlify-cli deploy \
+            --prod \
+            --dir="$dir" \
+            --message="portfolio-pr-${{ github.event.number }}-closed" \
+            --auth="$NETLIFY_PAT" \
+            --site="$NETLIFY_PROJECT"
+
+      - name: Update PR comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const marker = '<!-- netlify-preview-pr-comment -->';
+            const body = `${marker}\n### Preview cleared\n\nhttps://beckchan-staging.netlify.app/ now redirects to https://beck-chan.github.io/`;
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find((c) => c.body?.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
