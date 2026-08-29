@@ -4,17 +4,78 @@ subtitle: "Collated Samples"
 listing:
   - id: organizations
     type: grid
-    grid-columns: 2
+    grid-columns: 3
     max-description-length: 450
     sort: false
     fields: [title, subtitle, description]
     contents:
       - validmind.qmd
+      - atryum.qmd
       - saasquatch.qmd
 categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Blog", "Feature Highlights"]
 ---
 
-Samples of my work, grouped by organization.
+Samples of my work, grouped by organization. 
 
 :::{#organizations}
 :::
+
+<br><br>
+
+:::: {.flex .flex-wrap .items-center .justify-around .mb4 .cta-bar}
+
+::: {.w-25-ns .w-20-l .tc}
+```{=html}
+<div class="inline-quarto-search">
+  <button
+    type="button"
+    class="inline-quarto-search__trigger"
+    id="open-quarto-search"
+    aria-haspopup="dialog"
+    aria-controls="quarto-search"
+  >
+    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+    <span class="inline-quarto-search__label">Search Portfolio</span>
+    <kbd class="inline-quarto-search__hint">/</kbd>
+  </button>
+</div>
+<script>
+  (() => {
+    const openQuartoSearch = () => {
+      const detached = document.querySelector(
+        "#quarto-search .aa-DetachedSearchButton"
+      );
+      if (detached) {
+        detached.click();
+        return;
+      }
+      document.querySelector("#quarto-search input.aa-Input")?.focus();
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document
+        .getElementById("open-quarto-search")
+        ?.addEventListener("click", openQuartoSearch);
+    });
+  })();
+</script>
+```
+
+:::
+
+::: {.w-25-ns .w-20-l .tc}
+[{{< fa brands github >}} beck-chan](https://github.com/beck-chan){target="_blank" .button .cta}
+
+:::
+
+::: {.w-25-ns .w-20-l .tc}
+[{{< fa brands linkedin >}} beck-chan](https://linkedin.com/in/beck-chan){target="_blank" .button .cta}
+
+:::
+
+::: {.w-50-ns .w-30-l .tc}
+[{{< fa envelope >}} beckchan.tech@gmail.com](mailto:beckchan.tech@gmail.com){target="_blank" .button .cta}
+
+:::
+
+::::

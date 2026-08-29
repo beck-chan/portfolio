@@ -21,8 +21,13 @@ listing:
       - ../technical-writing/saasquatch/sdk/index.qmd
       - ../technical-writing/saasquatch/user-guides/index.qmd
     categories: true
-categories: ["Developer Content", "Feature Documentation", "User Guides", "JavaScript SDK",  "Integrations", "Salesforce", "CRMs", "Stripe", "Recurly", "Tango Card", "Payment Providers", "Reward Providers", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "JavaScript SDK",  "Integrations", "Salesforce", "CRMs", "Stripe", "Recurly", "Tango Card", "Payment Providers", "Reward Providers", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
 ---
+
+::: {.hidden}
+Before we had any formal technical writers at SaaSquatch, I created and maintained company-wide technical process, product and installation documentation.
+
+:::
 
 {{< include /samples/single-source/saasquatch/_saasquatch.qmd >}}
 

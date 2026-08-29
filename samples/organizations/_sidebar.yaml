@@ -6,5 +6,26 @@ website:
         - text: "Organizations"
           file: samples/organizations/index.qmd
         - text: "---"
-        - samples/organizations/validmind.qmd
-        - samples/organizations/saasquatch.qmd
+        - section: "ValidMind"
+          href: samples/organizations/validmind.qmd
+          contents:
+            - text: "Content Engineering"
+              file: samples/content-engineering/validmind/index.qmd
+            - text: "Technical Writing"
+              file: samples/technical-writing/validmind/index.qmd
+            - text: "Copywriting"
+              file: samples/copywriting/index.qmd#validmind
+        - section: "Atryum"
+          href: samples/organizations/atryum.qmd
+          contents:
+            - text: "Content Engineering"
+              file: samples/content-engineering/validmind/atryum.qmd
+            - text: "Technical Writing"
+              file: samples/technical-writing/atryum/index.qmd
+        - section: "SaaSquatch"
+          href: samples/organizations/saasquatch.qmd
+          contents:
+            - text: "Technical Writing"
+              file: samples/technical-writing/saasquatch/index.qmd
+            - text: "Copywriting"
+              file: samples/copywriting/index.qmd#saasquatch

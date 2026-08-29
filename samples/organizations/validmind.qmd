@@ -44,31 +44,34 @@ listing:
     - ../copywriting/validmind/reduce-culture-risk.qmd
     - ../copywriting/validmind/osff-takeaways.qmd
     categories: true
-categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Python Library", "Artificial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind", "Atryum"]
+categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Python Library", "Artificial Intelligence (AI)", "Agentic Orchestration", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind", "Atryum"]
 ---
 
-{{< include /samples/single-source/validmind/_validmind.qmd >}}
+::: {.hidden}
+I was the sole **Senior Technical Writer** for ValidMind, where I employed docs-as-code methodologies alongside software engineers delivering documentation as part of product in the same development ecosystem.
 
-{{< include /samples/single-source/validmind/_best-work.qmd >}}
+:::
+
+{{< include /samples/single-source/validmind/_validmind.qmd >}}
 
 {{< include /samples/single-source/_static-links.qmd >}}
 
 ## Content Engineering
 
+### Atryum
+
+{{< include /samples/single-source/atryum/_atryum.qmd >}}
+
 ## Technical Writing
 
 {{< include /samples/single-source/_technical.qmd >}}
-
-### ValidMind
-
-{{< include /samples/single-source/validmind/_validmind.qmd >}}
 
 {{< include /samples/single-source/validmind/_best-work.qmd >}}
 
 :::{#validmind-technical}
 :::
 
-#### Atryum
+### Atryum
 
 {{< include /samples/single-source/atryum/_atryum.qmd >}}
 
