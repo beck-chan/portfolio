@@ -274,6 +274,7 @@ listing:
       subtitle: "User Guides"
 includes:
   landing: true
+categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Python Library", "Artificial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
 ---
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}

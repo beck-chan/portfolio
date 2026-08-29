@@ -1,0 +1,16 @@
+---
+title: "Organizations"
+subtitle: "Collated Samples"
+listing:
+  - id: organizations
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - validmind.qmd
+      - saasquatch.qmd
+---
+
+Samples of my work, grouped by organization.
