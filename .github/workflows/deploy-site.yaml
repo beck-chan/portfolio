@@ -34,7 +34,7 @@ jobs:
     - name: Render static files
       run: |
           set -o pipefail
-          quarto render 2>&1 | tee render_errors.log || {
+          quarto render --profile production 2>&1 | tee render_errors.log || {
           echo "Quarto render failed immediately";
           cat render_errors.log;
           exit 1;
