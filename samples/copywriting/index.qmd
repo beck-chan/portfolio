@@ -22,17 +22,16 @@ listing:
     contents:
     - saasquatch/growth-automation.qmd
     categories: true
+categories: ["Blog", "Feature Highlights"]
 ---
 
-> Driving action and building connection through technical insight.
->
-> To me, software storytelling goes beyond simple feature highlights &mdash; culminating in tangible statements of value for users. 
+{{< include /samples/single-source/_copywriting.qmd >}}
 
 ## ValidMind
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}
 
-Check out some blog posts I wrote on our product offering and industry that shine some insight into my writing style:
+{{< include /samples/single-source/validmind/_blog.qmd >}}
 
 :::{#validmind-copywriting}
 :::
@@ -41,7 +40,7 @@ Check out some blog posts I wrote on our product offering and industry that shin
 
 {{< include /samples/single-source/saasquatch/_saasquatch.qmd >}}
 
-Below is the very first article I wrote for SaaSquatch. While it feels a bit rough now years later, it still showcases my consistent author voice:
+{{< include /samples/single-source/saasquatch/_feature.qmd >}}
 
 :::{#saasquatch-copywriting}
 :::

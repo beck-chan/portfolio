@@ -1,0 +1,51 @@
+---
+title: "SaaSquatch"
+subtitle: "Collated Samples"
+listing:
+  - id: saasquatch-copywriting
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - ../copywriting/saasquatch/growth-automation.qmd
+  - id: saasquatch-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - ../technical-writing/saasquatch/integrations/index.qmd
+      - ../technical-writing/saasquatch/sdk/index.qmd
+      - ../technical-writing/saasquatch/user-guides/index.qmd
+    categories: true
+categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "JavaScript SDK",  "Integrations", "Salesforce", "CRMs", "Stripe", "Recurly", "Tango Card", "Payment Providers", "Reward Providers", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+---
+
+::: {.hidden}
+Before we had any formal technical writers at SaaSquatch, I created and maintained company-wide technical process, product and installation documentation.
+
+:::
+
+{{< include /samples/single-source/saasquatch/_saasquatch.qmd >}}
+
+### Technical Writing
+
+{{< include /samples/single-source/_technical.qmd >}}
+
+{{< include /samples/single-source/saasquatch/_writing.qmd >}}
+
+:::{#saasquatch-technical}
+:::
+
+## Copywriting
+
+{{< include /samples/single-source/_copywriting.qmd >}}
+
+{{< include /samples/single-source/saasquatch/_feature.qmd >}}
+
+
+:::{#saasquatch-copywriting}
+:::

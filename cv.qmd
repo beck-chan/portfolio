@@ -123,18 +123,16 @@ AbeBooks.com, Amazon subsidiary
 - Quarto publishing
 - Jupyter Notebooks
 - Markdown
-- CI/CD workflows
 
 **Software Development**
 
+- CI/CD workflows
 - GitHub
 - Cursor Code
 - Visual Studio Code
 - Docker
 - Postman
-- HTML
-- CSS
-- TypeScript
+
 
 **Solutions Architecture & Implementation**
 
@@ -143,8 +141,19 @@ AbeBooks.com, Amazon subsidiary
 - JavaScript
 - JSONata
 - Python
+- HTML
+- CSS
+- TypeScript
 - SQL
 - FTP
+
+**Agents**
+
+- Cursor
+- Claude
+- ChatGPT
+- Gemini
+- Copilot
 
 **Support Engineering & Lifecycle Automation**
 
@@ -158,15 +167,14 @@ AbeBooks.com, Amazon subsidiary
 
 **Project Management**
 
+- Confluence
+- Jira
 - Shortcut
 - Notion
-- Jira
-- Confluence
 - Asana
 - Google Workspace
 - Microsoft 365
 - Adobe Creative Cloud
-
 
 **Integrations**
 

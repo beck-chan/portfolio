@@ -36,10 +36,7 @@ listing:
 
 Content produced to enable other creators to contribute to ValidMind's open-source.
 
-::: {.callout}
-Links below will take you to static versions of the content as last edited by Beck.
-
-:::
+{{< include /samples/single-source/_static-links.qmd >}}
 
 ## ValidMind Style Guide
 

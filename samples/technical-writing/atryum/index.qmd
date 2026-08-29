@@ -49,6 +49,7 @@ listing:
       subtitle: "Landing Page"
 includes:
   landing: true
+categories: ["Feature Documentation", "User Guides", "Quickstart", "Integrations", "Agentic Orchestration", "Artificial Intelligence (AI)", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Risk Governance", "Software as a Service", "Atryum", "ValidMind"]
 ---
 
 {{< include /samples/single-source/atryum/_atryum.qmd >}}

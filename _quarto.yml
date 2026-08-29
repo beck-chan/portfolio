@@ -16,7 +16,8 @@ metadata-files:
   - samples/content-engineering/_sidebar.yaml
   - samples/technical-writing/_sidebar.yaml
   - samples/copywriting/_sidebar.yaml
-  - samples/developer-advocacy/_sidebar.yaml
+  # - samples/developer-advocacy/_sidebar.yaml
+  - samples/organizations/_sidebar.yaml
 
 website:
   title: "Portfolio"

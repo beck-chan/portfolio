@@ -274,16 +274,15 @@ listing:
       subtitle: "User Guides"
 includes:
   landing: true
+categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Python Library", "Artificial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
 ---
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}
 
 {{< include /samples/single-source/validmind/_best-work.qmd >}}
 
-::: {.callout}
-Links below will take you to static versions of the content as last edited by Beck.
+{{< include /samples/single-source/_static-links.qmd >}}
 
-:::
 
 ## ValidMind Jupyter Notebooks
 

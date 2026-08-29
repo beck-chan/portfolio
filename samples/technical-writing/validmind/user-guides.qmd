@@ -212,10 +212,7 @@ listing:
 
 {{< include /samples/single-source/validmind/_user-guides.qmd >}}
 
-::: {.callout}
-Links below will take you to static versions of the content as last edited by Beck.
-
-:::
+{{< include /samples/single-source/_static-links.qmd >}}
 
 ## Workflows
 

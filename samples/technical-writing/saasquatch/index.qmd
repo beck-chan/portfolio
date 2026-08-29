@@ -41,6 +41,7 @@ listing:
     contents:
       - user-guides/sharelinks.qmd
       - user-guides/csv-import.qmd
+categories: ["Developer Content", "Feature Documentation", "User Guides", "JavaScript SDK",  "Integrations", "Salesforce", "CRMs", "Stripe", "Recurly", "Tango Card", "Payment Providers", "Reward Providers", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
 ---
 
 {{< include /samples/single-source/saasquatch/_saasquatch.qmd >}}

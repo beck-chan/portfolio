@@ -17,8 +17,9 @@ website:
               file: samples/content-engineering/validmind/releases.qmd
             - text: "Quickstarts"
               file: samples/content-engineering/validmind/quickstarts.qmd
-        - text: "Atryum Docs"
-          file: samples/content-engineering/validmind/atryum.qmd
+            - text: "Documentation Redesign"
+              file: samples/content-engineering/validmind/redesign.qmd
+        - samples/content-engineering/validmind/atryum.qmd
         - samples/content-engineering/personal/portfolio.qmd
         # - section: "Personal"
         #   contents:

@@ -1,0 +1,90 @@
+---
+title: "ValidMind"
+subtitle: "Collated Samples"
+listing:
+  - id: validmind-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - ../technical-writing/validmind/jupyter-notebooks.qmd
+      - ../technical-writing/validmind/training.qmd
+      - ../technical-writing/validmind/user-guides.qmd
+      - ../technical-writing/validmind/quickstarts.qmd
+      - ../technical-writing/validmind/enablement.qmd
+  - id: atryum-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: ../technical-writing/atryum/integrations.qmd
+      title: "Atryum Integrations"
+      subtitle: "Feature Documentation"
+      description: "User guides written for Atryum integrations."
+    - path: ../technical-writing/atryum/user-guides.qmd
+      title: "Atryum User Guides"
+      subtitle: "Feature Documentation"
+      description: "User guides written for core Atryum functionality."
+    - path: ../technical-writing/atryum/quickstart.qmd
+      title: "Atryum Quickstart"
+      subtitle: "Tutorial"
+      description: "Quickstart and installation guide for Atryum."
+  - id: validmind-copywriting
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - ../copywriting/validmind/honor-the-human.qmd
+    - ../copywriting/validmind/reduce-culture-risk.qmd
+    - ../copywriting/validmind/osff-takeaways.qmd
+    categories: true
+categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Python Library", "Artificial Intelligence (AI)", "Agentic Orchestration", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind", "Atryum"]
+---
+
+::: {.hidden}
+I was the sole **Senior Technical Writer** for ValidMind, where I employed docs-as-code methodologies alongside software engineers delivering documentation as part of product in the same development ecosystem.
+
+:::
+
+{{< include /samples/single-source/validmind/_validmind.qmd >}}
+
+{{< include /samples/single-source/_static-links.qmd >}}
+
+## Content Engineering
+
+### Atryum
+
+{{< include /samples/single-source/atryum/_atryum.qmd >}}
+
+## Technical Writing
+
+{{< include /samples/single-source/_technical.qmd >}}
+
+{{< include /samples/single-source/validmind/_best-work.qmd >}}
+
+:::{#validmind-technical}
+:::
+
+### Atryum
+
+{{< include /samples/single-source/atryum/_atryum.qmd >}}
+
+{{< include /samples/single-source/atryum/_writing.qmd >}}
+
+:::{#atryum-technical}
+:::
+
+## Copywriting
+
+{{< include /samples/single-source/_copywriting.qmd >}}
+
+{{< include /samples/single-source/validmind/_blog.qmd >}}
+
+:::{#validmind-copywriting}
+:::
