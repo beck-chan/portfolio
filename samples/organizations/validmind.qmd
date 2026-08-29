@@ -14,6 +14,18 @@ listing:
       - ../technical-writing/validmind/user-guides.qmd
       - ../technical-writing/validmind/quickstarts.qmd
       - ../technical-writing/validmind/enablement.qmd
+  - id: validmind-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - ../content-engineering/validmind/quickstarts.qmd
+    - ../content-engineering/validmind/library.qmd
+    - ../content-engineering/validmind/academy.qmd
+    - ../content-engineering/validmind/releases.qmd
+    - ../content-engineering/validmind/redesign.qmd
   - id: atryum-technical
     type: grid
     grid-columns: 3
@@ -33,6 +45,14 @@ listing:
       title: "Atryum Quickstart"
       subtitle: "Tutorial"
       description: "Quickstart and installation guide for Atryum."
+  - id: atryum-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+      - ../content-engineering/atryum/index.qmd
   - id: validmind-copywriting
     type: grid
     grid-columns: 3
@@ -58,9 +78,21 @@ I was the sole **Senior Technical Writer** for ValidMind, where I employed docs-
 
 ## Content Engineering
 
+{{< include /samples/single-source/_content.qmd >}}
+
+make sure to include the lead in blurb
+
+:::{#validmind-content}
+:::
+
 ### Atryum
 
 {{< include /samples/single-source/atryum/_atryum.qmd >}}
+
+make sure to include the lead in blurb
+
+:::{#atryum-content}
+:::
 
 ## Technical Writing
 

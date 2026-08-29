@@ -17,5 +17,7 @@ listing:
 categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Release Notes", "Quarto", "CI/CD Workflows", "Frontend Development"]
 ---
 
+{{< include /samples/single-source/atryum/_atryum.qmd >}}
+
 :::{#validmind-content}
 :::

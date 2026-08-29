@@ -3,7 +3,7 @@ website:
     - id: organizations
       title: "Organizations"
       contents:
-        - text: "Organizations"
+        - text: "Collated Samples"
           file: samples/organizations/index.qmd
         - text: "---"
         - section: "ValidMind"

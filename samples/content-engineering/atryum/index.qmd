@@ -4,6 +4,8 @@ subtitle: "Content Engineering"
 categories: ["Content Architecture", "Feature Documentation", "User Guides", "Training & Onboarding"]
 ---
 
+{{< include /samples/single-source/atryum/_atryum.qmd >}}
+
 ## Situation
 
 ## Solution

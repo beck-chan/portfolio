@@ -1,6 +1,6 @@
 ---
-title: "Organizations"
-subtitle: "Collated Samples"
+title: "Collated Samples"
+subtitle: "By Organization"
 listing:
   - id: organizations
     type: grid
@@ -15,16 +15,12 @@ listing:
 categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Blog", "Feature Highlights"]
 ---
 
-Samples of my work, grouped by organization. 
+{{< include /samples/single-source/_bio.qmd >}}
 
-:::{#organizations}
-:::
-
-<br><br>
 
 :::: {.flex .flex-wrap .items-center .justify-around .mb4 .cta-bar}
 
-::: {.w-25-ns .w-20-l .tc}
+::: {.w-25-ns .w-25-l .tc}
 ```{=html}
 <div class="inline-quarto-search">
   <button
@@ -63,19 +59,25 @@ Samples of my work, grouped by organization.
 
 :::
 
-::: {.w-25-ns .w-20-l .tc}
+::: {.w-25-ns .w-15-l .tc}
 [{{< fa brands github >}} beck-chan](https://github.com/beck-chan){target="_blank" .button .cta}
 
 :::
 
-::: {.w-25-ns .w-20-l .tc}
+::: {.w-25-ns .w-15-l .tc}
 [{{< fa brands linkedin >}} beck-chan](https://linkedin.com/in/beck-chan){target="_blank" .button .cta}
 
 :::
 
-::: {.w-50-ns .w-30-l .tc}
+::: {.w-50-ns .w-25-l .tc}
 [{{< fa envelope >}} beckchan.tech@gmail.com](mailto:beckchan.tech@gmail.com){target="_blank" .button .cta}
 
 :::
 
 ::::
+
+
+## Samples by organization 
+
+:::{#organizations}
+:::

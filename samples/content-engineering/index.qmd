@@ -34,9 +34,7 @@ listing:
 categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Release Notes", "Quarto", "GitHub Pages", "Netlify", "PostHog","CI/CD Workflows", "Frontend Development"]
 ---
 
-> Delivering content as an integrated and integral part of product.
->
-> Docs-as-code goes beyond just producing documentation in the same development ecosystem as features &mdash; thinking of content as product that's part of product, a dedication to intuitive content architecture on top of immaculate user resources, and wrapping content and feature storytelling into the definition of done.
+{{< include /samples/single-source/_content.qmd >}}
 
 ## ValidMind
 

@@ -85,26 +85,7 @@ listing:
     - samples/copywriting/saasquatch/growth-automation.qmd
 ---
 
-:::: {.flex .flex-wrap .justify-around}
-
-::: {.w-100-m .w-20-l .tc .flex .items-center .justify-center}
-
-![](assets/headshot.png){width=80% .pfp}
-
-:::
-
-::: {.w-100-m .w-80-l}
-
-> I'm **Beck**, poet with a passion for process &mdash; helping you empower users by designing and building solutions built to scale. 
->
-> I've designed, implemented, and managed everything from **content**, **support**, **training**, and **onboarding** architecture for organizations from startups to enterprises.
->
-> My methods bridge the gap between product design and user experience, whether that's advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features. 
-
-:::
-
-::::
-
+{{< include /samples/single-source/_bio.qmd >}}
 
 :::: {.flex .flex-wrap .items-center .justify-around .mb4 .cta-bar}
 
