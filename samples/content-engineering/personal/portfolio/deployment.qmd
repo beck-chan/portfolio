@@ -279,6 +279,9 @@ When a PR is merged into `main` and tagged with a [major]{.bubble}, [minor]{.bub
             core.info(`Created release ${newTag} from ${bump} label.`);
 ```
 
-Label precedence matches the PR template (1. [major]{.bubble}, 2. [minor]{.bubble}, 3. [patch]{.bubble}). Release body text comes from under `## Release notes` in the PR. 
+Label precedence matches the PR template (1. [major]{.bubble}, 2. [minor]{.bubble}, 3. [patch]{.bubble}). Release body text comes from under `## Release notes` in the PR:
 
-Comments are stripped, and an empty section falls back to "No public-facing release notes." PRs without one of those labels skip release generation.
+![Generated Release](release.png){.pics width="90%"}
+
+Comments are stripped, and an empty section falls back to "No public-facing release notes." PRs without one of the release-linked labels skip release generation.
+

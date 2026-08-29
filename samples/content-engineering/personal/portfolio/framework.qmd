@@ -237,6 +237,10 @@ These are defined in the root directory with our top-level `_quarto.yml`:
       dark: assets/themes/minimal/code.theme
 ```
 
+For reference, this is how the portfolio looks without my custom themes applied:^[[https://beckchan-folio.netlify.app/](https://beckchan-folio.netlify.app/){target="_blank"}]
+
+![Portfolio Sans Custom Themes](no-theme.png){.pics width="90%"}
+
 ::: {.panel-tabset}
 
 #### Full Colour Theme
@@ -354,6 +358,26 @@ Quarto's left sidebar uses sticky positioning inside a tall containing block, so
 
 On mobile or resize it unpins so Quarto's normal drawer behavior still works.
 
+:::: {.flex .flex-wrap .justify-around}
+
+::: {.w-50 .pa2}
+
+**Before**
+
+![Sidebar Scrolling Up](sidebar-before.png){.pics group="sidebar"}
+
+:::
+
+::: {.w-50 .pa2}
+
+**After**
+
+![Sidebar Stays Fixed](sidebar-after.png){.pics group="sidebar"}
+
+:::
+
+::::
+
 #### Margin Below Table of Contents
 
 Footnotes are positioned in the right margin as a matter of personal preference, which means that they can overlap with the table of contents and any category filtering options.
@@ -364,6 +388,26 @@ Quarto's built-in `layoutMarginEls` only spaces margin notes relative to each ot
 
 The themes also hide margin notes until a `margin-below-toc-ready` class is set, avoiding a flash of overlapping footnotes before layout runs.
 
+:::: {.flex .flex-wrap .justify-around}
+
+::: {.w-50 .pa2}
+
+**Before**
+
+![Table of Contents & Category Filters Overlap](margin-before.png){.pics group="margin"}
+
+:::
+
+::: {.w-50 .pa2}
+
+**After**
+
+![Table of Contents & Category Filters Don't Overlap](margin-after.png){.pics group="margin"}
+
+:::
+
+::::
+
 #### Sticky Table of Contents 
 
 Quarto's native `#quarto-toc-toggle` only appears when margin notes overlap the table of contents, but we solved that issue by cascading footnotes below the table of contents intentionally so the built-in dropdown never shows.
@@ -371,6 +415,27 @@ Quarto's native `#quarto-toc-toggle` only appears when margin notes overlap the 
 `assets/sticky-toc-toggle.html`^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [sticky-toc-toggle.html](https://github.com/beck-chan/portfolio/blob/main/assets/sticky-toc-toggle.html){target="_blank"}] shows a fixed table of contents dropdown under the navbar on desktop once `nav#TOC` scrolls under the header. 
 
 Expanding it clones the inline table of contents, and scrolling the page or following a link collapses it again. The inline table of contents is hidden while the dropdown is up so the two don't stack.
+
+:::: {.flex .flex-wrap .justify-around}
+
+::: {.w-50 .pa2}
+
+**Inline**
+
+![Table of Contents Inline](toc-inline.png){.pics group="toc"}
+
+:::
+
+::: {.w-50 .pa2}
+
+**Drop-Down**
+
+![Table of Contents Drop-Down](toc-dropdown.png){.pics group="toc"}
+
+:::
+
+::::
+
 
 :::
 
@@ -439,7 +504,7 @@ Utilizing pull requests allows me to streamline a few additional things with Git
 
 #### Spellcheck
 
-`.github/workflows/spellcheck.yaml`^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [spellcheck.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/spellcheck.yaml){target="_blank"}] runs when a PR is opened, or when a commit is sent up to the PR's branch, checking for spelling errors in the PR's files and adding a comment with the results when complete:
+`.github/workflows/spellcheck.yaml`^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [spellcheck.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/spellcheck.yaml){target="_blank"}] runs when a PR is opened, or when a commit is sent up to the PR's branch, checking for spelling errors in the PR's files and adding a comment with the results when complete:[^spellcheck]
 
 ```yaml
         # Set up steps ...
@@ -496,3 +561,30 @@ Utilizing pull requests allows me to streamline a few additional things with Git
 ```
 
 Words to be ignored are defined in `cspell.json`.^[**{{< fa brands github >}} beck-chan/portfolio/cspell.json:** [cspell.json](https://github.com/beck-chan/portfolio/blob/main/cspell.json){target="_blank"}]
+
+[^spellcheck]: **For example**:
+
+    ```markdown
+    ### Spelling errors found
+
+    poetry/random/24-guests.qmd:11:10 - Unknown word (wolfberries)
+    poetry/random/derelict-dog-star.qmd:11:2 - Unknown word (emsp)
+    poetry/random/derelict-dog-star.qmd:19:17 - Unknown word (Laika)
+    poetry/random/persimmons.qmd:50:40 - Unknown word (cinnabarite)
+    poetry/random/persimmons.qmd:51:18 - Unknown word (vermillion) fix: (vermilion)
+    poetry/random/taken.qmd:12:16 - Unknown word (Wheelock's)
+    poetry/random/taken.qmd:15:8 - Unknown word (rapio)
+    poetry/random/taken.qmd:15:15 - Unknown word (rapere)
+    poetry/random/taken.qmd:15:23 - Unknown word (rapui)
+    poetry/random/taken.qmd:15:30 - Unknown word (raptum)
+    poetry/random/taken.qmd:23:7 - Unknown word (ingly)
+    poetry/random/taken.qmd:25:9 - Unknown word (rapior)
+    poetry/random/taken.qmd:28:19 - Unknown word (suffereth)
+    poetry/random/taken.qmd:29:11 - Unknown word (violenti)
+    poetry/random/taken.qmd:29:20 - Unknown word (rapiunt)
+    poetry/random/taken.qmd:29:28 - Unknown word (illa)
+    poetry/random/taken.qmd:32:7 - Unknown word (iful)
+    poetry/random/taken.qmd:36:32 - Unknown word (Oothoon)
+    poetry/random/taken.qmd:39:8 - Unknown word (impeity)
+    poetry/random/to-dc.qmd:14:1 - Unknown word (Aegeas)
+    ```
