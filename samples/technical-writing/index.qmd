@@ -47,9 +47,7 @@ listing:
 categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement"]
 ---
 
-> Engendering empowered users through effective guidance content.
-> 
-> Along with a love of gratuitous alliteration, I truly enjoy authoring user guidance content. That's because I believe that great guidance content empowers users, and empowered users get excited about product.
+{{< include /samples/single-source/_technical.qmd >}}
 
 ## ValidMind
 

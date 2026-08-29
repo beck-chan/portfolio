@@ -281,10 +281,8 @@ categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation",
 
 {{< include /samples/single-source/validmind/_best-work.qmd >}}
 
-::: {.callout}
-Links below will take you to static versions of the content as last edited by Beck.
+{{< include /samples/single-source/_static-links.qmd >}}
 
-:::
 
 ## ValidMind Jupyter Notebooks
 

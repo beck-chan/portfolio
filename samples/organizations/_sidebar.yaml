@@ -1,0 +1,10 @@
+website:
+  sidebar:
+    - id: organizations
+      title: "Organizations"
+      contents:
+        - text: "Organizations"
+          file: samples/organizations/index.qmd
+        - text: "---"
+        - samples/organizations/validmind.qmd
+        - samples/organizations/saasquatch.qmd
