@@ -1,0 +1,31 @@
+---
+title: "Portfolio"
+subtitle: "Content Engineering"
+categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "PostHog", "CI/CD Workflows", "Frontend Development"]
+listing:
+  - id: content-portfolio
+    type: grid
+    max-description-length: 250
+    grid-columns: 3
+    sort: false
+    fields: [title, description]
+    contents:
+    - framework.qmd
+    - deployment.qmd
+    - analytics.qmd
+---
+
+How [https://beck-chan.github.io/](https://beck-chan.github.io/) is built and maintained, more or less.
+
+:::{#content-portfolio}
+:::
+
+
+
+
+
+
+
+
+
+

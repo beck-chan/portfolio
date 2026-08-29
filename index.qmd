@@ -26,7 +26,7 @@ listing:
     contents:
     - samples/content-engineering/validmind/index.qmd
     - samples/content-engineering/atryum/index.qmd
-    - samples/content-engineering/personal/portfolio.qmd
+    - samples/content-engineering/personal/portfolio/index.qmd
   - id: samples-developer
     type: grid
     max-description-length: 250

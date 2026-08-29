@@ -20,8 +20,12 @@ website:
             - text: "Documentation Redesign"
               file: samples/content-engineering/validmind/redesign.qmd
         - samples/content-engineering/atryum/index.qmd
-        - samples/content-engineering/personal/portfolio.qmd
-        # - section: "Personal"
-        #   contents:
-        #     - samples/content-engineering/personal/portfolio.qmd
-            # - samples/content-engineering/personal/guestbook.qmd
+        - section: "Portfolio"
+          href: samples/content-engineering/personal/portfolio/index.qmd
+          contents:
+            - text: "Framework"
+              file: samples/content-engineering/personal/portfolio/framework.qmd
+            - text: "Deployment"
+              file: samples/content-engineering/personal/portfolio/deployment.qmd
+            - text: "Analytics"
+              file: samples/content-engineering/personal/portfolio/analytics.qmd

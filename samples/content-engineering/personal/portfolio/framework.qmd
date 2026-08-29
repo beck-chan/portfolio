@@ -1,16 +1,17 @@
 ---
-title: "Portfolio"
+title: "Portfolio Framework"
 subtitle: "Content Engineering"
 categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "CI/CD Workflows", "Frontend Development"]
 includes:
     portfolio: true
 ---
 
-How [https://beck-chan.github.io/](https://beck-chan.github.io/) is built and maintained, more or less.
+::: {.hidden}
+This static portfolio site is built using Quarto and deployed by GitHub Workflows.
 
-## Framework
+:::
 
-This static portfolio site is built using Quarto^[[Quarto](https://quarto.org/){target="_blank"}] and hosted on GitHub Pages.^[[GitHub Pages](https://pages.github.com/){target="_blank"}]
+This static portfolio site is built using Quarto^[[Quarto](https://quarto.org/){target="_blank"}] and deployed by GitHub Workflows.^[**GitHub:**[Workflows](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows){target="_blank"}]
 
 ::: {.callout-tip collapse="true"}
 ## What is Quarto?
@@ -21,15 +22,15 @@ From your variety of source files, Quarto can build file formats such as `.html`
 
 :::
 
-### Authoring
+## Authoring
 
 I choose Quarto because Quarto is extensible, but simple to use:
 
-#### Content
+### Content
 
 ::: {.panel-tabset}
 
-##### Independent Pages
+#### Independent Pages
 
 Portfolio content is written in `.qmd` files, Quarto's version of Markdown where you specify metadata in a YAML frontmatter block.
 
@@ -45,7 +46,7 @@ categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "CI/CD
 How [https://beck-chan.github.io/](https://beck-chan.github.io/) is built and maintained.
 ```
 
-##### Single-Sourced Content
+#### Single-Sourced Content
 
 Content that is shared across multiple pages can be single-sourced from `_*.qmd` files, allowing for updates to the content across multiple pages without having to manually update each page. 
 
@@ -59,16 +60,16 @@ Renders as the below snippet everywhere it's embedded:
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}
 
-##### Searching Content
+#### Searching Content
 
-Quarto includes built-in indexing and searching capabilities,^[**Quarto:**[ Website Search](https://quarto.org/docs/websites/website-search.html){target="_blank"}] included in the top navigation in a top-level `_quarto.yml`
+Quarto includes built-in indexing and searching capabilities,^[**Quarto:** [Website Search](https://quarto.org/docs/websites/website-search.html){target="_blank"}] included in the top navigation in a top-level `_quarto.yml`
 
 ```yaml
   search:
     location: navbar
 ```
 
-I've also written a quick script to embed the same search within a page's content itself for ease of access:^[{{< fa brands github >}} beck-chan/portfolio: [index.html](https://github.com/beck-chan/portfolio/blob/8a5a018b194ea9529c06c044147c2ba9d14a3dda/index.qmd#L102){target="_blank"}]
+I've also written a quick script to embed the same search within a page's content itself for ease of access:^[**{{< fa brands github >}} beck-chan/portfolio/assets: **[search.html](https://github.com/beck-chan/portfolio/blob/main/assets/search.html){target="_blank"}]
 
 ::: {.tc}
 
@@ -113,7 +114,7 @@ I've also written a quick script to embed the same search within a page's conten
 
 :::
 
-#### Navigation
+### Navigation
 
 Navigation is defined by directory structure, and then specified in the site layout via `_*.yml` files.[^samples]
 
@@ -143,38 +144,9 @@ Navigation is defined by directory structure, and then specified in the site lay
         └── validmind/
     ```
 
-    <!-- ```markdown
-    samples/
-    ├── content-engineering/
-    │   ├── atryum/
-    │   ├── personal/
-    │   └── validmind/
-    ├── copywriting/
-    │   ├── saasquatch/
-    │   └── validmind/
-    ├── developer-advocacy/
-    │   ├── google-sheets/
-    │   ├── posthog/
-    │   ├── quarto/
-    │   └── supabase/
-    ├── organizations/
-    ├── single-source/
-    │   ├── atryum/
-    │   ├── saasquatch/
-    │   └── validmind/
-    └── technical-writing/
-        ├── atryum/
-        ├── saasquatch/
-        │   ├── integrations/
-        │   │   └── sfdc/
-        │   ├── sdk/
-        │   └── user-guides/
-        └── validmind/
-    ``` -->
-
 ::: {.panel-tabset}
 
-##### Top Navigation
+#### Top Navigation
 
 The consistent top navigation bar is defined in the root directory with our top-level `_quarto.yml`:
 
@@ -210,42 +182,7 @@ website:
         href: poetry/index.qmd
 ```
 
-
-<!-- ```yaml
-# Include the independent directory _sidebar.yaml files to display the correct sidenavs 
-metadata-files:
-  - samples/content-engineering/_sidebar.yaml
-  - samples/technical-writing/_sidebar.yaml
-  - samples/copywriting/_sidebar.yaml
-  - samples/developer-advocacy/_sidebar.yaml
-
-# Define the top navigation bar
-website:
-  title: "Portfolio"
-  favicon: assets/headshot.png
-  page-navigation: true
-  navbar:
-    left:
-      - samples/content-engineering/index.qmd
-      - samples/technical-writing/index.qmd
-      - samples/copywriting/index.qmd
-      - samples/developer-advocacy/index.qmd
-    right:
-      - cv.qmd
-      - text: "{{< fa brands github >}}"
-        target: _blank
-        href: https://github.com/beck-chan
-      - text: "{{< fa brands linkedin >}}"
-        target: _blank
-        href: https://linkedin.com/in/beck-chan
-      - text: "{{< fa envelope >}}"
-        href: mailto:beckchan.tech@gmail.com
-        target: _blank
-      - text: "{{< fa feather >}}"
-        href: poetry/index.qmd
-``` -->
-
-##### Sidebars
+#### Sidebars
 
 Each directory has its own `_sidebar.yml` and `_metadata.yml` files that defines the sidebar navigation for that directory. 
 
@@ -274,39 +211,9 @@ website:
               file: samples/content-engineering/validmind/quickstarts.qmd
             - text: "Documentation Redesign"
               file: samples/content-engineering/validmind/redesign.qmd
-        - samples/content-engineering/atryum/index.qmd
-        - samples/content-engineering/personal/portfolio.qmd
-```
 
-<!-- ```yaml
-# _sidebar.yaml
-website:
-  sidebar:
-    - id: content
-      title: "Content Engineering"
-      contents:
-        - text: "Content Engineering"
-          file: samples/content-engineering/index.qmd
-        - text: "---"
-        - section: "ValidMind"
-          href: samples/content-engineering/validmind/index.qmd
-          contents:
-            - text: "Developer Library"
-              file: samples/content-engineering/validmind/library.qmd
-            - text: "Training"
-              file: samples/content-engineering/validmind/academy.qmd
-            - text: "Release Notes"
-              file: samples/content-engineering/validmind/releases.qmd
-            - text: "Quickstarts"
-              file: samples/content-engineering/validmind/quickstarts.qmd
-            - text: "Documentation Redesign"
-              file: samples/content-engineering/validmind/redesign.qmd
-        - samples/content-engineering/atryum/index.qmd
-        - section: "Personal"
-          contents:
-            - samples/content-engineering/personal/portfolio.qmd
-            - samples/content-engineering/personal/guestbook.qmd
-``` -->
+        #  And all the rest...
+```
 
 ```yaml
 # _metadata.yml
@@ -315,7 +222,7 @@ format:
     sidebar: content
 ```
 
-##### Footer
+#### Footer
 
 Similarly, the footer is also defined in `_quarto.yml`:
 
@@ -335,11 +242,11 @@ Similarly, the footer is also defined in `_quarto.yml`:
 
 :::
 
-### Styling
+## Styling
 
 Quarto offers a few built-in themes, but I chose define custom themes using Bootstrap (`.scss`).
 
-#### Core Theming
+### Core Theming
 
 These are defined in the root directory with our top-level `_quarto.yml`:
 
@@ -358,13 +265,11 @@ These are defined in the root directory with our top-level `_quarto.yml`:
 
 ::: {.panel-tabset}
 
-##### Full Colour Theme
+#### Full Colour Theme
 
-Default theme users see when they load the portfolio. 
+Default theme users see when they load the portfolio. Defined in `assets/themes/default/styles.scss`:^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [styles.scss](https://github.com/beck-chan/portfolio/blob/main/assets/themes/default/styles.scss){target="_blank"}]
 
-Defined in `assets/themes/default/styles.scss`:^[{{< fa brands github >}} beck-chan/portfolio/assets: [styles.scss](https://github.com/beck-chan/portfolio/blob/main/assets/themes/default/styles.scss){target="_blank"}]
-
-```scss
+```{.scss fold=true}
 /*-- scss:defaults --*/
 
 // Foundations
@@ -389,7 +294,7 @@ $footer-bg: #df9a49; // Footer bg
 @import '_styles/mobile';
 ```
 
-And code styling is defined in `assets/themes/default/code.theme`:^[{{< fa brands github >}} beck-chan/portfolio/assets: [code.theme](https://github.com/beck-chan/portfolio/blob/main/assets/themes/default/code.theme){target="_blank"}]
+And code styling is defined in `assets/themes/default/code.theme`:^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [code.theme](https://github.com/beck-chan/portfolio/blob/main/assets/themes/default/code.theme){target="_blank"}]
 
 ```json
 {
@@ -407,13 +312,11 @@ And code styling is defined in `assets/themes/default/code.theme`:^[{{< fa brand
 }
 ```
 
-##### Monochrome Theme
+#### Monochrome Theme
 
-You can toggle this theme in the top navigation bar by clicking **{{< fa toggle-on >}}**. 
+You can toggle this theme in the top navigation bar by clicking **{{< fa toggle-on >}}**. Defined in `assets/themes/minimal/styles.scss`:^[**{{< fa brands github >}} beck-chan/portfolio/assets: **[styles.scss](https://github.com/beck-chan/portfolio/blob/main/assets/themes/minimal/styles.scss){target="_blank"}]
 
-Defined in `assets/themes/minimal/styles.scss`:^[{{< fa brands github >}} beck-chan/portfolio/assets: [styles.scss](https://github.com/beck-chan/portfolio/blob/main/assets/themes/minimal/styles.scss){target="_blank"}]
-
-```scss
+```{.scss fold=true}
 /*-- scss:defaults --*/
 
 // Foundations
@@ -437,7 +340,7 @@ $sidebar-padding-y: 1rem; // Top nav padding
 @import '_styles/mobile-min';
 ```
 
-And code styling is defined in `assets/themes/minimal/code.theme`:^[{{< fa brands github >}} beck-chan/portfolio/assets: [code.theme](https://github.com/beck-chan/portfolio/blob/main/assets/themes/minimal/code.theme){target="_blank"}]
+And code styling is defined in `assets/themes/minimal/code.theme`:^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [code.theme](https://github.com/beck-chan/portfolio/blob/main/assets/themes/minimal/code.theme){target="_blank"}]
 
 ```json
 {
@@ -450,13 +353,13 @@ And code styling is defined in `assets/themes/minimal/code.theme`:^[{{< fa brand
     "Other": { "text-color": "#d0b491" },
 
     // And so on ...
-
+  }
 }
 ```
 
 :::
 
-#### Custom Adjustments
+### Custom Adjustments
 
 There's a limit to what you can adjust with CSS due to Quarto's quirks, so additionally I have some custom adjustments set in `_quarto.yml` under `include-after-body`:
 
@@ -468,57 +371,157 @@ There's a limit to what you can adjust with CSS due to Quarto's quirks, so addit
 
 ::: {.panel-tabset}
 
-##### Pinned Side Navigation
+#### Pinned Side Navigation
 
 Quarto's left sidebar uses sticky positioning inside a tall containing block, so it still scrolls away with the page instead of staying fixed. CSS alone can't pin it reliably without breaking the grid column width.
 
-`assets/pin-sidenav.html`^[{{< fa brands github >}} beck-chan/portfolio/assets: [pin-sidenav.html](https://github.com/beck-chan/portfolio/blob/main/assets/pin-sidenav.html){target="_blank"}] measures the sidebar's in-flow width on desktop, locks that width, then adds an `is-pinned-sidenav` class that the theme styles as `position: fixed`. 
+`assets/pin-sidenav.html`^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [pin-sidenav.html](https://github.com/beck-chan/portfolio/blob/main/assets/pin-sidenav.html){target="_blank"}] measures the sidebar's in-flow width on desktop, locks that width, then adds an `is-pinned-sidenav` class that the theme styles as `position: fixed`. 
 
 On mobile or resize it unpins so Quarto's normal drawer behavior still works.
 
-##### Margin Below Table of Contents
+#### Margin Below Table of Contents
 
 Footnotes are positioned in the right margin as a matter of personal preference, which means that they can overlap with the table of contents and any category filtering options.
 
 Quarto's built-in `layoutMarginEls` only spaces margin notes relative to each other, so notes can overlap the table of contents, collide with the footer when footnotes stack tall, and break layout inside tabsets that nest a full page-columns grid.
 
-`assets/margin-below-toc.html`^[{{< fa brands github >}} beck-chan/portfolio/assets: [margin-below-toc.html](https://github.com/beck-chan/portfolio/blob/main/assets/margin-below-toc.html){target="_blank"}] cascades notes below the table of contents, pads `main.content` when notes outgrow the body so the footer clears them, and hoists tabset margin notes into a sibling container. 
+`assets/margin-below-toc.html`^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [margin-below-toc.html](https://github.com/beck-chan/portfolio/blob/main/assets/margin-below-toc.html){target="_blank"}] cascades notes below the table of contents, pads `main.content` when notes outgrow the body so the footer clears them, and hoists tabset margin notes into a sibling container. 
 
 The themes also hide margin notes until a `margin-below-toc-ready` class is set, avoiding a flash of overlapping footnotes before layout runs.
 
 :::
 
-### Publishing
+## Publishing
 
-I've chosen to automate the publishing process using GitHub Actions, instead of rendering the output files locally then committing them. 
+I've chosen to automate the publishing process in the spirit of Continuous Integration and Continuous Delivery and Deployment (CI/CD), letting GitHub Workflows handle both rendering the static HTML files from the source `.qmd` files, as well as deploying them to GitHub Pages and Netlify where my production and development portfolios are respectively hosted.
 
-#### Output
+### Output
 
-#### Pull Requests
+The first thing I did was define the output directory and and how and what files should be rendered in `_quarto.yml`:
 
-#### Release Notes
+```yaml
+project:
+  type: website
+  output-dir: _output # The default is _site
+  render:
+    - "**/*.qmd"
+    - "**/*.ipynb"
+```
 
-- PRs merged into main
-- spellchecker
-- release notes
+In my `.gitignore`, I've added the `_output` directory to avoid committing the rendered files to the repository whenever they are generated locally by previewing or testing as I want rendering to actually be done on the fly via GitHub Actions.
 
-## Deployment
+::: {.callout}
+This prevents me from ever accidentally forgetting to render the output files before calling it done, and as a result having outdated files displaying on the live portfolio site. 
 
-### Staging
+:::
 
-- preview-site.yaml
+### Pull Requests (PRs)
 
-### Production
+Since the content for this portfolio is developed using the GitHub CLI and lives in my GitHub repository,^[[{{< fa brands github >}} beck-chan/portfolio](https://github.com/beck-chan/portfolio){target="_blank"}], I've also decided to use pull requests to merge major changes into my `main` branch as part of good version control practices. 
 
-- deploy-site.yaml
+Each PR is populated by a PR template,^[**{{< fa brands github >}} beck-chan/portfolio/.github/:** [pull_request_template.md](https://github.com/beck-chan/portfolio/blob/main/.github/pull_request_template.md){target="_blank"}] that instructs on what information needs to be included in the PR comment in order to trigger some automated release notes:
 
-## Analytics
-
-- posthog, share dashboard here?
-
-#### Citation
-
-[{{< fa brands github >}} beck-chan/portfolio](https://github.com/beck-chan/portfolio){target="_blank" .button}
+```markdown
+<!-- Any internal notes go here -->
 
 
+## Release notes
 
+<!-- 
+
+Tag the PR with one of the following labels so that releases.yaml can automatically generate a GitHub release bump:
+
+1. `major`
+2. `minor`
+3. `patch`
+
+Tagging with more than one label will give precedence in the order as numbered.
+
+Include any release notes you want displayed under this section.
+
+-->
+
+
+<!-- Leave below untouched -->
+
+**Browse the updated portfolio at: [https://beck-chan.github.io/](https://beck-chan.github.io/)**
+```
+
+Utilizing pull requests allows me to streamline a few additional things with GitHub Workflows and automate (more on these in [Portfolio Deployment](deployment.qmd)):
+
+- [x] Spellchecking relevant files as part of PR checks
+- [x] Rendering and deploying the rendered files to Netlify for an open PR
+- [x] Generating release notes from certain PRs tagged with specific labels
+- [x] Rendering and deploying the rendered files to GitHub Pages production site when the PR is merged into `main` 
+
+#### Spellcheck
+
+`.github/workflows/spellcheck.yaml`^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [spellcheck.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/spellcheck.yaml){target="_blank"}] runs when a PR is opened, or when a commit is sent up to the PR's branch, checking for spelling errors in the PR's files and adding a comment with the results when complete:
+
+```{.yaml fold=true}
+jobs:
+  cspell:
+    name: Run cspell
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run spell checker
+        id: spellcheck
+        run: |
+          set +e
+          npx --yes cspell "**/*.qmd" --exclude "_output" --exclude ".quarto" --exclude "poetry/random/*" > cspell-output.txt
+          status=$?
+          set -e
+          cat cspell-output.txt
+          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- cspell-pr-comment -->';
+            const failed = '${{ steps.spellcheck.outputs.exit_code }}' !== '0';
+            let output = fs.readFileSync('cspell-output.txt', 'utf8').trim();
+            const max = 60000;
+            if (output.length > max) {
+              output = output.slice(0, max) + '\n\n…truncated';
+            }
+
+            const body = failed
+              ? `${marker}\n## Spelling errors found\n\n\`\`\`text\n${output}\n\`\`\``
+              : `${marker}\n## No spelling errors found`;
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find((c) => c.body?.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+```
+
+Words to be ignored are defined in `cspell.json`.^[**{{< fa brands github >}} beck-chan/portfolio/cspell.json:** [cspell.json](https://github.com/beck-chan/portfolio/blob/main/cspell.json){target="_blank"}]

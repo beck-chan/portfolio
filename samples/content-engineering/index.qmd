@@ -29,9 +29,9 @@ listing:
     sort: false
     fields: [title, subtitle]
     contents:
-      - personal/portfolio.qmd
+      - personal/portfolio/index.qmd
     categories: true
-categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Release Notes", "Quarto", "GitHub Pages", "Netlify", "CI/CD Workflows", "Frontend Development"]
+categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Release Notes", "Quarto", "GitHub Pages", "Netlify", "PostHog","CI/CD Workflows", "Frontend Development"]
 ---
 
 > Delivering content as an integrated and integral part of product.
