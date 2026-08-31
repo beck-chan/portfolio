@@ -1,2 +1,11 @@
 
+:::: {.content-visible when-format="html" when-meta="includes.content"}
+Along with authoring approximately 95% of the content for Atryum,^[Citation: [{{< fa brands github >}} `validmind/atryum/website` (documentation) archive](https://github.com/validbeck/atryum/tree/main/website){target="_blank"}] I also designed and implemented the static documentation website authoring flow.
+
+:::
+
+
+:::: {.content-visible when-format="html" unless-meta="includes.content"}
 I authored approximately 95% of the content for Atryum,^[Citation: [{{< fa brands github >}} `validmind/atryum/website` (documentation) archive](https://github.com/validbeck/atryum/tree/main/website){target="_blank"}] including the samples selected below: 
+
+::::

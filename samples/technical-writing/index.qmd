@@ -67,9 +67,9 @@ categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation",
 :::{#atryum-technical}
 :::
 
-<!-- ::: {.callout}
-You can learn more about my involvement with ValidMind, Atryum, and the impact I had on content and content architecture under [Content Engineering](/samples/content-engineering/index.qmd)
-::: -->
+::: {.callout}
+You can learn more about my involvement with ValidMind, Atryum, and the impact I had on content and content architecture under [Content Engineering](/samples/content-engineering/index.qmd).
+:::
 
 ## SaaSquatch
 

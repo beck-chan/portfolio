@@ -400,7 +400,7 @@ categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation",
 
 [{{< fa brands github >}} archive of `validmind/documentation` by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/){target="_blank" .button}
 
-<!-- ::: {.callout}
-You can learn more about my involvement with ValidMind's documentation and the impact I had on documentation architecture under [Content Engineering](/samples/content-engineering/index.qmd)
-::: -->
+::: {.callout}
+You can learn more about my involvement with ValidMind's documentation and the impact I had on documentation architecture under [Content Engineering](/samples/content-engineering/index.qmd).
+:::
 

@@ -14,10 +14,24 @@ listing:
     - academy.qmd
     - releases.qmd
     - redesign.qmd
+  - id: validmind-sample
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: ../../technical-writing/validmind/index.qmd
+      description: "Browse some of the documentation I produced for ValidMind."
 categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Release Notes", "Quarto", "CI/CD Workflows", "Frontend Development"]
 ---
 
 {{< include /samples/single-source/atryum/_atryum.qmd >}}
 
 :::{#validmind-content}
+:::
+
+## ValidMind Samples
+
+:::{#validmind-sample}
 :::
