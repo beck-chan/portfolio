@@ -34,17 +34,21 @@ website:
       # - samples/developer-advocacy/index.qmd
     right:
       - cv.qmd
-      - text: "{{< fa brands github >}}"
+      - text: '[{{< fa brands github >}}]{title="GitHub / beck-chan"}'
         target: _blank
         href: https://github.com/beck-chan
-      - text: "{{< fa brands linkedin >}}"
+        aria-label: GitHub
+      - text: '[{{< fa brands linkedin >}}]{title="LinkedIn / beck-chan"}'
         target: _blank
         href: https://linkedin.com/in/beck-chan
-      - text: "{{< fa envelope >}}"
+        aria-label: LinkedIn
+      - text: '[{{< fa envelope >}}]{title="Email / beckchan.tech@gmail.com"}'
         href: mailto:beckchan.tech@gmail.com
         target: _blank
-      - text: "{{< fa feather >}}"
+        aria-label: Email
+      - text: '[{{< fa feather >}}]{title="Poetry"}'
         href: poetry/index.qmd
+        aria-label: Poetry
 
   sidebar: 
     style: docked

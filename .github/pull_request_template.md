@@ -7,9 +7,9 @@
 
 Tag the PR with one of the following labels so that releases.yaml can automatically generate a GitHub release bump:
 
-1. `major`
-2. `minor`
-3. `patch`
+1. `major` (example: 1.0.0)
+2. `minor` (example: 1.1.0)
+3. `patch` (example: 1.1.1)
 
 Tagging with more than one label will give precedence in the order as numbered.
 

@@ -7,11 +7,15 @@ includes:
 ---
 
 ::: {.hidden}
-This static portfolio site is built using Quarto and deployed by GitHub Workflows.
+This static portfolio site is built using Quarto, styled with custom Bootstrap themes, and deployed by GitHub Workflows.
 
 :::
 
-This static portfolio site is built using Quarto^[[Quarto](https://quarto.org/){target="_blank"}] and deployed by GitHub Workflows.^[**GitHub:**[Workflows](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows){target="_blank"}]
+This static portfolio site is built using Quarto,^[[Quarto](https://quarto.org/){target="_blank"}] styled with custom Bootstrap themes,^[[Bootstrap](https://getbootstrap.com/){target="_blank"}] and deployed with GitHub Workflows.^[**GitHub:**[Workflows](https://docs.github.com/en/actions/concepts/workflows-and-actions/workflows){target="_blank"}]
+
+## Authoring
+
+I choose Quarto because Quarto is extensible, but simple to use.
 
 ::: {.callout-tip collapse="true"}
 ## What is Quarto?
@@ -22,10 +26,6 @@ From your variety of source files, Quarto can build file formats such as `.html`
 
 :::
 
-## Authoring
-
-I choose Quarto because Quarto is extensible, but simple to use:
-
 ### Content
 
 ::: {.panel-tabset}
@@ -34,7 +34,7 @@ I choose Quarto because Quarto is extensible, but simple to use:
 
 Portfolio content is written in `.qmd` files, Quarto's version of Markdown where you specify metadata in a YAML frontmatter block.
 
-Take this page for example, this is the first few lines of the file:
+For example:
 
 ```markdown
 ---
@@ -48,21 +48,21 @@ How [https://beck-chan.github.io/](https://beck-chan.github.io/) is built and ma
 
 #### Single-Sourced Content
 
-Content that is shared across multiple pages can be single-sourced from `_*.qmd` files, allowing for updates to the content across multiple pages without having to manually update each page. 
+Content that is repeated can be single-sourced from Quarto Includes^[**Quarto:** [Includes](https://quarto.org/docs/authoring/includes.html){target="_blank"}] `_*.qmd` files, allowing for updates to shared content across multiple pages without having to manually update each page. 
 
-Quarto Includes are not rendered as pages independently. For example, my introduction for one of the organizations I've worked with, ValidMind:
+For example, my introduction for one of the organizations I've worked with, ValidMind ...
 
 ```markdown
 {{</* include /samples/single-source/validmind/_validmind.qmd */>}}
 ```
 
-Renders as the below snippet everywhere it's embedded:
+... renders as the below snippet everywhere it's embedded:
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}
 
 #### Searching Content
 
-Quarto includes built-in indexing and searching capabilities,^[**Quarto:** [Website Search](https://quarto.org/docs/websites/website-search.html){target="_blank"}] included in the top navigation in a top-level `_quarto.yml`
+Quarto offers built-in indexing and searching capabilities,^[**Quarto:** [Website Search](https://quarto.org/docs/websites/website-search.html){target="_blank"}] placed in the top navigation via an independent top-level frontmatter file called `_quarto.yml`:
 
 ```yaml
   search:
@@ -116,7 +116,7 @@ I've also written a quick script to embed the same search within a page's conten
 
 ### Navigation
 
-Navigation is defined by directory structure, and then display of links specified in the site layout via `_*.yml` files.
+Filepaths are defined by directory structure, and then link display specified in the top or side navigation bars via `_*.yml` files.
 
 ::: {.panel-tabset}
 
@@ -143,24 +143,28 @@ website:
       - samples/copywriting/index.qmd
     right:
       - cv.qmd
-      - text: "{{< fa brands github >}}"
+      - text: '[{{< fa brands github >}}]{title="GitHub / beck-chan"}'
         target: _blank
         href: https://github.com/beck-chan
-      - text: "{{< fa brands linkedin >}}"
+        aria-label: GitHub
+      - text: '[{{< fa brands linkedin >}}]{title="LinkedIn / beck-chan"}'
         target: _blank
         href: https://linkedin.com/in/beck-chan
-      - text: "{{< fa envelope >}}"
+        aria-label: LinkedIn
+      - text: '[{{< fa envelope >}}]{title="Email / beckchan.tech@gmail.com"}'
         href: mailto:beckchan.tech@gmail.com
         target: _blank
-      - text: "{{< fa feather >}}"
+        aria-label: Email
+      - text: '[{{< fa feather >}}]{title="Poetry"}'
         href: poetry/index.qmd
+        aria-label: Poetry
 ```
 
 #### Sidebars
 
-Each directory has its own `_sidebar.yml` and `_metadata.yml` files that defines the sidebar navigation for that directory. 
+Each external facing directory has its own `_sidebar.yml` and `_metadata.yml` files that defines the sidebar navigation for that directory. 
 
-For this directory, `content-engineering/`, the contents of those two files are:
+For the `content-engineering/` directory, the contents of those two files are:
 
 ```yaml
 # _sidebar.yaml
@@ -222,7 +226,7 @@ Quarto offers a few built-in themes, but I chose define custom themes using Boot
 
 ### Core Theming
 
-These are defined in the root directory with our top-level `_quarto.yml`:
+Themes are defined in the root directory with our top-level `_quarto.yml`:
 
 ```yaml
     theme:
@@ -339,7 +343,7 @@ And code styling is defined in `assets/themes/minimal/code.theme`:^[**{{< fa bra
 
 ### Custom Adjustments
 
-There's a limit to what you can adjust with CSS due to Quarto's quirks, so additionally I have some custom adjustments set in `_quarto.yml` under `include-after-body`:
+There's a limit to what you can adjust with CSS due to Quarto's quirks, so I have some additional custom script adjustments set in `_quarto.yml` under `include-after-body`:
 
 ```yaml
     include-after-body:
@@ -352,11 +356,7 @@ There's a limit to what you can adjust with CSS due to Quarto's quirks, so addit
 
 #### Pinned Side Navigation
 
-Quarto's left sidebar uses sticky positioning inside a tall containing block, so it still scrolls away with the page instead of staying fixed. CSS alone can't pin it reliably without breaking the grid column width.
-
-`assets/pin-sidenav.html`^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [pin-sidenav.html](https://github.com/beck-chan/portfolio/blob/main/assets/pin-sidenav.html){target="_blank"}] measures the sidebar's in-flow width on desktop, locks that width, then adds an `is-pinned-sidenav` class that the theme styles as `position: fixed`. 
-
-On mobile or resize it unpins so Quarto's normal drawer behavior still works.
+`assets/pin-sidenav.html`:^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [pin-sidenav.html](https://github.com/beck-chan/portfolio/blob/main/assets/pin-sidenav.html){target="_blank"}] Patch for Quarto's left sidebar scrolling vertically with the page instead of staying fixed, since CSS alone can't pin the sidebar reliably without breaking the page layout.
 
 :::: {.flex .flex-wrap .justify-around}
 
@@ -380,13 +380,9 @@ On mobile or resize it unpins so Quarto's normal drawer behavior still works.
 
 #### Margin Below Table of Contents
 
-Footnotes are positioned in the right margin as a matter of personal preference, which means that they can overlap with the table of contents and any category filtering options.
+Footnotes are positioned in the right margin as a matter of personal preference, which means that they can overlap with the table of contents, any category filtering options, and the footer when the margin stacks tall, as well as break tabset containment.
 
-Quarto's built-in `layoutMarginEls` only spaces margin notes relative to each other, so notes can overlap the table of contents, collide with the footer when footnotes stack tall, and break layout inside tabsets that nest a full page-columns grid.
-
-`assets/margin-below-toc.html`^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [margin-below-toc.html](https://github.com/beck-chan/portfolio/blob/main/assets/margin-below-toc.html){target="_blank"}] cascades notes below the table of contents, pads `main.content` when notes outgrow the body so the footer clears them, and hoists tabset margin notes into a sibling container. 
-
-The themes also hide margin notes until a `margin-below-toc-ready` class is set, avoiding a flash of overlapping footnotes before layout runs.
+`assets/margin-below-toc.html`:^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [margin-below-toc.html](https://github.com/beck-chan/portfolio/blob/main/assets/margin-below-toc.html){target="_blank"}]  Cascades notes below the table of contents and category filters, pads the main content area when margin outgrows the body so it doesn't collide with the footer, and hoists footnotes attached to tabset content into a sibling container. 
 
 :::: {.flex .flex-wrap .justify-around}
 
@@ -410,25 +406,17 @@ The themes also hide margin notes until a `margin-below-toc-ready` class is set,
 
 #### Sticky Table of Contents 
 
-Quarto's native `#quarto-toc-toggle` only appears when margin notes overlap the table of contents, but we solved that issue by cascading footnotes below the table of contents intentionally so the built-in dropdown never shows.
-
-`assets/sticky-toc-toggle.html`^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [sticky-toc-toggle.html](https://github.com/beck-chan/portfolio/blob/main/assets/sticky-toc-toggle.html){target="_blank"}] shows a fixed table of contents dropdown under the navbar on desktop once `nav#TOC` scrolls under the header. 
-
-Expanding it clones the inline table of contents, and scrolling the page or following a link collapses it again. The inline table of contents is hidden while the dropdown is up so the two don't stack.
+`assets/sticky-toc-toggle.html`:^[**{{< fa brands github >}} beck-chan/portfolio/assets:** [sticky-toc-toggle.html](https://github.com/beck-chan/portfolio/blob/main/assets/sticky-toc-toggle.html){target="_blank"}] Shows a fixed table of contents dropdown when the page scrolls past the inline table of contents, allowing access to the table of contents anywhere on the page.
 
 :::: {.flex .flex-wrap .justify-around}
 
 ::: {.w-50 .pa2}
-
-**Inline**
 
 ![Table of Contents Inline](toc-inline.png){.pics group="toc"}
 
 :::
 
 ::: {.w-50 .pa2}
-
-**Drop-Down**
 
 ![Table of Contents Drop-Down](toc-dropdown.png){.pics group="toc"}
 
@@ -441,7 +429,7 @@ Expanding it clones the inline table of contents, and scrolling the page or foll
 
 ## Publishing
 
-I've chosen to automate the publishing process in the spirit of Continuous Integration and Continuous Delivery and Deployment (CI/CD), letting GitHub Workflows handle both rendering the static HTML files from the source `.qmd` files, as well as deploying them to GitHub Pages and Netlify where my production and development portfolios are respectively hosted.
+I've chosen to automate the publishing process in the spirit of Continuous Integration and Continuous Delivery and Deployment (CI/CD), letting GitHub Workflows handle both generating (via `quarto render`) the website files from the source `.qmd` files, and deploying the completed site to GitHub Pages and Netlify where my production and staging portfolios are respectively hosted.
 
 ### Output
 
@@ -456,18 +444,18 @@ project:
     - "**/*.ipynb"
 ```
 
-In my `.gitignore`, I've added the `_output` directory to avoid committing the rendered files to the repository whenever they are generated locally by previewing or testing as I want rendering to actually be done on the fly via GitHub Actions.
+In my `.gitignore`, I've added the `_output` directory to avoid committing website files to the repository whenever they are generated locally by previewing or testing as I want rendering to actually be done on the fly via GitHub Actions.
 
 ::: {.callout}
-This prevents me from ever accidentally forgetting to render the output files before calling it done, and as a result having outdated files displaying on the live portfolio site. 
+This prevents me from ever accidentally forgetting to render the updated output files before calling it done, and as a result having outdated files displaying on the live portfolio site. 
 
 :::
 
 ### Pull Requests (PRs)
 
-Since the content for this portfolio is developed using the GitHub CLI and lives in my GitHub repository,^[[{{< fa brands github >}} beck-chan/portfolio](https://github.com/beck-chan/portfolio){target="_blank"}], I've also decided to use pull requests to merge major changes into my `main` branch as part of good version control practices. 
+Since the content for this portfolio lives in my GitHub repository,^[[{{< fa brands github >}} beck-chan/portfolio](https://github.com/beck-chan/portfolio){target="_blank"}] I've also decided to use pull requests to merge major changes into my `main` branch as part of good version control practices even if I'm the only one working on any changes.
 
-Each PR is populated by a PR template,^[**{{< fa brands github >}} beck-chan/portfolio/.github/:** [pull_request_template.md](https://github.com/beck-chan/portfolio/blob/main/.github/pull_request_template.md){target="_blank"}] that instructs on what information needs to be included in the PR comment in order to trigger some automated release notes:
+Each PR top-level comment is autopopulated with content from a PR template,^[**{{< fa brands github >}} beck-chan/portfolio/.github/:** [pull_request_template.md](https://raw.githubusercontent.com/beck-chan/portfolio/refs/heads/main/.github/pull_request_template.md){target="_blank"}] that includes information on how to trigger automated release notes:
 
 ```markdown
 <!-- Any internal notes go here -->
@@ -479,9 +467,9 @@ Each PR is populated by a PR template,^[**{{< fa brands github >}} beck-chan/por
 
 Tag the PR with one of the following labels so that releases.yaml can automatically generate a GitHub release bump:
 
-1. `major`
-2. `minor`
-3. `patch`
+1. `major` (example: 1.0.0)
+2. `minor` (example: 1.1.0)
+3. `patch` (example: 1.1.1)
 
 Tagging with more than one label will give precedence in the order as numbered.
 
@@ -495,16 +483,16 @@ Include any release notes you want displayed under this section.
 **Browse the updated portfolio at: [https://beck-chan.github.io/](https://beck-chan.github.io/)**
 ```
 
-Utilizing pull requests allows me to streamline a few additional things with GitHub Workflows and automate (more on these in [Portfolio Deployment](deployment.qmd)):
+Utilizing pull requests allows me to streamline a few additional things with GitHub Workflows and automate (more on the last three in [Portfolio Deployment](deployment.qmd)):
 
-- [x] Spellchecking relevant files as part of PR checks
-- [x] Rendering and deploying the rendered files to Netlify for an open PR
-- [x] Generating release notes from certain PRs tagged with specific labels
-- [x] Rendering and deploying the rendered files to GitHub Pages production site when the PR is merged into `main` 
+- [x] Spellchecking relevant files as part of PR checks.
+- [x] Rendering and deploying the rendered files to Netlify for an open PR to my staging site.
+- [x] Generating release notes from PRs tagged with specific labels.
+- [x] Rendering and deploying the rendered files to GitHub Pages production site when the PR is merged into `main`.
 
 #### Spellcheck
 
-`.github/workflows/spellcheck.yaml`^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [spellcheck.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/spellcheck.yaml){target="_blank"}] runs when a PR is opened, or when a commit is sent up to the PR's branch, checking for spelling errors in the PR's files and adding a comment with the results when complete:[^spellcheck]
+`.github/workflows/spellcheck.yaml`^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [spellcheck.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/spellcheck.yaml){target="_blank"}] runs when a PR is opened, or when a commit is sent up to a branch connected to a PR, checking for spelling errors in relevant `*.qmd` files and adding a comment with the results when complete:[^spellcheck]
 
 ```yaml
         # Set up steps ...
