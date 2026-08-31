@@ -241,9 +241,10 @@ Themes are defined in the root directory with our top-level `_quarto.yml`:
       dark: assets/themes/minimal/code.theme
 ```
 
-For reference, this is how the portfolio looks without my custom themes applied:^[[https://beckchan-folio.netlify.app/](https://beckchan-folio.netlify.app/){target="_blank"}]
+For reference, this is how the portfolio looks without my custom themes applied:^[[View Unstyled Portfolio](https://beckchan-folio.netlify.app/){target="_blank" .button}]
 
-![Portfolio Sans Custom Themes](no-theme.png){.pics width="90%"}
+::: {.iframe url="https://beckchan-folio.netlify.app/" title="Unstyled Portfolio" width="90%" height=660}
+:::
 
 ::: {.panel-tabset}
 
@@ -427,6 +428,14 @@ Footnotes are positioned in the right margin as a matter of personal preference,
 
 :::
 
+## Extensions
+
+<!-- WIP -->
+
+
+
+
+
 ## Publishing
 
 I've chosen to automate the publishing process in the spirit of Continuous Integration and Continuous Delivery and Deployment (CI/CD), letting GitHub Workflows handle both generating (via `quarto render`) the website files from the source `.qmd` files, and deploying the completed site to GitHub Pages and Netlify where my production and staging portfolios are respectively hosted.
@@ -550,9 +559,9 @@ Utilizing pull requests allows me to streamline a few additional things with Git
 
 Words to be ignored are defined in `cspell.json`.^[**{{< fa brands github >}} beck-chan/portfolio/cspell.json:** [cspell.json](https://github.com/beck-chan/portfolio/blob/main/cspell.json){target="_blank"}]
 
-[^spellcheck]: **For example**:
+[^spellcheck]: **Spellcheck Comment Example**:
 
-    ```markdown
+    ```{.markdown fold=true}
     ### Spelling errors found
 
     poetry/random/24-guests.qmd:11:10 - Unknown word (wolfberries)

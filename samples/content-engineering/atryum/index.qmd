@@ -68,16 +68,8 @@ Some comparisons of the content I managed to produce for the Atryum within a ver
 
 The old landing page, with spilt install scripts:
 
-```{=html}
-<iframe
-  src="https://validbeck.github.io/atryum-archive/"
-  title="Previous Atryum landing page"
-  width="100%"
-  height="720"
-  loading="lazy"
-  class="pics"
-></iframe>
-```
+::: {.iframe url="https://validbeck.github.io/atryum-archive/" title="Previous Atryum Landing Page"}
+:::
 
 ::: {.tc}
 [Open Old Landing Page](https://validbeck.github.io/atryum-archive/){target="_blank" .button}
@@ -87,16 +79,8 @@ The old landing page, with spilt install scripts:
 
 My new landing page, with a combined smart install script:
 
-```{=html}
-<iframe
-  src="https://validbeck.github.io/atryum-docs/"
-  title="Atryum documentation landing page"
-  width="100%"
-  height="720"
-  loading="lazy"
-  class="pics"
-></iframe>
-```
+::: {.iframe url="https://validbeck.github.io/atryum-docs/" title="New Atryum Landing Page"}
+:::
 
 ::: {.tc}
 [Open New Landing Page](https://validbeck.github.io/atryum-docs/){target="_blank" .button}
@@ -112,16 +96,8 @@ My new landing page, with a combined smart install script:
 
 The old **Docs** (Quickstart) page:
 
-```{=html}
-<iframe
-  src="https://validbeck.github.io/atryum-archive/docs.html"
-  title="Previous Atryum landing page"
-  width="100%"
-  height="720"
-  loading="lazy"
-  class="pics"
-></iframe>
-```
+::: {.iframe url="https://validbeck.github.io/atryum-archive/docs.html" title="Previous Atryum Quickstart"}
+:::
 
 ::: {.tc}
 [Open Old Quickstart](https://validbeck.github.io/atryum-archive/docs.html){target="_blank" .button}
@@ -133,16 +109,8 @@ You'll also note that this was the only existing documentation on the website be
 
 My new cleaned up **Quickstart** page:
 
-```{=html}
-<iframe
-  src="https://validbeck.github.io/atryum-docs/documentation/1_quickstart.html"
-  title="Atryum documentation landing page"
-  width="100%"
-  height="720"
-  loading="lazy"
-  class="pics"
-></iframe>
-```
+::: {.iframe url="https://validbeck.github.io/atryum-docs/documentation/1_quickstart.html" title="New Atryum Quickstart"}
+:::
 
 ::: {.tc}
 [Open New Quickstart](https://validbeck.github.io/atryum-docs/documentation/1_quickstart.html){target="_blank" .button}
