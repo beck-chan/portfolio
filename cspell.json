@@ -23,8 +23,11 @@
       "atryum",
       "Atryum",
       "autopopulate",
+      "autopopulated",
       "Caecus",
       "chan",
+      "Colour",
+      "colour",
       "colwidths",
       "Complia",
       "Configurator",
@@ -68,6 +71,7 @@
       "SFDC",
       "sharelink",
       "sharelinks",
+      "sidenav",
       "squatch",
       "squatchjs",
       "supabase",
@@ -78,5 +82,6 @@
       "Upserts",
       "validmind",
       "ValidMind",
+      "Vercel",
     ]
   }

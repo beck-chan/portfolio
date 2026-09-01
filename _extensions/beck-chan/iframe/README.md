@@ -1,33 +1,12 @@
 # Iframe
 
-HTML filter that embeds a zoomable iframe from a fenced div. Optional `title` text is rendered as a caption under the frame.
+Embeds an iframe with a fenced div with options to include a caption under the iframe, as well as adjust zoom, sizing, and loading configurations.
+
+## Prerequisites
 
 Requires Quarto `>= 1.4.0`.
 
-## Installation
-
-Copy this directory into your project:
-
-```
-your-project/
-  _extensions/
-    beck-chan/
-      iframe/
-        _extension.yml
-        iframe.lua
-        iframe.css
-```
-
-Then enable the filter in `_quarto.yml`:
-
-```yaml
-filters:
-  - iframe
-```
-
-In this portfolio the extension is already installed and listed under `filters`. The filter only affects HTML output. The default `.pics` class is styled by this site's theme; other projects should define `.pics` (and `figcaption`) themselves if they want the same border, shadow, and caption look.
-
-## Usage
+## Usage Examples
 
 Only `url` is required. `title` becomes the caption under the iframe:
 
@@ -43,16 +22,16 @@ Override defaults when you need a different size, zoom, or alignment:
 :::
 ```
 
-`src` is an alias for `url`. Extra classes can be passed with `class="..."` or `{.iframe .your-class}`. `.pics` is always applied. `align` and `valign` default to `center`; `middle` is accepted for `valign`.
+## Reference
 
 | Attribute | Default | Notes |
 |---|---|---|
-| `url` / `src` | required | iframe source |
-| `title` | — | caption under the iframe; also used as the iframe `title` |
-| `zoom` | `60%` | also accepts `75` or `0.75` |
-| `width` | `100%` | visible viewport width |
-| `height` | `560` | unitless numbers become `px` |
+| `url` / `src` | Rrequired Input | Iframe source URL |
+| `title` | — | Caption under the frame and used as the iframe `title` |
+| `zoom` | `60%` | Also accepts `75` or `0.75` |
+| `width` | `100%` | Visible viewport width |
+| `height` | `560` | Unitless numbers become `px` |
 | `align` | `center` | `left`, `center`, or `right` on the page |
-| `valign` | `center` | `top`, `center`/`middle`, or `bottom` in a flex/grid parent |
-| `loading` | `lazy` | iframe `loading` attribute |
-| `class` | `pics` | extra classes are added alongside `pics` |
+| `valign` | `center` | `top`, `center` or `middle` (valign), or `bottom` in a flex/grid parent |
+| `loading` | `lazy` | Iframe `loading` attribute |
+| `class` | `pics` | Extra style classes can be passed with `class="..."` or `{.iframe .your-class}` |

@@ -8,13 +8,13 @@
     key: value
     ```
 
-    ```{.yaml fold=show fold-summary="Show config"}
+    ```{.yaml fold=false summary="Show config"}
     key: value
     ```
 
   Attributes:
-    fold          true|1|hide → collapsed; show → expanded; false|0|none → no fold
-    fold-summary  summary label (default: "Show Code")
+    fold      true → collapsed; false → expanded
+    summary   summary label (default: "Show Code")
 
   Notes:
     Uses a real wrapper div (not quarto-scaffold) so margin-footnote
@@ -39,12 +39,10 @@ local function normalize_fold(value)
     return nil
   end
   local fold = pandoc.utils.stringify(value):lower()
-  if fold == "true" or fold == "1" or fold == "hide" then
-    return "hide"
-  elseif fold == "show" then
-    return "show"
-  elseif fold == "false" or fold == "0" or fold == "none" then
-    return "none"
+  if fold == "true" then
+    return "true"
+  elseif fold == "false" then
+    return "false"
   end
   return nil
 end
@@ -56,22 +54,22 @@ function CodeBlock(block)
 
   local fold = normalize_fold(block.attributes["fold"])
   if fold == nil and block.classes:includes("fold") then
-    fold = "hide"
+    fold = "true"
   end
-  if fold == nil or fold == "none" then
+  if fold == nil then
     return nil
   end
 
-  local summary = block.attributes["fold-summary"] or "show code"
+  local summary = block.attributes["summary"] or "show code"
   summary = escape_html(pandoc.utils.stringify(summary))
 
   block.attributes["fold"] = nil
-  block.attributes["fold-summary"] = nil
+  block.attributes["summary"] = nil
   block.classes = block.classes:filter(function(class)
     return class ~= "fold"
   end)
 
-  local open = fold == "show" and " open" or ""
+  local open = fold == "false" and " open" or ""
   return pandoc.Div({
     pandoc.RawBlock(
       "html",

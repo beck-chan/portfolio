@@ -4,5 +4,6 @@
 _quarto_internal_scss_error.scss
 site_libs
 node_modules/
+.netlify
 
 .env

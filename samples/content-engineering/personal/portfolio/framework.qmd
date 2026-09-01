@@ -563,9 +563,9 @@ Utilizing pull requests allows me to streamline a few additional things with Git
 
 Words to be ignored are defined in `cspell.json`.^[**{{< fa brands github >}} beck-chan/portfolio/cspell.json:** [cspell.json](https://github.com/beck-chan/portfolio/blob/main/cspell.json){target="_blank"}]
 
-[^spellcheck]: **Spellcheck Comment Example**:
+[^spellcheck]: **Spellcheck Comment**:
 
-    ```{.markdown fold=true}
+    ```{.markdown .fold summary="view example"}
     ### Spelling errors found
 
     poetry/random/24-guests.qmd:11:10 - Unknown word (wolfberries)

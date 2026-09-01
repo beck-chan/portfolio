@@ -186,9 +186,9 @@ release *args:
 
     body="${notes}
 
-> **Browse the updated portfolio at: [{{production_url}}]({{production_url}})**
+    > **Browse the updated portfolio at: [{{production_url}}]({{production_url}})**
 
-[How are releases generated?]({{production_url}}samples/content-engineering/personal/portfolio/deployment.html#release-notes)"
+    [How are releases generated?]({{production_url}}samples/content-engineering/personal/portfolio/deployment.html#release-notes)"
 
     echo
     echo "----"
@@ -231,7 +231,7 @@ staging *args:
     fi
     npx cspell "**/*.qmd" --exclude "_output" --exclude ".quarto" --exclude "poetry/random/*"
     just _render
-    just _netlify _output "$NETLIFY_PROJECT" "$message"
+    just _netlify _output "$NETLIFY_PROJECT" "$message" >/dev/null
     echo "{{staging_url}}"
 
 [private]
