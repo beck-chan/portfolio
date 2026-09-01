@@ -295,3 +295,45 @@ Label precedence matches the PR template (1. [major]{.bubble}, 2. [minor]{.bubbl
 
 Comments are stripped, and an empty section falls back to "No public-facing release notes." PRs without one of the release-linked labels skip release generation.
 
+## Fallbacks
+
+I created a justfile^[**{{< fa brands github >}} beck-chan/portfolio/Justfile:** [Justfile](https://github.com/beck-chan/portfolio/blob/main/Justfile){target="_blank"}] (like a Makefile, but in Rust) to handle fallback cases locally, in the unlikely event that GitHub Actions is out of commission and I need to manually handle website deployments.
+
+### just staging
+
+`just staging` runs spellcheck on relevant files and returns any errors:
+
+```bash
+npx cspell "**/*.qmd" --exclude "_output" --exclude ".quarto" --exclude "poetry/random/*"
+```
+
+If no errors are found, the site is rendered with no PostHog tracking and deployed to Netlify,^[[https://beckchan-staging.netlify.app/](https://beckchan-staging.netlify.app/){target="_blank"}] then a link to the staging preview site returned:
+
+```bash
+```
+
+### just refresh
+
+`just refresh` clears the staging site with a replacement redirect to the production site,^[[https://beck-chan.github.io/](https://beck-chan.github.io/){target="_blank"}] then returns a link to the staging preview site:
+
+```bash
+```
+
+### just production
+
+`just production` renders the site with PostHog tracking and copies the rendered output to the `beck-chan/beck-chan.github.io`^[**{{< fa brands github >}} beck-chan:** [beck-chan.github.io](https://github.com/beck-chan/beck-chan.github.io){target="_blank"}] repository, where GitHub Pages^[[https://beck-chan.github.io/](https://beck-chan.github.io/){target="_blank"}] should automatically serve the site from the `main` branch:
+
+### just deploy
+
+`just deploy` manually deploys the files in from the `main` branch of `beck-chan/beck-chan.github.io` repository to GitHub Pages in the event that GitHub Workflows are out of commission and returns a link to the production site:
+
+```bash
+```
+
+### just release
+
+`just release` interactively generates the next semver tag and notes for the next release, by prompting the user for a release type tag and release notes body:
+
+```bash
+```
+
