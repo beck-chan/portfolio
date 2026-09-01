@@ -396,7 +396,7 @@ categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation",
 
 :::
 
-## Citations
+## Citation
 
 [{{< fa brands github >}} archive of `validmind/documentation` by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/){target="_blank" .button}
 

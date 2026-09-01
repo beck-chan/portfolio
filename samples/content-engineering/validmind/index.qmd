@@ -31,7 +31,7 @@ categories: ["Content Architecture", "Developer Content", "Feature Documentation
 :::{#validmind-content}
 :::
 
-## ValidMind Samples
+## ValidMind User Guidance
 
 :::{#validmind-sample}
 :::

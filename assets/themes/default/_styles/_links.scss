@@ -163,15 +163,11 @@ nav[aria-label="breadcrumb"] {
   color: #ff6162 !important; 
 }
 
-// Anchor link offset for fixed header
-main.content h1, 
-main.content h2, 
-main.content h3, 
-main.content h4, 
-main.content h5, 
-main.content h6,
-section[id] {
-  scroll-margin-top: 85px !important;
+// Leave room for the fixed header on in-page hash navigation.
+// scroll-padding on html covers every target (headings, sections, listings),
+// including those inside Quarto's page-columns grid where scroll-margin is unreliable.
+html {
+  scroll-padding-top: 80px;
 }
 
 

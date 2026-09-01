@@ -8,3 +8,4 @@ format:
       - assets/margin-below-toc.html
       - assets/sticky-toc-toggle.html
       - assets/pin-sidenav.html
+      - assets/anchor-offset.html

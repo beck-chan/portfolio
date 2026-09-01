@@ -7,3 +7,13 @@ categories: ["Content Architecture", "Training & Onboarding", "Quarto", "Fronten
 ## Situation
 
 ## Solution
+
+## Comparisons
+
+## Citation
+
+[{{< fa brands github >}} archive of `validmind/documentation` by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/get-started/){target="_blank" .button}
+
+::: {.callout}
+You can learn more about my involvement with ValidMind's documentation and the impact I had on training and onboarding collateral under [Technical Writing](/samples/technical-writing/validmind/index.qmd#validmind-quickstarts).
+:::

@@ -36,7 +36,7 @@ Links below will take you to static versions of the quickstarts as last edited b
 
 {{< include /samples/single-source/validmind/_cf-quickstarts.qmd >}}
 
-## Citations
+## Citation
 
 [{{< fa brands github >}} archive of `validmind/documentation` quickstarts by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/get-started){target="_blank" .button}
 

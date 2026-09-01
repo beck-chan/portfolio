@@ -128,7 +128,7 @@ You can browse the rest of the guides I authored under [Atryum Samples](#atryum-
 
 :::
 
-## Atryum Samples
+## Atryum User Guidance
 
 :::{#atryum-sample}
 :::

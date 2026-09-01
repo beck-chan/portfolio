@@ -21,6 +21,12 @@ includes:
 
 Along with authoring the bulk of ValidMind's user guidance content, I also led the redesign and reorganization of ValidMind's documentation site.
 
+::: {.callout}
+## You may notice many visual similarities between ValidMind's documentation and this portfolio. 
+
+That's because they're both built on Quarto,^[[Portfolio Framework](/samples/content-engineering/personal/portfolio/framework.qmd)] and I designed and maintained both!
+:::
+
 ## Situation
 
 Before I joined ValidMind, our documentation site was not only sparse in user guidance content, but any available content was not well organized or presented.
@@ -29,11 +35,9 @@ There were no clear user journeys, information on the same topics was scattered 
 
 ## Solution
 
-::: {.callout}
-I had an influence on nearly every page and section of the documentation. I'll only cover here changes not detailed under [Additional Content Overhauls](#additional-content-overhauls).
-:::
-
 Along with cleaning up internal authoring practices and establishing proper file name conventions, usage of product variables, and other guidance detailed in the company style guide,^[[ValidMind Enablement Content](/samples/technical-writing/validmind/enablement.qmd#validmind-style-guide)] I overhauled several key landing pages, made content placement more intuitive, and partnered with our frontend team to redesign the site's theme.
+
+I had an influence on nearly every page and section of the documentation. I'll only cover here changes not detailed under [Additional Redesigns](#additional-redesigns).
 
 ## Comparisons
 
@@ -172,4 +176,12 @@ The new FAQs, with updated and more detailed questions and answers, now featurin
 ## Additional Redesigns
 
 :::{#validmind-overhauls}
+:::
+
+## Citation
+
+[{{< fa brands github >}} archive of `validmind/documentation` by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/){target="_blank" .button}
+
+::: {.callout}
+You can learn more about my involvement with ValidMind's documentation and the impact I had on user guidance content under [Technical Writing](/samples/technical-writing/validmind/index.qmd#validmind-user-guides).
 :::

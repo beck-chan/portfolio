@@ -7,3 +7,13 @@ categories: ["Content Architecture", "Developer Content", "Feature Documentation
 ## Situation
 
 ## Solution
+
+## Comparisons
+
+## Citation
+
+[{{< fa brands github >}} archive of `validmind/validmind-library` notebooks by Beck](https://github.com/validbeck/validmind-library/tree/main/notebooks){target="_blank" .button}
+
+::: {.callout}
+You can learn more about my involvement with ValidMind's documentation and the impact I had on developer content under [Technical Writing](/samples/technical-writing/validmind/index.qmd#validmind-jupyter-notebooks).
+:::

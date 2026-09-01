@@ -296,7 +296,8 @@ listing:
 :::
 
 
-## Citations
+## Citation
 
 [{{< fa brands github >}} archive of `validmind/documentation/guide` by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/guide/){target="_blank" .button}
+
 

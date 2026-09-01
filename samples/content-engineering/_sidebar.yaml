@@ -11,7 +11,7 @@ website:
           contents:
             - text: "Developer Library"
               file: samples/content-engineering/validmind/library.qmd
-            - text: "Training"
+            - text: "Training Academy"
               file: samples/content-engineering/validmind/academy.qmd
             - text: "Release Notes"
               file: samples/content-engineering/validmind/releases.qmd

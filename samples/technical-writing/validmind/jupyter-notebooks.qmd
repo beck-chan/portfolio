@@ -60,6 +60,6 @@ Links below will take you to static versions of the notebooks as last edited by 
 :::{#validmind-notebooks-coauthored}
 :::
 
-## Citations
+## Citation
 
 [{{< fa brands github >}} archive of `validmind/validmind-library` notebooks by Beck](https://github.com/validbeck/validmind-library/tree/main/notebooks){target="_blank" .button}

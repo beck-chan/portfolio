@@ -52,6 +52,10 @@ categories: ["Content Architecture", "Developer Content", "Feature Documentation
 :::{#atryum-content}
 :::
 
+::: {.callout}
+You can learn more about my involvement with ValidMind and Atryum's documentation and the impact I had on user guidance content under [Technical Writing](/samples/technical-writing/validmind/index.qmd).
+:::
+
 ## Personal
 
 Some behind-the-scenes insights into how I built this portfolio site.

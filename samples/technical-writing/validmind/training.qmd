@@ -31,7 +31,7 @@ Links below will take you to static versions of the training courses as last edi
 :::{#validmind-training}
 :::
 
-## Citations
+## Citation
 
 [{{< fa brands github >}} archive of `validmind/documentation` training by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/training){target="_blank" .button}
 
