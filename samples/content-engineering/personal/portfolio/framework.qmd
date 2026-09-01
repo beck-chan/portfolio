@@ -430,19 +430,89 @@ Footnotes are positioned in the right margin as a matter of personal preference,
 
 ## Extensions
 
-I've also written a couple of Quarto Extensions^[[**Quarto:** [Extensions](https://quarto.org/docs/extensions/){target="_blank"}]] for custom functionality I found myself reusing and wanted to simplify the implementation of.
+I've also written a couple of Quarto Extensions^[**Quarto:** [Extensions](https://quarto.org/docs/extensions/){target="_blank"}] in Lua for custom functionality I found myself reusing and wanted to simplify the implementation of.
+
+::: {.panel-tabset}
 
 ### Code Folding
 
+Quarto's build-in option for folding code^[**Quarto:** [HTML Code Blocks](https://quarto.org/docs/output-formats/html-code.html#folding-code){target="_blank"}] only covers executable cell output. This extension allows non-executable fenced code blocks to be wrapped in a `<details>` toggle used below:^[**{{< fa brands github >}} beck-chan/portfolio/`_`{=html}extensions/beck-chan/:** [fold-code.lua](https://github.com/beck-chan/portfolio/blob/main/_extensions/beck-chan/fold-code/fold-code.lua){target="_blank"}]
+
+```{.lua .fold summary="view code"}
+local function is_html()
+  return quarto.doc.is_format("html:js") or quarto.doc.is_format("html")
+end
+
+local function escape_html(text)
+  return text
+    :gsub("&", "&amp;")
+    :gsub("<", "&lt;")
+    :gsub(">", "&gt;")
+    :gsub('"', "&quot;")
+end
+
+local function normalize_fold(value)
+  if value == nil then
+    return nil
+  end
+  local fold = pandoc.utils.stringify(value):lower()
+  if fold == "true" then
+    return "true"
+  elseif fold == "false" then
+    return "false"
+  end
+  return nil
+end
+
+function CodeBlock(block)
+  if not is_html() then
+    return nil
+  end
+
+  local fold = normalize_fold(block.attributes["fold"])
+  if fold == nil and block.classes:includes("fold") then
+    fold = "true"
+  end
+  if fold == nil then
+    return nil
+  end
+
+  local summary = block.attributes["summary"] or "show code"
+  summary = escape_html(pandoc.utils.stringify(summary))
+
+  block.attributes["fold"] = nil
+  block.attributes["summary"] = nil
+  block.classes = block.classes:filter(function(class)
+    return class ~= "fold"
+  end)
+
+  local open = fold == "false" and " open" or ""
+  return pandoc.Div({
+    pandoc.RawBlock(
+      "html",
+      "<details class=\"code-fold\"" .. open .. "><summary>" .. summary .. "</summary>"
+    ),
+    block,
+    pandoc.RawBlock("html", "</details>")
+  }, pandoc.Attr("", { "code-fold-wrap" }))
+end
+```
+
 ### Embedded Iframes
 
+Embeds an iframe with a fenced div with options to include a caption under the iframe, as well as adjust zoom, sizing, and loading configurations:^[**{{< fa brands github >}} beck-chan/portfolio/`_`{=html}extensions/beck-chan/:** [iframe.lua](https://github.com/beck-chan/portfolio/blob/main/_extensions/beck-chan/iframe/iframe.lua){target="_blank"}]
 
+::: {.iframe url="https://beck-chan.github.io/" title="Embedded Portfolio in Iframe"}
+:::
 
+:::
 
 
 ## Publishing
 
 I've chosen to automate the publishing process in the spirit of Continuous Integration and Continuous Delivery and Deployment (CI/CD), letting GitHub Workflows handle both generating (via `quarto render`) the website files from the source `.qmd` files, and deploying the completed site to GitHub Pages and Netlify where my production and staging portfolios are respectively hosted.
+
+::: {.panel-tabset}
 
 ### Output
 
@@ -589,3 +659,5 @@ Words to be ignored are defined in `cspell.json`.^[**{{< fa brands github >}} be
     poetry/random/taken.qmd:39:8 - Unknown word (impeity)
     poetry/random/to-dc.qmd:14:1 - Unknown word (Aegeas)
     ```
+
+:::
