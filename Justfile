@@ -1,6 +1,10 @@
 # Local deploys and releases. Requires bash, quarto, npx, and gh.
-# Rehearse without publishing: just staging dry-run
-#   (same for production, refresh, deploy, release)
+# Rehearse without publishing:
+#   just deploy --test
+#   just production --test
+#   just refresh --test
+#   just release --test
+#   just staging --test
 
 set dotenv-load := true
 set windows-shell := ["bash", "-c"]
@@ -15,105 +19,17 @@ source_repo := "beck-chan/portfolio"
 default:
     @just --list
 
-# Deploy stripped theme to Netlify FOLIO, then production profile to GitHub Pages
-production *args:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    dry=0
-    if [ "${DRY_RUN:-}" = "1" ] || [ "${DRY_RUN:-}" = "true" ]; then dry=1; fi
-    set -- {{args}}
-    for arg in "$@"; do
-      case "$arg" in
-        --dry-run|dry-run) dry=1 ;;
-        *) echo "Unknown argument: $arg" >&2; echo "Usage: just production [dry-run]" >&2; exit 1 ;;
-      esac
-    done
-    just _require NETLIFY_PAT FOLIO_PROJECT
-    message="portfolio-local-$(date -u +%Y%m%d-%H%M%S)"
-    if [ "$dry" -eq 1 ]; then
-      echo "Would: quarto render --profile stripped"
-      echo "Would: netlify deploy --prod --dir=_output --site=${FOLIO_PROJECT} --message=${message}"
-      echo "Would: quarto render --profile production"
-      echo "Would: clone {{pages_repo}}, replace with _output, commit, push origin main"
-      echo "{{pages_repo_url}}"
-      exit 0
-    fi
-    just _render stripped
-    just _netlify _output "$FOLIO_PROJECT" "$message"
-    just _render production
-    just _pages_sync
-    echo "{{pages_repo_url}}"
-
-# Spellcheck, render, and deploy preview to Netlify staging
-staging *args:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    dry=0
-    if [ "${DRY_RUN:-}" = "1" ] || [ "${DRY_RUN:-}" = "true" ]; then dry=1; fi
-    set -- {{args}}
-    for arg in "$@"; do
-      case "$arg" in
-        --dry-run|dry-run) dry=1 ;;
-        *) echo "Unknown argument: $arg" >&2; echo "Usage: just staging [dry-run]" >&2; exit 1 ;;
-      esac
-    done
-    just _require NETLIFY_PAT NETLIFY_PROJECT
-    message="portfolio-local-$(date -u +%Y%m%d-%H%M%S)"
-    if [ "$dry" -eq 1 ]; then
-      echo "Would: npx cspell \"**/*.qmd\" --exclude \"_output\" --exclude \".quarto\" --exclude \"poetry/random/*\""
-      echo "Would: quarto render"
-      echo "Would: netlify deploy --prod --dir=_output --site=${NETLIFY_PROJECT} --message=${message}"
-      echo "{{staging_url}}"
-      exit 0
-    fi
-    npx cspell "**/*.qmd" --exclude "_output" --exclude ".quarto" --exclude "poetry/random/*"
-    just _render
-    just _netlify _output "$NETLIFY_PROJECT" "$message"
-    echo "{{staging_url}}"
-
-# Replace staging with a redirect to production
-refresh *args:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    dry=0
-    if [ "${DRY_RUN:-}" = "1" ] || [ "${DRY_RUN:-}" = "true" ]; then dry=1; fi
-    set -- {{args}}
-    for arg in "$@"; do
-      case "$arg" in
-        --dry-run|dry-run) dry=1 ;;
-        *) echo "Unknown argument: $arg" >&2; echo "Usage: just refresh [dry-run]" >&2; exit 1 ;;
-      esac
-    done
-    just _require NETLIFY_PAT NETLIFY_PROJECT
-    message="portfolio-local-$(date -u +%Y%m%d-%H%M%S)-closed"
-    if [ "$dry" -eq 1 ]; then
-      echo "Would: write _redirects (302 {{production_url}}) and index.html"
-      echo "Would: netlify deploy --prod --site=${NETLIFY_PROJECT} --message=${message}"
-      echo "{{staging_url}}"
-      exit 0
-    fi
-    dir="$(mktemp -d)"
-    printf '%s\n' '/*    {{production_url}}    302' > "$dir/_redirects"
-    printf '%s\n' \
-      '<!doctype html>' \
-      '<meta http-equiv="refresh" content="0;url={{production_url}}">' \
-      '<title>Redirecting…</title>' \
-      '<p>No active preview. <a href="{{production_url}}">Go to portfolio</a>.</p>' \
-      > "$dir/index.html"
-    just _netlify "$dir" "$NETLIFY_PROJECT" "$message"
-    echo "{{staging_url}}"
-
 # Rebuild GitHub Pages from beck-chan.github.io main
 deploy *args:
     #!/usr/bin/env bash
     set -euo pipefail
     dry=0
-    if [ "${DRY_RUN:-}" = "1" ] || [ "${DRY_RUN:-}" = "true" ]; then dry=1; fi
+    if [ "${TEST:-}" = "1" ] || [ "${TEST:-}" = "true" ]; then dry=1; fi
     set -- {{args}}
     for arg in "$@"; do
       case "$arg" in
-        --dry-run|dry-run) dry=1 ;;
-        *) echo "Unknown argument: $arg" >&2; echo "Usage: just deploy [dry-run]" >&2; exit 1 ;;
+        --test) dry=1 ;;
+        *) echo "Unknown argument: $arg" >&2; echo "Usage: just deploy [--test]" >&2; exit 1 ;;
       esac
     done
     command -v gh >/dev/null || { echo "gh is required" >&2; exit 1; }
@@ -136,17 +52,78 @@ deploy *args:
     gh api "repos/{{pages_repo}}/pages/builds/latest" --jq '{status, commit, created_at, updated_at}'
     echo "{{production_url}}"
 
+# Deploy stripped theme to Netlify FOLIO, then production profile to GitHub Pages
+production *args:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    dry=0
+    if [ "${TEST:-}" = "1" ] || [ "${TEST:-}" = "true" ]; then dry=1; fi
+    set -- {{args}}
+    for arg in "$@"; do
+      case "$arg" in
+        --test) dry=1 ;;
+        *) echo "Unknown argument: $arg" >&2; echo "Usage: just production [--test]" >&2; exit 1 ;;
+      esac
+    done
+    just _require NETLIFY_PAT FOLIO_PROJECT
+    message="portfolio-local-$(date -u +%Y%m%d-%H%M%S)"
+    if [ "$dry" -eq 1 ]; then
+      echo "Would: quarto render --profile stripped"
+      echo "Would: netlify deploy --prod --dir=_output --site=${FOLIO_PROJECT} --message=${message}"
+      echo "Would: quarto render --profile production"
+      echo "Would: clone {{pages_repo}}, replace with _output, commit, push origin main"
+      echo "{{pages_repo_url}}"
+      exit 0
+    fi
+    just _render stripped
+    just _netlify _output "$FOLIO_PROJECT" "$message"
+    just _render production
+    just _pages_sync
+    echo "{{pages_repo_url}}"
+
+# Replace staging with a redirect to production
+refresh *args:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    dry=0
+    if [ "${TEST:-}" = "1" ] || [ "${TEST:-}" = "true" ]; then dry=1; fi
+    set -- {{args}}
+    for arg in "$@"; do
+      case "$arg" in
+        --test) dry=1 ;;
+        *) echo "Unknown argument: $arg" >&2; echo "Usage: just refresh [--test]" >&2; exit 1 ;;
+      esac
+    done
+    just _require NETLIFY_PAT NETLIFY_PROJECT
+    message="portfolio-local-$(date -u +%Y%m%d-%H%M%S)-closed"
+    if [ "$dry" -eq 1 ]; then
+      echo "Would: write _redirects (302 {{production_url}}) and index.html"
+      echo "Would: netlify deploy --prod --site=${NETLIFY_PROJECT} --message=${message}"
+      echo "{{staging_url}}"
+      exit 0
+    fi
+    dir="$(mktemp -d)"
+    printf '%s\n' '/*    {{production_url}}    302' > "$dir/_redirects"
+    printf '%s\n' \
+      '<!doctype html>' \
+      '<meta http-equiv="refresh" content="0;url={{production_url}}">' \
+      '<title>Redirecting…</title>' \
+      '<p>No active preview. <a href="{{production_url}}">Go to portfolio</a>.</p>' \
+      > "$dir/index.html"
+    just _netlify "$dir" "$NETLIFY_PROJECT" "$message"
+    echo "{{staging_url}}"
+
 # Create a tagged GitHub release (major / minor / patch)
 release *args:
     #!/usr/bin/env bash
     set -euo pipefail
     dry=0
-    if [ "${DRY_RUN:-}" = "1" ] || [ "${DRY_RUN:-}" = "true" ]; then dry=1; fi
+    if [ "${TEST:-}" = "1" ] || [ "${TEST:-}" = "true" ]; then dry=1; fi
     set -- {{args}}
     for arg in "$@"; do
       case "$arg" in
-        --dry-run|dry-run) dry=1 ;;
-        *) echo "Unknown argument: $arg" >&2; echo "Usage: just release [dry-run]" >&2; exit 1 ;;
+        --test) dry=1 ;;
+        *) echo "Unknown argument: $arg" >&2; echo "Usage: just release [--test]" >&2; exit 1 ;;
       esac
     done
     command -v gh >/dev/null || { echo "gh is required" >&2; exit 1; }
@@ -230,37 +207,32 @@ release *args:
       --target "$(git rev-parse HEAD)"
     echo "https://github.com/{{source_repo}}/releases/tag/${new_tag}"
 
-[private]
-_require +names:
+# Spellcheck, render, and deploy preview to Netlify staging
+staging *args:
     #!/usr/bin/env bash
     set -euo pipefail
-    for name in {{names}}; do
-      if [ -z "${!name:-}" ]; then
-        echo "Missing required environment variable: $name" >&2
-        echo "Set it in .env." >&2
-        exit 1
-      fi
+    dry=0
+    if [ "${TEST:-}" = "1" ] || [ "${TEST:-}" = "true" ]; then dry=1; fi
+    set -- {{args}}
+    for arg in "$@"; do
+      case "$arg" in
+        --test) dry=1 ;;
+        *) echo "Unknown argument: $arg" >&2; echo "Usage: just staging [--test]" >&2; exit 1 ;;
+      esac
     done
-
-[private]
-_render profile="":
-    #!/usr/bin/env bash
-    set -euo pipefail
-    set -o pipefail
-    profile="{{profile}}"
-    if [ -n "$profile" ]; then
-      quarto render --profile "$profile" 2>&1 | tee render_errors.log || {
-        echo "Quarto render failed immediately"
-        cat render_errors.log
-        exit 1
-      }
-    else
-      quarto render 2>&1 | tee render_errors.log || {
-        echo "Quarto render failed immediately"
-        cat render_errors.log
-        exit 1
-      }
+    just _require NETLIFY_PAT NETLIFY_PROJECT
+    message="portfolio-local-$(date -u +%Y%m%d-%H%M%S)"
+    if [ "$dry" -eq 1 ]; then
+      echo "Would: npx cspell \"**/*.qmd\" --exclude \"_output\" --exclude \".quarto\" --exclude \"poetry/random/*\""
+      echo "Would: quarto render"
+      echo "Would: netlify deploy --prod --dir=_output --site=${NETLIFY_PROJECT} --message=${message}"
+      echo "{{staging_url}}"
+      exit 0
     fi
+    npx cspell "**/*.qmd" --exclude "_output" --exclude ".quarto" --exclude "poetry/random/*"
+    just _render
+    just _netlify _output "$NETLIFY_PROJECT" "$message"
+    echo "{{staging_url}}"
 
 [private]
 _netlify dir site message:
@@ -307,3 +279,35 @@ _pages_sync:
       git commit -m "Automated file sync from portfolio"
       git push origin main
     fi
+
+[private]
+_render profile="":
+    #!/usr/bin/env bash
+    set -euo pipefail
+    set -o pipefail
+    profile="{{profile}}"
+    if [ -n "$profile" ]; then
+      quarto render --profile "$profile" 2>&1 | tee render_errors.log || {
+        echo "Quarto render failed immediately"
+        cat render_errors.log
+        exit 1
+      }
+    else
+      quarto render 2>&1 | tee render_errors.log || {
+        echo "Quarto render failed immediately"
+        cat render_errors.log
+        exit 1
+      }
+    fi
+
+[private]
+_require +names:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    for name in {{names}}; do
+      if [ -z "${!name:-}" ]; then
+        echo "Missing required environment variable: $name" >&2
+        echo "Set it in .env." >&2
+        exit 1
+      fi
+    done

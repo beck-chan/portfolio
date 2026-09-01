@@ -430,7 +430,11 @@ Footnotes are positioned in the right margin as a matter of personal preference,
 
 ## Extensions
 
-<!-- WIP -->
+I've also written a couple of Quarto Extensions^[[**Quarto:** [Extensions](https://quarto.org/docs/extensions/){target="_blank"}]] for custom functionality I found myself reusing and wanted to simplify the implementation of.
+
+### Code Folding
+
+### Embedded Iframes
 
 
 
