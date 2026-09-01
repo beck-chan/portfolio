@@ -2,8 +2,174 @@
 title: "ValidMind Documentation Redesign"
 subtitle: "Content Engineering"
 categories: ["Content Architecture", "Quarto", "Frontend Development"]
+listing:
+  - id: validmind-overhauls
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - library.qmd
+    - academy.qmd
+    - releases.qmd
+    - quickstarts.qmd
+includes:
+  redesign: true
+  landing: false
 ---
+
+Along with authoring the bulk of ValidMind's user guidance content, I also led the redesign and reorganization of ValidMind's documentation site.
 
 ## Situation
 
+Before I joined ValidMind, our documentation site was not only sparse in user guidance content, but any available content was not well organized or presented.
+
+There were no clear user journeys, information on the same topics was scattered across multiple places in the documentation, and the overall structure was not intuitive. As a new user, using the documentation was a frustrating and confusing experience.
+
 ## Solution
+
+::: {.callout}
+I had an influence on nearly every page and section of the documentation. I'll only cover here changes not detailed under [Additional Content Overhauls](#additional-content-overhauls).
+:::
+
+Along with cleaning up internal authoring practices and establishing proper file name conventions, usage of product variables, and other guidance detailed in the company style guide,^[[ValidMind Enablement Content](/samples/technical-writing/validmind/enablement.qmd#validmind-style-guide)] I overhauled several key landing pages, made content placement more intuitive, and partnered with our frontend team to redesign the site's theme.
+
+## Comparisons
+
+Some comparisons of my influence on the documentation site:
+
+### Landing Page
+
+::: {.panel-tabset}
+
+#### Before
+
+The old landing page, which was cluttered, had poorly defined user journeys, and suboptimal display on mobile devices:[^old-landing]
+
+::: {.iframe url="https://validbeck.github.io/archive/" title="Previous ValidMind Documentation Landing Page"}
+:::
+
+::: {.tc}
+[Open Old Landing Page](https://validbeck.github.io/archive/){target="_blank" .button}
+:::
+
+[^old-landing]: 
+
+    ::: {.iframe url="https://validbeck.github.io/archive/" title="Previous ValidMind Documentation Landing Page" zoom="100%" width="70%"}
+    :::
+
+#### After
+
+I led the redesign of this landing page, collaborating cross-functionally with our frontend team to ensure the new design was both user-friendly and visually appealing as well as mobile responsive:[^new-landing]
+
+::: {.iframe url="https://validbeck.github.io/docs/" title="New ValidMind Documentation Landing Page"}
+:::
+
+::: {.tc}
+[Open New Landing Page](https://validbeck.github.io/docs/){target="_blank" .button}
+:::
+
+[^new-landing]: 
+
+    ::: {.iframe url="https://validbeck.github.io/docs/" title="New ValidMind Documentation Landing Page"zoom="100%" width="70%"}
+    :::
+
+:::
+
+### User Guides
+
+::: {.panel-tabset}
+
+#### Before
+
+The old user guides portal, which not only had sparse content, buts somehow still felt crowded and cluttered:
+
+::: {.iframe url="https://validbeck.github.io/archive/guide/guides.html" title="Previous ValidMind User Guides"}
+:::
+
+::: {.tc}
+[Open Old User Guides](https://validbeck.github.io/archive/guide/guides.html){target="_blank" .button}
+:::
+
+#### After
+
+The new user guides portal, filled with content I authored, and now featuring a cleaner experience thanks to my new collapsible sidebar Quarto Extension custom designed for this landing:^[**{{< fa brands github >}} validmind/documentation archive:** [validbeck/sidebar-slim](https://github.com/validbeck/validmind-docs/tree/main/site/_extensions/validbeck/sidebar-slim){target="_blank"}]
+
+::: {.iframe url="https://validbeck.github.io/docs/guide/guides.html" title="New ValidMind User Guides"}
+:::
+
+::: {.tc}
+[Open New User Guides](https://validbeck.github.io/docs/guide/guides.html){target="_blank" .button}
+:::
+
+:::
+
+
+### Support
+
+::: {.panel-tabset}
+
+#### Before
+
+The old support portal, which was not very helpful at all:
+
+::: {.iframe url="https://validbeck.github.io/archive/guide/support.html" title="Previous ValidMind Support Landing Page"}
+:::
+
+::: {.tc}
+[Open Old Support Landing Page](https://validbeck.github.io/archive/guide/support.html){target="_blank" .button}
+:::
+
+#### After
+
+The new support portal, now with actions users can actually take, including visiting our custom Help Center:[^help-center]
+
+[^help-center]: 
+
+    ::: {.callout}
+    Alongside owning our user guidance content, I also designed and implemented this exact custom Zendesk Help Center as a solo contributor with by-in and accolades from executive leadership.
+    :::
+
+::: {.iframe url="https://validbeck.github.io/docs/support/support.html" title="New ValidMind Support Landing Page"}
+:::
+
+::: {.tc}
+[Open New Support Landing Page](https://validbeck.github.io/docs/support/support.html){target="_blank" .button}
+:::
+
+:::
+
+### FAQs
+
+::: {.panel-tabset}
+
+#### Before
+
+The old FAQs, with outdated questions and answers, and lack of descriptive links to indicate relevant content:
+
+::: {.iframe url="https://validbeck.github.io/archive/guide/faq.html" title="Previous ValidMind FAQs"}
+:::
+
+::: {.tc}
+[Open Old FAQs](https://validbeck.github.io/archive/guide/faq.html){target="_blank" .button}
+:::
+
+#### After
+
+The new FAQs, with updated and more detailed questions and answers, now featuring descriptive display of links to indicate relevant content:
+
+::: {.iframe url="https://validbeck.github.io/docs/faq/faq.html" title="New ValidMind FAQs"}
+:::
+
+::: {.tc}
+[Open New FAQs](https://validbeck.github.io/docs/faq/faq.html){target="_blank" .button}
+:::
+
+:::
+
+
+## Additional Redesigns
+
+:::{#validmind-overhauls}
+:::

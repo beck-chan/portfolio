@@ -7,7 +7,7 @@ listing:
     grid-columns: 3
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
       - validmind/library.qmd
       - validmind/releases.qmd
@@ -19,7 +19,7 @@ listing:
     grid-columns: 2
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
       - atryum/index.qmd
   - id: personal-content
@@ -27,7 +27,7 @@ listing:
     grid-columns: 2
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
       - personal/portfolio/index.qmd
     categories: true
@@ -39,6 +39,8 @@ categories: ["Content Architecture", "Developer Content", "Feature Documentation
 ## ValidMind
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}
+
+{{< include /samples/single-source/validmind/_architecture.qmd >}}
 
 :::{#validmind-content}
 :::

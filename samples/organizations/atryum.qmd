@@ -26,11 +26,13 @@ listing:
     grid-columns: 2
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
       - ../content-engineering/atryum/index.qmd
     categories: true
 categories: ["Content Architecture", "Feature Documentation", "User Guides", "Quickstart", "Integrations", "Agentic Orchestration", "Artificial Intelligence (AI)", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Risk Governance", "Software as a Service", "Atryum", "ValidMind"]
+includes:
+  organizations: true
 ---
 
 ::: {.hidden}
@@ -43,8 +45,6 @@ Atryum is an open-source agentic orchestration tool developed by ValidMind. I wa
 ## Content Engineering
 
 {{< include /samples/single-source/_content.qmd >}}
-
-make sure to include the lead in blurb
 
 :::{#atryum-content}
 :::

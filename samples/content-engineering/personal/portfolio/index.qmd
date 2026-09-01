@@ -14,7 +14,7 @@ listing:
     - deployment.qmd
 ---
 
-How [https://beck-chan.github.io/](https://beck-chan.github.io/) is built and maintained, more or less.
+How this portfolio website is built and maintained, more or less.
 
 :::{#content-portfolio}
 :::

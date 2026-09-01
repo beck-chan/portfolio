@@ -27,6 +27,10 @@ includes:
     content: true
 ---
 
+::: {.hidden}
+Along with authoring approximately 95% of the content for Atryum, I also designed and implemented the static documentation website authoring flow.
+:::
+
 {{< include /samples/single-source/atryum/_atryum.qmd >}}
 
 {{< include /samples/single-source/atryum/_writing.qmd >}}
@@ -116,7 +120,11 @@ My new cleaned up **Quickstart** page:
 [Open New Quickstart](https://validbeck.github.io/atryum-docs/documentation/1_quickstart.html){target="_blank" .button}
 :::
 
-Along with this Quickstart page, I also produced the rest of the guides linked in the top navigation.
+Along with this Quickstart page, I also produced the rest of the guides linked in the top navigation. 
+
+::: {.callout}
+You can browse the rest of the guides I authored under [Atryum Samples](#atryum-samples).
+:::
 
 :::
 

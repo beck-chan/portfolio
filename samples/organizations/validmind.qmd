@@ -50,7 +50,7 @@ listing:
     grid-columns: 2
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
       - ../content-engineering/atryum/index.qmd
   - id: validmind-copywriting
@@ -80,7 +80,7 @@ I was the sole **Senior Technical Writer** for ValidMind, where I employed docs-
 
 {{< include /samples/single-source/_content.qmd >}}
 
-make sure to include the lead in blurb
+{{< include /samples/single-source/validmind/_architecture.qmd >}}
 
 :::{#validmind-content}
 :::
@@ -88,8 +88,6 @@ make sure to include the lead in blurb
 ### Atryum
 
 {{< include /samples/single-source/atryum/_atryum.qmd >}}
-
-make sure to include the lead in blurb
 
 :::{#atryum-content}
 :::
