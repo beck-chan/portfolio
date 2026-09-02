@@ -75,19 +75,11 @@ The old landing page, with spilt install scripts:
 ::: {.iframe url="https://validbeck.github.io/atryum-archive/" title="Previous Atryum Landing Page"}
 :::
 
-::: {.tc}
-[Open Old Landing Page](https://validbeck.github.io/atryum-archive/){target="_blank" .button}
-:::
-
 #### After
 
 My new landing page, with a combined smart install script:
 
 ::: {.iframe url="https://validbeck.github.io/atryum-docs/" title="New Atryum Landing Page"}
-:::
-
-::: {.tc}
-[Open New Landing Page](https://validbeck.github.io/atryum-docs/){target="_blank" .button}
 :::
 
 :::
@@ -103,10 +95,6 @@ The old **Docs** (Quickstart) page:
 ::: {.iframe url="https://validbeck.github.io/atryum-archive/docs.html" title="Previous Atryum Quickstart"}
 :::
 
-::: {.tc}
-[Open Old Quickstart](https://validbeck.github.io/atryum-archive/docs.html){target="_blank" .button}
-:::
-
 You'll also note that this was the only existing documentation on the website before my involvement.
 
 #### After
@@ -114,10 +102,6 @@ You'll also note that this was the only existing documentation on the website be
 My new cleaned up **Quickstart** page:
 
 ::: {.iframe url="https://validbeck.github.io/atryum-docs/documentation/1_quickstart.html" title="New Atryum Quickstart"}
-:::
-
-::: {.tc}
-[Open New Quickstart](https://validbeck.github.io/atryum-docs/documentation/1_quickstart.html){target="_blank" .button}
 :::
 
 Along with this Quickstart page, I also produced the rest of the guides linked in the top navigation. 

@@ -54,13 +54,9 @@ The old landing page, which was cluttered, had poorly defined user journeys, and
 ::: {.iframe url="https://validbeck.github.io/archive/" title="Previous ValidMind Documentation Landing Page"}
 :::
 
-::: {.tc}
-[Open Old Landing Page](https://validbeck.github.io/archive/){target="_blank" .button}
-:::
-
 [^old-landing]: 
 
-    ::: {.iframe url="https://validbeck.github.io/archive/" title="Previous ValidMind Documentation Landing Page" zoom="100%" width="70%"}
+    ::: {.iframe url="https://validbeck.github.io/archive/" title="Previous ValidMind Documentation Landing Page Mobile View" zoom="100%" width="70%" new-window="false"}
     :::
 
 #### After
@@ -70,13 +66,9 @@ I led the redesign of this landing page, collaborating cross-functionally with o
 ::: {.iframe url="https://validbeck.github.io/docs/" title="New ValidMind Documentation Landing Page"}
 :::
 
-::: {.tc}
-[Open New Landing Page](https://validbeck.github.io/docs/){target="_blank" .button}
-:::
-
 [^new-landing]: 
 
-    ::: {.iframe url="https://validbeck.github.io/docs/" title="New ValidMind Documentation Landing Page"zoom="100%" width="70%"}
+    ::: {.iframe url="https://validbeck.github.io/docs/" title="New ValidMind Documentation Landing Page Mobile View" zoom="100%" width="70%" new-window="false"}
     :::
 
 :::
@@ -92,19 +84,11 @@ The old user guides portal, which not only had sparse content, buts somehow stil
 ::: {.iframe url="https://validbeck.github.io/archive/guide/guides.html" title="Previous ValidMind User Guides"}
 :::
 
-::: {.tc}
-[Open Old User Guides](https://validbeck.github.io/archive/guide/guides.html){target="_blank" .button}
-:::
-
 #### After
 
 The new user guides portal, filled with content I authored, and now featuring a cleaner experience thanks to my new collapsible sidebar Quarto Extension custom designed for this landing:^[**{{< fa brands github >}} validmind/documentation archive:** [validbeck/sidebar-slim](https://github.com/validbeck/validmind-docs/tree/main/site/_extensions/validbeck/sidebar-slim){target="_blank"}]
 
 ::: {.iframe url="https://validbeck.github.io/docs/guide/guides.html" title="New ValidMind User Guides"}
-:::
-
-::: {.tc}
-[Open New User Guides](https://validbeck.github.io/docs/guide/guides.html){target="_blank" .button}
 :::
 
 :::
@@ -121,10 +105,6 @@ The old support portal, which was not very helpful at all:
 ::: {.iframe url="https://validbeck.github.io/archive/guide/support.html" title="Previous ValidMind Support Landing Page"}
 :::
 
-::: {.tc}
-[Open Old Support Landing Page](https://validbeck.github.io/archive/guide/support.html){target="_blank" .button}
-:::
-
 #### After
 
 The new support portal, now with actions users can actually take, including visiting our custom Help Center:[^help-center]
@@ -136,10 +116,6 @@ The new support portal, now with actions users can actually take, including visi
     :::
 
 ::: {.iframe url="https://validbeck.github.io/docs/support/support.html" title="New ValidMind Support Landing Page"}
-:::
-
-::: {.tc}
-[Open New Support Landing Page](https://validbeck.github.io/docs/support/support.html){target="_blank" .button}
 :::
 
 :::
@@ -155,19 +131,11 @@ The old FAQs, with outdated questions and answers, and lack of descriptive links
 ::: {.iframe url="https://validbeck.github.io/archive/guide/faq.html" title="Previous ValidMind FAQs"}
 :::
 
-::: {.tc}
-[Open Old FAQs](https://validbeck.github.io/archive/guide/faq.html){target="_blank" .button}
-:::
-
 #### After
 
 The new FAQs, with updated and more detailed questions and answers, now featuring descriptive display of links to indicate relevant content:
 
 ::: {.iframe url="https://validbeck.github.io/docs/faq/faq.html" title="New ValidMind FAQs"}
-:::
-
-::: {.tc}
-[Open New FAQs](https://validbeck.github.io/docs/faq/faq.html){target="_blank" .button}
 :::
 
 :::

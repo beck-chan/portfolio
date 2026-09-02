@@ -1,6 +1,6 @@
 # Iframe
 
-Embeds an iframe with a fenced div with options to include a caption under the iframe, as well as adjust zoom, sizing, loading, and an open-in-new-window control.
+Embeds an iframe with a fenced div with options to include a caption under the iframe, as well as adjust zoom, sizing, and loading configurations.
 
 ## Prerequisites
 

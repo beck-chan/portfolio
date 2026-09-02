@@ -8,7 +8,7 @@ sidebar: false
 
 ::: {.timeline .tl-diamond .tl-label-banner .vertical}
 
-::: {.event data-label="March 2024 &ndash; July 2026" style="--tl-color-label: #de267e; --tl-color-dot: #de267e;"}
+::: {.event data-label="March 2024 &ndash; July 2026" style="--tl-color-label: #de267e; --tl-color-dot: #de267e;" .tl-card}
 ### Senior Technical Writer
 
 **ValidMind, Inc**
@@ -23,7 +23,11 @@ sidebar: false
 
 :::
 
-::: {.event data-label="April 2023 &ndash; January 2024" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;"}
+::: {.event data-label="October 2018 &ndash; January 2024" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;" .tl-card}
+
+::: {.timeline .tl-label-badge .vertical .sq-line}
+
+::: {.event data-label="April 2023 &ndash; January 2024" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;" .sq data-dot="3"}
 ### Senior Customer Solutions Specialist
 
 **SaaSquatch by impact.com**
@@ -35,7 +39,7 @@ sidebar: false
 
 :::
 
-::: {.event data-label="October 2022 &ndash; March 2023" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;"}
+::: {.event data-label="October 2022 &ndash; March 2023" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;" .sq data-dot="2"}
 ### Senior Technical Specialist
 
 **SaaSquatch by impact.com**
@@ -47,7 +51,7 @@ sidebar: false
 
 :::
 
-::: {.event data-label="October 2018 &ndash; September 2022" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;"}
+::: {.event data-label="October 2018 &ndash; September 2022" style="--tl-color-label: #06926d; --tl-color-dot: #06926d;" .sq data-dot="1"}
 ### Solutions Architect
 
 **SaaSquatch by impact.com**
@@ -59,7 +63,11 @@ sidebar: false
 
 :::
 
-::: {.event data-label="October 2017 &ndash; August 2018" style="--tl-color-label: #f26b29; --tl-color-dot: #f26b29;"}
+:::
+
+:::
+
+::: {.event data-label="October 2017 &ndash; August 2018" style="--tl-color-label: #f26b29; --tl-color-dot: #f26b29;" .tl-card}
 ### Customer Support Analyst
 
 **Develus Systems Inc. for Complia Health**
@@ -70,7 +78,7 @@ sidebar: false
 
 :::
 
-::: {.event data-label="July 2016 &ndash; September 2017" style="--tl-color-label: #cd1727; --tl-color-dot: #cd1727;"}
+::: {.event data-label="July 2016 &ndash; September 2017" style="--tl-color-label: #cd1727; --tl-color-dot: #cd1727;" .tl-card}
 ### Customer Support Representative
 
 AbeBooks.com, Amazon subsidiary
@@ -80,7 +88,7 @@ AbeBooks.com, Amazon subsidiary
 
 :::
 
-::: {.event data-label="January 2014 &ndash; July 2016" style="--tl-color-label: #f3be60; --tl-color-dot: #f3be60;"}
+::: {.event data-label="January 2014 &ndash; July 2016" style="--tl-color-label: #f3be60; --tl-color-dot: #f3be60;" .tl-card}
 ### Optical Technician & Medical Office Assistant
 
 **Hudson's Bay Optical**
@@ -90,7 +98,7 @@ AbeBooks.com, Amazon subsidiary
 
 :::
 
-::: {.event data-label="July 2013 &ndash; December 2013" style="--tl-color-label: #0272be; --tl-color-dot: #0272be;"}
+::: {.event data-label="July 2013 &ndash; December 2013" style="--tl-color-label: #0272be; --tl-color-dot: #0272be;" .tl-card}
 ### Medical Office Assistant / Receptionist
 
 **Inner Harbour Optometry**
@@ -100,7 +108,7 @@ AbeBooks.com, Amazon subsidiary
 
 :::
 
-::: {.event data-label="July 2010 &ndash; July 2013" style="--tl-color-label: #222e84; --tl-color-dot: #222e84;"}
+::: {.event data-label="July 2010 &ndash; July 2013" style="--tl-color-label: #222e84; --tl-color-dot: #222e84;" .tl-card}
 
 ### Administrative & Teaching Assistant
 
@@ -130,8 +138,11 @@ AbeBooks.com, Amazon subsidiary
 - GitHub
 - Cursor Code
 - Visual Studio Code
+<!-- - Supabase -->
 - Docker
 - Postman
+- Netlify
+<!-- - Vercel -->
 
 
 **Solutions Architecture & Implementation**
@@ -139,9 +150,12 @@ AbeBooks.com, Amazon subsidiary
 - REST API
 - GraphQL
 - JavaScript
+- Next.js
 - JSONata
 - Python
+- Rust
 - HTML
+<!-- - Tailwind CSS -->
 - CSS
 - TypeScript
 - SQL
@@ -187,19 +201,16 @@ AbeBooks.com, Amazon subsidiary
 :::
 
 
-
-
-
 ## Education
 
-::: {.timeline .tl-diamond .tl-label-badge .vertical}
+::: {.timeline .tl-diamond .tl-label-badge .vertical-right}
 
-::: {.event data-label="Completed 2019" style="--tl-color-label: #ff6068; --tl-color-dot: #ff6068;"}
+::: {.event data-label="Completed 2019" style="--tl-color-label: #ff6068; --tl-color-dot: #ff6068;" .tl-card}
 ### Lighthouse Labs
 Intro to Front-End with JavaScript
 :::
 
-::: {.event data-label="Graduated 2013" style="--tl-color-label: #0272be; --tl-color-dot: #0272be;"}
+::: {.event data-label="Graduated 2013" style="--tl-color-label: #0272be; --tl-color-dot: #0272be;" .tl-card}
 ### University of Victoria
 ***cum laude***
 
@@ -207,4 +218,31 @@ Bachelor of Arts, English Literature & Japanese Studies
 :::
 
 :::
+
+## Projects
+
+::: {.timeline .tl-diamond .tl-label-badge .vertical}
+
+<!-- ::: {.event data-label="Launched October 2026" style="--tl-color-label: #ffb3ba; --tl-color-dot: #ffb3ba;" .tl-card}
+### y2k Guestbook
+*[https://beck-chan.vercel.app](https://beck-chan.vercel.app){target="_blank"}*
+
+- Mobile-responsive frontend built on Next.js, backend powered by Supabase. Custom styling in Tailwind CSS. 
+- Rate-limiting implemented with {x}, profanity moderation implemented with {y}.
+-->
+
+<!-- ::: -->
+
+
+::: {.event data-label="Launched August 2026" style="--tl-color-label: #0b2a12; --tl-color-dot: #0b2a12;" .tl-card}
+### Personal Portfolio
+*[https://beck-chan.github.io](https://beck-chan.github.io)*
+
+- Mobile-responsive build using Quarto, deployed to GitHub Pages and Netlify via GitHub CI/CD Workflows.
+- Custom themes and styling using Bootstrap. Custom functionality added with JavaScript and Lua.
+- Backup local deployment fallbacks via Justfile in Rust.
+:::
+
+:::
+
 

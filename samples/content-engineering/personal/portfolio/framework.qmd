@@ -111,6 +111,12 @@ I've also written a quick script to embed the same search within a page's conten
 
 :::
 
+#### Mobile View
+
+I implemented better support for viewing the portfolio on mobile devices by using Tachyons flex^[**Tachyons:** [Flexbox](https://tachyons.io/docs/layout/flexbox/){target="_blank"}] classes for columns, and adjusting parts of the theme to be more mobile-friendly:^[[Styling](#styling)]
+
+::: {.iframe url="https://beck-chan.github.io" title="Portfolio in Mobile View" zoom="100%" width="50%" new-window="false"}
+:::
 
 :::
 
@@ -222,7 +228,7 @@ Similarly, the footer is also defined in `_quarto.yml`:
 
 ## Styling
 
-Quarto offers a few built-in themes, but I chose define custom themes using Bootstrap (`.scss`).
+Quarto offers a few built-in themes, but I chose define custom themes using Bootstrap (`.scss`). 
 
 ### Core Theming
 

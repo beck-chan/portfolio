@@ -232,7 +232,7 @@ function Div(div)
   if new_window then
     local open_label = title ~= ""
       and ("Open " .. title .. "")
-      or "Open in a new window"
+      or "Open Full Size"
     open_link = string.format(
       '    <a class="iframe-embed__open" href="%s" target="_blank" rel="noopener noreferrer" title="%s" aria-label="%s">\n'
         .. "      %s\n"

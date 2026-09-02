@@ -54,6 +54,29 @@ $code-block-bg: #212121; // Block background color
     display: none !important;
     }
 
+.timeline .event.tl-card {
+    background: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #21212180;
+    box-shadow: 4px 4px 0px 0px #21212180 !important;
+    padding: 0.875rem 1rem;
+    }
+
+    .timeline.vertical.sq-line {
+    --tl-line-width: 5px;
+    }
+    
+    .timeline.vertical.tl-diamond .event.sq::after {
+    border-radius: 50%;
+    left: calc(-30px + var(--tl-line-width) / 2);
+    transform: translateX(-50%);
+    }
+    
+    .timeline.vertical.sq-line::before {
+    width: 0;
+    background: none;
+    border-left: var(--tl-line-width) dotted #838383;
+    }
 
 
       

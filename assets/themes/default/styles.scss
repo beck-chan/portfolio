@@ -56,6 +56,30 @@ $code-block-bg: #0b2a12; // Block background color
     display: none !important;
 }
 
+.timeline .event.tl-card {
+    background: #fff4f5;
+    border-radius: 5px;
+    border: 1px solid #ffb3ba;
+    box-shadow: 4px 4px 0px 0px #ffb3ba !important;
+    padding: 0.875rem 1rem;
+  }
+
+  .timeline.vertical.sq-line {
+    --tl-line-width: 5px;
+  }
+  
+  .timeline.vertical.tl-diamond .event.sq::after {
+    border-radius: 50%;
+    left: calc(-30px + var(--tl-line-width) / 2);
+    transform: translateX(-50%);
+  }
+  
+  .timeline.vertical.sq-line::before {
+    width: 0;
+    background: none;
+    border-left: var(--tl-line-width) dotted #0b2a1280;
+  }
+
 
       
 

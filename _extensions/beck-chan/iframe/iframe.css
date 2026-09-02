@@ -65,25 +65,19 @@ figure.iframe-embed {
   width: 2rem;
   height: 2rem;
   padding: 0.35rem;
-  color: #1a1a1a;
-  background-color: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(0, 0, 0, 0.16);
+  color: inherit;
+  background-color: #fff;
+  border: 1px solid currentColor;
   border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: none;
   text-decoration: none !important;
-  border-bottom: none !important;
   line-height: 0;
-  transition: color 0.15s ease-in, background-color 0.15s ease-in,
-    border-color 0.15s ease-in;
+  transition: color 0.15s ease-in, border-color 0.15s ease-in;
 }
 
 .iframe-embed__open:hover,
 .iframe-embed__open:focus-visible {
-  color: #000;
-  background-color: #fff;
-  border-color: rgba(0, 0, 0, 0.32);
   text-decoration: none !important;
-  border-bottom: none !important;
   outline: none;
 }
 
@@ -91,17 +85,6 @@ figure.iframe-embed {
   display: block;
   width: 1rem;
   height: 1rem;
-}
-
-.quarto-dark .iframe-embed__open {
-  color: #f4f4f4;
-  background-color: rgba(20, 20, 20, 0.88);
-  border-color: rgba(255, 255, 255, 0.22);
-}
-
-.quarto-dark .iframe-embed__open:hover,
-.quarto-dark .iframe-embed__open:focus-visible {
-  color: #fff;
-  background-color: #111;
-  border-color: rgba(255, 255, 255, 0.4);
+  fill: none;
+  stroke: currentColor;
 }
