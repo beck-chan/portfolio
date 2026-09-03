@@ -229,9 +229,10 @@ Bachelor of Arts, English Literature & Japanese Studies
 ### y2k Guestbook
 *[https://beck-chan.vercel.app](https://beck-chan.vercel.app){target="_blank"}*
 
-- Mobile-responsive frontend built on Next.js, backend powered by Supabase. Custom styling in Tailwind CSS. 
-- Rate-limiting implemented with {x}, profanity moderation implemented with {y}.
-- Admin functionality for comment management. Documentation including API reference written in MDX. -->
+- Mobile-responsive frontend built on Next.js, backend powered by Supabase. Custom styling with Tailwind CSS. 
+- Built-in rate limiting and profanity filtering. Admin functionality for comment management and customization.
+- Documentation including API reference written in MDX. Admin authentication handled by Google Cloud Platform.
+ -->
 
 <!-- 
 ::: -->
