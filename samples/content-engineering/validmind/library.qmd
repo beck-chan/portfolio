@@ -4,11 +4,106 @@ subtitle: "Content Engineering"
 categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Quarto",  "Frontend Development"]
 ---
 
+::: {.hidden}
+:::
+
+blurb
+
+{{< include /samples/single-source/validmind/_new-user.qmd >}}
+
 ## Situation
 
 ## Solution
 
+::: {.panel-tabset}
+
+### Landing Pages
+
+### Jupyter Notebooks
+
+:::
+
 ## Comparisons
+
+### Developer Library
+
+::: {.panel-tabset}
+
+#### Before
+
+wip
+
+::: {.iframe url="https://validbeck.github.io/archive/guide/get-started-developer-framework.html" title="Previous ValidMind Developer Library"}
+:::
+
+#### After
+
+designed and implemented this
+
+::: {.iframe url="https://validbeck.github.io/docs/developer/validmind-library.html" title="New ValidMind Developer Library"}
+:::
+
+:::
+
+### Testing
+
+::: {.panel-tabset}
+
+#### Before
+
+wip
+
+::: {.iframe url="https://validbeck.github.io/archive/guide/testing-overview.html" title="Previous ValidMind Library Testing"}
+:::
+
+#### After
+
+designed and implemented this
+
+::: {.iframe url="https://validbeck.github.io/docs/developer/how-to/testing-overview.html" title="New ValidMind Library Testing"}
+:::
+
+:::
+
+### Features
+
+::: {.panel-tabset}
+
+#### Before
+
+wip
+
+::: {.iframe url="https://validbeck.github.io/archive/guide/testing-overview.html" title="Previous ValidMind Library Features"}
+:::
+
+#### After
+
+designed and implemented this
+
+::: {.iframe url="https://validbeck.github.io/docs/developer/how-to/feature-overview.html" title="New ValidMind Library Features"}
+:::
+
+:::
+
+### Samples
+
+::: {.panel-tabset}
+
+#### Before
+
+wip
+
+::: {.iframe url="https://validbeck.github.io/archive/guide/samples-jupyter-notebooks.html" title="Previous ValidMind Library Samples"}
+:::
+
+#### After
+
+designed and implemented this
+
+::: {.iframe url="https://validbeck.github.io/docs/developer/samples-jupyter-notebooks.html" title="New ValidMind Library Samples"}
+:::
+
+:::
 
 ## Citation
 

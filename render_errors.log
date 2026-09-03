@@ -1,70 +1,0 @@
-[ 1/67] 404.qmd
-[ 2/67] cv.qmd
-[ 3/67] index.qmd
-[ 4/67] poetry\index.qmd
-[ 5/67] poetry\random\24-guests.qmd
-[ 6/67] poetry\random\derelict-dog-star.qmd
-[ 7/67] poetry\random\envy.qmd
-[ 8/67] poetry\random\future.qmd
-[ 9/67] poetry\random\ode-to-peonies.qmd
-[10/67] poetry\random\past.qmd
-[11/67] poetry\random\persimmons.qmd
-[12/67] poetry\random\present.qmd
-[13/67] poetry\random\taken.qmd
-[14/67] poetry\random\to-dc.qmd
-[15/67] poetry\random\wonder.qmd
-[16/67] samples\content-engineering\atryum\index.qmd
-[17/67] samples\content-engineering\index.qmd
-[18/67] samples\content-engineering\personal\portfolio\deployment.qmd
-[19/67] samples\content-engineering\personal\portfolio\framework.qmd
-[20/67] samples\content-engineering\personal\portfolio\index.qmd
-[21/67] samples\content-engineering\validmind\academy.qmd
-[22/67] samples\content-engineering\validmind\index.qmd
-[23/67] samples\content-engineering\validmind\library.qmd
-[24/67] samples\content-engineering\validmind\quickstarts.qmd
-[25/67] samples\content-engineering\validmind\redesign.qmd
-[26/67] samples\content-engineering\validmind\releases.qmd
-[27/67] samples\copywriting\index.qmd
-[28/67] samples\copywriting\saasquatch\growth-automation.qmd
-[29/67] samples\copywriting\validmind\honor-the-human.qmd
-[30/67] samples\copywriting\validmind\osff-takeaways.qmd
-[31/67] samples\copywriting\validmind\reduce-culture-risk.qmd
-[32/67] samples\developer-advocacy\google-sheets\index.qmd
-[33/67] samples\developer-advocacy\index.qmd
-[34/67] samples\developer-advocacy\posthog\index.qmd
-[35/67] samples\developer-advocacy\quarto\index.qmd
-[36/67] samples\developer-advocacy\supabase\index.qmd
-[37/67] samples\organizations\atryum.qmd
-[38/67] samples\organizations\index.qmd
-[39/67] samples\organizations\saasquatch.qmd
-[40/67] samples\organizations\validmind.qmd
-[41/67] samples\technical-writing\atryum\index.qmd
-[42/67] samples\technical-writing\atryum\integrations.qmd
-[43/67] samples\technical-writing\atryum\quickstart.qmd
-[44/67] samples\technical-writing\atryum\user-guides.qmd
-[45/67] samples\technical-writing\index.qmd
-[46/67] samples\technical-writing\saasquatch\index.qmd
-[47/67] samples\technical-writing\saasquatch\integrations\index.qmd
-[48/67] samples\technical-writing\saasquatch\integrations\recurly.qmd
-[49/67] samples\technical-writing\saasquatch\integrations\sfdc\attribution-lookup.qmd
-[50/67] samples\technical-writing\saasquatch\integrations\sfdc\integration-guide.qmd
-[51/67] samples\technical-writing\saasquatch\integrations\sfdc\invocable-methods.qmd
-[52/67] samples\technical-writing\saasquatch\integrations\sfdc\user-account-ids.qmd
-[53/67] samples\technical-writing\saasquatch\integrations\stripe.qmd
-[54/67] samples\technical-writing\saasquatch\integrations\tango-card.qmd
-[55/67] samples\technical-writing\saasquatch\sdk\index.qmd
-[56/67] samples\technical-writing\saasquatch\sdk\key-sjs.qmd
-[57/67] samples\technical-writing\saasquatch\sdk\sjs-advanced.qmd
-[58/67] samples\technical-writing\saasquatch\sdk\tracking-cookies.qmd
-[59/67] samples\technical-writing\saasquatch\user-guides\csv-import.qmd
-[60/67] samples\technical-writing\saasquatch\user-guides\index.qmd
-[61/67] samples\technical-writing\saasquatch\user-guides\sharelinks.qmd
-[62/67] samples\technical-writing\validmind\enablement.qmd
-[63/67] samples\technical-writing\validmind\index.qmd
-[64/67] samples\technical-writing\validmind\jupyter-notebooks.qmd
-[65/67] samples\technical-writing\validmind\quickstarts.qmd
-[66/67] samples\technical-writing\validmind\training.qmd
-[67/67] samples\technical-writing\validmind\user-guides.qmd
-
-Output created: _output\index.html
-

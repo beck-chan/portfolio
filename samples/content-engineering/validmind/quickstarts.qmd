@@ -13,7 +13,14 @@ listing:
     - ../../technical-writing/validmind/jupyter-notebooks.qmd
 ---
 
-{{< include /samples/single-source/validmind/_redesign.qmd >}}
+::: {.hidden}
+I transformed ValidMind's cluttered and ill-defined quickstart experience with gaps in resources to a clean and comprehensive onboarding journey with clear learning outcomes that showcased the value of our product through interaction.
+
+:::
+
+Along with authoring the bulk of ValidMind's user guidance content, I also transformed our cluttered and ill-defined quickstart experience with gaps in resources to a clean and comprehensive onboarding journey with clear learning outcomes that showcased the value of our product through interaction.
+
+{{< include /samples/single-source/validmind/_new-user.qmd >}}
 
 ## Situation
 
@@ -71,7 +78,7 @@ The new portal, with clearly defined user journeys and expected learning outcome
 
 #### Before
 
-The old developer only quickstart was not really a quickstart at all, but rather a collation of scattered links to more action-oriented guides:
+The old developer only quickstart was not really a quickstart at all, but rather a collation of scattered links to other guides with no connecting narrative:
 
 ::: {.iframe url="https://validbeck.github.io/archive/guide/quickstart.html" title="Previous Developer Only Quickstart"}
 :::
@@ -81,6 +88,11 @@ The old developer only quickstart was not really a quickstart at all, but rather
 The new quickstart, guiding developers through actions with clear learning outcomes in a cohesive journey, without requiring them to leave the context simply to complete instructions:
 
 ::: {.iframe url="https://validbeck.github.io/docs/get-started/developer/quickstart-developer.html" title="New Developer Quickstart"}
+:::
+
+::: {.callout}
+The instructions in the new quickstarts are also singled-sourced,^[[Portfolio Framework](/samples/content-engineering/personal/portfolio/framework.qmd#content)] meaning that information for the same task is consistent across the documentation when it is displayed in multiple places, such as in training or the full user guides for that feature.
+
 :::
 
 :::

@@ -15,11 +15,16 @@ listing:
     - releases.qmd
     - quickstarts.qmd
 includes:
-  redesign: true
   landing: false
 ---
 
-{{< include /samples/single-source/validmind/_redesign.qmd >}}
+::: {.hidden}
+I transformed ValidMind's documentation from a sparsely populated and poorly organized site with no brand identity to a comprehensive and user-friendly experience with a clean, modern, and mobile-responsive design.
+:::
+
+Along with authoring the bulk of ValidMind's user guidance content, I also led the redesign and reorganization of ValidMind's documentation, transforming a sparsely populated and poorly organized site with no brand identity to a comprehensive and user-friendly experience with a clean, modern, and mobile-responsive design.
+
+{{< include /samples/single-source/validmind/_new-user.qmd >}}
 
 ::: {.callout}
 ## You may notice many visual similarities between ValidMind's documentation and this portfolio. 

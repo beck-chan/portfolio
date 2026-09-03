@@ -4,11 +4,107 @@ subtitle: "Content Engineering"
 categories: ["Content Architecture", "Jupyter Notebooks", "Training & Onboarding", "Quarto", "CI/CD Workflows", "Frontend Development"]
 ---
 
+::: {.hidden}
+I transformed ValidMind's rudimentary training resources into a comprehensive learning academy to empower users to maximize their use of the product.
+:::
+
+Along with authoring the bulk of ValidMind’s user guidance content, I also transformed our rudimentary training resources into a comprehensive learning academy to empower users to maximize their use of ValidMind.
+
+{{< include /samples/single-source/validmind/_new-user.qmd >}}
+
 ## Situation
 
 ## Solution
 
+::: {.panel-tabset}
+
+### Curriculum
+
+### Jupyter Notebooks
+
+:::
+
 ## Comparisons
+
+### Training Portal
+
+::: {.panel-tabset}
+
+#### Before
+
+wip
+
+::: {.iframe url="https://validbeck.github.io/training-archive/training/training-overview.html" title="Previous ValidMind Training Portal"}
+:::
+
+#### After
+
+designed and implemented this
+
+::: {.iframe url="https://validbeck.github.io/docs/training/training.html" title="New ValidMind Training Portal"}
+:::
+
+:::
+
+### Developer Training
+
+::: {.panel-tabset}
+
+#### Before
+
+wip
+
+::: {.iframe url="https://validbeck.github.io/training-archive/training/training-for-model-developers.html#/in-this-training-module" title="Previous ValidMind Developer Training"}
+:::
+
+#### After
+
+extended modules
+
+::: {.iframe url="https://validbeck.github.io/docs/training/developer-fundamentals/developer-fundamentals-register.html" title="New ValidMind Developer Training"}
+:::
+
+:::
+
+### Validator Training
+
+::: {.panel-tabset}
+
+#### Before
+
+wip
+
+::: {.iframe url="https://validbeck.github.io/training-archive/training/training-for-model-validators.html#/in-this-training-module" title="Previous ValidMind Validator Training"}
+:::
+
+#### After
+
+extended modules
+
+::: {.iframe url="https://validbeck.github.io/docs/training/validator-fundamentals/validator-fundamentals-register.html" title="New ValidMind Validator Training"}
+:::
+
+:::
+
+### Administrator Training
+
+::: {.panel-tabset}
+
+#### Before
+
+wip
+
+::: {.iframe url="https://validbeck.github.io/training-archive/training/training-for-administrators.html#/in-this-training-module" title="Previous ValidMind Administrator Training"}
+:::
+
+#### After
+
+extended modules
+
+::: {.iframe url="https://validbeck.github.io/docs/training/administrator-fundamentals/administrator-fundamentals-register.html" title="New ValidMind Administrator Training"}
+:::
+
+:::
 
 ## Citation
 
