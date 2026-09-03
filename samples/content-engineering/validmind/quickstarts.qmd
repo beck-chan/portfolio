@@ -2,13 +2,88 @@
 title: "ValidMind Quickstart Guides"
 subtitle: "Content Engineering"
 categories: ["Content Architecture", "Training & Onboarding", "Quarto", "Frontend Development"]
+listing:
+  - id: validmind-jupyter
+    type: grid
+    grid-columns: 1
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - ../../technical-writing/validmind/jupyter-notebooks.qmd
 ---
+
+{{< include /samples/single-source/validmind/_redesign.qmd >}}
 
 ## Situation
 
+The quickstart journey offered by ValidMind before I joined was simply put, not very quick, and not very helpful in getting you started:
+
+- Our solution was for developers, validators, and auditors, but the only guidance available was for developers.
+- Most of the information was conceptual, not action-oriented, bombarding users with walls of text.
+- Any action-oriented info was scattered into multiple guides, asking users click many links before starting tasks.
+
 ## Solution
 
+A cleaned-up, uncluttered quickstart portal with no fluff:
+
+- Quickstart journeys for all roles, each presented with explicit learning outcomes to set expectations.
+- Quickstarts are only action-oriented, and consolidated into a single guide for each role. 
+- Show, and not tell — value is demonstrated through interaction with the product, not through conceptual text.
+
+::: {.callout}
+## Along with redesigning the quickstart experience, I also owned the content of each quickstart in its entirety.
+
+For the developer and validator quickstarts, I also authored the Jupyter Notebooks used in those journeys.
+:::
+
+::: {.column-margin}
+:::{#validmind-jupyter}
+:::
+
+:::
+
 ## Comparisons
+
+### Portal
+
+::: {.panel-tabset}
+
+#### Before
+
+The old portal, asking you to scroll through a wall of conceptual information and hunt in the sidebar for scattered links with actionable instructions:
+
+::: {.iframe url="https://validbeck.github.io/archive/guide/get-started.html" title="Previous ValidMind Quickstart Portal"}
+:::
+
+#### After
+
+The new portal, with clearly defined user journeys and expected learning outcomes deliver in one page per role, and zero clutter or fluff:
+
+::: {.iframe url="https://validbeck.github.io/docs/get-started/get-started.html" title="New ValidMind Quickstart Portal"}
+:::
+
+:::
+
+### Guides
+
+::: {.panel-tabset}
+
+#### Before
+
+The old developer only quickstart was not really a quickstart at all, but rather a collation of scattered links to more action-oriented guides:
+
+::: {.iframe url="https://validbeck.github.io/archive/guide/quickstart.html" title="Previous Developer Only Quickstart"}
+:::
+
+#### After
+
+The new quickstart, guiding developers through actions with clear learning outcomes in a cohesive journey, without requiring them to leave the context simply to complete instructions:
+
+::: {.iframe url="https://validbeck.github.io/docs/get-started/developer/quickstart-developer.html" title="New Developer Quickstart"}
+:::
+
+:::
 
 ## Citation
 

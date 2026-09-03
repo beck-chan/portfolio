@@ -225,14 +225,13 @@ Bachelor of Arts, English Literature & Japanese Studies
 
 ::: {.timeline .tl-diamond .tl-label-badge .vertical}
 
-<!-- ::: {.event data-label="Launched November 2026" style="--tl-color-label: #ffb3ba; --tl-color-dot: #ffb3ba;" .tl-card}
+<!-- ::: {.event data-label="Launched October 2026" style="--tl-color-label: #ffb3ba; --tl-color-dot: #ffb3ba;" .tl-card}
 ### y2k Guestbook
 *[https://beck-chan.vercel.app](https://beck-chan.vercel.app){target="_blank"}*
 
-- Mobile-responsive frontend built on Next.js, backend powered by Supabase. 
-- Admin functionality for comment management. Custom styling in Tailwind CSS. 
+- Mobile-responsive frontend built on Next.js, backend powered by Supabase. Custom styling in Tailwind CSS. 
 - Rate-limiting implemented with {x}, profanity moderation implemented with {y}.
-- Documentation including API reference written in MDX. -->
+- Admin functionality for comment management. Documentation including API reference written in MDX. -->
 
 <!-- 
 ::: -->

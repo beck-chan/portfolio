@@ -19,7 +19,7 @@ includes:
   landing: false
 ---
 
-Along with authoring the bulk of ValidMind's user guidance content, I also led the redesign and reorganization of ValidMind's documentation site.
+{{< include /samples/single-source/validmind/_redesign.qmd >}}
 
 ::: {.callout}
 ## You may notice many visual similarities between ValidMind's documentation and this portfolio. 
