@@ -249,7 +249,7 @@ The old developer demonstration notebook that was embedded into the training, wi
 
 #### After
 
-The first of my new series of four developer demonstration notebooks, with concepts spilt out to match each module of the training curriculum, and a hidden top navigation when embedded into the training:[^dev-notebooks-link]
+The first of my new updated series of four developer demonstration notebooks, with concepts spilt out to match each module of the training curriculum, and a hidden top navigation when embedded into the training:[^dev-notebooks-link]
 
 [^dev-notebooks-link]: **Archive of `validmind/documentation`:** [View Developer Notebooks](https://validbeck.github.io/docs/developer/validmind-library.html#development){.button}
 
@@ -264,20 +264,22 @@ The first of my new series of four developer demonstration notebooks, with conce
 
 #### Before
 
-wip
+The old validator training course, in a sparse single module without a supporting tutorial notebook:
 
 ::: {.iframe url="https://validbeck.github.io/training-archive/training/training-for-model-validators.html#/in-this-training-module" title="Previous ValidMind Validator Training"}
 :::
 
 #### After
 
-extended modules, notebooks footnote/listing
+My new validator training course, a comprehensive and guided journey broken out into four modules each with clear learning outcomes, paired with the new validator demonstration notebooks[^validator-notebooks] that culminate in a tangible and complete sample project:
+
+[^validator-notebooks]: **Archive of `validmind/documentation`:** [View Validator Notebooks](https://validbeck.github.io/docs/developer/validmind-library.html#validation){.button}
 
 ::: {.iframe url="https://validbeck.github.io/docs/training/validator-fundamentals/validator-fundamentals-register.html" title="New ValidMind Validator Training"}
 :::
 
 ::: {.callout}
-Along with producing a edited version of the developer demonstration notebook, now delivered clean and clear in a four-part series that aligned with each module of the developer training curriculum, I also authored a brand new series of validation demonstration notebooks for the validator role, aligned with each module of the validator training curriculum.
+Along with producing a edited version of the developer demonstration notebook, now delivered clean and clear in a four-part series that aligned with each module of the developer training curriculum, I also independently authored a brand new series of validation demonstration notebooks for the validator role, aligned with each module of the validator training curriculum.
 
 :::
 
@@ -289,14 +291,14 @@ Along with producing a edited version of the developer demonstration notebook, n
 
 #### Before
 
-wip
+The old administrator training course, in a sparse single module with little meaningful learning outcomes:
 
 ::: {.iframe url="https://validbeck.github.io/training-archive/training/training-for-administrators.html#/in-this-training-module" title="Previous ValidMind Administrator Training"}
 :::
 
 #### After
 
-extended modules
+My new administrator training course, a comprehensive and guided journey broken out into four modules each with clear learning outcomes, culminating in a fully configured sample instance of ValidMind's frontend application:
 
 ::: {.iframe url="https://validbeck.github.io/docs/training/administrator-fundamentals/administrator-fundamentals-register.html" title="New ValidMind Administrator Training"}
 :::
