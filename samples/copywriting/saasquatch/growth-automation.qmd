@@ -103,4 +103,4 @@ More about how your users will interact with your Growth Automation program can 
 
 #### Citation
 
-[SaaSquatch Help Center: View original post](https://docs.saasquatch.com/growth/saasquatch-ga){.button}
+[SaaSquatch Help Center: View Original Post](https://docs.saasquatch.com/growth/saasquatch-ga){.button}

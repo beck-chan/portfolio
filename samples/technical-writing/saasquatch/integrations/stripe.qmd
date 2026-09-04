@@ -139,4 +139,4 @@ To confirm a user reward has been fulfilled by Stripe, sign into your SaaSquatch
 
 #### Citation
 
-[SaaSquatch Help Center: View original guide](https://docs.saasquatch.com/developer/stripe-v2-install-guide){.button}
+[SaaSquatch Help Center: View Original Guide](https://docs.saasquatch.com/developer/stripe-v2-install-guide){.button}

@@ -40,6 +40,6 @@ Hide the open-in-new-window control:
 | `height` | `560` | Unitless numbers become `px` |
 | `align` | `center` | `left`, `center`, or `right` on the page |
 | `valign` | `center` | `top`, `center` or `middle` (valign), or `bottom` in a flex/grid parent |
-| `loading` | `lazy` | Iframe `loading` attribute |
+| `loading` | `lazy` | Iframe `loading` attribute, switch to `eager` for pre-loading |
 | `new-window` | `true` | SVG control in the bottom-left that opens the iframe URL in a new window. Set `false` / `off` / `no` to hide it |
 | `class` | `pics` | Extra style classes can be passed with `class="..."` or `{.iframe .your-class}` |

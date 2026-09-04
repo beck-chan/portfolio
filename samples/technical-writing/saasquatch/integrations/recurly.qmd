@@ -210,4 +210,4 @@ reactivated_item_notification	| ignored |
 
 #### Citation
 
-[SaaSquatch Help Center: View original guide](https://docs.saasquatch.com/developer/recurly){.button}
+[SaaSquatch Help Center: View Original Guide](https://docs.saasquatch.com/developer/recurly){.button}

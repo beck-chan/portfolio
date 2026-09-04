@@ -72,4 +72,4 @@ Once a Lead has been converted, and the Custom Field(s) mapped to the Account an
 
 #### Citation
 
-[SaaSquatch Help Center: View original guide](https://docs.saasquatch.com/salesforce/ids-config/){.button}
+[SaaSquatch Help Center: View Original Guide](https://docs.saasquatch.com/salesforce/ids-config/){.button}

@@ -261,4 +261,4 @@ squatch.ready(function(){
 
 #### Citation
 
-[SaaSquatch Help Center: View original guide](https://docs.saasquatch.com/developer/squatchjs/v2/advanced-use-cases){.button}
+[SaaSquatch Help Center: View Original Guide](https://docs.saasquatch.com/developer/squatchjs/v2/advanced-use-cases){.button}

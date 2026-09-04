@@ -350,4 +350,4 @@ We maintain an Issue Code List with details and specific troubleshooting tips fo
 
 #### Citation
 
-[SaaSquatch Help Center: View original guide](https://docs.saasquatch.com/developer/squatchjs/v2){.button}
+[SaaSquatch Help Center: View Original Guide](https://docs.saasquatch.com/developer/squatchjs/v2){.button}

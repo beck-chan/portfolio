@@ -91,4 +91,4 @@ Now, when the gift card is earned, the custom email you have set up will be sent
 
 #### Citation
 
-[SaaSquatch Help Center: View original guide](https://docs.saasquatch.com/tangocard-connection){.button}
+[SaaSquatch Help Center: View Original Guide](https://docs.saasquatch.com/tangocard-connection){.button}

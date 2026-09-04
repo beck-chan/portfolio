@@ -31,7 +31,7 @@ listing:
     contents:
       - personal/portfolio/index.qmd
     categories: true
-categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Release Notes", "Quarto", "GitHub Pages", "Netlify", "PostHog","CI/CD Workflows", "Frontend Development"]
+categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Instructional Design", "Release Notes", "Quarto", "GitHub Pages", "Netlify", "PostHog","CI/CD Workflows", "Frontend Development"]
 ---
 
 {{< include /samples/single-source/_content.qmd >}}

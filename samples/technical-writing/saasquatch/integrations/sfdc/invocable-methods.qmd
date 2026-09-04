@@ -221,4 +221,4 @@ This method allows you to send events to SaaSquatch participants when activity o
 
 #### Citation
 
-[SaaSquatch Help Center: View original guide](https://docs.saasquatch.com/salesforce/process-builder/){.button}
+[SaaSquatch Help Center: View Original Guide](https://docs.saasquatch.com/salesforce/process-builder/){.button}
