@@ -38,7 +38,7 @@ Links below will take you to static versions of the quickstarts as last edited b
 
 ## Citation
 
-[{{< fa brands github >}} archive of `validmind/documentation` quickstarts by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/get-started){target="_blank" .button}
+[{{< fa brands github >}} Archive of `validmind/documentation` Quickstarts by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/get-started){target="_blank" .button}
 
 ::: {.callout}
 You can learn more about my involvement with ValidMind's documentation and the impact I had on training and onboarding architecture under [Content Engineering](/samples/content-engineering/index.qmd).

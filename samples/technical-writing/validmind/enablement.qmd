@@ -54,7 +54,7 @@ Content produced to enable other creators to contribute to ValidMind's open-sour
 
 ## Citation
 
-[{{< fa brands github >}} archive of `validmind/documentation` style guide by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/about/contributing/style-guide){target="_blank" .button}
+[{{< fa brands github >}} Archive of `validmind/documentation` Style Guide by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/about/contributing/style-guide){target="_blank" .button}
 
 
 

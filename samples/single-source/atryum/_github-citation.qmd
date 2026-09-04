@@ -1,6 +1,6 @@
 ## Citation
 
-[{{< fa brands github >}} archive of `validmind/atryum` commits by Beck](https://github.com/validbeck/atryum/commits/main/?author=validbeck){target="_blank" .button}
+[{{< fa brands github >}} Archive of `validmind/atryum` Commits by Beck](https://github.com/validbeck/atryum/commits/main/?author=validbeck){target="_blank" .button}
 
 
 

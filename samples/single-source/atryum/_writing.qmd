@@ -6,6 +6,6 @@ Along with authoring approximately 95% of the content for Atryum,^[Citation: [{{
 
 
 :::: {.content-visible when-format="html" unless-meta="includes.content"}
-I authored approximately 95% of the content for Atryum,^[Citation: [{{< fa brands github >}} `validmind/atryum/website` (documentation) archive](https://github.com/validbeck/atryum/tree/main/website){target="_blank"}] including the samples selected below: 
+I authored approximately 95% of the content for Atryum,^[Citation: [{{< fa brands github >}} Archive of `validmind/atryum/website` (documentation)](https://github.com/validbeck/atryum/tree/main/website){target="_blank"}] including the samples selected below: 
 
 ::::

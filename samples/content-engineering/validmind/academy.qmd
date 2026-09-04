@@ -64,7 +64,7 @@ The instructions in the new training curriculums are also singled-sourced,^[[Por
 
 Along with producing a edited version of the developer demonstration notebook, now delivered clean and clear in a four-part series that aligned with each module of the developer training curriculum, I also authored a brand new series of validation demonstration notebooks for the validator role, aligned with each module of the validator training curriculum.
 
-Instead of a writer having to manually execute (run code cells) the notebooks each time they were updated, and uploading the version with execution artifacts to embed into the training, now a GitHub composite action^[**{{< fa brands github >}} GitHub:** [Creating a composite action](https://docs.github.com/en/actions/tutorials/create-actions/create-a-composite-action){target="_blank"}] chained to our production deployment workflow executed the notebooks on the fly, thanks to Quarto's native JupyterLab support:^[**Quarto:** [JupyterLab](https://quarto.org/docs/tools/jupyter-lab.html#cell-execution){target="_blank"}] 
+Instead of a writer having to manually execute (run code cells) the notebooks each time they were updated, and uploading the version with execution artifacts to embed into the training, now a GitHub composite action^[**{{< fa brands github >}} GitHub:** [Creating a composite action](https://docs.github.com/en/actions/tutorials/create-actions/create-a-composite-action){target="_blank"}] chained to our production deployment workflows execute the notebooks on the fly, thanks to Quarto's native JupyterLab support:^[**Quarto:** [JupyterLab](https://quarto.org/docs/tools/jupyter-lab.html#cell-execution){target="_blank"}] 
 
 - [x] No human input required, as the GitHub composite action is triggered by a production deployment.
 - [x] No exposed credentials, as any API keys are referenced as repository secrets from the GitHub Workflow:
@@ -75,9 +75,9 @@ Instead of a writer having to manually execute (run code cells) the notebooks ea
 
 #### Production Deployment Workflow
 
-A GitHub Workflow that runs when we deploy to production creates our required API credentials in `.env` files on the fly, then passes these credentials to the notebook execution action:
+A GitHub Workflow that runs when we deploy to production creates our required API credentials in `.env` files on the fly, then passes these credentials to the notebook execution action:^[**{{< fa brands github >}} Archive of `validmind/documentation`:** [Notebook Execution Workflow](https://github.com/validbeck/validmind-docs/blob/main/.github/workflows/execute-prod.yaml){target="_blank"}]
 
-```yaml
+```{.yaml .fold summary="view workflow snippet"} 
       - name: Create dev.env file
         id: create_dev_env
         run: |
@@ -106,11 +106,18 @@ A GitHub Workflow that runs when we deploy to production creates our required AP
           valid_env: valid.env
 ```
 
+::: {.callout}
+The notebooks are executed in their workflow parallel to rendering the rest of the static site files, and everything uploaded into our AWS instance when completed. 
+
+I spilt our the deployment to accommodate for instances where changes to our Python library may cause issues in execution, preventing the rest of the site from deploying. This way, even if the notebooks fail to execute, the rest of the site still deploys successfully, just with the plain versions of the notebooks without any output artifacts, and errors are easier to troubleshoot within the isolated workflow.
+
+:::
+
 #### Notebook Execution Action
 
-The notebook execution action renders our notebooks with the production Quarto profile, where execution rules are set:
+The notebook execution action renders our notebooks with the production Quarto profile, where execution rules are set:^[**{{< fa brands github >}} Archive of `validmind/documentation`:** [Notebook Execution Action](https://github.com/validbeck/validmind-docs/blob/main/.github/actions/prod-notebook/action.yml){target="_blank"}]
 
-```yaml
+```{.yaml .fold summary="view workflow snippet"} 
     - name: Ensure dev.env file is available
       shell: bash
       id: find_dev_env
@@ -158,14 +165,16 @@ The notebook execution action renders our notebooks with the production Quarto p
 
 #### Production Deployment Profile
 
-```yaml
+When executing the notebooks, we render them with our production Quarto profile that includes a stripped layout to make embedding them into our training slides cleaner:^[**{{< fa brands github >}} Archive of `validmind/documentation`:** [Quarto Production Profile](https://github.com/validbeck/validmind-docs/blob/main/site/_quarto-exe-prod.yml){target="_blank"}]
+
+```{.yaml .fold summary="view deployment profile snippet"} 
 format:
   html:
     page-layout: full # Extend the page layout to the wider version
     navbar: false # Remove the top navigation for less clutter 
     repo-actions: false # Remove the GitHub actions from the table of contents
     include-in-header: 
-      - environments/datadog-production.html # Add Datadog logging for production
+      - environments/datadog-production.html # Add logging for production
 execute: 
   enabled: true # "Execute" our notebooks with Quarto's native JupyterLab support
   freeze: auto # Only rerender the notebook if the source notebook has changed
@@ -288,7 +297,7 @@ extended modules
 
 ## Citation
 
-[{{< fa brands github >}} archive of `validmind/documentation` by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/training){target="_blank" .button}
+[{{< fa brands github >}} Archive of `validmind/documentation` Training by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/training){target="_blank" .button}
 
 ::: {.callout}
 You can learn more about my involvement with ValidMind's documentation and the impact I had on training and onboarding collateral under [Technical Writing](/samples/technical-writing/validmind/index.qmd#validmind-training).

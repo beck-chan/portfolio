@@ -62,4 +62,4 @@ Links below will take you to static versions of the notebooks as last edited by 
 
 ## Citation
 
-[{{< fa brands github >}} archive of `validmind/validmind-library` notebooks by Beck](https://github.com/validbeck/validmind-library/tree/main/notebooks){target="_blank" .button}
+[{{< fa brands github >}} Archive of `validmind/validmind-library` Notebooks by Beck](https://github.com/validbeck/validmind-library/tree/main/notebooks){target="_blank" .button}

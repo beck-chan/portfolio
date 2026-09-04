@@ -33,7 +33,7 @@ Links below will take you to static versions of the training courses as last edi
 
 ## Citation
 
-[{{< fa brands github >}} archive of `validmind/documentation` training by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/training){target="_blank" .button}
+[{{< fa brands github >}} Archive of `validmind/documentation` Training by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/training){target="_blank" .button}
 
 ::: {.callout}
 You can learn more about my involvement with ValidMind Academy and the impact I had on training and onboarding architecture under [Content Engineering](/samples/content-engineering/index.qmd).

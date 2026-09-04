@@ -107,7 +107,7 @@ designed and implemented this
 
 ## Citation
 
-[{{< fa brands github >}} archive of `validmind/validmind-library` notebooks by Beck](https://github.com/validbeck/validmind-library/tree/main/notebooks){target="_blank" .button}
+[{{< fa brands github >}} Archive of `validmind/documentation` Developer Portal by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/developer){target="_blank" .button}
 
 ::: {.callout}
 You can learn more about my involvement with ValidMind's documentation and the impact I had on developer content under [Technical Writing](/samples/technical-writing/validmind/index.qmd#validmind-jupyter-notebooks).

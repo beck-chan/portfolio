@@ -153,7 +153,7 @@ The new FAQs, with updated and more detailed questions and answers, now featurin
 
 ## Citation
 
-[{{< fa brands github >}} archive of `validmind/documentation` by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/){target="_blank" .button}
+[{{< fa brands github >}} Archive of `validmind/documentation` by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/){target="_blank" .button}
 
 ::: {.callout}
 You can learn more about my involvement with ValidMind's documentation and the impact I had on user guidance content under [Technical Writing](/samples/technical-writing/validmind/index.qmd#validmind-user-guides).
