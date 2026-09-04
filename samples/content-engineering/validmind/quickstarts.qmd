@@ -58,14 +58,14 @@ For the developer and validator quickstarts, I also authored the Jupyter Noteboo
 
 #### Before
 
-The old portal, asking you to scroll through a wall of conceptual information and hunt in the sidebar for scattered links with actionable instructions:
+The old quickstart portal, asking you to scroll through a wall of conceptual information and hunt in the sidebar for scattered links with actionable instructions:
 
 ::: {.iframe url="https://validbeck.github.io/archive/guide/get-started.html" title="Previous ValidMind Quickstart Portal"}
 :::
 
 #### After
 
-The new portal, with clearly defined user journeys and expected learning outcomes deliver in one page per role, and zero clutter or fluff:
+My new quickstart portal, with clearly defined user journeys and expected learning outcomes deliver in one page per role, and zero clutter or fluff:
 
 ::: {.iframe url="https://validbeck.github.io/docs/get-started/get-started.html" title="New ValidMind Quickstart Portal"}
 :::
@@ -85,7 +85,7 @@ The old developer only quickstart was not really a quickstart at all, but rather
 
 #### After
 
-The new quickstart, guiding developers through actions with clear learning outcomes in a cohesive journey, without requiring them to leave the context simply to complete instructions:
+My new developer quickstart, guiding users through actions with clear learning outcomes in a cohesive journey, without requiring them to leave the context simply to complete instructions:
 
 ::: {.iframe url="https://validbeck.github.io/docs/get-started/developer/quickstart-developer.html" title="New Developer Quickstart"}
 :::

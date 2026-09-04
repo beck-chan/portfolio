@@ -28,7 +28,7 @@ Along with authoring the bulk of ValidMind’s user guidance content, I also tra
 
 ### Curriculums
 
-The initial versions of the training lived in the cluttered Quickstart landing,^[[ValidMind Quickstarts](/samples/content-engineering/validmind/quickstarts.qmd)] and contained draft modules that did not cover enough fundamental functionality of ValidMind relevant to each role, or effectively guide users through thoughtful and curated learning journeys.
+The initial versions of the training lived in the cluttered Quickstart section,^[[ValidMind Quickstarts](/samples/content-engineering/validmind/quickstarts.qmd)] and contained draft modules that did not cover enough fundamental functionality of ValidMind relevant to each role, or effectively guide users through thoughtful and curated learning journeys.
 
 As with the old quickstart experience, most of the training was focused on the developer role, with very sparse material for the validator and administrator roles. 
 
@@ -196,14 +196,14 @@ execute:
 
 #### Before
 
-wip
+Training courses hidden in the corner of our cluttered quickstart section, bombarding users with a conceptual wall of text before they can scroll down to the courses:
 
 ::: {.iframe url="https://validbeck.github.io/training-archive/training/training-overview.html" title="Previous ValidMind Training Portal"}
 :::
 
 #### After
 
-designed and implemented this
+My new training portal, with a clear and concise overview of the available courses at the forefront alongside a cleaned up design and presentation:
 
 ::: {.iframe url="https://validbeck.github.io/docs/training/training.html" title="New ValidMind Training Portal"}
 :::
@@ -216,14 +216,20 @@ designed and implemented this
 
 #### Before
 
-wip
+The old developer training course, in a single module built on the old developer tutorial notebook:
 
 ::: {.iframe url="https://validbeck.github.io/training-archive/training/training-for-model-developers.html#/in-this-training-module" title="Previous ValidMind Developer Training"}
 :::
 
 #### After
 
-wip
+My new developer training course, a comprehensive and guided journey broken out into four modules each with clear learning outcomes, paired with the new developer demonstration notebooks[^dev-notebooks] that culminate in a tangible and complete sample project:
+
+[^dev-notebooks]: 
+
+    ::: {.tc}
+    ![New Developer Notebooks](developer-notebooks.png){.pics width="100%"}
+    :::
 
 ::: {.iframe url="https://validbeck.github.io/docs/training/developer-fundamentals/developer-fundamentals-register.html" title="New ValidMind Developer Training"}
 :::
@@ -236,16 +242,18 @@ wip
 
 #### Before
 
-wip
+The old developer demonstration notebook that was embedded into the training, with too many concepts in one notebook without proper context for new users, and the top navigation distracting from the content:
 
-::: {.iframe url="https://validbeck.github.io/training-archive/notebooks/tutorials/intro_for_model_developers_EXECUTED.html" title="Previous ValidMind Developer Notebook"}
+::: {.iframe url="https://validbeck.github.io/training-archive/training/training-for-model-developers.html#/section" title="Previous ValidMind Developer Notebook"}
 :::
 
 #### After
 
-extended modules, series footnote
+The first of my new series of four developer demonstration notebooks, with concepts spilt out to match each module of the training curriculum, and a hidden top navigation when embedded into the training:[^dev-notebooks-link]
 
-::: {.iframe url="https://validbeck.github.io/docs/notebooks/EXECUTED/development/1-set_up_validmind.html" title="New ValidMind Developer Notebooks"}
+[^dev-notebooks-link]: **Archive of `validmind/documentation`:** [View Developer Notebooks](https://validbeck.github.io/docs/developer/validmind-library.html#development){.button}
+
+::: {.iframe url="https://validbeck.github.io/docs/training/developer-fundamentals/using-validmind-for-development.html#/section-1" title="New ValidMind Developer Notebooks"}
 :::
 
 :::
