@@ -36,7 +36,7 @@ A cleaned-up, uncluttered quickstart portal with no fluff:
 
 - Quickstart journeys for all roles, each presented with explicit learning outcomes to set expectations.
 - Quickstarts are only action-oriented, and consolidated into a single guide for each role. 
-- Show, and not tell — value is demonstrated through interaction with the product, not through conceptual text.
+- Show, and not tell &mdash; value is demonstrated through interaction with the product, not through conceptual text.
 
 ::: {.callout}
 ## Along with redesigning the quickstart experience, I also owned the content of each quickstart in its entirety.

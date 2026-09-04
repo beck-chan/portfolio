@@ -14,11 +14,38 @@ Along with authoring the bulk of ValidMind’s user guidance content, I also tra
 
 ## Situation
 
+
+::: {.panel-tabset}
+
+### Curriculums
+
+The initial versions of the training lived in the cluttered Quickstart landing,^[[ValidMind Quickstarts](/samples/content-engineering/validmind/quickstarts.qmd)] and contained draft modules that did not cover enough fundamental functionality of ValidMind relevant to each role, or effectively guide users through thoughtful and curated learning journeys.
+
+As with the old quickstart experience, most of the training was focused on the developer role, with very sparse material for the validator and administrator roles. 
+
+
+### Jupyter Notebooks
+
+Only the developer demonstration notebook existed, and an executed (with code run outputs) version of the notebook was initially hosted within our company-hosted JupyterHub instance via a very manual workflow.
+
+A writer would make a copy of the notebook every time it was updated, run the code, then upload the notebook with output artifacts to JupyterHub, and request for a deployment to our JupyterHub instance &mdash; a tedious and time-consuming process.
+
+:::
+
+
 ## Solution
 
 ::: {.panel-tabset}
 
-### Curriculum
+### Curriculums
+
+
+
+::: {.callout}
+The instructions in the new training curriculums are also singled-sourced,^[[Portfolio Framework](/samples/content-engineering/personal/portfolio/framework.qmd#content)] meaning that information for the same task is consistent across the documentation when it is displayed in multiple places, such as in the quickstarts or the full user guides for that feature.
+
+:::
+
 
 ### Jupyter Notebooks
 
@@ -57,11 +84,22 @@ wip
 ::: {.iframe url="https://validbeck.github.io/training-archive/training/training-for-model-developers.html#/in-this-training-module" title="Previous ValidMind Developer Training"}
 :::
 
+### Developer Notebooks
+
+::: {.panel-tabset}
+
+#### Before
+
+wip
+
+::: {.iframe url="https://validbeck.github.io/training-archive/notebooks/tutorials/intro_for_model_developers_EXECUTED.html" title="Previous ValidMind Developer Notebook"}
+:::
+
 #### After
 
 extended modules
 
-::: {.iframe url="https://validbeck.github.io/docs/training/developer-fundamentals/developer-fundamentals-register.html" title="New ValidMind Developer Training"}
+::: {.iframe url="https://validbeck.github.io/docs/notebooks/EXECUTED/development/1-set_up_validmind.html" title="New ValidMind Developer Notebooks"}
 :::
 
 :::

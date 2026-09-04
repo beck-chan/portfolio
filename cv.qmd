@@ -13,7 +13,7 @@ sidebar: false
 
 **ValidMind, Inc**
 
-- Took features from design to complete release supported by storytelling alongside software engineers in GitHub.
+- Owned Agile feature development from design to release supported by storytelling alongside SWEs in GitHub.
 - Improved documentation and training through quality auditing and comprehensive redesigns using Quarto.
 - Authored 53% of user guidance content, including Jupyter Notebook samples for models and agentic systems.
 - Bridged gap between product design and user experience, verifying feature functionality and applying bug fixes.
