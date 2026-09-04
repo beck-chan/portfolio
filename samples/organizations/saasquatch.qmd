@@ -1,6 +1,8 @@
 ---
 title: "SaaSquatch"
 subtitle: "Collated Samples"
+aliases: 
+  - /saasquatch/index.html
 listing:
   - id: saasquatch-copywriting
     type: grid

@@ -1,6 +1,8 @@
 ---
 title: "Collated Samples"
 subtitle: "By Organization"
+aliases: 
+  - /organizations/index.html
 listing:
   - id: organizations
     type: grid

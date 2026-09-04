@@ -1,5 +1,7 @@
 ---
 title: "Developer Advocacy"
+aliases: 
+  - /developer/index.html
 subtitle: "Samples"
 # listing:
 #   - id: developer

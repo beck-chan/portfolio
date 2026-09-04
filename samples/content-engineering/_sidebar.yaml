@@ -20,6 +20,27 @@ website:
             - text: "Documentation Redesign"
               file: samples/content-engineering/validmind/redesign.qmd
         - samples/content-engineering/atryum/index.qmd
+        # - section: "Personal"
+        #   href: samples/content-engineering/personal/index.qmd
+        #   contents:
+        #     - section: "Portfolio"
+        #       href: samples/content-engineering/personal/portfolio/index.qmd
+        #       contents:
+        #         - text: "Framework"
+        #           file: samples/content-engineering/personal/portfolio/framework.qmd
+        #         - text: "Deployment"
+        #           file: samples/content-engineering/personal/portfolio/deployment.qmd
+        #     - section: "y2k Guestbook"
+        #       href: samples/content-engineering/personal/guestbook/index.qmd
+        #       contents:
+        #         - text: "Framework"
+        #           file: samples/content-engineering/personal/guestbook/framework.qmd
+        #         - text: "Deployment"
+        #           file: samples/content-engineering/personal/guestbook/deployment.qmd
+        #         - text: "Customization"
+        #           file: samples/content-engineering/personal/guestbook/customization.qmd
+        #         - text: "Documentation"
+        #           file: samples/content-engineering/personal/guestbook/documentation.qmd
         - section: "Portfolio"
           href: samples/content-engineering/personal/portfolio/index.qmd
           contents:

@@ -1,6 +1,8 @@
 ---
 title: "Content Engineering"
 subtitle: "Samples"
+aliases: 
+  - /content/index.html
 listing:
   - id: validmind-content
     type: grid

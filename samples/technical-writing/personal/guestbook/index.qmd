@@ -1,0 +1,6 @@
+---
+title: "y2k Guestbook"
+subtitle: "Technical Writing"
+categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Software as a Service"]
+search: false
+---

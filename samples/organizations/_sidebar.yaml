@@ -22,6 +22,7 @@ website:
               file: samples/content-engineering/atryum/index.qmd
             - text: "Technical Writing"
               file: samples/technical-writing/atryum/index.qmd
+        # - samples/organizations/personal.qmd
         - section: "SaaSquatch"
           href: samples/organizations/saasquatch.qmd
           contents:

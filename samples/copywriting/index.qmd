@@ -1,6 +1,8 @@
 ---
 title: "Copywriting"
 subtitle: "Samples"
+aliases: 
+  - /copy/index.html
 listing:
   - id: validmind-copywriting
     type: grid

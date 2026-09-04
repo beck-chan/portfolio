@@ -1,6 +1,8 @@
 ---
 title: "Technical Writing"
 subtitle: "Samples"
+aliases: 
+  - /writing/index.html
 listing:
   - id: validmind-technical
     type: grid

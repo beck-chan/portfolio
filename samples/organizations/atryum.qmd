@@ -1,6 +1,8 @@
 ---
 title: "Atryum"
 subtitle: "Collated Samples"
+aliases: 
+  - /atryum/index.html
 listing:
   - id: atryum-technical
     type: grid

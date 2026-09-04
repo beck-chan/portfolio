@@ -1,6 +1,8 @@
 ---
 title: "ValidMind"
 subtitle: "Collated Samples"
+aliases: 
+  - /validmind/index.html
 listing:
   - id: validmind-technical
     type: grid

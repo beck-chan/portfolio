@@ -1,0 +1,23 @@
+---
+title: "Personal"
+subtitle: "Content Engineering"
+search: false
+aliases: 
+  - /personal/index.html
+listing:
+  - id: personal-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - portfolio/index.qmd
+    - guestbook/index.qmd
+categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "CI/CD Workflows", "Frontend Development", "Software as a Service"]
+---
+
+wip
+
+:::{#personal-content}
+:::
