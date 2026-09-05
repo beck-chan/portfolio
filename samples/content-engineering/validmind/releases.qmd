@@ -1,7 +1,7 @@
 ---
 title: "ValidMind Release Notes"
 subtitle: "Content Engineering"
-categories: ["Content Architecture", "Release Notes", "Quarto", "CI/CD Workflows"]
+categories: ["Release Notes", "CI/CD Workflows"]
 ---
 
 ## Situation

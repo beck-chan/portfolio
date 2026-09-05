@@ -23,7 +23,7 @@ listing:
     contents:
     - path: ../../technical-writing/validmind/index.qmd
       description: "Browse some of the documentation I produced for ValidMind."
-categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Release Notes", "Quarto", "Cursor Code", "Agent Skills", "CI/CD Workflows", "Frontend Development"]
+categories: ["Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Release Notes", "Quarto", "Cursor Code", "Agent Skills", "CI/CD Workflows", "Frontend Development"]
 ---
 
 {{< include /samples/single-source/atryum/_atryum.qmd >}}

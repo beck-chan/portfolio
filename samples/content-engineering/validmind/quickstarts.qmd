@@ -1,7 +1,7 @@
 ---
 title: "ValidMind Quickstart Guides"
 subtitle: "Content Engineering"
-categories: ["Content Architecture", "Training & Onboarding", "Instructional Design", "Quarto", "Frontend Development"]
+categories: ["Training & Onboarding", "Instructional Design", "Quarto", "Frontend Development"]
 listing:
   - id: validmind-jupyter
     type: grid

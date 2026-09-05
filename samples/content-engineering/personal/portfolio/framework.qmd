@@ -1,7 +1,6 @@
 ---
 title: "Portfolio Framework"
 subtitle: "Content Engineering"
-categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "CI/CD Workflows", "Frontend Development"]
 includes:
     portfolio: true
 ---
