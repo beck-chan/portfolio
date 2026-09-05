@@ -34,7 +34,7 @@ Like our quickstart portal,^[[ValidMind Quickstarts](/samples/content-engineerin
 As part of leading the redesign and reorganization of ValidMind's documentation,^[[ValidMind Documentation Redesign](/samples/content-engineering/validmind/redesign.qmd)] I gave the developer portal its own alternate, simplified design inspired by our checkmark logo to put the focus on the technical content:
 
 - Cleaned up landing pages with clear, actionable links to helpful tutorials and other guidance.
-- Comprehensive resources laid out in a reorganized sidebar navigation, with clear starter user journeys by role.
+- Comprehensive resources laid out in a reorganized sidebar navigation, with explicit starter user journeys by role.
 
 ## Comparisons
 
@@ -56,7 +56,7 @@ The old developer resource section, asking you to scroll through a wall of conce
 
 #### After
 
-My new developer resource portal, with a cleaned up introduction, more comprehensive resources for both relevant user roles, and no hidden links on mobile devices:[^new-library]
+My new developer resource portal, with a cleaned up introduction, more comprehensive resources for both relevant user roles, and important links visible on mobile devices:[^new-library]
 
 [^new-library]: 
 
@@ -86,16 +86,16 @@ I authored both the validation quickstart and introduction to validation Jupyter
 
 #### Before
 
-wip
+Our old "Run tests and test suites" section, like the entry point to the developer sources, also bombarded users with walls of conceptual text before presented with an unorganized list of tutorials:
 
 ::: {.iframe url="https://validbeck.github.io/archive/guide/testing-overview.html" title="Previous ValidMind Library Testing"}
 :::
 
 #### After
 
-designed and implemented this
+My new "How to run tests and test suites" section, with a cleaned up introduction, and relevant tutorials laid out sequentially for new users, each concept building on the last:
 
-::: {.iframe url="https://validbeck.github.io/docs/developer/how-to/testing-overview.html" title="New ValidMind Library Testing"}
+::: {.iframe url="https://validbeck.github.io/docs/developer/how-to/testing-overview.html" zoom="50%" title="New ValidMind Library Testing"}
 :::
 
 :::
@@ -106,16 +106,23 @@ designed and implemented this
 
 #### Before
 
-wip
+The old "Run tests and test suites" section also included all of our tutorials on features unrelated to basic knowledge on running tests:
 
 ::: {.iframe url="https://validbeck.github.io/archive/guide/testing-overview.html" title="Previous ValidMind Library Features"}
 :::
 
 #### After
 
-designed and implemented this
+My brand-new "How to use ValidMind Library features" section, with granular tutorials sorted into tabs by topic that build on the beginner testing guides:
 
-::: {.iframe url="https://validbeck.github.io/docs/developer/how-to/feature-overview.html" title="New ValidMind Library Features"}
+::: {.iframe url="https://validbeck.github.io/docs/developer/how-to/feature-overview.html" zoom="50%"  title="New ValidMind Library Features"}
+:::
+
+::: {.callout}  
+{{< include /samples/single-source/validmind/_notebooks.qmd >}}
+
+After sorting relevant tutorials into `how_to`, I wrote a Python script^[**{{< fa brands github >}} Archive of `validmind/documentation`:** [update_how_tos.py](https://github.com/validbeck/validmind-docs/blob/main/site/scripts/developer-sidebar/update_how_tos.py){target="_blank"}] that automatically populated new notebooks when added to the `documentation` repo to this landing page in organized tabs and the related "Use library features" section in the sidebar.
+
 :::
 
 :::
@@ -126,16 +133,23 @@ designed and implemented this
 
 #### Before
 
-wip
+The old "Code samples" section:
 
 ::: {.iframe url="https://validbeck.github.io/archive/guide/samples-jupyter-notebooks.html" title="Previous ValidMind Library Samples"}
 :::
 
 #### After
 
-designed and implemented this
+My new "Code samples" section, including several more notebooks I either authored or edited:
 
-::: {.iframe url="https://validbeck.github.io/docs/developer/samples-jupyter-notebooks.html" title="New ValidMind Library Samples"}
+::: {.iframe url="https://validbeck.github.io/docs/developer/samples-jupyter-notebooks.html" zoom="50%" title="New ValidMind Library Samples"}
+:::
+
+::: {.callout}  
+{{< include /samples/single-source/validmind/_notebooks.qmd >}}
+
+After sorting relevant tutorials into `use_cases`, I wrote a Python script^[**{{< fa brands github >}} Archive of `validmind/documentation`:** [update_use_cases.py](https://github.com/validbeck/validmind-docs/blob/main/site/scripts/developer-sidebar/update_use_cases.py){target="_blank"}] that automatically populated new notebooks when added to the `documentation` repo to this landing page in organized tabs and the related "Code samples" section in the sidebar.
+
 :::
 
 :::

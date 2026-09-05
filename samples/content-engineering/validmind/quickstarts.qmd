@@ -97,7 +97,7 @@ The old developer only quickstart was not really a quickstart at all, but rather
 
 My new developer quickstart, guiding users through actions with clear learning outcomes in a cohesive journey, without requiring them to leave the context simply to complete instructions:
 
-::: {.iframe url="https://validbeck.github.io/docs/get-started/developer/quickstart-developer.html" title="New Developer Quickstart"}
+::: {.iframe url="https://validbeck.github.io/docs/get-started/developer/quickstart-developer.html" zoom="50%" title="New Developer Quickstart"}
 :::
 
 ::: {.callout}
