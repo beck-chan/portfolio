@@ -79,7 +79,7 @@ categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", 
 ::::
 
 
-## Samples by organization 
+## Samples by Organization 
 
 :::{#organizations}
 :::

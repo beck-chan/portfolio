@@ -7,6 +7,17 @@ article.content {
   margin-bottom: -40px !important;
 }
 
+// Full-bleed pages without a left sidenav (e.g. All Samples) sit against
+// the viewport edge. Inset ~1in on desktop so titles and body have room.
+@media (min-width: 768px) {
+  #quarto-content.page-layout-full:not(:has(#quarto-sidebar)) {
+    #quarto-document-content.page-full,
+    #quarto-document-content.column-page-left {
+      padding-left: 6rem;
+    }
+  }
+}
+
 // Subtitle
 .subtitle, 
 header .subtitle {

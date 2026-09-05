@@ -26,8 +26,9 @@ listing:
     contents:
     - samples/content-engineering/validmind/index.qmd
     - samples/content-engineering/atryum/index.qmd
+    # - samples/content-engineering/personal/index.qmd
     - samples/content-engineering/personal/portfolio/index.qmd
-  - id: samples-developer
+  - id: samples-developer # Add y2k guestbook API docs
     type: grid
     max-description-length: 250
     grid-columns: 2
@@ -44,7 +45,7 @@ listing:
     fields: [title, subtitle]
     contents:
     - samples/technical-writing/validmind/training.qmd
-  - id: samples-guides
+  - id: samples-guides # Add y2k guestbook docs
     type: grid
     max-description-length: 250
     grid-columns: 2
@@ -55,7 +56,7 @@ listing:
     - samples/technical-writing/atryum/integrations.qmd
     - samples/technical-writing/atryum/user-guides.qmd
     - samples/technical-writing/saasquatch/user-guides/index.qmd
-  - id: samples-tutorials
+  - id: samples-tutorials # add y2k guestbook quickstart
     type: grid
     max-description-length: 250
     grid-columns: 2

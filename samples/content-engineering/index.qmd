@@ -62,7 +62,7 @@ You can learn more about my involvement with ValidMind and Atryum's documentatio
 
 ## Personal
 
-Some behind-the-scenes insights into how I built this portfolio site.
+{{< include /samples/single-source/personal/_content.qmd >}}
 
 :::{#personal-content}
 :::
