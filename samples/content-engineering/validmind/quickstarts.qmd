@@ -58,14 +58,24 @@ For the developer and validator quickstarts, I also authored the Jupyter Noteboo
 
 #### Before
 
-The old quickstart portal, asking you to scroll through a wall of conceptual information and hunt in the sidebar for scattered links with actionable instructions:
+The old quickstart portal, asking you to scroll through a wall of conceptual information and hunt in the sidebar for scattered links with actionable instructions, which was also hidden on mobile devices by default:[^old-quickstarts]
+
+[^old-quickstarts]: 
+
+    ::: {.iframe url="https://validbeck.github.io/archive/guide/get-started.html" title="Previous ValidMind Quickstart Portal Mobile View" zoom="100%" width="70%" new-window="false"}
+    :::
 
 ::: {.iframe url="https://validbeck.github.io/archive/guide/get-started.html" title="Previous ValidMind Quickstart Portal"}
 :::
 
 #### After
 
-My new quickstart portal, with clearly defined user journeys and expected learning outcomes deliver in one page per role, and zero clutter or fluff:
+My new quickstart portal, with clearly defined user journeys and expected learning outcomes deliver in one page per role, and zero clutter or fluff, no hidden links on mobile devices:[^new-quickstarts]
+
+[^new-quickstarts]: 
+
+    ::: {.iframe url="https://validbeck.github.io/docs/get-started/get-started.html" title="New ValidMind Quickstart Portal Mobile View" zoom="100%" width="70%" new-window="false"}
+    :::
 
 ::: {.iframe url="https://validbeck.github.io/docs/get-started/get-started.html" title="New ValidMind Quickstart Portal"}
 :::
