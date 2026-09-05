@@ -196,14 +196,24 @@ execute:
 
 #### Before
 
-Training courses hidden in the corner of our cluttered quickstart section, bombarding users with a conceptual wall of text before they can scroll down to the courses:
+Training courses hidden in the corner of our cluttered quickstart section, bombarding users with a conceptual wall of text before they can scroll down to the courses, and a poor experience on mobile devices:[^old-training]
+
+[^old-training]: 
+
+    ::: {.iframe url="https://validbeck.github.io/training-archive/training/training-overview.html" title="Previous ValidMind Training Portal Mobile View" zoom="100%" width="70%" new-window="false"}
+    :::
 
 ::: {.iframe url="https://validbeck.github.io/training-archive/training/training-overview.html" title="Previous ValidMind Training Portal"}
 :::
 
 #### After
 
-My new training portal, with a clear and concise overview of the available courses at the forefront alongside a cleaned up design and presentation:
+My new training portal, with a clear and concise overview of the available courses at the forefront alongside a cleaned up design and presentation, with a mobile-responsive layout:[^new-training]
+
+[^new-training]: 
+
+    ::: {.iframe url="https://validbeck.github.io/docs/training/training.html" title="New ValidMind Training Portal Mobile View" zoom="90%" width="70%" new-window="false"}
+    ::: 
 
 ::: {.iframe url="https://validbeck.github.io/docs/training/training.html" title="New ValidMind Training Portal"}
 :::
