@@ -23,7 +23,7 @@ listing:
     contents:
       - ../technical-writing/personal/guestbook/index.qmd
     categories: true
-categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Feature Flags", "CI/CD Workflows", "Frontend Development", "Software as a Service"]
+categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Feature Flags", "CI/CD Workflows", "Frontend Development"]
 ---
 
 wip

@@ -1,7 +1,6 @@
 ---
 title: "`squatch.js` Advanced Use Cases"
 subtitle: "JavaScript SDK"
-categories: ["Developer Content", "JavaScript SDK", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
 ---
 
 > While I did not write the original material, I was involved heavily with consulting for accuracy and provided code samples. I also restructured and edited the entire article for coherency and accessibility. 

@@ -14,7 +14,7 @@ listing:
     contents:
     - portfolio/index.qmd
     - guestbook/index.qmd
-categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "CI/CD Workflows", "Frontend Development", "Software as a Service"]
+categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "CI/CD Workflows", "Frontend Development"]
 ---
 
 wip

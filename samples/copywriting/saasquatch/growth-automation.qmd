@@ -1,7 +1,7 @@
 ---
 title: "SaaSquatch Growth Automation Platform"
 subtitle: "Feature Highlight"
-categories: ["Feature Highlights", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+categories: ["Feature Highlights", "Referrals & Attributions", "eCommerce", "Marketing Technology", "SaaSquatch"]
 ---
 
 > I owned this feature highlight post from start to finish.
