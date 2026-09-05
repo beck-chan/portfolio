@@ -32,6 +32,12 @@ website:
       - samples/technical-writing/index.qmd
       - samples/copywriting/index.qmd
       # - samples/developer-advocacy/index.qmd
+      - text: "All Samples"
+        menu:
+        - text: "Filter by Topic"
+          file: samples/index.qmd
+        - text: "Collated by Organization"
+          file: samples/organizations/index.qmd
     right:
       - cv.qmd
       - text: '[{{< fa brands github >}}]{title="GitHub / beck-chan"}'

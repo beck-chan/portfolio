@@ -83,6 +83,15 @@ listing:
     - samples/copywriting/validmind/reduce-culture-risk.qmd
     - samples/copywriting/validmind/osff-takeaways.qmd
     - samples/copywriting/saasquatch/growth-automation.qmd
+  - id: all-samples
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - samples/index.qmd
+    - samples/organizations/index.qmd
 ---
 
 {{< include /samples/single-source/_bio.qmd >}}
@@ -146,12 +155,12 @@ listing:
 ::::
 
 
-## Samples by type
+## Samples by Type
 
 :::{#samples-type}
 :::
 
-## Samples by format
+## Samples by Format
 
 ::: {.panel-tabset}
 
@@ -192,5 +201,8 @@ listing:
 :::
 
 :::
+
+## All Samples
+
 
 

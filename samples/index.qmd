@@ -1,0 +1,45 @@
+---
+title: "All Samples"
+subtitle: "Filter by Topic"
+search: false
+listing:
+  - id: samples
+    type: grid
+    grid-columns: 3
+    max-description-length: 450
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - validmind.qmd
+      - atryum.qmd
+      - saasquatch.qmd
+    categories: true
+categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Blog", "Feature Highlights"]
+---
+
+Use [filter by category]{.smallcaps} in the right-hand sidebar to narrow down samples by topic. 
+
+
+## Content Architecture
+
+### ValidMind
+
+#### Atryum
+
+### Personal
+
+## Technical Writing
+
+### ValidMind
+
+#### Atryum
+
+<!-- ### Personal -->
+
+### SaaSquatch
+
+## Copywriting
+
+### ValidMind
+
+### SaaSquatch

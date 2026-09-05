@@ -66,7 +66,7 @@ listing:
     - ../copywriting/validmind/reduce-culture-risk.qmd
     - ../copywriting/validmind/osff-takeaways.qmd
     categories: true
-categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Python Library", "Artificial Intelligence (AI)", "Agentic Orchestration", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind", "Atryum"]
+categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Release Notes", "Python Library", "Artificial Intelligence (AI)", "Agentic Orchestration", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Model Risk Management", "Risk Governance",  "Quarto", "Cursor Code", "Agent Skills", "CI/CD Workflows", "Frontend Development","Software as a Service", "ValidMind", "Atryum"]
 ---
 
 ::: {.hidden}

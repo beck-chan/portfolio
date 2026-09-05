@@ -10,6 +10,48 @@
     font-weight: bold;
   }
 
+// Navbar dropdown — listing-tile title color, current nav size/weight
+.navbar .dropdown-menu {
+  --bs-dropdown-bg: #fff8f9;
+  --bs-dropdown-border-color: #ffb3ba;
+  --bs-dropdown-link-color: #ff6162;
+  --bs-dropdown-link-hover-color: #ff6162;
+  --bs-dropdown-link-hover-bg: #fee3e5;
+  --bs-dropdown-link-active-color: #ff6162;
+  --bs-dropdown-link-active-bg: #fee3e5;
+  background-color: #fff8f9;
+  border: 1px solid #ffb3ba;
+  border-right: 3px solid #ffb3ba;
+  border-bottom: 3px solid #ffb3ba;
+  border-radius: 5px;
+}
+
+.navbar .dropdown-item,
+.navbar .dropdown-item .dropdown-text {
+  color: #ff6162;
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus,
+.navbar .dropdown-item:focus-visible {
+  color: #ff6162;
+  background-color: #fee3e5;
+
+  .dropdown-text {
+    color: #ff6162;
+  }
+}
+
+.navbar .dropdown-item.active,
+.navbar .dropdown-item:active {
+  color: #ff6162;
+  background-color: #fee3e5;
+
+  .dropdown-text {
+    color: #ff6162;
+  }
+}
+
 
 // Fixed top nav
 #quarto-header, 
