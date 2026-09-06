@@ -359,7 +359,7 @@ main.content li {
 main.content li::marker {
   color: #3c3c3c !important;  
 }
-main.content li a {
+main.content li a:not(.footnote-ref) {
   font-family: "Your Font Name", system-ui, sans-serif !important;
   color: #3c3c3c !important;
 }
