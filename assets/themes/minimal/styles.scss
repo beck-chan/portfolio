@@ -55,6 +55,18 @@ $code-block-bg: #212121; // Block background color
     display: none !important;
     }
 
+.hidden-mobile {
+  @media (max-width: 767px) {
+    display: none !important;
+  }
+}
+
+.hidden-desktop {
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+}
+
 .timeline .event.tl-card {
     background: #f9f9f9;
     border-radius: 5px;

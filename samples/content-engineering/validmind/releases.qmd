@@ -1,8 +1,10 @@
 ---
 title: "ValidMind Release Notes"
 subtitle: "Content Engineering"
-categories: ["Release Notes", "CI/CD Workflows"]
+categories: ["Release Notes", "Cursor Code", "Agent Skills", "Large Language Models", "CI/CD Workflows"]
 ---
+
+I automated our fragmented and manual release notes process using Python scripts and use of agent skills supported by large language models, reducing writer input time from almost a week to less than a day.
 
 ## Situation
 
