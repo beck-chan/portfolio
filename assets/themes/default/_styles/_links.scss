@@ -16,6 +16,15 @@ main a:hover:not(.quarto-grid-link):not(.button):not(.breadcrumb):not(.iframe-em
   }
 }
 
+/* Footnote numbering: body link colour, no underline */
+#quarto-document-content a.footnote-ref,
+main a.footnote-ref {
+  color: #ff6162;
+  font-weight: 500;
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
 a.iframe-embed__open {
   color: #ff6162 !important;
   background-color: #fff;
