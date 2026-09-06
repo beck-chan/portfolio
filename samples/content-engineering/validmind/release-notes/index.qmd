@@ -65,7 +65,7 @@ Release notes are are published by [`documentation`](https://github.com/validmin
 
 | Surface | URL | Audience | Lists |
 | --- | --- | --- | --- |
-| **Public releases hub** | [All releases](https://docs.validmind.ai/releases/all-releases.html){target="_blank"} | Product discovery, library, docs changelog | Curated highlights & invididual PRs, ValidMind Library releases, documentation updates but *not* CMVM assembled release-lists or patch notes |
+| **Public releases hub** | [All releases](https://docs.validmind.ai/releases/all-releases.html){target="_blank"} | Product discovery, library, docs changelog | Curated highlights & individual PRs, ValidMind Library releases, documentation updates but *not* CMVM assembled release-lists or patch notes |
 | **Installation / Customer-managed ValidMind** | (CMVM) Release notes | On-prem CMVM installers | Every `releases/cmvm/**/*.qmd` assembled release-lists — monthly and each patch |
 
 #### How are release notes embedded?
@@ -95,7 +95,7 @@ During generation of patch and monthly release partials, the initial draft adds 
 
 ##### Quarto listings
 
-Quarto listings retreive and display links to other pages that match a defined query in a table (sometimes displayed as grid tiles) — in the case of release notes, wrappers that match a specific category of releases.
+Quarto listings retrieve and display links to other pages that match a defined query in a table (sometimes displayed as grid tiles) — in the case of release notes, wrappers that match a specific category of releases.
 
 ###### CMVM installation
 

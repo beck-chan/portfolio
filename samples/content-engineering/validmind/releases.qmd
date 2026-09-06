@@ -3,7 +3,7 @@ title: "ValidMind Release Notes"
 subtitle: "Content Engineering"
 aliases:
     - /validmind/releases/index.html
-categories: ["Content Enablement", "User Guides", "Release Notes", "Cursor Code", "Agent Skills", "Large Language Models", "CI/CD Workflows"]
+categories: ["Content Enablement", "User Guides", "Release Notes", "Cursor Code", "Agent Skills", "Large Language Models", "Integrations", "CI/CD Workflows"]
 ---
 
 I automated our fragmented and manual release notes process using Python scripts and use of agent skills supported by large language models, reducing writer input time from almost a week to less than a day.
@@ -17,7 +17,7 @@ At the end of my tenure at ValidMind, the volume of our release notes required a
 
 ## Solution
 
-Using Cursor Code Agent Skills supported by large language models (LLMs) and custom Python scripts, I automated collating and drafting release notes for all our products:
+Using Cursor Code Agent Skills^[**Cursor:** [Agent Skills](https://cursor.com/docs/skills){target="_blank"}] supported by large language models (LLMs) and custom Python scripts, I automated collating and drafting release notes for all our products:
 
 1. When a release tag is cut on relevant repos, a GitHub Workflow fires to detect the delta between the previously published set of release notes and the new tag. 
     
@@ -26,7 +26,7 @@ Using Cursor Code Agent Skills supported by large language models (LLMs) and cus
 2. Drafts for relevant release notes versions for that release tag's scope are generated in our `release-notes` repository in a branch and a PR is automatically opened when the generations are complete. 
 
     - This branch is linked automatically to a ticket cut in our project management board for editing the release notes for that tag's scope. 
-    - A notification is sent to the `release-notes` Slack channel alerting that release notes are ready for review and editing.
+    - A notification is sent to the `release-notes` Slack channel^[[Slack](https://slack.com/){target="_blank"}] alerting that release notes are ready for review and editing.
 
 3. PR comment bodies contain information about the tag's scope, and instructions for the human editor on how to wrap up and finishing curating the release notes.
 

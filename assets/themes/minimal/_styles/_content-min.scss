@@ -207,8 +207,11 @@ div[id^="fn"] > .code-fold-wrap {
   }
 }
 
-// Hover footnotes append tippy inside the parent <p>, so Quarto's
-// `p code.sourceCode` rule paints block code with the inline code bg.
+// Quarto's `p/li/td code.sourceCode` rule paints fenced blocks with the
+// inline code bg when nested in lists, tippy, etc. Keep block code clear.
+li pre > code.sourceCode,
+p pre > code.sourceCode,
+td pre > code.sourceCode,
 .tippy-content pre code,
 .tippy-content div.sourceCode code {
   background-color: transparent !important;

@@ -23,7 +23,7 @@ listing:
     contents:
     - path: ../../technical-writing/validmind/index.qmd
       description: "Browse some of the documentation I produced for ValidMind."
-categories: ["Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Release Notes", "Quarto", "Cursor Code", "Agent Skills", "Large Language Models", "CI/CD Workflows", "Frontend Development"]
+categories: ["Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Release Notes", "Quarto", "Cursor Code", "Agent Skills", "Large Language Models", "Integrations", "CI/CD Workflows", "Frontend Development"]
 ---
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}
