@@ -340,6 +340,21 @@ nav#TOC .toc-actions ul li a.toc-action,
     color: inherit !important;
     }
 
+// Inline mobile category dropdown (category-filter extension)
+.category-filter__label-text {
+    color: #ff6162;
+}
+
+.category-filter__select {
+    color: #0b2a12;
+    border-color: #ffb3ba;
+    background-color: #fff8f9;
+}
+
+.category-filter__select:focus {
+    outline-color: #ff6162;
+}
+
 
 // Margin content
 
