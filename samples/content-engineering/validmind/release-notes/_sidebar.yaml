@@ -5,6 +5,7 @@ website:
       contents:
         - text: "ValidMind release notes"
           file: samples/content-engineering/validmind/release-notes/index.qmd
+        - samples/content-engineering/validmind/release-notes/access-requirements.qmd
         - samples/content-engineering/validmind/release-notes/trigger-workflows.qmd
         - text: "---"
         - text: "CMVM patch"

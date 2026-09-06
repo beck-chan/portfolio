@@ -7,9 +7,9 @@ Locally generate customer-managed ValidMind (CMVM) hotfix or patch release notes
 
 ## Prerequisites
 
-- [ ] **[Access requirements](../access-requirements.md)** — `.env` setup, GitHub authentication, Poetry, `VM_RELEASE_DELTA`, Zendesk & Shortcut tokens
-- [ ] **Stable CMVM patch tag (no `-rc`) for discovery** — For example: `cmvm/26.06.07`
-- [ ] You're on the `release-notes` repo and are up-to-date with `main`
+- [x] **[Access requirements](../access-requirements.md)** — `.env` setup, GitHub authentication, Poetry, `VM_RELEASE_DELTA`, Zendesk & Shortcut tokens
+- [x] **Stable CMVM patch tag (no `-rc`) for discovery** — For example: `cmvm/26.06.07`
+- [x] You're on the `release-notes` repo and are up-to-date with `main`
 
 ## Batch vs individual patch release generation
 
@@ -24,19 +24,19 @@ Locally generate customer-managed ValidMind (CMVM) hotfix or patch release notes
 | **Individual — generate** | `generate_patch_release_notes.py` only — writes `.qmd` with explicit `--edit`; no PRs or Shortcut Stories automatically created or Slack notifications sent | Exactly one version from `--version` / `--start-tag` / `--end-tag` | Single edge case patch version tag | [Generate individual](#generate-individual-patch-releases) |
 | **Individual — regenerate** | Same as individual generate with `--preserve-human-edits` on an existing file | Same single version | Refresh one release patch tag in place without opening or updating automation PRs | [Regenerate individual](#regenerate-individual-patch-releases) |
 
-<details id="discovery-scope">
-<summary><strong>Discovery scope</strong></summary>
+::: {#discovery-scope .callout-tip collapse="true"}
+## Discovery scope
 
 - `discover_undocumented_cmvm_patches.py` builds `targets[]`; `generate_patch_batch.py` runs the full workflow once per target. 
-- Per-target `start_tag` and `gap_start_tag` are the incremental previous patch tag in the month (or the month's `.01` for the first patch). Fetch, generate, and cross-check all use this window — same rules as [Patch release automation](patch-release-automation.md#1-discovery). [`VM_RELEASE_DELTA`](../access-requirements.md#repository-variables) is discovery-only and does not widen per-target fetch windows.
+- Per-target `start_tag` and `gap_start_tag` are the incremental previous patch tag in the month (or the month's `.01` for the first patch). Fetch, generate, and cross-check all use this window — same rules as [Patch release automation](automation.qmd#1-discovery). [`VM_RELEASE_DELTA`](/samples/content-engineering/validmind/release-notes/access-requirements.qmd#repository-variables) is discovery-only and does not widen per-target fetch windows.
 
 | Flag | Scope | When to use |
 | --- | --- | --- |
-| `--tag cmvm/26.06.07` | **Ceiling/trigger tag** — matches [Patch release automation](patch-release-automation.md) (GitHub workflow always passes `--tag`). Discovers undocumented patches in that month with `NN ≤ 07`. Usually one target when the triggered tag is the newest and earlier patches are on `main`; can return several if gaps exist below the ceiling. | **Normal release** — net-new patch from a stable tag trigger. |
-| `--month 26.06` | **Local/manual only** — whole-month scope of all undocumented patches in `26.06`. Not available through [Patch release automation](patch-release-automation.md). | **Backfill** — document every missing patch in a month when catching up locally. |
+| `--tag cmvm/26.06.07` | **Ceiling/trigger tag** — matches [Patch release automation](automation.qmd) (GitHub workflow always passes `--tag`). Discovers undocumented patches in that month with `NN ≤ 07`. Usually one target when the triggered tag is the newest and earlier patches are on `main`; can return several if gaps exist below the ceiling. | **Normal release** — net-new patch from a stable tag trigger. |
+| `--month 26.06` | **Local/manual only** — whole-month scope of all undocumented patches in `26.06`. Not available through [Patch release automation](automation.qmd). | **Backfill** — document every missing patch in a month when catching up locally. |
 | `--refresh-in-place 26.06.06` | Force a refresh target when an open automation PR exists and the file is not on `main`. | **Regenerate** — refresh an open automation draft in place. |
 
-</details>
+:::
 
 ## Generating batch patches locally
 
@@ -65,8 +65,10 @@ poetry run python scripts/generate_patch_batch.py --discovery discovery.json --e
 
 Review the automatically generated draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), polish customer-facing prose, then merge PRs in sequence. 
 
-> [!NOTE] 
-> Refer to [What happens when patch drafts are automatically generated?](patch-release-automation.md#what-happens-when-patch-drafts-are-automatically-generated) for full instructions.
+::: {.callout} 
+Refer to [What happens when patch drafts are automatically generated?](automation.qmd#what-happens-when-patch-drafts-are-automatically-generated) for full instructions.
+
+:::
 
 ### Regenerate batch patch releases
 
@@ -99,8 +101,10 @@ poetry run python scripts/generate_patch_batch.py \
 
 Review the automatically refreshed draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), polish customer-facing prose, then merge PRs in sequence.
 
-> [!NOTE] 
-> Refer to [What happens when patch drafts are automatically generated?](patch-release-automation.md#what-happens-when-patch-drafts-are-automatically-generated) for full instructions.
+::: {.callout} 
+Refer to [What happens when patch drafts are automatically generated?](automation.qmd#what-happens-when-patch-drafts-are-automatically-generated) for full instructions.
+
+:::
 
 ## Generating individual patch releases locally
 
@@ -157,10 +161,12 @@ poetry run python scripts/generate_patch_release_notes.py \
 
 #### 4. Human follow-up
 
-Review and edit `releases/cmvm/{version}/release-notes.qmd` on your branch/worktree (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `26.06.06` → `cross_check_26_06_06.json`) or [Zendesk cross-check review](../processes/zendesk-cross-check-review.md)), polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
+Review and edit `releases/cmvm/{version}/release-notes.qmd` on your branch/worktree (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `26.06.06` → `cross_check_26_06_06.json`) or Zendesk cross-check review, polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
 
-> [!NOTE] 
-> Refer to [What happens when patch drafts are automatically generated?](patch-release-automation.md#what-happens-when-patch-drafts-are-automatically-generated) for full instructions.
+::: {.callout} 
+Refer to [What happens when patch drafts are automatically generated?](automation.qmd#what-happens-when-patch-drafts-are-automatically-generated) for full instructions.
+
+:::
 
 ### Regenerate individual patch releases
 
@@ -231,7 +237,9 @@ poetry run python scripts/generate_patch_release_notes.py \
 
 #### 4. Human follow-up
 
-Review the refreshed `.qmd` with human edits preserved (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `26.06.06` → `cross_check_26_06_06.json`) or [Zendesk cross-check review](../processes/zendesk-cross-check-review.md)), polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
+Review the refreshed `.qmd` with human edits preserved (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `26.06.06` → `cross_check_26_06_06.json`) or Zendesk cross-check review, polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
 
-> [!NOTE] 
-> Refer to [What happens when patch drafts are automatically generated?](patch-release-automation.md#what-happens-when-patch-drafts-are-automatically-generated) for full instructions.
+::: {.callout} 
+Refer to [What happens when patch drafts are automatically generated?](automation.qmd#what-happens-when-patch-drafts-are-automatically-generated) for full instructions.
+
+:::

@@ -23,5 +23,5 @@ While the solution I engineered was proprietary and cannot be shared publicly, I
 
 You can view a modified version of these artifacts with only the best guides included with references to proprietary content or repositories removed using the portal below:
 
-::: {.iframe url="release-notes/index.html" title="Previous ValidMind Developer Library"}
+::: {.iframe url="release-notes/index.html" title="ValidMind Release Notes Guides" loading="eager"}
 :::

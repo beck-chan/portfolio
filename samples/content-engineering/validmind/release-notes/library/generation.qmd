@@ -7,9 +7,9 @@ Locally generate `validmind-library` semver release notes (`vX.Y.Z`, version wit
 
 ## Prerequisites
 
-- [ ] **[Access requirements](../access-requirements.md)** — `.env` setup, GitHub authentication, Poetry, `LIBRARY_RELEASE_DELTA`, Zendesk & Shortcut tokens, `OPENAI_API_KEY` when passing `--edit`
-- [ ] **Stable library tag (no prerelease suffix) for discovery** — For example: `v2.13.5`
-- [ ] You're on the `release-notes` repo and are up-to-date with `main`
+- [x] **[Access requirements](/samples/content-engineering/validmind/release-notes/access-requirements.qmd)** — `.env` setup, GitHub authentication, Poetry, `LIBRARY_RELEASE_DELTA`, Zendesk & Shortcut tokens, `OPENAI_API_KEY` when passing `--edit`
+- [x] **Stable library tag (no prerelease suffix) for discovery** — For example: `v2.13.5`
+- [x] You're on the `release-notes` repo and are up-to-date with `main`
 
 ## Batch vs individual library release generation
 
@@ -24,19 +24,19 @@ Locally generate `validmind-library` semver release notes (`vX.Y.Z`, version wit
 | **Individual — generate** | `generate_library_release_notes.py` only — writes `.qmd` with explicit `--edit` and `--release-type-hint`; no PRs or Shortcut Stories automatically created or Slack notifications sent | Exactly one version from `--version` / `--start-tag` / `--end-tag` | Single edge case library version tag | [Generate individual](#generate-individual-library-releases) |
 | **Individual — regenerate** | Same as individual generate with `--preserve-human-edits` on an existing file | Same single version | Refresh one release library tag in place without opening or updating automation PRs | [Regenerate individual](#regenerate-individual-library-releases) |
 
-<details id="discovery-scope">
-<summary><strong>Discovery scope</strong></summary>
+::: {#discovery-scope .callout-tip collapse="true"}
+## Discovery scope
 
 - `discover_undocumented_library_releases.py` builds `targets[]`; `generate_library_batch.py` runs the full workflow once per target. 
-- Per-target `start_tag` and `gap_start_tag` are the previous stable library tag. Fetch, generate, and cross-check all use this incremental window — same rules as [Library release automation](library-release-automation.md#1-discovery). [`LIBRARY_RELEASE_DELTA`](../access-requirements.md#repository-variables) is discovery-only and does not widen per-target fetch windows.
+- Per-target `start_tag` and `gap_start_tag` are the previous stable library tag. Fetch, generate, and cross-check all use this incremental window — same rules as [Library release automation](automation.qmd#1-discovery). [`LIBRARY_RELEASE_DELTA`](/samples/content-engineering/validmind/release-notes/access-requirements.qmd#repository-variables) is discovery-only and does not widen per-target fetch windows.
 
 | Flag | Scope | When to use |
 | --- | --- | --- |
-| `--tag v2.13.5` | **Ceiling/trigger tag** — matches [Library release automation](library-release-automation.md) (GitHub workflow always passes `--tag`). Discovers undocumented library releases up to and including `2.13.5`. Usually one target when the triggered tag is the newest and earlier releases are on `main`; can return several if gaps exist below the ceiling. | **Normal release** — net-new library release from a stable tag trigger. |
-| `--catch-up` | **Local/manual only** — full backfill of all undocumented library tags with **no upper bound**. Not available through [Library release automation](library-release-automation.md). | **Backfill** — document every missing library release when catching up across multiple versions locally. |
+| `--tag v2.13.5` | **Ceiling/trigger tag** — matches [Library release automation](automation.qmd) (GitHub workflow always passes `--tag`). Discovers undocumented library releases up to and including `2.13.5`. Usually one target when the triggered tag is the newest and earlier releases are on `main`; can return several if gaps exist below the ceiling. | **Normal release** — net-new library release from a stable tag trigger. |
+| `--catch-up` | **Local/manual only** — full backfill of all undocumented library tags with **no upper bound**. Not available through [Library release automation](automation.qmd). | **Backfill** — document every missing library release when catching up across multiple versions locally. |
 | `--refresh-in-place 2.13.5` | Force a refresh target when an open automation PR exists and the file is not on `main`. | **Regenerate** — refresh an open automation draft in place. |
 
-</details>
+:::
 
 ## Generating batch library releases locally
 
@@ -63,10 +63,12 @@ poetry run python scripts/generate_library_batch.py --discovery discovery.json -
 
 #### 3. Human follow-up
 
-Review the automatically generated draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), run [library-highlights](library-highlights.md) for feature releases on the automation branch, polish customer-facing prose, then merge PRs in sequence. 
+Review the automatically generated draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), run [the library highlights process](highlights.qmd) for feature releases on the automation branch, polish customer-facing prose, then merge PRs in sequence. 
 
-> [!NOTE] 
-> Refer to [What happens when library drafts are automatically generated?](library-release-automation.md#what-happens-when-library-drafts-are-automatically-generated) for full instructions.
+::: {.callout}
+Refer to [What happens when library drafts are automatically generated?](automation.qmd#what-happens-when-library-drafts-are-automatically-generated) for full instructions.
+
+:::
 
 ### Regenerate batch library releases
 
@@ -99,8 +101,10 @@ poetry run python scripts/generate_library_batch.py \
 
 Review the automatically refreshed draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), polish customer-facing prose, then merge PRs in sequence.
 
-> [!NOTE] 
-> Refer to [What happens when library drafts are automatically generated?](library-release-automation.md#what-happens-when-library-drafts-are-automatically-generated) for full instructions.
+::: {.callout}
+Refer to [What happens when library drafts are automatically generated?](automation.qmd#what-happens-when-library-drafts-are-automatically-generated) for full instructions.
+
+:::
 
 ## Generating individual library releases locally
 
@@ -168,10 +172,12 @@ poetry run python scripts/generate_library_release_notes.py \
 
 #### 4. Human follow-up
 
-Review and edit `releases/validmind-library/v{version}/release-notes.qmd` on your branch/worktree (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/validmind-library/v{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `2.13.5` → `cross_check_2_13_5.json`) or [Zendesk cross-check review](../processes/zendesk-cross-check-review.md)), run [library-highlights](library-highlights.md) for feature releases, polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
+Review and edit `releases/validmind-library/v{version}/release-notes.qmd` on your branch/worktree (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/validmind-library/v{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `2.13.5` → `cross_check_2_13_5.json`) or Zendesk cross-check review, run [the library highlights process](highlights.qmd) for feature releases, polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
 
-> [!NOTE] 
-> Refer to [What happens when library drafts are automatically generated?](library-release-automation.md#what-happens-when-library-drafts-are-automatically-generated) for full instructions.
+::: {.callout}
+Refer to [What happens when library drafts are automatically generated?](automation.qmd#what-happens-when-library-drafts-are-automatically-generated) for full instructions.
+
+:::
 
 ### Regenerate individual library releases
 
@@ -244,7 +250,9 @@ poetry run python scripts/generate_library_release_notes.py \
 
 #### 4. Human follow-up
 
-Review the refreshed `.qmd` with human edits preserved (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/validmind-library/v{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `2.13.5` → `cross_check_2_13_5.json`) or [Zendesk cross-check review](../processes/zendesk-cross-check-review.md)), polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
+Review the refreshed `.qmd` with human edits preserved (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/validmind-library/v{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `2.13.5` → `cross_check_2_13_5.json`) or Zendesk cross-check review, polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
 
-> [!NOTE] 
-> Refer to [What happens when library drafts are automatically generated?](library-release-automation.md#what-happens-when-library-drafts-are-automatically-generated) for full instructions.
+::: {.callout}
+Refer to [What happens when library drafts are automatically generated?](automation.qmd#what-happens-when-library-drafts-are-automatically-generated) for full instructions.
+
+:::

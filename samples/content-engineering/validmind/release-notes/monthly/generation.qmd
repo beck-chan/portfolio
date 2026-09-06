@@ -7,9 +7,9 @@ Locally generate monthly (full, feature) release notes (`YY.MM`, stable tag `cmv
 
 ## Prerequisites
 
-- [ ] **[Access requirements](../access-requirements.md)** — `.env` setup, GitHub authentication, Poetry, `VM_RELEASE_DELTA`, Zendesk & Shortcut tokens
-- [ ] **Stable CMVM monthly tag ([`-rc` tags are rejected](release-candidate-testing.md)) for discovery** — For example: `cmvm/26.07.01` 
-- [ ] You're on the `release-notes` repo and are up-to-date with `main`
+- [x] **[Access requirements](/samples/content-engineering/validmind/release-notes/access-requirements.qmd)** — `.env` setup, GitHub authentication, Poetry, `VM_RELEASE_DELTA`, Zendesk & Shortcut tokens
+- [x] **Stable CMVM monthly tag (`-rc` tags are rejected) for discovery** — For example: `cmvm/26.07.01` 
+- [x] You're on the `release-notes` repo and are up-to-date with `main`
 
 ## Batch vs individual monthly release generation
 
@@ -24,19 +24,19 @@ Locally generate monthly (full, feature) release notes (`YY.MM`, stable tag `cmv
 | **Individual — generate** | `generate_monthly_release_notes.py` only — writes `.qmd` with explicit `--release-label`; no PRs or Shortcut Stories automatically created or Slack notifications sent | Exactly one version from `--version` / `--start-tag` / `--end-tag` | Single edge case monthly version tag | [Generate individual](#generate-individual-monthly-releases) |
 | **Individual — regenerate** | Same as individual generate with `--preserve-human-edits` on an existing file | Same single version | Refresh one release monthly tag in place without opening or updating automation PRs | [Regenerate individual](#regenerate-individual-monthly-releases) |
 
-<details id="discovery-scope">
-<summary><strong>Discovery scope</strong></summary>
+::: {#discovery-scope .callout-tip collapse="true"}
+## Discovery scope
 
 - `discover_undocumented_cmvm_monthlies.py` builds `targets[]`; `generate_monthly_batch.py` runs the full workflow once per target. 
-- Per-target `start_tag` and `gap_start_tag` are the **previous monthly stable** tag (`cmvm/YY.MM.01`), not the last patch in the prior month. Fetch, generate, and cross-check all use this monthly-to-monthly window — same rules as [Monthly release automation](monthly-release-automation.md#1-discovery). [`VM_RELEASE_DELTA`](../access-requirements.md#repository-variables) is discovery-only and does not widen per-target fetch windows.
+- Per-target `start_tag` and `gap_start_tag` are the **previous monthly stable** tag (`cmvm/YY.MM.01`), not the last patch in the prior month. Fetch, generate, and cross-check all use this monthly-to-monthly window — same rules as [Monthly release automation](automation.qmd#1-discovery). [`VM_RELEASE_DELTA`](/samples/content-engineering/validmind/release-notes/access-requirements.qmd#repository-variables) is discovery-only and does not widen per-target fetch windows.
 
 | Flag | Scope | When to use |
 | --- | --- | --- |
-| `--tag cmvm/26.07.01` | **Ceiling/trigger tag** — matches [Monthly release automation](monthly-release-automation.md) (GitHub workflow always passes `--tag`). Discovers undocumented monthlies up to and including `26.07`. Usually one target when the triggered tag is the newest and earlier monthlies are on `main`; can return several if gaps exist below the ceiling. | **Normal release** — net-new monthly from a stable tag trigger. |
-| `--catch-up` | **Local/manual only** — full backfill of all undocumented stable monthlies with **no upper bound**. Not available through [Monthly release automation](monthly-release-automation.md). | **Backfill** — document every missing monthly when catching up across multiple versions locally. |
+| `--tag cmvm/26.07.01` | **Ceiling/trigger tag** — matches [Monthly release automation](automation.qmd) (GitHub workflow always passes `--tag`). Discovers undocumented monthlies up to and including `26.07`. Usually one target when the triggered tag is the newest and earlier monthlies are on `main`; can return several if gaps exist below the ceiling. | **Normal release** — net-new monthly from a stable tag trigger. |
+| `--catch-up` | **Local/manual only** — full backfill of all undocumented stable monthlies with **no upper bound**. Not available through [Monthly release automation](automation.qmd). | **Backfill** — document every missing monthly when catching up across multiple versions locally. |
 | `--refresh-in-place 26.07` | Force a refresh target when the file is not on `main`. Required for `--catch-up` or when the triggered `--tag` does not match; redundant when re-running the same `--tag` with an open automation PR (auto-detected). | **Regenerate** — refresh an open automation draft in place. |
 
-</details>
+:::
 
 ## Generating batch monthlies locally
 
@@ -55,7 +55,7 @@ jq '.targets[] | {version, start_tag, end_tag, release_label}' discovery.json
 
 #### 2. Generate monthly batches
 
-Run the monthly batch generation script (**omit `--edit` for structural/raw draft** — LLM polish is done at materialize during [Monthly highlights](monthly-highlights.md) curation to reduce token spend):
+Run the monthly batch generation script (**omit `--edit` for structural/raw draft** — LLM polish is done at materialize during [Monthly highlights](highlights.qmd) curation to reduce token spend):
 
 ```bash
 poetry run python scripts/generate_monthly_batch.py --discovery discovery.json
@@ -63,10 +63,12 @@ poetry run python scripts/generate_monthly_batch.py --discovery discovery.json
 
 #### 3. Human follow-up
 
-Review the automatically generated draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), run [Monthly highlights](monthly-highlights.md) process, polish customer-facing prose, then merge PRs in sequence. 
+Review the automatically generated draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), run [Monthly highlights](highlights.qmd) process, polish customer-facing prose, then merge PRs in sequence. 
 
-> [!NOTE] 
-> Refer to [What happens when monthly drafts are automatically generated?](monthly-release-automation.md#what-happens-when-monthly-drafts-are-automatically-generated) for full instructions.
+::: {.callout}
+Refer to [What happens when monthly drafts are automatically generated?](automation.qmd#what-happens-when-monthly-drafts-are-automatically-generated) for full instructions.
+
+:::
 
 ### Regenerate batch monthly releases
 
@@ -97,10 +99,12 @@ poetry run python scripts/generate_monthly_batch.py \
 
 #### 3. Human follow-up
 
-Review the automatically refreshed draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), rerun the [Monthly highlights](monthly-highlights.md) process when refreshed generated partials need rematch or rematerialize, polish customer-facing prose, then merge PRs in sequence.
+Review the automatically refreshed draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), rerun the [Monthly highlights](highlights.qmd) process when refreshed generated partials need rematch or rematerialize, polish customer-facing prose, then merge PRs in sequence.
 
-> [!NOTE] 
-> Refer to [What happens when monthly drafts are automatically generated?](monthly-release-automation.md#what-happens-when-monthly-drafts-are-automatically-generated) for full instructions.
+::: {.callout}
+Refer to [What happens when monthly drafts are automatically generated?](automation.qmd#what-happens-when-monthly-drafts-are-automatically-generated) for full instructions.
+
+:::
 
 ## Generating individual monthly releases locally
 
@@ -139,7 +143,7 @@ jq '.targets[] | {version, start_tag, end_tag, release_label}' discovery.json
 
 #### 3. Generate monthly release notes
 
-Run the individual monthly release notes generator for the monthly you want (**omit `--edit` for structural/raw draft** — LLM polish is done at materialize during [Monthly highlights](monthly-highlights.md) curation to reduce token spend):
+Run the individual monthly release notes generator for the monthly you want (**omit `--edit` for structural/raw draft** — LLM polish is done at materialize during [Monthly highlights](highlights.qmd) curation to reduce token spend):
 
 ```bash
 # ONLY SET ONE TAG AT A TIME — widening --start-tag skips monthlies that batch discovery would document in separate per-target windows.
@@ -157,10 +161,12 @@ poetry run python scripts/generate_monthly_release_notes.py \
 
 #### 4. Human follow-up
 
-Review and edit `releases/cmvm/{version}/release-notes.qmd` on your branch/worktree (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `26.07` → `cross_check_26_07.json`) or [Zendesk cross-check review](../processes/zendesk-cross-check-review.md)), run the [Monthly highlights](monthly-highlights.md) process, polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
+Review and edit `releases/cmvm/{version}/release-notes.qmd` on your branch/worktree (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `26.07` → `cross_check_26_07.json`) or Zendesk cross-check review, run the [Monthly highlights](highlights.qmd) process, polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
 
-> [!NOTE] 
-> Refer to [What happens when monthly drafts are automatically generated?](monthly-release-automation.md#what-happens-when-monthly-drafts-are-automatically-generated) for full instructions.
+::: {.callout}
+Refer to [What happens when monthly drafts are automatically generated?](automation.qmd#what-happens-when-monthly-drafts-are-automatically-generated) for full instructions.
+
+:::
 
 ### Regenerate individual monthly releases
 
@@ -231,8 +237,9 @@ poetry run python scripts/generate_monthly_release_notes.py \
 
 #### 4. Human follow-up
 
-Review the refreshed `.qmd` with human edits preserved (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `26.07` → `cross_check_26_07.json`) or [Zendesk cross-check review](../processes/zendesk-cross-check-review.md)), rerun the [Monthly highlights](monthly-highlights.md) process when refreshed partials need rematch or rematerialize, polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
+Review the refreshed `.qmd` with human edits preserved (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `26.07` → `cross_check_26_07.json`) or Zendesk cross-check review, rerun the [Monthly highlights](highlights.qmd) process when refreshed partials need rematch or rematerialize, polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
 
-> [!NOTE] 
-> Refer to [What happens when monthly drafts are automatically generated?](monthly-release-automation.md#what-happens-when-monthly-drafts-are-automatically-generated) for full instructions.
+::: {.callout}
+Refer to [What happens when monthly drafts are automatically generated?](automation.qmd#what-happens-when-monthly-drafts-are-automatically-generated) for full instructions.
 
+:::

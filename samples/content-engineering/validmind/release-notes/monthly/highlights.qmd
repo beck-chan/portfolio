@@ -7,15 +7,15 @@ Human-driven authoring process for monthly (full, feature) release notes (`YY.MM
 
 ## Prerequisites
 
-- [ ] **[Access requirements](../access-requirements.md)** — `.env` setup, GitHub authentication, Poetry, `VM_RELEASE_DELTA`, Zendesk & Shortcut tokens, `OPENAI_API_KEY` for LLM edits
-- [ ] **Stable CMVM monthly release draft has been generated** ([`-rc#` tags are rejected](release-candidate-testing.md)) — For example: `cmvm/26.07.01` 
-- [ ] Access to the **[ValidMind Releases One-Pagers](https://drive.google.com/drive/folders/1qTfa7N_ISCrQdPvQ_6pVU6X6lh_NWG82)** Google Drive folder
+- [x] **[Access requirements](/samples/content-engineering/validmind/release-notes/access-requirements.qmd)** — `.env` setup, GitHub authentication, Poetry, `VM_RELEASE_DELTA`, Zendesk & Shortcut tokens, `OPENAI_API_KEY` for LLM edits
+- [x] **Stable CMVM monthly release draft has been generated** (`-rc#` tags are rejected) — For example: `cmvm/26.07.01` 
+- [x] Access to the **ValidMind Releases One-Pagers** Google Drive folder
 
 ## Why do we generate monthly feature highlights?
 
 Monthly feature highlights group a release's major product themes into a cohesive story for customers:
 
-- Feature highlights are also required to generate [customer release notifications](../processes/customer-release-notifications.md) — notification emails pull highlight titles from curated theme pages (`pr-*-highlights.qmd`), not from individual per-PR `highlight` category release notes (`pr-{n}.qmd`). 
+- Feature highlights are also required to generate customer release notifications — notification emails pull highlight titles from curated theme pages (`pr-*-highlights.qmd`), not from individual per-PR `highlight` category release notes (`pr-{n}.qmd`). 
 - Materializing highlights creates those theme pages — without them, notifications have nothing to summarize except customer Zendesk ticket status. Skipping materialize leaves nothing theme-grouped for notifications to summarize, even if individual `pr-{n}.qmd` wrappers carry a `highlight` category.
 
 ## When should I generate monthly feature highlights?
@@ -24,8 +24,8 @@ Generate monthly feature highlights when initial monthly release notes drafts ha
 
 | Scenario | Branch context | When to run | Full context |
 | --- | --- | --- | --- |
-| **A — Automation creates monthly release drafts, branch, & PRs** | `automated/monthly-{version}` (Refer to: [Monthly release automation](monthly-release-automation.md)) | After checking out the open `release-notes` draft PR | Automation opens the branch and drafts customer-managed ValidMind (CMVM) `release-notes.qmd` plus partials; *does not* curate highlights |
-| **B — You create monthly release drafts & branch/worktree** | Local batch or individual generate (Refer to: [Manual monthly releases](manual-monthly-releases.md)) | After `generate_monthly_release_notes.py` (or `generate_monthly_batch.py`) writes draft partials on your branch | Generation drafts CMVM `release-notes.qmd` plus partials; no branch/worktree or PR unless you create/open |
+| **A — Automation creates monthly release drafts, branch, & PRs** | `automated/monthly-{version}` (Refer to: [Monthly release automation](automation.qmd)) | After checking out the open `release-notes` draft PR | Automation opens the branch and drafts customer-managed ValidMind (CMVM) `release-notes.qmd` plus partials; *does not* curate highlights |
+| **B — You create monthly release drafts & branch/worktree** | Local batch or individual generate (Refer to: [Manual monthly releases](generation.qmd)) | After `generate_monthly_release_notes.py` (or `generate_monthly_batch.py`) writes draft partials on your branch | Generation drafts CMVM `release-notes.qmd` plus partials; no branch/worktree or PR unless you create/open |
 
 ## How do I generate monthly feature highlights?
 
@@ -36,27 +36,24 @@ Generate monthly feature highlights when initial monthly release notes drafts ha
 
   a. **Fetch GitHub PR data** — Downloads PR titles, bodies, labels, and merge dates for every PR merged between your CMVM tags into `releases-data/{version}/github_data_*.json`. Does not write release notes or memory files.
 
-  ```bash
-  poetry run python scripts/fetch_github_data.py \
-    --start-tag {start_tag} --end-tag {end_tag} --output-as {version}  # Example — cmvm/25.05.01 → cmvm/26.06.01 for version 26.06
-  ```
+```bash
+poetry run python scripts/fetch_github_data.py \
+  --start-tag {start_tag} --end-tag {end_tag} --output-as {version}  # Example — cmvm/25.05.01 → cmvm/26.06.01 for version 26.06
+```
 
   b. **Ingest into release memory** — Loads that JSON into the `memory/` store so `nosy-neighbour` and brief synthesis can search PR clusters and prior context for this release.
 
-  ```bash
-  poetry run python scripts/ingest_pr_memory.py \
-    --github-data releases-data/{version}/github_data_*.json \
-    --release {version} --state merged  # Example — ingest merged PRs for 26.06 after fetch
-  ```
-
-> [!NOTE] 
-> Refer to [Release memory preparation](../processes/release-memory-prep.md) for full instructions.
+```bash
+poetry run python scripts/ingest_pr_memory.py \
+  --github-data releases-data/{version}/github_data_*.json \
+  --release {version} --state merged  # Example — ingest merged PRs for 26.06 after fetch
+```
 
 ### 2. Generate release highlights from themes
 
 #### a. Prepare release themes text file
 
-  i. Open the relevant **[ValidMind Releases One-Pager slide](https://drive.google.com/drive/folders/1qTfa7N_ISCrQdPvQ_6pVU6X6lh_NWG82)** for your monthly `{version}`.
+  i. Open the relevant *[ValidMind Releases One-Pager** slide in Google Drive for your monthly `{version}`.
 
   ii. Copy and paste the themes into `releases-data/{version}/{version}-themes.txt`.
 
@@ -68,25 +65,25 @@ Generate monthly feature highlights when initial monthly release notes drafts ha
   - Clean up bullet list items, drop duplicate items, and move any around that belong to a different theme
   - (Optional) Mark internal (CMVM only) themes with `[CMVM]` so you know to exclude them from the public release notes after materializing highlights — You'll need to remove the CMVM from the rendered title later, or just remember to hide them anyway; doesn't matter, just pick one
 
-    <details>
-    <summary><strong>Theme `.txt` file format</strong></summary>
+::: {.callout-tip collapse="true"}
+## Theme `.txt` file format
 
-    Use markdown-style `# Theme name` headings with bullet lines underneath. Blank lines separate themes:
+Use markdown-style `# Theme name` headings with bullet lines underneath. Blank lines separate themes:
 
-    ```text
-    # Model inventory workflows
-    - Browse and filter models in the inventory grid
-    - Bulk actions for model owners and validators
+```text
+# Model inventory workflows
+- Browse and filter models in the inventory grid
+- Bulk actions for model owners and validators
 
-    # Documentation site refresh
-    - Updated navigation for release notes
-    - Faster search across product guides
+# Documentation site refresh
+- Updated navigation for release notes
+- Faster search across product guides
 
-    # [CMVM-only] Customer admin UI feature
-    - etc.
-    ```
+# [CMVM-only] Customer admin UI feature
+- etc.
+```
 
-    </details>
+:::
 
 #### b. Extract themes from text file
 
@@ -140,8 +137,8 @@ The script will:
   | `q` | *Quit* — Save progress to `theme-pr-matches.json` and `release-themes.json` and continue later |
 - Write `theme-pr-matches.json` and sync `release-themes.json` `bullet.prs[]` after matching completes
 
-<details>
-<summary><strong>Can you rerun theme matching or rematch PRs to different themes?</strong></summary>
+:::: {.callout-tip collapse="true"}
+## Can you rerun theme matching or rematch PRs to different themes?
 
 Yes — before materializing highlights, rerun the same command whenever themes or draft partials change:
 
@@ -149,28 +146,27 @@ Yes — before materializing highlights, rerun the same command whenever themes 
 - Use `--match-only` to refresh auto-match proposals in `theme-pr-matches.json` without updating approvals.
 - **`q` quit** saves progress to both JSON files so you can resume later. Matching only edits JSON — it does not comment out CMVM includes or write highlight files (that happens at materialize).
 
-> [!NOTE]
-> If you already materialized highlights and need to rematch PR to different themes:
->
-> a. Update PR links to themes by:
->
->  -  **Manually editing `release-themes.json`** — Open the file under `releases/cmvm/{version}/` and edit each theme bullet's `prs[]` array — add, remove, or change `{"repo": "…", "number": N}` entries so materialize pulls the right `_pr-{n}.qmd` partials into that highlight. You do not need to re-extract themes from the `.txt` file. Do this if already know which PRs belong on which bullets for a small number of bullets.
->  - **Rematching themes interactively** — Rerun theme matching script if you want refreshed auto-proposals in the interactive session for all themes. 
->
-> b. Rerun highlight materialize —
-> - Use `--dry-run` first to inspect planned changes without writing files — the script prints a JSON summary of themes and paths it *would* create or update (highlight partials, wrappers, CMVM shell include comment-outs, promoted to highlight wrapper `hidden` tags) plus any warnings; it skips disk writes, LLM `--edit` polish, and overview output until you rerun without the flag:
->
-> ```bash
-> poetry run python scripts/materialize_monthly_highlights.py --version {version} --dry-run
-> ```
-> - If you must re-run discovery and batch regeneration on the same automation branch after committing themes, pass `--preserve-human-edits` on generate — without it, stable refresh can overwrite or delete `release-themes.json` and other highlight artifacts; with it, the generator backs up and restores them when regeneration completes:
->
-> ```bash
-> poetry run python scripts/generate_monthly_batch.py \
->  --discovery discovery.json --preserve-human-edits  # Example — on automated/monthly-26.07 after committed highlight work
-> ```
+If you already materialized highlights and need to rematch PR to different themes:
 
-</details>
+a. Update PR links to themes by:
+
+ -  **Manually editing `release-themes.json`** — Open the file under `releases/cmvm/{version}/` and edit each theme bullet's `prs[]` array — add, remove, or change `{"repo": "…", "number": N}` entries so materialize pulls the right `_pr-{n}.qmd` partials into that highlight. You do not need to re-extract themes from the `.txt` file. Do this if already know which PRs belong on which bullets for a small number of bullets.
+ - **Rematching themes interactively** — Rerun theme matching script if you want refreshed auto-proposals in the interactive session for all themes. 
+
+b. Rerun highlight materialize —
+- Use `--dry-run` first to inspect planned changes without writing files — the script prints a JSON summary of themes and paths it *would* create or update (highlight partials, wrappers, CMVM shell include comment-outs, promoted to highlight wrapper `hidden` tags) plus any warnings; it skips disk writes, LLM `--edit` polish, and overview output until you rerun without the flag:
+
+```bash
+poetry run python scripts/materialize_monthly_highlights.py --version {version} --dry-run
+```
+- If you must re-run discovery and batch regeneration on the same automation branch after committing themes, pass `--preserve-human-edits` on generate — without it, stable refresh can overwrite or delete `release-themes.json` and other highlight artifacts; with it, the generator backs up and restores them when regeneration completes:
+
+```bash
+poetry run python scripts/generate_monthly_batch.py \
+ --discovery discovery.json --preserve-human-edits  # Example — on automated/monthly-26.07 after committed highlight work
+```
+
+::::
 
 ii. Spot-check `release-themes.json` to confirm PRs are linked as expected:
 
@@ -215,38 +211,37 @@ The script will:
   | `q` | *Quit* — Save progress to `orphan-prs.json` and continue later |
 - Write `releases/cmvm/{version}/orphan-prs.json` after orphan review completes or on quit; on a full session (every orphan reviewed), also write pre-materialize `releases/cmvm/{version}/{version}-highlights-overview.json` and `{version}-highlights-overview.md`
 
-  <details>
-  <summary><strong>Can you rerun orphan review?</strong></summary>
+:::: {.callout-tip collapse="true"}
+## Can you rerun orphan review?
 
-  Yes — before materializing highlights, rerun the same command to resume an incomplete session or review newly orphaned PRs:
+Yes — before materializing highlights, rerun the same command to resume an incomplete session or review newly orphaned PRs:
 
-  - The script reloads `orphan-prs.json`; orphans that already have an orphan review are skipped, so only pending PRs appear in prompts.
-  - **`q` quit** saves progress to `orphan-prs.json` so you can continue later.
-  - Use `--dry-run` to walk prompts without writing `orphan-prs.json`, hide side effects, theme syncs, or overview files.
-  - Use `--report-only` to list orphans without interactive orphan review (add `--acknowledge` to write a timestamped report).
-  - Unlike theme matching, there is no per-PR *keep* or *replace* prompt — to change an earlier orphan assignment, remove that PR from the `orphans[]` array in `orphan-prs.json` and undo any side effects before rerunning:
-    - **Hidden** — Restore the wrapper's `hidden` category and uncomment the CMVM include in `release-notes.qmd`
-    - **Promoted** — Remove the PR from the target theme bullet's `prs[]` in `release-themes.json` and from `approved_prs` in `theme-pr-matches.json` (otherwise it stays linked and will not reappear as an orphan)
-    - **Kept** — Remove the `orphan-prs.json` entry only; no other files change
+- The script reloads `orphan-prs.json`; orphans that already have an orphan review are skipped, so only pending PRs appear in prompts.
+- **`q` quit** saves progress to `orphan-prs.json` so you can continue later.
+- Use `--dry-run` to walk prompts without writing `orphan-prs.json`, hide side effects, theme syncs, or overview files.
+- Use `--report-only` to list orphans without interactive orphan review (add `--acknowledge` to write a timestamped report).
+- Unlike theme matching, there is no per-PR *keep* or *replace* prompt — to change an earlier orphan assignment, remove that PR from the `orphans[]` array in `orphan-prs.json` and undo any side effects before rerunning:
+  - **Hidden** — Restore the wrapper's `hidden` category and uncomment the CMVM include in `release-notes.qmd`
+  - **Promoted** — Remove the PR from the target theme bullet's `prs[]` in `release-themes.json` and from `approved_prs` in `theme-pr-matches.json` (otherwise it stays linked and will not reappear as an orphan)
+  - **Kept** — Remove the `orphan-prs.json` entry only; no other files change
 
-  > [!NOTE]
-  > If you already materialized highlights and need to change orphan reviews:
-  >
-  > a. Update orphan records and related theme or hide files as above.
-  >
-  > b. Rerun orphan review, then materialize highlights —
-  > - Rerun orphan review after undoing side effects — `report_orphan_prs.py` has no `--preserve-human-edits` flag:
-  >
-  > ```bash
-  > poetry run python scripts/report_orphan_prs.py --version {version}
-  > ```
-  > - Use `--dry-run` first on materialize to inspect planned changes without writing files — the script prints a JSON summary of themes and paths it *would* create or update (highlight partials, wrappers, CMVM shell include comment-outs, promoted to highlight wrapper `hidden` tags) plus any warnings; it skips disk writes, LLM `--edit` polish, and overview output until you rerun without the flag:
-  >
-  > ```bash
-  > poetry run python scripts/materialize_monthly_highlights.py --version {version} --dry-run
-  > ```
+If you already materialized highlights and need to change orphan reviews:
 
-  </details>
+a. Update orphan records and related theme or hide files as above.
+
+b. Rerun orphan review, then materialize highlights —
+- Rerun orphan review after undoing side effects — `report_orphan_prs.py` has no `--preserve-human-edits` flag:
+
+```bash
+poetry run python scripts/report_orphan_prs.py --version {version}
+```
+- Use `--dry-run` first on materialize to inspect planned changes without writing files — the script prints a JSON summary of themes and paths it *would* create or update (highlight partials, wrappers, CMVM shell include comment-outs, promoted to highlight wrapper `hidden` tags) plus any warnings; it skips disk writes, LLM `--edit` polish, and overview output until you rerun without the flag:
+
+```bash
+poetry run python scripts/materialize_monthly_highlights.py --version {version} --dry-run
+```
+
+::::
 
 ii. Spot-check `{version}-highlights-overview.md` to confirm that PRs are grouped as expected:
 
@@ -304,48 +299,47 @@ Materialize will:
 - Generate inline blocks for bullets with empty `prs` by default (`--no-generate-inline` to disable)
 - Write post-materialize `releases/cmvm/{version}/{version}-release-overview.json` and `{version}-release-overview.md` (omit with `--skip-overview`)
 
-  <details>
-  <summary><strong>Can you rerun materialize highlights?</strong></summary>
+:::: {.callout-tip collapse="true"}
+## Can you rerun materialize highlights?
 
-  Yes — after upstream theme or orphan fixes, rerun the same command to refresh highlight output:
+Yes — after upstream theme or orphan fixes, rerun the same command to refresh highlight output:
 
-  - The script re-reads `releases/cmvm/{version}/release-themes.json` and rebuilds every included theme from its bullets and PR mappings, **overwritings** highlight partials (`_pr-*-highlights.qmd`) and theme wrappers (`pr-*-highlights.qmd`) — scaffold and any prior prose in those files is replaced.
-  - Use `--dry-run` to inspect planned changes without writing files — the script prints a JSON summary of themes and paths it *would* create or update (highlight partials, wrappers, CMVM shell include comment-outs, promoted to highlight wrapper `hidden` tags) plus any warnings; it skips disk writes, LLM `--edit` / `--edit-highlights` polish, overview output, and manifest upserts until you rerun without the flag.
-  - Use `--skip-overview` to omit post-materialize `{version}-release-overview.json` / `.md` (add `--no-generate-inline` to skip inline blocks for bullets with empty `prs`).
-  - Unlike orphan review, there is no human-edit protection — on every rerun it refreshes CMVM shell and wrapper output:
-    - **Highlight partials** — `_pr-*-highlights.qmd` scaffold and prose replaced (`--edit` rewrites heading + prose columns when present)
-    - **Theme wrappers** — `pr-*-highlights.qmd` title, subtitle, and `.hidden` description replaced (`--edit-highlights` rewrites wrapper copy)
-    - **Source partials** — `_pr-{n}.qmd` draft partials are *not* overwritten — materialize only embeds them via include expressions
+- The script re-reads `releases/cmvm/{version}/release-themes.json` and rebuilds every included theme from its bullets and PR mappings, **overwritings** highlight partials (`_pr-*-highlights.qmd`) and theme wrappers (`pr-*-highlights.qmd`) — scaffold and any prior prose in those files is replaced.
+- Use `--dry-run` to inspect planned changes without writing files — the script prints a JSON summary of themes and paths it *would* create or update (highlight partials, wrappers, CMVM shell include comment-outs, promoted to highlight wrapper `hidden` tags) plus any warnings; it skips disk writes, LLM `--edit` / `--edit-highlights` polish, overview output, and manifest upserts until you rerun without the flag.
+- Use `--skip-overview` to omit post-materialize `{version}-release-overview.json` / `.md` (add `--no-generate-inline` to skip inline blocks for bullets with empty `prs`).
+- Unlike orphan review, there is no human-edit protection — on every rerun it refreshes CMVM shell and wrapper output:
+  - **Highlight partials** — `_pr-*-highlights.qmd` scaffold and prose replaced (`--edit` rewrites heading + prose columns when present)
+  - **Theme wrappers** — `pr-*-highlights.qmd` title, subtitle, and `.hidden` description replaced (`--edit-highlights` rewrites wrapper copy)
+  - **Source partials** — `_pr-{n}.qmd` draft partials are *not* overwritten — materialize only embeds them via include expressions
 
-  > [!NOTE]
-  > If you need to refresh highlights after upstream theme or orphan changes:
-  >
-  > a. Update `release-themes.json`, orphan disposition side effects, or theme-match files as needed.
-  >
-  > b. Rerun materialize —
-  > - Use `--dry-run` first:
-  >
-  > ```bash
-  > poetry run python scripts/materialize_monthly_highlights.py --version {version} --dry-run
-  > ```
-  > - Rerun without `--dry-run` to write highlight output and `--edit` / `--edit-highlights` for LLM polish — updates CMVM `release-notes.qmd` `## … highlights` sections, comment-outs promoted to highlight category includes, sets `hidden` on promoted to highlight wrappers, generates inline blocks for empty bullets, and writes post-materialize overview and manifest rows (omit overview with `--skip-overview`):
-  >
-  > ```bash
-  > poetry run python scripts/materialize_monthly_highlights.py --version {version} --edit --edit-highlights
-  > ```
+If you need to refresh highlights after upstream theme or orphan changes:
 
-  | Scenario | Rerun? | Notes |
-  | --- | --- | --- |
-  | `release-themes.json` changed | Yes | Re-read themes and rebuild highlight output |
-  | Orphan disposition side-effect fixes (promote/hide/keep) | Yes | Refresh wrappers, partials, and CMVM includes |
-  | `--dry-run` surfaced missing partials or other upstream issues | Yes | Fix upstream, then rerun without `--dry-run` |
-  | Only hand-polished highlight prose (`--edit`, `--edit-highlights`, or manual edits) you intend to keep | No | Materialize overwrites highlight partials and wrappers |
+a. Update `release-themes.json`, orphan disposition side effects, or theme-match files as needed.
 
-  </details>
+b. Rerun materialize —
+- Use `--dry-run` first:
+
+```bash
+poetry run python scripts/materialize_monthly_highlights.py --version {version} --dry-run
+```
+- Rerun without `--dry-run` to write highlight output and `--edit` / `--edit-highlights` for LLM polish — updates CMVM `release-notes.qmd` `## … highlights` sections, comment-outs promoted to highlight category includes, sets `hidden` on promoted to highlight wrappers, generates inline blocks for empty bullets, and writes post-materialize overview and manifest rows (omit overview with `--skip-overview`):
+
+```bash
+poetry run python scripts/materialize_monthly_highlights.py --version {version} --edit --edit-highlights
+```
+
+| Scenario | Rerun? | Notes |
+| --- | --- | --- |
+| `release-themes.json` changed | Yes | Re-read themes and rebuild highlight output |
+| Orphan disposition side-effect fixes (promote/hide/keep) | Yes | Refresh wrappers, partials, and CMVM includes |
+| `--dry-run` surfaced missing partials or other upstream issues | Yes | Fix upstream, then rerun without `--dry-run` |
+| Only hand-polished highlight prose (`--edit`, `--edit-highlights`, or manual edits) you intend to keep | No | Materialize overwrites highlight partials and wrappers |
+
+::::
 
 ii. Spot-check `{version}-release-overview.md` to confirm materialized highlights look correct:
 
-- Open `releases/cmvm/{version}/{version}-release-overview.md` — Verify theme groupings, promoted orphans, hidden PRs, and kept orphans align with orphan review (§4) and theme matching (§3).
+- Open `releases/cmvm/{version}/{version}-release-overview.md` — Verify theme groupings, promoted orphans, hidden PRs, and kept orphans align with orphan review (§4) and theme matching.
 - Cross-check highlight partials under `releases/*/{version}/_pr-*-highlights.qmd` and theme wrappers `pr-*-highlights.qmd` when you ran with `--edit` / `--edit-highlights`.
 - Use the `--dry-run` command above first if you want a JSON summary of planned paths before writing files.
 - If you passed `--skip-overview`, spot-check highlight files on disk only — overview files are not refreshed.
@@ -405,26 +399,28 @@ git push
 
 ## Appendix
 
-<details>
-<summary><strong>Scripts</strong></summary>
+::: {.callout-tip collapse="true"}
+## Scripts
 
 | Script | Purpose | Phase |
 | --- | --- | --- |
-| [`fetch_github_data.py`](https://github.com/validmind/release-notes/blob/main/scripts/fetch_github_data.py) | Fetch PR delta JSON for tag range | Memory prep |
-| [`ingest_pr_memory.py`](https://github.com/validmind/release-notes/blob/main/scripts/ingest_pr_memory.py) | Ingest PR observations into `memory/` | Memory prep |
-| [`nosy_release_brief.py`](https://github.com/validmind/release-notes/blob/main/scripts/nosy_release_brief.py) | Synthesize release investigation brief | Memory prep |
-| [`extract_release_themes.py`](https://github.com/validmind/release-notes/blob/main/scripts/extract_release_themes.py) | Parse themes paste → `release-themes.json` | 2 — Themes |
-| [`match_theme_bullets_to_prs.py`](https://github.com/validmind/release-notes/blob/main/scripts/match_theme_bullets_to_prs.py) | Interactive bullet ↔ PR association | 3 — Match |
-| [`report_orphan_prs.py`](https://github.com/validmind/release-notes/blob/main/scripts/report_orphan_prs.py) | Orphan review for unlinked partials | 4 — Orphans |
-| [`materialize_monthly_highlights.py`](https://github.com/validmind/release-notes/blob/main/scripts/materialize_monthly_highlights.py) | Embed partials, CMVM shell, overview | 5 — Materialize |
-| [`edit_non_highlight_partials.py`](https://github.com/validmind/release-notes/blob/main/scripts/edit_non_highlight_partials.py) | LLM polish on non-highlight `_pr-{n}.qmd` partials | 6 — Non-highlight edit |
+| `fetch_github_data.py` | Fetch PR delta JSON for tag range | Memory prep |
+| `ingest_pr_memory.py` | Ingest PR observations into `memory/` | Memory prep |
+| `nosy_release_brief.py` | Synthesize release investigation brief | Memory prep |
+| `extract_release_themes.py` | Parse themes paste → `release-themes.json` | 2 — Themes |
+| `match_theme_bullets_to_prs.py` | Interactive bullet ↔ PR association | 3 — Match |
+| `report_orphan_prs.py` | Orphan review for unlinked partials | 4 — Orphans |
+| `materialize_monthly_highlights.py` | Embed partials, CMVM shell, overview | 5 — Materialize |
+| `edit_non_highlight_partials.py` | LLM polish on non-highlight `_pr-{n}.qmd` partials | 6 — Non-highlight edit |
 
-</details>
+:::
 
-<details>
-<summary><strong>Skills</strong></summary>
+::: {.callout-tip collapse="true"}
+## Skills
 
 | Skill | When |
 | --- | --- |
-| [`nosy-neighbour`](https://github.com/validmind/skills/blob/main/nosy-neighbour/SKILL.md) | Memory prep and theme validation before paste |
-| [`generate-release-notes`](https://github.com/validmind/skills/blob/main/generate-release-notes/SKILL.md) | Use in the final human proofread only, NOT to generate release notes as that is now taken care of by the automations/updated scripts — apply [editing-generated-release-notes.md](../processes/editing-generated-release-notes.md) content rules |
+| `nosy-neighbour` | Memory prep and theme validation before paste |
+| `generate-release-notes` | Use in the final human proofread only, NOT to generate release notes as that is now taken care of by the automations/updated scripts — apply the **Editing generated release notes** process content rules |
+
+:::

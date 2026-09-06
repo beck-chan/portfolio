@@ -5,14 +5,16 @@ subtitle: "ValidMind release notes guides"
 
 Manually run the release notes automation for a specific release tag using GitHub Actions.
 
-> [!IMPORTANT]
-> Manual `workflow_dispatch` is *ungated* — it runs regardless of the defined `RELEASE_AUTOMATION` variable on `validmind/installation` or `validmind/validmind-library`.
+
+::: {.callout} 
+Manual `workflow_dispatch` is *ungated* — it runs regardless of the defined `RELEASE_AUTOMATION` variable on `validmind/installation` or `validmind/validmind-library`.
+:::
 
 ## Prerequisites
 
 - Write access (or equivalent) to the `validmind/release-notes` repository so you can use **Run workflow**.
 - The release tag you want to document already exists on the source repository.
-- Repository secrets and variables configured — refer to the [Access requirements](../access-requirements.md) for setup.
+- Repository secrets and variables configured — refer to the [Access requirements](access-requirements.qmd) for setup.
 
 
 ## When would a human manually trigger release notes workflows?
@@ -22,24 +24,26 @@ Manually run the release notes automation for a specific release tag using GitHu
 
 ## Which workflow should be triggered?
 
-All three listener workflows live in `validmind/release-notes` under [**Actions**](https://github.com/validmind/release-notes/actions):
+All three listener workflows live in `validmind/release-notes` under **Actions**:
 
 | Workflow | GitHub Actions name | Enter this tag format | Source repo |
 | --- | --- | --- | --- |
-| [Library release notes](https://github.com/validmind/release-notes/actions/workflows/library_release_notes.yml) | **Library release notes** | `v2.13.5` (semver) | [`validmind/validmind-library`](https://github.com/validmind/validmind-library/tags) |
-| [Monthly release notes](https://github.com/validmind/release-notes/actions/workflows/monthly_release_notes.yml) | **Monthly release notes** | `cmvm/26.06.01` (stable monthly ending in `.01`) | [`validmind/installation`](https://github.com/validmind/installation/tags) |
-| [Patch release notes](https://github.com/validmind/release-notes/actions/workflows/patch_release_notes.yml) | **Patch release notes** | `cmvm/26.06.07` (not ending in `.01`)| [`validmind/installation`](https://github.com/validmind/installation/tags) |
+| Library release notes | **Library release notes** | `v2.13.5` (semver) | [`validmind/validmind-library`](https://github.com/validmind/validmind-library/tags){target="_blank"} |
+| Monthly release notes | **Monthly release notes** | `cmvm/26.06.01` (stable monthly ending in `.01`) | `validmind/installation` |
+| Patch release notes | **Patch release notes** | `cmvm/26.06.07` (not ending in `.01`)| `validmind/installation` |
 
-
+::: {.column-margin}
 For track-specific behavior after the workflow completes, refer to:
 
-- [Library release automation](../library-releases/library-release-automation.md)
-- [Patch release automation](../patch-releases/patch-release-automation.md)
-- [Monthly release automation](../monthly-releases/monthly-release-automation.md)
+- [Library release automation](library/automation.qmd)
+- [Patch release automation](patch/automation.qmd)
+- [Monthly release automation](monthly/automation.qmd)
+
+:::
 
 ## How does a human manually trigger a release notes workflow?
 
-1. Open: [https://github.com/validmind/release-notes/actions](https://github.com/validmind/release-notes/actions)
+1. Open: `https://github.com/validmind/release-notes/actions`
 
 2. Select the workflow you want to run from the left sidebar:
 
@@ -54,10 +58,12 @@ For track-specific behavior after the workflow completes, refer to:
   - **Skip LLM `--edit` ...** — Leave this UNCHECKED for library and patch releases, but make sure to CHECK for monthly releases.
   - **Shortcut preflight** (Monthly releases only) — dropdown: `none`, `exists`, or `nonempty` (default `nonempty`)
     - `nonempty` — Shortcut release epic label must exist and have at least one tagged epic or story
-    - Use `none` or `exists` only when you understand the Shortcut preflight implications (refer to [monthly release automation](../monthly-releases/monthly-release-automation.md))
+    - Use `none` or `exists` only when you understand the Shortcut preflight implications (refer to [monthly release automation](monthly/automation.qmd))
     - Tag-push `repository_dispatch` runs always use `nonempty`; this dropdown applies to manual `workflow_dispatch` only
 
-> [!IMPORTANT]
-> Run **one workflow at a time per tag**. Each track workflow uses a concurrency group keyed on the tag (`library-${{ tag }}`, `patch-${{ tag }}`, `monthly-${{ tag }}`) so duplicate dispatches for the same tag queue rather than overlap. Parallel runs for the *same* version can still race on Shortcut story creation if concurrency is bypassed — avoid double-triggering the same tag.
+::: {.callout}
+Run **one workflow at a time per tag**. Each track workflow uses a concurrency group keyed on the tag (`library-${{ tag }}`, `patch-${{ tag }}`, `monthly-${{ tag }}`) so duplicate dispatches for the same tag queue rather than overlap. Parallel runs for the *same* version can still race on Shortcut story creation if concurrency is bypassed — avoid double-triggering the same tag.
+
+:::
 
 4. Click **Run workflow**.
