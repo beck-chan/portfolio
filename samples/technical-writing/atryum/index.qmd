@@ -49,7 +49,7 @@ listing:
       subtitle: "Landing Page"
 includes:
   landing: true
-categories: ["Feature Documentation", "User Guides", "Quickstart", "Integrations", "Agentic Orchestration", "Artificial Intelligence (AI)", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Risk Governance", "Software as a Service", "Atryum", "ValidMind"]
+categories: ["Quickstart", "Integrations", "Model Context Protocol Servers"]
 ---
 
 {{< include /samples/single-source/atryum/_atryum.qmd >}}
@@ -93,9 +93,9 @@ Links below will take you to a static version of the documentation as last edite
 
 #### Citation
 
-[{{< fa brands github >}} archive of `validmind/atryum` commits by Beck](https://github.com/validbeck/atryum/commits/main/?author=validbeck){target="_blank" .button}
+[{{< fa brands github >}} Archive of `validmind/atryum` Commits by Beck](https://github.com/validbeck/atryum/commits/main/?author=validbeck){target="_blank" .button}
 
-<!-- ::: {.callout}
-You can learn more about my involvement with ValidMind, Atryum, and the impact I had on content and content architecture under [Content Engineering](/samples/content-engineering/index.qmd)
-::: -->
+::: {.callout}
+You can learn more about my involvement with ValidMind, Atryum, and the impact I had on content and content architecture under [Content Engineering](/samples/content-engineering/index.qmd).
+:::
 

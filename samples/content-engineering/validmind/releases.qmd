@@ -1,4 +1,48 @@
 ---
 title: "ValidMind Release Notes"
 subtitle: "Content Engineering"
+aliases:
+    - /validmind/releases/index.html
+categories: ["Content Enablement", "User Guides", "Release Notes", "Cursor Code", "Agent Skills", "Large Language Models", "Integrations", "CI/CD Workflows"]
 ---
+
+I automated our fragmented and manual release notes process using Python scripts and use of agent skills supported by large language models, reducing writer input time from almost a week to less than a day.
+
+## Situation
+
+At the end of my tenure at ValidMind, the volume of our release notes required a writer to spend up to a week:
+
+- Manually collating and verifying information on features for multiple products in our offering from many competing sources, including cloud storage, project management boards, and scattered GitHub repositories.
+- Creating multiple versions of release notes for each product in our suite, one for public consumption, and one tailored for on-prem customers. 
+
+## Solution
+
+Using Cursor Code Agent Skills^[**Cursor:** [Agent Skills](https://cursor.com/docs/skills){target="_blank"}] supported by large language models (LLMs) and custom Python scripts, I automated collating and drafting release notes for all our products:
+
+1. When a release tag is cut on relevant repos, a GitHub Workflow fires to detect the delta between the previously published set of release notes and the new tag. 
+    
+    Any missing release notes are then drafted using LLMs according to logic per release type (on-prem patch, python library, comprehensive monthly product suite release) from the feature pull requests (PRs) falling within that new tag's release scope, guided by a skill informed by release notes conventions and our company documentation style guide.
+
+2. Drafts for relevant release notes versions for that release tag's scope are generated in our `release-notes` repository in a branch and a PR is automatically opened when the generations are complete. 
+
+    - This branch is linked automatically to a ticket cut in our project management board for editing the release notes for that tag's scope. 
+    - A notification is sent to the `release-notes` Slack channel^[[Slack](https://slack.com/){target="_blank"}] alerting that release notes are ready for review and editing.
+
+3. PR comment bodies contain information about the tag's scope, and instructions for the human editor on how to wrap up and finishing curating the release notes.
+
+    Release content that is served in multiple versions is single-sourced,^[[Portfolio Framework](/samples/content-engineering/personal/portfolio/framework.qmd#content)] meaning that editors only need to review one file for content displayed in multiple versions instead of many files.
+
+::: {.callout}
+The custom Python scripts also enable authors to generate LLM-drafted release notes manually if the automation is not available due to GitHub Workflows outages or other issues.
+
+I also delivered comprehensive internal documentation for the automation to empower authors to review and edit the generated release notes in accordance with our standards.
+:::
+
+## Citation
+
+While the solution I engineered was proprietary and cannot be shared publicly, I was permitted to showcase modified versions of the documentation I created to capture my automation's functionality and the standard operating procedures users were expected to follow.
+
+You can some of these artifacts with only the most relevant guides included with references to proprietary content or repositories removed using the portal below:
+
+::: {.iframe url="release-notes/index.html" title="ValidMind Release Notes Guides" loading="eager"}
+:::

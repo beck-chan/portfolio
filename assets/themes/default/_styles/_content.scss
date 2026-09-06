@@ -7,6 +7,19 @@ article.content {
   margin-bottom: -40px !important;
 }
 
+// Full-bleed pages without a left sidenav (e.g. All Samples) sit against
+// the viewport edge. Inset ~1in on the parent grid so nested tracks stay
+// aligned with the margin sidebar (padding on main shifts body-content-end
+// into that column on wide screens).
+@media (min-width: 768px) {
+  #quarto-content.page-layout-full:not(:has(#quarto-sidebar)):has(
+      #quarto-document-content.page-full,
+      #quarto-document-content.column-page-left
+    ) {
+    padding-left: 6rem;
+  }
+}
+
 // Subtitle
 .subtitle, 
 header .subtitle {
@@ -22,6 +35,11 @@ strong, b {
     border-radius: 3px;   
     font-weight: 500 !important;     
     color: #0b2a1290 !important;
+}
+
+.smallcaps {
+  font-weight: 500;
+  color: #ff6162 !important;
 }
 
 // Profile pic
@@ -119,6 +137,83 @@ h5 {
 div.sourceCode {
     margin-left: 1.5rem !important;    
     padding: 1.25rem !important;     
+}
+
+// Foldable static code blocks (fold=true via fold-code filter)
+.code-fold-wrap {
+  margin: 1rem 0 1.25rem 1.5rem;
+}
+
+details.code-fold {
+  > summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    color: #ff6162;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-variant: small-caps;
+    margin-bottom: 0.5rem;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 0.55rem;
+      height: 0.55rem;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(-45deg);
+      transition: transform 0.15s ease;
+      translate: 0 -0.05rem;
+    }
+  }
+
+  &[open] > summary::before {
+    transform: rotate(45deg);
+    translate: 0 -0.15rem;
+  }
+
+  > summary:hover {
+    color: #0b2a12;
+  }
+
+  > div.sourceCode,
+  > .code-copy-outer-scaffold > div.sourceCode {
+    margin-left: 0 !important;
+  }
+}
+
+// Margin footnotes: keep "N Show Code" on one line
+div[id^="fn"] > .code-fold-wrap {
+  margin: 0.25rem 0 0.75rem 0;
+
+  > details.code-fold {
+    display: inline-block;
+    vertical-align: baseline;
+    max-width: 100%;
+  }
+
+  > details.code-fold > summary {
+    margin-bottom: 0.35rem;
+  }
+}
+
+// Quarto's `p/li/td code.sourceCode` rule paints fenced blocks with the
+// inline pink bg when nested in lists, tippy, etc. Keep block code clear.
+li pre > code.sourceCode,
+p pre > code.sourceCode,
+td pre > code.sourceCode,
+.tippy-content pre code,
+.tippy-content div.sourceCode code {
+  background-color: transparent !important;
+  padding: 0;
 }
 
 // Checkboxes
@@ -291,4 +386,15 @@ div.quarto-post .thumbnail img {
   p {
     margin: 0;
   }
+}
+
+// Bubble
+
+.bubble {
+  color: #0b2a12;
+  border: 1px solid #0b2a12;
+  padding: 5px;
+  border-radius: 15px;
+  font-size: smaller;
+  line-height: 2.5em;
 }

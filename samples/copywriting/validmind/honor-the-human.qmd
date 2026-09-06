@@ -51,4 +51,4 @@ ValidMind’s approach to model documentation puts the human first, starting the
 
 #### Citation
 
-[ValidThoughts: View original post](https://validmind.com/blog/honor-the-human-with-validmind/){.button}
+[ValidThoughts: View Original Post](https://validmind.com/blog/honor-the-human-with-validmind/){.button}

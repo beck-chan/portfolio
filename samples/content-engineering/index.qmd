@@ -1,44 +1,53 @@
 ---
 title: "Content Engineering"
 subtitle: "Samples"
+aliases: 
+  - /content/index.html
 listing:
   - id: validmind-content
     type: grid
-    grid-columns: 2
+    grid-columns: 3
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
       - validmind/library.qmd
       - validmind/releases.qmd
       - validmind/academy.qmd
       - validmind/quickstarts.qmd
+      - validmind/redesign.qmd
   - id: atryum-content
     type: grid
     grid-columns: 2
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
-      - validmind/atryum.qmd
+      - atryum/index.qmd
   - id: personal-content
     type: grid
     grid-columns: 2
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
-      - personal/portfolio.qmd
+      - personal/portfolio/index.qmd
+      # - personal/guestbook/index.qmd
     categories: true
+categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Instructional Design", "Content Enablement", "Release Notes", "Quarto", "Cursor Code", "Agent Skills", "Large Language Models", "GitHub Pages", "Netlify", "PostHog", "Integrations", "CI/CD Workflows", "Frontend Development"]
+# categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Instructional Design", "Release Notes",  "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Quarto", "Cursor Code", "Agent Skills","GitHub Pages", "Netlify", "PostHog","CI/CD Workflows", "Frontend Development"]
 ---
 
-> lorem ipsum etc so the preview shows text same here, same listing page 
->
-> Gotta update as to why content engineering is important
+{{< include /samples/single-source/_content.qmd >}}
+
+::: {.category-filter}
+:::
 
 ## ValidMind
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}
+
+{{< include /samples/single-source/validmind/_architecture.qmd >}}
 
 :::{#validmind-content}
 :::
@@ -50,7 +59,13 @@ listing:
 :::{#atryum-content}
 :::
 
+::: {.callout}
+You can learn more about my involvement with ValidMind and Atryum's documentation and the impact I had on user guidance content under [Technical Writing](/samples/technical-writing/validmind/index.qmd).
+:::
+
 ## Personal
+
+{{< include /samples/single-source/personal/_content.qmd >}}
 
 :::{#personal-content}
 :::

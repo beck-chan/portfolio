@@ -1,0 +1,174 @@
+---
+title: "Patch release automation"
+subtitle: "ValidMind release notes guides"
+---
+
+Automated customer-managed ValidMind (CMVM) hotfix or patch release notes (`cmvm/YY.MM.NN` where `NN ≥ 02`).
+
+## When are patch release drafts automatically generated?
+
+| Scenario | Trigger | `installation` `RELEASE_AUTOMATION` repo variable | Notes |
+| --- | --- | --- | --- |
+| **A (tag push)** | When `validmind/installation` receives a new `cmvm/YY.MM.NN` tag | `vars.RELEASE_AUTOMATION == 'true'` | A notifier on `installation` dispatches `patch-release-notes` to the `release-notes` repo |
+| **B (`workflow_dispatch`)** — Fallback | A human manually runs `patch_release_notes.yml` with a tag | Ungated | Example: `gh workflow run patch_release_notes.yml --repo validmind/release-notes -f tag=cmvm/26.06.07` |
+
+- Patch release automation is triggered by stable `cmvm/YY.MM.NN` tags only (`NN ≥ 02`) — release candidate `-rc#` tags and monthly `.01` tags are rejected by discovery; monthly `.01` tags dispatch [Monthly release automation](/samples/content-engineering/validmind/release-notes/monthly/automation.qmd) instead.
+- Discovery *skips* a patch when `releases/cmvm/{version}/release-notes.qmd` is already on `validmind/release-notes` `main`, or when an open automation PR (release-notes draft and/or documentation preview) is already in flight for that version.
+- Re-dispatching the *same* stable tag (for example, running the workflow again) while a draft PR on `automated/patch-{version}` is still open—and the file is not yet on `main` — sets `refresh_in_place` and regenerates on that branch instead of skipping or opening a new PR.
+
+## What happens when patch drafts are automatically generated?
+
+###  1. Discovery
+
+- `discover_undocumented_cmvm_patches.py` builds `targets[]`; `generate_patch_batch.py` runs the full workflow once per target (each patch release tag identified in the delta).
+- Per-target `start_tag` and `gap_start_tag` are the incremental previous patch tag in the month (or the month's `.01` for the first patch in that month). Fetch, generate, and Zendesk cross-check all use this window — each target documents only PRs since the previous patch. Refer to the **Zendesk cross-check review** process.
+- [`VM_RELEASE_DELTA`](/samples/content-engineering/validmind/release-notes/access-requirements.qmd#repository-variables) is required in `.env` (mirror GitHub) but is discovery-only; it does not widen fetch or generate windows for patch targets.
+- **Stale `discovery.json`:** targets created before the dedupe fix may have a wide `start_tag` without `gap_start_tag`. Batch warns and uses `gap_start_tag` when present; re-dispatch open `automated/*` branches with fresh discover output after merging dedupe fixes — do not reuse pre-fix `discovery.json`.
+
+### 2. Automation branch checked out, release notes drafted, and pushed
+
+Before generating, `generate_patch_batch.py` runs `_ensure_branch` (`ensure_batch_branch` in `batch_git.py`) so the working tree is on `automated/patch-{version}` (creating or checking out from base when needed). The draft lands on that automation branch — not on `main`.
+
+a. `generate_patch_batch.py` runs `generate_patch_release_notes.py` with default **`--edit`** (initial LLM cleanup) on partials and CMVM shell.
+
+b. **Written on `release-notes` branch (`automated/patch-{version}`)** — `releases/cmvm/{version}/release-notes.qmd` plus repo partials under `releases/frontend/{YY.MM}/` and `releases/backend/{YY.MM}/`. `validmind-library` is **not** in scope — library releases use [Library release automation](/samples/content-engineering/validmind/release-notes/library/automation.qmd).
+
+c. **Committed and pushed** to `validmind/release-notes` on `automated/patch-{version}`. No branch is created in `validmind/documentation` at this step.
+
+### 3. Shortcut Story created or reused
+
+Batch automation resolves a Shortcut Story using one of three paths:
+
+| Path | When | How the story is resolved |
+| --- | --- | --- |
+| **create** | First run for a version (no automation branch yet, or new branch from base) | Title search (`Edit {version} release notes`) → reuse existing story if found, otherwise POST a new chore story |
+| **refresh** | Discover sets `refresh_in_place: true` (same tag re-dispatch, `release-notes.qmd` not on `main`, open release-notes PR on `automated/patch-{version}`) | Parse the Shortcut blockquote from the open release-notes PR body (no new POST) |
+| **orphan** | Remote automation branch exists but there is no open PR (partial/failed prior run) | Same as **create** — title search then POST or reuse; batch then opens the release-notes PR |
+
+`release-notes` and `documentation` PRs link to the Shortcut Story via the Story blockquote in the PR template. On **refresh**, if the blockquote is missing or malformed, batch falls back to the **create** path (title search) instead of failing.
+
+::: {.callout-tip collapse="true"}
+## Shortcut story fields
+
+| Field | Value |
+| --- | --- |
+| Story type | `chore` |
+| Title | `Edit {version} release notes` |
+| State | In progress |
+| Epic | Automated Release Notes |
+| Group | Docs |
+| Estimate | 1 |
+| Iteration | Current iteration when started |
+| Technical Area | Product Documentation |
+
+:::
+
+### 4. Release-notes PR opened
+
+Draft PR on `validmind/release-notes` from `automated/patch-{version}`. Follows the template: `patch_pr_body.md`.
+
+On **refresh** (`refresh_in_place`), an open PR already exists — batch updates the branch in place and reuses the existing PR (no new `gh pr create`). On **orphan** resume, batch opens the release-notes PR after Shortcut story resolution.
+
+### 5. Documentation preview deployed
+
+The **Documentation preview** check on the release-notes PR dispatches the reusable preview workflow on `validmind/documentation`. It renders the exact release-notes PR commit and deploys it to `pr_previews/release-notes/pr-{pr_number}`. Every new commit redeploys the same preview URL; no documentation branch or PR is created.
+
+### 6. Slack notification sent
+
+- Posts success or failure to `#release-notes`. Follows templates: `patch-success.md`, `patch-failure.md`.
+- Slack messages use **mrkdwn** (not GitHub Markdown): line 1 is fully bold (`*…*`), links use `<url|label>`, to-do items use `•` bullets, and failure error text is shown in a monospace code block so subprocess output cannot break link formatting.
+- `generate_patch_batch.py` calls `render_slack_batch_notify.py` per target on success or failure when run locally. In GitHub Actions, batch scripts skip in-process Slack; workflow steps post from `batch_results.json` (`--batch-successes` on success/partial, `--batch-failures` / `--batch-crashed` on failure). Handled per-target failures do not trigger duplicate Slack messages.
+- When initial draft `--edit` fails partially, the Slack message includes an edit-skipped line.
+
+::: {.callout-tip collapse="true"}
+## Slack notification examples
+
+| Scenario | Channel | When | Example message |
+| --- | --- | --- | --- |
+| **Success** | `#release-notes` | Target completes in `generate_patch_batch.py` | *Patch release notes draft ready — v26.06.07*<br>Triggered by cmvm/26.06.07<br>&lt;shortcut URL\|sc-12345&gt; \| &lt;PR URL\|release-notes #42&gt; \| &lt;docs PR URL\|documentation #99&gt;<br>Tag window: cmvm/26.06.06 → cmvm/26.06.07 \| Fixes: 3 \| Empty: no \| Cross-check gaps: 1<br>…<br>To-do: • Complete *What needs special review?* on release-notes PR; • Confirm docs preview CI green |
+| **Success (refresh)** | `#release-notes` | Same tag re-dispatch while an automation PR is open (`refresh_in_place`) | Same as success; title includes (refresh): *Patch release notes draft ready — v26.06.07 (refresh)* |
+| **Success (edit skipped)** | `#release-notes` | Initial draft `--edit` soft-fails (`edit_skipped: true`) | Same as success, with an extra line after the tag-range summary:<br>⚠️ LLM --edit skipped — review draft wording manually. |
+| **Failure (target step)** | `#release-notes` | `BatchStepError` or unhandled exception in `process_target` | *⚠️ Patch release notes automation FAILED — v26.06.07*<br>Triggered by cmvm/26.06.07<br>Error (step: `release_notes_pr`):<br>```<br>{subprocess error text}<br>```<br>Workflow run: &lt;run URL\|View workflow run&gt;<br>Branches:<br>• &lt;release-notes tree URL\|automated/patch-26.06.07&gt; — pushed<br>• documentation preview: _none created_ (failed at step: `release_notes_pr`)<br>Artifacts:<br>• Shortcut story: created — &lt;shortcut URL\|sc-12345&gt;<br>• Release-notes PR: not created<br>• Documentation PR: not created<br>…<br>To-do: • Inspect logs; • Delete orphan branches; • Re-run workflow_dispatch |
+| **Failure (discovery)** | `#release-notes` | `discover` step fails in `patch_release_notes.yml` | *⚠️ Patch release notes automation FAILED — v26.06.07*<br>Error (step: `discover`):<br>```<br>Discovery failed<br>```<br>Branches: _none created_ (failed at step: `discover`)<br>Artifacts:<br>• Shortcut story: not created<br>• Release-notes PR: not created<br>• Documentation PR: not created |
+| **Failure (batch crashed)** | `#release-notes` | Batch step fails **before** `batch_results.json` is written (true crash only) | Error (step: `generate`):<br>```<br>Batch crashed before writing batch_results.json<br>```<br>— one failure message per target in discovery.json |
+
+:::
+
+## What does a human have to do after the patch release automation runs?
+
+### 1. Zendesk cross-check
+
+Patch draft generation runs an initial Zendesk cross-check automatically — `generate_patch_release_notes.py` fetches Shortcut `zendesk_pr_mapping` and GitHub tag-delta, evaluates PR merge windows against CMVM tag timestamps, and injects qualifying customer-linked fixes into the draft before default `--edit` polishes prose.
+
+-  Cross-check gaps flagged by automation under **What needs special review?** on the `release-notes` automation PR; gap count also appears in the `#release-notes` Slack success message (`Cross-check gaps: N`).
+- Confirm every qualifying fix is in `releases/cmvm/{version}/release-notes.qmd` with Zendesk ticket HTML comments; resolve each gap row; spot-check 1–2 tickets in Zendesk for wording and patch scope.
+
+### 2. Human editing & review
+
+Proofread the patch release composite file (`releases/cmvm/{version}/release-notes.qmd`) — refer to the **Editing generated release notes** guide.
+
+### 3. Merge release notes
+
+After the **Documentation preview** check passes, merge `release-notes` > `main`. There is no paired documentation PR to clean up or merge. The merge automatically rebuilds the documentation staging site from the updated release-notes source.
+
+### 4. Publish documentation site
+
+After **Publish release notes to documentation staging** passes, push `documentation` to production: `staging` > `prod`.
+
+## Do patch drafts automatically get regenerated?
+
+| Scenario | What happens | Notes |
+| --- | --- | --- |
+| **Stable refresh** | Re-dispatch with the same tag while an open automation PR exists (and `release-notes.qmd` is not on `main`) sets `refresh_in_place` on the discover target; batch regenerates automation-owned paths and preserves human edits automatically. | Same installation tag; workflow re-dispatched — not a new tag. |
+| **New tag** | A new patch increment opens a new automation PR. | |
+
+::: {.callout}
+Discovery auto-detects an open PR and a file not yet on `main` when the same tag is re-dispatched and sets `refresh_in_place: true`: 
+- If `releases/cmvm/{version}/release-notes.qmd` is not on `main` yet and an automation PR is already open on `automated/patch-{version}`, normal discovery treats that version as *in-flight* and skips it — correct for net-new work, wrong when you want to update the existing draft.
+- Generation checks out the existing `automated/patch-{version}` branch, re-fetches Shortcut/Zendesk/GitHub data, regenerates `release-notes.qmd`, commits, and pushes — updating the open PR, not opening a new one. It reuses the existing Shortcut story and PR bodies, and sets up the human-edit protection baseline.
+
+:::
+
+## Appendix
+
+::: {.callout-tip collapse="true"}
+## Scripts
+
+| Script | Role |
+| --- | --- |
+| `discover_undocumented_cmvm_patches.py` | Find undocumented patch targets |
+| `generate_patch_release_notes.py` | Generate patch `.qmd` files |
+| `generate_patch_batch.py` | Batch orchestration (PR, Shortcut, preview) |
+
+:::
+
+::: {.callout-tip collapse="true"}
+## GitHub workflows
+
+| Workflow | Trigger |
+| --- | --- |
+| `patch_release_notes.yml` | `repository_dispatch` / `workflow_dispatch` |
+| `documentation_preview.yml` | Commits to release-notes PRs that change `releases/**` |
+| `installation` notifier | Tag push on `validmind/installation` when `RELEASE_AUTOMATION=true` (patch tags `NN ≥ 02`, no `-rc`) |
+
+:::
+
+::: {.callout-tip collapse="true"}
+## Skills
+
+| Skill | When |
+| --- | --- |
+| `generate-release-notes` | Use in the final human proofread only, NOT to generate release notes as that is now taken care of by the automations/updated scripts — apply **Editing generated release notes** process content rules |
+| `generate-release-notifications` | Optional post-merge customer emails |
+
+:::
+
+::: {.callout-tip collapse="true"}
+## Other
+
+| Item | Notes |
+| --- | --- |
+| PR body template | `patch_pr_body.md` |
+| Discovery floor | [`VM_RELEASE_DELTA`](/samples/content-engineering/validmind/release-notes/access-requirements.qmd#repository-variables) — discovery-only; does not widen per-target fetch windows |
+
+:::

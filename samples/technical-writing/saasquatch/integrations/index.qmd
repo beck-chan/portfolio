@@ -1,7 +1,7 @@
 ---
 title: "SaaSquatch Integrations"
 subtitle: "Feature Documentation"
-categories: ["Feature Documentation", "User Guides", "Integrations", "Salesforce", "CRMs", "Stripe", "Recurly", "Tango Card", "Payment Providers", "Reward Providers", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+categories: ["Stripe", "Recurly", "Tango Card", "Payment Providers", "Reward Providers"]
 listing:
   - id: saasquatch-sfdc
     type: grid

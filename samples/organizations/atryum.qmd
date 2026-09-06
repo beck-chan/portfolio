@@ -1,6 +1,8 @@
 ---
 title: "Atryum"
 subtitle: "Collated Samples"
+aliases: 
+  - /atryum/index.html
 listing:
   - id: atryum-technical
     type: grid
@@ -21,8 +23,18 @@ listing:
       title: "Atryum Quickstart"
       subtitle: "Tutorial"
       description: "Quickstart and installation guide for Atryum."
+  - id: atryum-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - ../content-engineering/atryum/index.qmd
     categories: true
 categories: ["Content Architecture", "Feature Documentation", "User Guides", "Quickstart", "Integrations", "Agentic Orchestration", "Artificial Intelligence (AI)", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Risk Governance", "Software as a Service", "Atryum", "ValidMind"]
+includes:
+  organizations: true
 ---
 
 ::: {.hidden}
@@ -32,7 +44,15 @@ Atryum is an open-source agentic orchestration tool developed by ValidMind. I wa
 
 {{< include /samples/single-source/atryum/_atryum.qmd >}}
 
+::: {.category-filter}
+:::
+
 ## Content Engineering
+
+{{< include /samples/single-source/_content.qmd >}}
+
+:::{#atryum-content}
+:::
 
 ## Technical Writing
 

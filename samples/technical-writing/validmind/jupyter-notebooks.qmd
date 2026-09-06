@@ -1,7 +1,7 @@
 ---
 title: "ValidMind Jupyter Notebooks"
 subtitle: "Developer Content"
-categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Python Library", "Artificial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
+categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Python Library"]
 listing:
   - id: validmind-notebooks-authored
     type: grid
@@ -60,6 +60,6 @@ Links below will take you to static versions of the notebooks as last edited by 
 :::{#validmind-notebooks-coauthored}
 :::
 
-## Citations
+## Citation
 
-[{{< fa brands github >}} archive of `validmind/validmind-library` notebooks by Beck](https://github.com/validbeck/validmind-library/tree/main/notebooks){target="_blank" .button}
+[{{< fa brands github >}} Archive of `validmind/validmind-library` Notebooks by Beck](https://github.com/validbeck/validmind-library/tree/main/notebooks){target="_blank" .button}

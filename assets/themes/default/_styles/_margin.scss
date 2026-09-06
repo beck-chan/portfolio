@@ -4,10 +4,17 @@ div[id^="fn"] {
   padding: 1rem 0;
 }
 
-// Fixing annoying margin dupe scroll
-#quarto-margin-sidebar {
+// Fixing annoying margin dupe scroll. Quarto's .sidebar { position: sticky }
+// keeps a short TOC stuck in view on long footnote pages (tall grid row),
+// which blocks scroll-past detection — force normal flow.
+#quarto-margin-sidebar,
+#quarto-margin-sidebar.sidebar,
+#quarto-margin-sidebar.margin-sidebar {
   max-height: none !important;
   overflow: visible !important;
+  position: static !important;
+  top: auto !important;
+  bottom: auto !important;
   pointer-events: none;
 }
 
@@ -22,45 +29,163 @@ div[id^="fn"] {
   display: none !important;
 }
 
+// Scroll-aware TOC dropdown (sticky-toc-toggle.html). Expanded state clones
+// nav#TOC as nav.portfolio-toc-panel so styles match 1:1.
+#portfolio-toc-toggle.portfolio-toc-toggle {
+  position: fixed;
+  // Above sidenav (1020), navbar stays 1040 geometrically above via top offset.
+  z-index: 1080 !important;
+  opacity: 1 !important;
+  box-sizing: border-box;
+  overflow: hidden;
+  pointer-events: auto;
+  background: transparent;
+}
+
+#portfolio-toc-toggle[hidden] {
+  display: none !important;
+}
+
+// Collapsed affordance only — expanded chrome comes from the cloned panel.
+#portfolio-toc-toggle:not(.expanded) {
+  border-left: 3px solid #ffb3ba;
+  background-color: #fff4f5;
+}
+
+#portfolio-toc-toggle .portfolio-toc-toggle-title {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.75rem 1.75rem 0.65rem 1rem;
+  border: 0;
+  border-bottom: 1px dotted #ffb3ba;
+  background: transparent;
+  color: #0b2a1290;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 0.875rem;
+  text-align: left;
+}
+
+#portfolio-toc-toggle.expanded .portfolio-toc-toggle-title {
+  display: none;
+}
+
+#portfolio-toc-toggle .portfolio-toc-toggle-icon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  color: #ffb3ba;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+#portfolio-toc-toggle .portfolio-toc-toggle-contents {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#portfolio-toc-toggle:not(.expanded) .portfolio-toc-toggle-contents {
+  padding: 0 !important;
+}
+
+#portfolio-toc-toggle nav.portfolio-toc-panel .portfolio-toc-panel-heading {
+  position: relative;
+  padding-right: 1.75rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dotted #ffb3ba;
+  cursor: pointer;
+}
+
+#portfolio-toc-toggle nav.portfolio-toc-panel .portfolio-toc-panel-heading .portfolio-toc-toggle-icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  color: #ffb3ba;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+// Hide the in-flow TOC while the fixed dropdown is covering that role.
+nav#TOC.portfolio-toc-rolled-up {
+  visibility: hidden !important;
+}
+
 html:not(.margin-below-toc-ready) main.content .column-margin.column-container {
   visibility: hidden;
 }
 
-// TOC links
-nav#TOC {
-    border-left: 3px solid #ffb3ba
-    ;
+// Quarto nests a full page-columns grid inside tabsets that contain
+// margin footnotes, which squeezes the tab body and floats the note
+// across a wide empty gutter. Keep tabsets as normal block layout;
+// margin-below-toc.html hoists the notes into .tabset-margin-container.
+.panel-tabset.page-columns,
+.panel-tabset .tab-content.page-columns {
+  display: block !important;
+  grid-template-columns: none !important;
+}
+
+.panel-tabset .tab-content > .tab-pane.page-columns.active {
+  display: block !important;
+}
+
+.panel-tabset.page-full,
+.panel-tabset .page-full {
+  grid-column: auto !important;
+}
+
+// TOC links — shared by in-flow nav#TOC and sticky dropdown clone
+nav#TOC,
+#portfolio-toc-toggle nav.portfolio-toc-panel {
+    border-left: 3px solid #ffb3ba;
     background-color: #fff4f5;
     padding: 1rem;
-    
+    // Match Quarto $toc-font-size (sidebar rule doesn't apply to the clone).
+    font-size: 0.875rem;
+
     ul {
+      list-style: none !important;
       border-left: none !important;
-      padding-left: 0; 
-      
+      padding-left: 0;
+      margin-bottom: 0;
+      font-size: 0.875rem;
+
       ul {
-        padding-left: 0.6rem; 
+        padding-left: 0.6rem;
       }
-      
+
+      // All depths: coral links, dark active + diamond
+      // Spacing mirrors Quarto `.sidebar nav[role=doc-toc]>ul li a`
+      // (clone is outside .sidebar, so it misses those rules).
       li a.nav-link {
-        color: #0b2a12 !important;
-        text-decoration: none;
-        border-left: 1px solid transparent !important;
+        color: #ff6162 !important;
+        text-decoration: none !important;
+        border-left: 0 none transparent !important;
         margin-left: 0 !important;
-        padding-left: 0.5rem !important;
+        padding-left: 1rem !important;
+        padding-top: 0.2rem !important;
+        padding-bottom: 0.2rem !important;
         position: relative;
-        
+        font-weight: 400 !important;
+        font-size: 0.875rem !important;
+        line-height: 1.1rem !important;
+
         &:hover {
-          color: #ff6162 !important;
+          color: #0b2a12 !important;
         }
-        
+
         &.active {
-          color: #ff6162 !important;
-          font-weight: 400 !important;
-          
+          color: #0b2a12 !important;
+
           &::before {
             content: "";
             position: absolute;
-            left: -0.1rem; 
+            left: 0;
             top: 50%;
             transform: translateY(-50%) rotate(45deg);
             width: 6px;
@@ -68,16 +193,19 @@ nav#TOC {
             border-top: 2px solid #0b2a12;
             border-right: 2px solid #0b2a12;
             background-color: transparent;
+            margin-left: -0.1rem;
             z-index: 10;
           }
         }
       }
     }
-  
+
     #quarto-sidebar-toc-header, h2, h3 {
-      color: #0b2a12 !important;
+      color: #0b2a1290 !important;
+      font-size: 0.875rem !important;
+      font-weight: 400 !important;
     }
-  
+
     .toc-actions ul li a.toc-action {
       color: #0b2a12;
       text-decoration: none;
@@ -85,80 +213,35 @@ nav#TOC {
       margin-right: 1em;
     }
 }
-  
-#quarto-sidebar-toc-header, 
-  nav#TOC > h2, 
-  nav#TOC > h3 {
+
+#quarto-sidebar-toc-header,
+nav#TOC > h2,
+nav#TOC > h3,
+#portfolio-toc-toggle nav.portfolio-toc-panel > h2,
+#portfolio-toc-toggle nav.portfolio-toc-panel > h3 {
     color: #0b2a1290 !important;
-  }
-  
-nav#TOC ul li a.nav-link,
-nav#TOC ul li a.nav-link.active,
-nav#TOC ul li a.nav-link:hover {
-    border-left: 0px none transparent !important;
-    margin-left: 0 !important;
-    padding-left: 1rem !important; 
-    position: relative;
-    }
-  
-  
-nav#TOC ul > li > a.nav-link.active::before {
-    content: "";
-    position: absolute;
-    left: 0;   
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg); 
-    width: 6px;
-    height: 6px;
-    border-top: 2px solid #0b2a12; 
-    border-right: 2px solid #0b2a12;
-    background-color: transparent; 
-    margin-left: -0.1rem; 
-    z-index: 10; 
-    }
-  
-nav#TOC ul > li > a.nav-link.active {
-    color: #0b2a12 !important; 
-    font-weight: 400 !important;
-    text-decoration: none;
-    }
-  
-nav#TOC ul {
+}
+
+nav#TOC > h2,
+nav#TOC > h3 {
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dotted #ffb3ba;
+}
+
+nav#TOC ul,
+#portfolio-toc-toggle nav.portfolio-toc-panel ul {
     border-left: none !important;
-    }
-  
-nav#TOC ul > li > a.nav-link:not(.active) {
-    border-left: 1px solid transparent !important;
-    }
-  
-nav#TOC ul > li > a.nav-link {
-    color: #ff6162 !important;
-    text-decoration: none;
-    }
-  
-nav#TOC ul > li > a.nav-link {
-    color: #ff6162 !important;
-    text-decoration: none;
-    }
-    
-nav#TOC ul > li > a.nav-link:hover,
-nav#TOC ul > li > a.nav-link.active:hover {
-    color: #0b2a12 !important;
-    text-decoration: none;
-    }
-    
-nav#TOC ul > li > a.nav-link.active, nav#TOC ul > li > a.nav-link.active:hover {
-    color: #0b2a12 !important;
-    font-weight: 400 !important;
-    text-decoration: none;
-    }
-    
-nav#TOC .toc-actions ul li a.toc-action {
+    list-style: none !important;
+}
+
+nav#TOC .toc-actions ul li a.toc-action,
+#portfolio-toc-toggle nav.portfolio-toc-panel .toc-actions ul li a.toc-action {
     color: #0b2a12;
     text-decoration: none;
     font-size: 0.9em;
     margin-right: 1em;
-    }
+}
   
 
 // Category tags & filtering
@@ -257,6 +340,14 @@ nav#TOC .toc-actions ul li a.toc-action {
     color: inherit !important;
     }
 
+// Category filter extension tokens (inline mobile dropdown)
+:root {
+  --category-filter-accent: #ff6162;
+  --category-filter-border: #ffb3ba;
+  --category-filter-fg: #0b2a12;
+  --category-filter-bg: #fff8f9;
+}
+
 
 // Margin content
 
@@ -269,7 +360,7 @@ main.content li {
 main.content li::marker {
   color: #2c3e50 !important;  
 }
-main.content li a {
+main.content li a:not(.footnote-ref) {
   font-family: "Your Font Name", system-ui, sans-serif !important;
   color: #2c3e50 !important;
 }

@@ -1,6 +1,8 @@
 ---
 title: "ValidMind"
 subtitle: "Collated Samples"
+aliases: 
+  - /validmind/index.html
 listing:
   - id: validmind-technical
     type: grid
@@ -14,6 +16,18 @@ listing:
       - ../technical-writing/validmind/user-guides.qmd
       - ../technical-writing/validmind/quickstarts.qmd
       - ../technical-writing/validmind/enablement.qmd
+  - id: validmind-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - ../content-engineering/validmind/quickstarts.qmd
+    - ../content-engineering/validmind/library.qmd
+    - ../content-engineering/validmind/academy.qmd
+    - ../content-engineering/validmind/releases.qmd
+    - ../content-engineering/validmind/redesign.qmd
   - id: atryum-technical
     type: grid
     grid-columns: 3
@@ -33,6 +47,14 @@ listing:
       title: "Atryum Quickstart"
       subtitle: "Tutorial"
       description: "Quickstart and installation guide for Atryum."
+  - id: atryum-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - ../content-engineering/atryum/index.qmd
   - id: validmind-copywriting
     type: grid
     grid-columns: 3
@@ -44,7 +66,7 @@ listing:
     - ../copywriting/validmind/reduce-culture-risk.qmd
     - ../copywriting/validmind/osff-takeaways.qmd
     categories: true
-categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Python Library", "Artificial Intelligence (AI)", "Agentic Orchestration", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind", "Atryum"]
+categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Release Notes", "Python Library", "Artificial Intelligence (AI)", "Agentic Orchestration", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Model Risk Management", "Risk Governance",  "Quarto", "Cursor Code", "Agent Skills", "Large Language Models", "Integrations", "CI/CD Workflows", "Frontend Development", "Software as a Service", "ValidMind", "Atryum"]
 ---
 
 ::: {.hidden}
@@ -56,11 +78,25 @@ I was the sole **Senior Technical Writer** for ValidMind, where I employed docs-
 
 {{< include /samples/single-source/_static-links.qmd >}}
 
+::: {.category-filter}
+:::
+
+
 ## Content Engineering
+
+{{< include /samples/single-source/_content.qmd >}}
+
+{{< include /samples/single-source/validmind/_architecture.qmd >}}
+
+:::{#validmind-content}
+:::
 
 ### Atryum
 
 {{< include /samples/single-source/atryum/_atryum.qmd >}}
+
+:::{#atryum-content}
+:::
 
 ## Technical Writing
 

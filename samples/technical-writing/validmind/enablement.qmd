@@ -1,7 +1,7 @@
 ---
 title: "ValidMind Enablement Content"
 subtitle: "Content Creation"
-categories: ["Content Enablement", "Artificial Intelligence (AI)", "AI Risk", "Model Risk Management", "Risk Governance", "Software as a Service", "ValidMind"]
+categories: ["Python Library", "Content Enablement", "Release Notes", "Cursor Code", "Agent Skills", "Large Language Models", "CI/CD Workflows"]
 listing:
   - id: validmind-style-guide
     type: grid
@@ -32,6 +32,16 @@ listing:
     - path: https://github.com/validbeck/validmind-library/blob/main/notebooks/templates/e2e-notebook.ipynb
       title: "End-to-end notebook template generation"
       subtitle: "Content Enablement"
+  - id: validmind-release-notes
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: ../../../samples/content-engineering/validmind/releases.qmd#citation
+      title: "ValidMind Release Notes"
+      subtitle: "Content Enablement"
 ---
 
 Content produced to enable other creators to contribute to ValidMind's open-source.
@@ -52,9 +62,16 @@ Content produced to enable other creators to contribute to ValidMind's open-sour
 :::{#validmind-notebook-templates}
 :::
 
-## Citations
+## ValidMind Release Notes
 
-[{{< fa brands github >}} archive of `validmind/documentation` style guide by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/about/contributing/style-guide){target="_blank" .button}
+As part of automating our release notes process, I delivered comprehensive internal documentation for the automation to empower authors to review and edit the generated release notes in accordance with our standards:
+
+:::{#validmind-release-notes}
+:::
+
+## Citation
+
+[{{< fa brands github >}} Archive of `validmind/documentation` Style Guide by Beck](https://github.com/validbeck/validmind-docs/tree/main/site/about/contributing/style-guide){target="_blank" .button}
 
 
 

@@ -1,7 +1,7 @@
 ---
 title: "SaaSquatch Growth Automation Platform"
 subtitle: "Feature Highlight"
-categories: ["Feature Highlights", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
+categories: ["Feature Highlights", "Referrals & Attributions", "eCommerce", "Marketing Technology", "SaaSquatch"]
 ---
 
 > I owned this feature highlight post from start to finish.
@@ -103,4 +103,4 @@ More about how your users will interact with your Growth Automation program can 
 
 #### Citation
 
-[SaaSquatch Help Center: View original post](https://docs.saasquatch.com/growth/saasquatch-ga){.button}
+[SaaSquatch Help Center: View Original Post](https://docs.saasquatch.com/growth/saasquatch-ga){.button}

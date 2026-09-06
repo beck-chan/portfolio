@@ -1,0 +1,202 @@
+---
+title: "Library release automation"
+subtitle: "ValidMind release notes guides"
+---
+
+Automated `validmind-library` semver release notes (`vX.Y.Z`).
+
+## When are library release drafts automatically generated?
+
+| Scenario | Trigger | `validmind-library` `RELEASE_AUTOMATION` repo variable | Notes |
+| --- | --- | --- | --- |
+| **A (tag push)** | When `validmind/validmind-library` receives a new stable semver tag | `vars.RELEASE_AUTOMATION == 'true'` | A [notifier on `validmind-library`](https://github.com/validmind/validmind-library/blob/main/.github/workflows/notify-library-release-notes.yaml){target="_blank"} dispatches `library-release-notes` to the `release-notes` repo |
+| **B (`workflow_dispatch`)** — Fallback | A human manually runs `library_release_notes.yml` with a tag | Ungated | Example: `gh workflow run library_release_notes.yml --repo validmind/release-notes -f tag=v2.13.5` |
+
+- Library release automation is triggered by stable `vX.Y.Z` tags only (min. `v2.13.2+` floor); prerelease suffixes (`-rc`, `-alpha`, `-beta`) are rejected by discovery and the library notifier.
+- **Patch** vs **feature** follows the new tag relative to the previous stable tag: a patch-only bump (e.g. `v2.13.4` → `v2.13.5`) → patch; a major or minor bump (e.g. `v2.13.5` → `v2.14.0`) → feature. The first in-scope tag is feature when the patch is `.0` and patch otherwise.
+- Discovery *skips* a library release when `releases/validmind-library/v{version}/release-notes.qmd` is already on `validmind/release-notes` `main`, or when an open automation PR (release-notes draft and/or documentation preview) is already in flight for that version.
+- Re-dispatching the *same* stable tag (for example, running the workflow again) while a draft PR on `automated/library-v{version}` is still open—and the file is not yet on `main` — sets `refresh_in_place` and regenerates on that branch instead of skipping or opening a new PR.
+
+### How are library patch and feature releases different?
+
+| Aspect | Patch release | Feature release |
+| --- | --- | --- |
+| Examples | `v2.13.4` → `v2.13.5` | `v2.13.5` → `v2.14.0` |
+| Discover `release_type_hint` | `patch` — semver patch bump vs previous tag, or first in-scope tag with non-zero patch | `feature` — major/minor bump, or first in-scope tag with `.0` patch |
+| Zendesk cross-check | Runs automatically | Runs automatically |
+| Curated highlights | No generated `*-highlights*` files | Author runs the [Library highlights](highlights.qmd) process after the automated drafts are generated |
+| Untagged highlight candidates | Listed in the PR body for human review (advisory only) | Same — candidates do not change the semver `release_type_hint` |
+
+
+## What happens when library drafts are automatically generated?
+
+### 1. Discovery
+
+- `discover_undocumented_library_releases.py` builds `targets[]`; `generate_library_batch.py` runs the full workflow once per target (each library release tag identified in the delta).
+- Per-target `start_tag` and `gap_start_tag` are the previous stable library tag. Fetch, generate, and Zendesk cross-check all use this incremental window — each target documents only PRs since the previous release. Refer to the **Zendesk cross-check review** guide.
+- **Stale `discovery.json`:** targets created before the dedupe fix may have a wide `start_tag` without `gap_start_tag`. Batch warns and uses `gap_start_tag` when present; re-dispatch open `automated/*` branches with fresh discover output after merging dedupe fixes — do not reuse pre-fix `discovery.json`.
+- Discovery scope is filtered by the library automation floor (`v2.13.2+`). [`LIBRARY_RELEASE_DELTA`](/samples/content-engineering/validmind/release-notes/access-requirements.qmd#repository-variables) is required in `.env` (mirror GitHub) but is discovery-only; it does not widen fetch or generate windows for library targets.
+
+### 2. Automation branch checked out, release notes drafted, and pushed
+
+Before generating, `generate_library_batch.py` runs `_ensure_branch` (`ensure_batch_branch` in `batch_git.py`) so the working tree is on `automated/library-v{version}` (creating or checking out from base when needed). The draft lands on that automation branch — not on `main`.
+
+a. `generate_library_batch.py` runs `generate_library_release_notes.py` with default **`--edit`** (initial LLM cleanup) on partials and library shell. Patch and feature releases both run the Zendesk cross-check in this step before `--edit`.
+
+b. **Written on `release-notes` branch (`automated/library-v{version}`)** — `releases/validmind-library/v{version}/release-notes.qmd` plus `_pr-{n}.qmd` and `pr-{n}.qmd` for all in-scope PRs. *No* curated `*-highlights*` files automatically generated in the initial draft — human authors run the [Library highlights](highlights.qmd) process.
+
+c. **Committed and pushed** to `validmind/release-notes` on `automated/library-v{version}`. No branch is created in `validmind/documentation` at this step.
+
+### 3. Shortcut Story created or reused
+
+Batch automation resolves a Shortcut Story using one of three paths:
+
+| Path | When | How the story is resolved |
+| --- | --- | --- |
+| **create** | First run for a version (no automation branch yet, or new branch from base) | Title search (`Edit v{version} release notes`) → reuse existing story if found, otherwise POST a new chore story |
+| **refresh** | Discover sets `refresh_in_place: true` (same tag re-dispatch, `release-notes.qmd` not on `main`, open release-notes PR on `automated/library-v{version}`) | Parse the Shortcut blockquote from the open release-notes PR body (no new POST) |
+| **orphan** | Remote automation branch exists but there is no open PR (partial/failed prior run) | Same as **create** — title search then POST or reuse; batch then opens the release-notes PR |
+
+`release-notes` and `documentation` PRs link to the Shortcut Story via the Story blockquote in the PR template. On **refresh**, if the blockquote is missing or malformed, batch falls back to the **create** path (title search) instead of failing.
+
+::: {.callout-tip collapse="true"}
+## Shortcut story fields
+
+| Field | Value |
+| --- | --- |
+| Story type | `chore` |
+| Title | `Edit v{version} release notes` |
+| State | In progress |
+| Epic | Automated Release Notes |
+| Group | Docs |
+| Estimate | 1 |
+| Iteration | Current iteration when started |
+| Technical Area | Product Documentation |
+
+:::
+
+### 4. Release-notes PR opened
+
+Draft PR on `validmind/release-notes` from `automated/library-v{version}`. Follows the template: `library_pr_body.md`.
+
+On **refresh** (`refresh_in_place`), an open PR already exists — batch updates the branch in place and reuses the existing PR (no new `gh pr create`). On **orphan** resume, batch opens the release-notes PR after Shortcut story resolution.
+
+### 5. Documentation preview deployed
+
+The **Documentation preview** check on the release-notes PR dispatches the reusable preview workflow on `validmind/documentation`. It renders the exact release-notes PR commit and deploys it to `pr_previews/release-notes/pr-{pr_number}`. Every new commit redeploys the same preview URL; no documentation branch or PR is created.
+
+### 6. Slack notification sent
+
+- Posts success or failure to `#release-notes`. Follows templates: `library-success.md`, `library-failure.md`.
+- Slack messages use **mrkdwn** (not GitHub Markdown): line 1 is fully bold (`*…*`), links use `<url|label>`, to-do items use `•` bullets, and failure error text is shown in a monospace code block so subprocess output cannot break link formatting.
+- `generate_library_batch.py` calls `render_slack_batch_notify.py` per target on success or failure when run locally. In GitHub Actions, batch scripts skip in-process Slack; workflow steps post from `batch_results.json` (`--batch-successes` on success/partial, `--batch-failures` / `--batch-crashed` on failure). Handled per-target failures do not trigger duplicate Slack messages.
+- When initial draft `--edit` fails partially, the Slack message includes an edit-skipped line.
+
+::: {.callout-tip collapse="true"}
+## Slack notification examples
+
+| Scenario | Channel | When | Example message |
+| --- | --- | --- | --- |
+| **Success (patch)** | `#release-notes` | Target completes in `generate_library_batch.py` | *Library release notes draft ready — v2.13.5*<br>Triggered by v2.13.5<br>&lt;shortcut URL\|sc-12345&gt; \| &lt;PR URL\|release-notes #42&gt; \| &lt;docs PR URL\|documentation #99&gt;<br>Tag window: v2.13.0 → v2.13.5 \| Type hint: patch \| PRs: 3 \| Cross-check gaps: 1<br>…<br>To-do: • Complete *What needs special review?* on release-notes PR; • Confirm docs preview CI green |
+| **Success (feature)** | `#release-notes` | Same; discover resolves `release_type_hint: feature` | *Library release notes draft ready — v2.14.0*<br>Triggered by v2.14.0<br>&lt;shortcut URL\|sc-12345&gt; \| &lt;PR URL\|release-notes #42&gt; \| &lt;docs PR URL\|documentation #99&gt;<br>Tag window: v2.13.5 → v2.14.0 \| Type hint: feature \| PRs: 12 \| Cross-check gaps: 2<br>…<br>To-do: • Complete *What needs special review?* on release-notes PR — including generating the [Library highlights](highlights.qmd); • Confirm docs preview CI green |
+| **Success (refresh)** | `#release-notes` | Same tag re-dispatch while an automation PR is open (`refresh_in_place`) | Same as success; title includes (refresh): *Library release notes draft ready — v2.13.5 (refresh)* |
+| **Success (edit skipped)** | `#release-notes` | Initial draft `--edit` soft-fails (`edit_skipped: true`) | Same as success, with an extra line after the tag-range summary:<br>⚠️ LLM --edit skipped — review draft wording manually. |
+| **Failure (target step)** | `#release-notes` | `BatchStepError` or unhandled exception in `process_target` | *⚠️ Library release notes automation FAILED — v2.13.5*<br>Triggered by v2.13.5<br>Error (step: `release_notes_pr`):<br>```<br>{subprocess error text}<br>```<br>Workflow run: &lt;run URL\|View workflow run&gt;<br>Branches:<br>• &lt;release-notes tree URL\|automated/library-v2.13.5&gt; — pushed<br>• documentation preview: _none created_ (failed at step: `release_notes_pr`)<br>Artifacts:<br>• Shortcut story: created — &lt;shortcut URL\|sc-12345&gt;<br>• Release-notes PR: not created<br>• Documentation PR: not created<br>…<br>To-do: • Inspect logs; • Delete orphan branches; • Re-run workflow_dispatch |
+| **Failure (discovery)** | `#release-notes` | `discover` step fails in `library_release_notes.yml` | *⚠️ Library release notes automation FAILED — v2.13.5*<br>Error (step: `discover`):<br>```<br>Discovery failed<br>```<br>Branches: _none created_ (failed at step: `discover`)<br>Artifacts:<br>• Shortcut story: not created<br>• Release-notes PR: not created<br>• Documentation PR: not created |
+| **Failure (batch crashed)** | `#release-notes` | Batch step fails **before** `batch_results.json` is written (true crash only) | Error (step: `generate`):<br>```<br>Batch crashed before writing batch_results.json<br>```<br>— one failure message per target in discovery.json |
+
+:::
+
+## What does a human have to do after the library release automation runs?
+
+### 1. Zendesk cross-check
+
+Library releases run an initial Zendesk cross-check automatically in during initial draft generation — `generate_library_release_notes.py` fetches Shortcut `zendesk_pr_mapping` and GitHub tag-delta, evaluates PR merge windows against library tag timestamps, and injects qualifying customer-linked fixes into the draft before default `--edit` polishes prose.
+
+- Cross-check gaps flagged by automation under **What needs special review?** on the `release-notes` automation PR; gap count also appears in the `#release-notes` Slack success message (`Cross-check gaps: N`).
+- Confirm every qualifying fix is in `releases/validmind-library/v{version}/release-notes.qmd` with Zendesk ticket HTML comments; resolve each gap row; spot-check 1–2 tickets in Zendesk for wording and library scope.
+
+### 2. Library feature highlights (feature releases only)
+
+- Run highlight curation on the automation PR branch after initial draft: `curate_library_highlights.py` → `report_library_orphan_prs.py` → `curate_library_highlights.py --materialize`. The initial automated draft does not include `*-highlights*` files.
+
+::: {.callout}
+Full guide: [Library highlights](highlights.qmd)
+
+:::
+
+### 3. Human editing & review
+
+- Proofread customer-facing wording in all files that will be visible — refer to the **Editing generated release notes** guide.
+- Confirm that `releases/validmind-library-releases.qmd` has been updated with the right `subtitle: "Latest: `v{version}`"` and `date` with your release tag
+
+### 4. Merge release notes
+
+After the **Documentation preview** check passes, merge `release-notes` > `main`. There is no paired documentation PR to clean up or merge. The merge automatically rebuilds the documentation staging site from the updated release-notes source.
+
+### 5. Publish documentation site
+
+After **Publish release notes to documentation staging** passes, push `documentation` to production: `staging` > `prod`.
+
+## Do library drafts automatically get regenerated?
+
+| Scenario | What happens | Notes |
+| --- | --- | --- |
+| **Stable refresh** | Re-dispatch with the same tag while an open automation PR exists (and `release-notes.qmd` is not on `main`) sets `refresh_in_place` on the discover target; batch regenerates automation-owned paths and preserves human edits automatically. Feature releases also protect materialized highlight files (`preserve_materialized=not is_patch`). | Same library tag; workflow re-dispatched — not a new tag. |
+| **New tag** | A new semver tag opens a new automation PR. | |
+
+::: {.callout}
+
+Discovery auto-detects an open PR and a file not yet on `main` when the same tag is re-dispatched and sets `refresh_in_place: true`: 
+
+- If `releases/validmind-library/v{version}/release-notes.qmd` is not on `main` yet and an automation PR is already open on `automated/library-v{version}`, normal discovery treats that version as *in-flight* and skips it — correct for net-new work, wrong when you want to update the existing draft.
+- Generation checks out the existing `automated/library-v{version}` branch, re-fetches Shortcut/Zendesk/GitHub data, regenerates `release-notes.qmd`, commits, and pushes — updating the open PR, not opening a new one. It reuses the existing Shortcut story and PR bodies, and sets up the human-edit protection baseline. Feature releases also protect materialized highlight paths (`preserve_materialized=not is_patch`).
+
+:::
+
+## Appendix
+
+::: {.callout-tip collapse="true"}
+## Scripts
+
+| Script | Role |
+| --- | --- |
+| `discover_undocumented_library_releases.py` | Find undocumented library targets |
+| `generate_library_release_notes.py` | Generate library `.qmd` files |
+| `generate_library_batch.py` | Batch orchestration (PR, Shortcut, preview) |
+| `curate_library_highlights.py` | Feature highlights §2a + §2c (author stage) |
+| `report_library_orphan_prs.py` | Feature highlights §2b (author stage) |
+
+:::
+
+::: {.callout-tip collapse="true"}
+## GitHub workflows
+
+| Workflow | Trigger |
+| --- | --- |
+| `library_release_notes.yml` | `repository_dispatch` / `workflow_dispatch` |
+| `documentation_preview.yml` | Commits to release-notes PRs that change `releases/**` |
+| [`validmind-library` notifier](https://github.com/validmind/validmind-library/blob/main/.github/workflows/notify-library-release-notes.yaml){target="_blank"} | Tag push on `validmind/validmind-library` when `RELEASE_AUTOMATION=true` (stable semver only, no prerelease) |
+
+:::
+
+::: {.callout-tip collapse="true"}
+## Skills
+
+| Skill | When |
+| --- | --- |
+| `generate-release-notes` | Use in the final human proofread only, NOT to generate release notes as that is now taken care of by the automations/updated scripts — apply the **Editing generated release notes** process content rules |
+| `generate-release-notifications` | Optional post-merge customer emails |
+
+:::
+
+::: {.callout-tip collapse="true"}
+## Other
+
+| Item | Notes |
+| --- | --- |
+| PR body template | `library_pr_body.md` |
+| Discovery floor | [`LIBRARY_RELEASE_DELTA`](/samples/content-engineering/validmind/release-notes/access-requirements.qmd#repository-variables) — Discovery-only; does not widen per-target fetch windows |
+| Feature highlights | [Library feature highlights](highlights.qmd) — not duplicated here |
+
+:::

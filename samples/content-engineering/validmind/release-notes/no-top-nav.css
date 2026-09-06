@@ -1,0 +1,60 @@
+/* Release notes chrome overrides on top of assets/themes/minimal.
+   Minimal supplies the page theme; this file only adjusts no-navbar layout
+   and hides site chrome that doesn't belong on these pages. */
+
+#quarto-content {
+  margin-top: 0 !important;
+}
+
+#quarto-sidebar.sidebar-navigation.is-pinned-sidenav {
+  top: 0 !important;
+}
+
+html {
+  scroll-padding-top: 1rem;
+}
+
+footer.footer,
+.nav-footer {
+  display: none !important;
+}
+
+#title-block-header .quarto-categories {
+  display: none !important;
+}
+
+#quarto-sidebar .sidebar-title {
+  display: none !important;
+}
+
+/* Section labels in the sidebar (e.g. Library, CMVM patch) */
+#quarto-sidebar .sidebar-item > .menu-text {
+  font-weight: 700;
+}
+
+/* Mobile still has Quarto's secondary (sidebar) bar; park it at the top. */
+@media (max-width: 767px) {
+  nav.quarto-secondary-nav {
+    top: 0 !important;
+  }
+
+  #quarto-sidebar,
+  .offcanvas,
+  .offcanvas-start,
+  .quarto-sidebar-role,
+  div[aria-label="Quarto Sidebar"] {
+    top: 0 !important;
+    height: 100vh !important;
+    padding-top: 0 !important;
+  }
+
+  .quarto-sidebar-glass,
+  .offcanvas-backdrop {
+    top: 0 !important;
+  }
+
+  /* Secondary nav only (~3.5rem), not primary + secondary. */
+  #quarto-content {
+    margin-top: 3.5rem !important;
+  }
+}

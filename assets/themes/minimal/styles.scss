@@ -38,12 +38,13 @@ $code-block-bg: #212121; // Block background color
 
 /*-- scss:rules --*/
 
-/* Import modular SCSS files (paths unique so Quarto does not pick assets/_styles) */
+/* Import modular SCSS files */
 @import '_styles/links-min';
 @import '_styles/nav-min';
 @import '_styles/content-min';
 @import '_styles/margin-min';
 @import '_styles/mobile-min';
+
 
 .poetry {
     line-height: 1.25 !important; 
@@ -54,6 +55,41 @@ $code-block-bg: #212121; // Block background color
     display: none !important;
     }
 
+.hidden-mobile {
+  @media (max-width: 767px) {
+    display: none !important;
+  }
+}
+
+.hidden-desktop {
+  @media (min-width: 768px) {
+    display: none !important;
+  }
+}
+
+.timeline .event.tl-card {
+    background: #f9f9f9;
+    border-radius: 5px;
+    border: 1px solid #21212180;
+    box-shadow: 4px 4px 0px 0px #21212180 !important;
+    padding: 0.875rem 1rem;
+    }
+
+    .timeline.vertical.sq-line {
+    --tl-line-width: 5px;
+    }
+    
+    .timeline.vertical.tl-diamond .event.sq::after {
+    border-radius: 50%;
+    left: calc(-30px + var(--tl-line-width) / 2);
+    transform: translateX(-50%);
+    }
+    
+    .timeline.vertical.sq-line::before {
+    width: 0;
+    background: none;
+    border-left: var(--tl-line-width) dotted #838383;
+    }
 
 
       

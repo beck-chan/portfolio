@@ -77,7 +77,7 @@ jobs:
 
             const body = pr.body || '';
             const notesMatch = body.match(
-              /##\s*Release notes\s*\r?\n([\s\S]*?)(?=\r?\n##\s|$)/i
+              /##\s*Release Notes\s*\r?\n([\s\S]*?)(?=\r?\n##\s|$)/i
             );
             let notes = notesMatch ? notesMatch[1] : '';
             notes = notes.replace(/<!--[\s\S]*?-->/g, '').trim();

@@ -1,0 +1,154 @@
+---
+title: "Release notes guides"
+subtitle: "ValidMind"
+listing:
+  - id: patch
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, description]
+    contents:
+    - path: patch/automation.qmd
+      description: "How the patch release automation works."
+    - path: patch/generation.qmd
+      description: "How to generate patch release drafts manually."
+  - id: library
+    type: grid
+    max-description-length: 250
+    grid-columns: 3
+    sort: false
+    fields: [title, description]
+    contents:
+    - path: library/automation.qmd
+      description: "How the library release automation works."
+    - path: library/generation.qmd
+      description: "How to generate library release drafts manually."
+    - path: library/highlights.qmd
+      description: "Generating library feature highlights."
+  - id: monthly
+    type: grid
+    max-description-length: 250
+    grid-columns: 3
+    sort: false
+    fields: [title, description]
+    contents:
+    - path: monthly/automation.qmd
+      description: "How the monthly release automation works."
+    - path: monthly/generation.qmd
+      description: "How to generate monthly release drafts manually."
+    - path: monthly/highlights.qmd
+      description: "Generating monthly feature highlights."
+  - id: reference
+    type: grid
+    max-description-length: 250
+    grid-columns: 2
+    sort: false
+    fields: [title, description]
+    contents:
+    - path: trigger-workflows.qmd
+      description: "Trigger GitHub release notes workflows manually when required."
+---
+
+## Prerequisites
+
+1. Follow the instructions in the ValidMind release notes repository README.
+
+2. Ensure you've met all the [Access requirements](access-requirements.qmd).
+
+3. Make sure you understand how release notes are structured:
+
+::: {.callout-tip collapse="true"}
+## How are release notes structured?
+
+Release notes are are published by [`documentation`](https://github.com/validmind/documentation){target="_blank"} builds in two places:
+
+| Surface | URL | Audience | Lists |
+| --- | --- | --- | --- |
+| **Public releases hub** | [All releases](https://docs.validmind.ai/releases/all-releases.html){target="_blank"} | Product discovery, library, docs changelog | Curated highlights & individual PRs, ValidMind Library releases, documentation updates but *not* CMVM assembled release-lists or patch notes |
+| **Installation / Customer-managed ValidMind** | (CMVM) Release notes | On-prem CMVM installers | Every `releases/cmvm/**/*.qmd` assembled release-lists — monthly and each patch |
+
+#### How are release notes embedded?
+
+- Partials hold release narratives and are inserted into wrappers or the assembled release-list pages
+- Wrappers or assembled release-list pages display content on Quarto listings
+
+##### File patterns
+
+- *Assembled release-list pages* are full narrative pages listed on the CMVM installation grid. Monthly pages use `{{< include >}}` partials, and patch pages include inline bug/support notes only.
+- *Wrappers* supply listing-table metadata (`title`, `subtitle`, `.hidden`, `categories`) and use `{{< include >}}` partials — they never appear on the CMVM grid.
+
+| Pattern | Partial / Wrapper | CMVM assembly | Public `/releases/` listing |
+| --- | --- | --- | --- |
+| `releases/cmvm/**/release-notes.qmd` | Wrapper | This *is* the assembled CMVM release-list page | **No** |
+| `_pr-*-highlights.qmd` (content partial) | Partial | **Yes** — via `{{< include >}}` onto the assembled release-list | No |
+| `pr-*-highlights.qmd` (listing wrapper) | Wrapper | No | **Yes** — Curated feature highlights |
+| `_pr-{n}.qmd` (bug content) | Partial | **Yes** when support-associated | No |
+| `pr-{n}.qmd` (bug wrapper) | Wrapper | No | **Yes** — Under ValidMind Platform releases when PR is tagged as `support` (label/category) |
+
+**CMVM conditional titles**
+
+During generation of patch and monthly release partials, the initial draft adds a conditional` :::: {.content-visible when-meta="includes.cmvm"}` wrapper around the title for any non-library repo PR:
+
+- This wrapper ensures that the title is not duplicated when partials are inserted into public release wrappers.
+- However, when these partials are included in the CMVM release-notes.qmd wrappers, these titles will display above the content as the CMVM release notes wrapper does not include titles within the file.
+
+##### Quarto listings
+
+Quarto listings retrieve and display links to other pages that match a defined query in a table (sometimes displayed as grid tiles) — in the case of release notes, wrappers that match a specific category of releases.
+
+###### CMVM installation
+
+| Listing page | Source `.qmd` | Lists |
+| --- | --- | --- |
+| (CMVM) Release notes | `installation/site/installation/release-notes.qmd` | Grid of assembled `releases/cmvm/**/release-notes.qmd` pages — monthly (`YY.MM`) and patch (`YY.MM.NN`) |
+
+###### Public releases
+
+| Listing page | Source `.qmd` | Lists |
+| --- | --- | --- |
+| [All releases](https://docs.validmind.ai/releases/all-releases.html){target="_blank"} | `documentation/site/releases/all-releases.qmd` | Hub grid linking to platform, library, and documentation sub-pages; embedded highlights table of `pr-*-highlights.qmd` wrappers |
+| [Feature highlights](https://docs.validmind.ai/releases/feature-highlights.html){target="_blank"} | `releases/feature-highlights.qmd` | Curated `pr-*-highlights.qmd` wrappers (`categories: highlight`) |
+| [ValidMind Platform releases](https://docs.validmind.ai/releases/validmind-platform-releases.html){target="_blank"} | `releases/validmind-platform-releases.qmd` | `releases/frontend/**/pr*.qmd` wrappers |
+| [ValidMind Library releases](https://docs.validmind.ai/releases/validmind-library-releases.html){target="_blank"} | `releases/validmind-library-releases.qmd` | `releases/validmind-library/**/pr*.qmd` wrappers |
+| [Documentation updates](https://docs.validmind.ai/releases/documentation-updates.html){target="_blank"} | `releases/documentation-updates.qmd` | `pr*.qmd` wrappers tagged `documentation` |
+| [Breaking changes and deprecations](https://docs.validmind.ai/releases/breaking-changes-and-deprecations.html){target="_blank"} | `releases/breaking-changes-and-deprecations.qmd` | Platform, backend, and library wrappers with breaking-change or deprecation categories |
+
+##### Internal releases portal
+
+The `release-notes` repo also renders its own internal **Release notes portal** with additional listing pages not copied to public releases: 
+
+- CMVM releases (`releases/cmvm-releases.qmd`) 
+- Backend releases (`releases/backend-releases.qmd`, includes `releases-internal/backend/**/pr*.qmd`)
+
+:::
+
+## Author release notes
+
+### CMVM patch
+
+:::{#patch}
+:::
+
+### Library (patch & feature)
+
+:::{#library}
+:::
+
+### Monthly (full) feature releases
+
+:::{#monthly}
+:::
+
+<!-- | Path | How the automation works | How to generate drafts manually | Generating highlights |
+| --- | --- | --- | --- |
+| **CMVM patch** | [Patch release automation](patch-releases/patch-release-automation.md) | [Manual patch releases generation](patch-releases/manual-patch-releases.md) | n/a — Only feature releases get highlights |
+| **Library (patch & feature)**| [Library release automation](library-releases/library-release-automation.md) | [Manual library releases generation](library-releases/manual-library-releases.md) | [Library feature highlights](library-releases/library-highlights.md) (feature only) |
+| **Monthly (full) feature releases** | [Monthly release automation](monthly-releases/monthly-release-automation.md) | [Manual monthly releases generation](monthly-releases/manual-monthly-releases.md) | [Monthly feature highlights](monthly-releases/monthly-highlights.md) | -->
+
+## Reference
+
+:::{#trigger-workflows}
+:::
+
+

@@ -1,0 +1,35 @@
+```{=html}
+<div class="inline-quarto-search">
+<button
+    type="button"
+    class="inline-quarto-search__trigger"
+    id="open-quarto-search"
+    aria-haspopup="dialog"
+    aria-controls="quarto-search"
+>
+    <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+    <span class="inline-quarto-search__label">Search Portfolio</span>
+    <kbd class="inline-quarto-search__hint">/</kbd>
+</button>
+</div>
+<script>
+(() => {
+    const openQuartoSearch = () => {
+    const detached = document.querySelector(
+        "#quarto-search .aa-DetachedSearchButton"
+    );
+    if (detached) {
+        detached.click();
+        return;
+    }
+    document.querySelector("#quarto-search input.aa-Input")?.focus();
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+    document
+        .getElementById("open-quarto-search")
+        ?.addEventListener("click", openQuartoSearch);
+    });
+})();
+</script>
+```

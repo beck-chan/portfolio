@@ -1,0 +1,23 @@
+website:
+  sidebar:
+    - id: releases
+      title: "ValidMind release notes"
+      contents:
+        - text: "ValidMind release notes"
+          file: samples/content-engineering/validmind/release-notes/index.qmd
+        - samples/content-engineering/validmind/release-notes/access-requirements.qmd
+        - samples/content-engineering/validmind/release-notes/trigger-workflows.qmd
+        - text: "---"
+        - text: "CMVM patch"
+        - samples/content-engineering/validmind/release-notes/patch/automation.qmd
+        - samples/content-engineering/validmind/release-notes/patch/generation.qmd
+        - text: "---"
+        - text: "Library"
+        - samples/content-engineering/validmind/release-notes/library/automation.qmd
+        - samples/content-engineering/validmind/release-notes/library/generation.qmd
+        - samples/content-engineering/validmind/release-notes/library/highlights.qmd
+        - text: "---"
+        - text: "Monthly / full"
+        - samples/content-engineering/validmind/release-notes/monthly/automation.qmd
+        - samples/content-engineering/validmind/release-notes/monthly/generation.qmd
+        - samples/content-engineering/validmind/release-notes/monthly/highlights.qmd

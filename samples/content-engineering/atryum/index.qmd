@@ -1,0 +1,120 @@
+---
+title: "Atryum Documentation"
+subtitle: "Content Engineering"
+categories: ["Feature Documentation", "User Guides", "Training & Onboarding"]
+listing:
+  - id: atryum-readme
+    type: grid
+    grid-columns: 1
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://github.com/validbeck/atryum/blob/main/website/
+      title: "Atryum documentation"
+      subtitle: "README"
+      description: "Full Atryum website build instructions as documented by Beck."
+  - id: atryum-sample
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: ../../technical-writing/atryum/index.qmd
+      description: "Browse the rest of the documentation I produced for Atryum."
+includes:
+    content: true
+---
+
+::: {.hidden}
+Along with authoring approximately 95% of the content for Atryum, I also designed and implemented the static documentation website authoring flow.
+:::
+
+{{< include /samples/single-source/atryum/_atryum.qmd >}}
+
+{{< include /samples/single-source/atryum/_writing.qmd >}}
+
+## Situation
+
+The original ask was just to produce complete documentation for Atryum within one business day, hosted on a static website.
+
+::: {.callout}
+I wanted to go beyond just content by making the authoring process easier and more efficient, as the existing framework required writers to edit a static HTML file directly just to update content.
+
+:::
+
+## Solution
+
+Instead of editing giant messes of static HTML files directly, writers now create or edit `.md` files under a `md-drafts` directory, then call a `just docs` command that builds `.html` files from the Markdown using a Python script, automatically populating links to any new pages in the existing navigation:^[**{{< fa brands github >}} `validmind/atryum/website/scripts`**: [md_to_html.py](https://github.com/validbeck/atryum/blob/main/website/scripts/md_to_html.py){target="_blank"}]
+
+```bash
+docs:
+	python3 website/scripts/md_to_html.py
+```
+
+::: {.column-margin}
+
+:::{#atryum-readme}
+:::
+
+:::
+
+## Comparisons
+
+Some comparisons of the content I managed to produce for the Atryum within a very short timeline:
+
+### Landing Page
+
+::: {.panel-tabset}
+
+#### Before
+
+The old landing page, with spilt install scripts:
+
+::: {.iframe url="https://validbeck.github.io/atryum-archive/" title="Previous Atryum Landing Page"}
+:::
+
+#### After
+
+My new landing page, with a combined smart install script:
+
+::: {.iframe url="https://validbeck.github.io/atryum-docs/" title="New Atryum Landing Page"}
+:::
+
+:::
+
+### Quickstart
+
+::: {.panel-tabset}
+
+#### Before
+
+The old **Docs** (Quickstart) page:
+
+::: {.iframe url="https://validbeck.github.io/atryum-archive/docs.html" title="Previous Atryum Quickstart"}
+:::
+
+You'll also note that this was the only existing documentation on the website before my involvement.
+
+#### After
+
+My new cleaned up **Quickstart** page:
+
+::: {.iframe url="https://validbeck.github.io/atryum-docs/documentation/1_quickstart.html" title="New Atryum Quickstart"}
+:::
+
+Along with this Quickstart page, I also produced the rest of the guides linked in the top navigation. 
+
+::: {.callout}
+You can browse the rest of the guides I authored under [Atryum Samples](#atryum-samples).
+:::
+
+:::
+
+## Atryum User Guidance
+
+:::{#atryum-sample}
+:::
+
+

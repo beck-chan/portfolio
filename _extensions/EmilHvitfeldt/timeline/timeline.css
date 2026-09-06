@@ -5,12 +5,12 @@
 /* ---- CSS Custom Properties --------------------------------- */
 .timeline {
   --tl-color-accent:   initial;
-  --tl-color-line:     #222222;
+  --tl-color-line:     #0b2a12;
   --tl-color-dot:      #222222;
   --tl-color-dot-bg:   #ffffff;
   --tl-color-label:    #222222;
   --tl-color-content:  currentColor;
-  --tl-color-card-bg:  #ffffff;
+  --tl-color-card-bg:  #fff4f5;
   --tl-dot-size:       0.875rem;
   --tl-dot-icon-color: currentColor;
   --tl-line-width:     3px;
@@ -586,7 +586,7 @@
 /* ---- Dot icon: data-dot attribute -------------------------- */
 
 .timeline .event[data-dot] {
-  --tl-dot-size: 2rem;
+  --tl-dot-size: 1.75rem;
 }
 
 .timeline .event[data-dot]::after {
@@ -663,9 +663,11 @@
 /* ---- Event card: .tl-card ---------------------------------- */
 
 .timeline .event.tl-card {
-  background: var(--tl-color-card-bg);
-  border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  /* background: var(--tl-color-card-bg); */
+  border-radius: 5px;
+  /* border: 1px solid #ffb3ba;
+  box-shadow: 4px 4px 0px 0px #ffb3ba !important; */
+  /* box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06); */
   padding: 0.875rem 1rem;
 }
 

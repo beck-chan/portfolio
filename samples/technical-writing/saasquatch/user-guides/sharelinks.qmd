@@ -152,4 +152,4 @@ You can see that the example below groups the sharelinks by Engagement medium an
 
 #### Citation
 
-[SaaSquatch Help Center: View original guide](https://docs.saasquatch.com/developer/sharelinks/){.button}
+[SaaSquatch Help Center: View Original Guide](https://docs.saasquatch.com/developer/sharelinks/){.button}

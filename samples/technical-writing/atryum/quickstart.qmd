@@ -1,7 +1,7 @@
 ---
 title: "Atryum Quickstart"
 subtitle: "Tutorial"
-categories: ["Feature Documentation", "User Guides", "Quickstart", "Agentic Orchestration", "Artificial Intelligence (AI)", "AI Risk", "Agents", "Risk Governance", "Software as a Service", "Atryum", "ValidMind"]
+categories: ["Training & Onboarding"]
 listing:
   - id: atryum-quickstart
     type: grid

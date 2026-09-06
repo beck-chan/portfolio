@@ -3,7 +3,7 @@ website:
     - id: organizations
       title: "Organizations"
       contents:
-        - text: "Organizations"
+        - text: "Collated Samples"
           file: samples/organizations/index.qmd
         - text: "---"
         - section: "ValidMind"
@@ -19,9 +19,10 @@ website:
           href: samples/organizations/atryum.qmd
           contents:
             - text: "Content Engineering"
-              file: samples/content-engineering/validmind/atryum.qmd
+              file: samples/content-engineering/atryum/index.qmd
             - text: "Technical Writing"
               file: samples/technical-writing/atryum/index.qmd
+        # - samples/organizations/personal.qmd
         - section: "SaaSquatch"
           href: samples/organizations/saasquatch.qmd
           contents:

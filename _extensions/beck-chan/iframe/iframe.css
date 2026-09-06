@@ -1,0 +1,90 @@
+.iframe-embed,
+figure.iframe-embed {
+  display: block;
+  width: var(--iframe-width, 100%);
+  max-width: 100%;
+}
+
+.iframe-embed--align-left {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.iframe-embed--align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.iframe-embed--align-right {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.iframe-embed--valign-top {
+  vertical-align: top;
+  align-self: flex-start;
+}
+
+.iframe-embed--valign-center {
+  vertical-align: middle;
+  align-self: center;
+}
+
+.iframe-embed--valign-bottom {
+  vertical-align: bottom;
+  align-self: flex-end;
+}
+
+.iframe-embed__chrome {
+  position: relative;
+}
+
+.iframe-embed__frame {
+  height: var(--iframe-height, 560px);
+  overflow: hidden;
+}
+
+.iframe-embed iframe {
+  display: block;
+  width: calc(100% / var(--iframe-zoom, 0.6));
+  height: calc(100% / var(--iframe-zoom, 0.6));
+  transform: scale(var(--iframe-zoom, 0.6));
+  transform-origin: top left;
+  border: 0;
+}
+
+.iframe-embed__open {
+  position: absolute;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.35rem;
+  color: inherit;
+  background-color: #fff;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  box-shadow: none;
+  text-decoration: none !important;
+  line-height: 0;
+  transition: color 0.15s ease-in, border-color 0.15s ease-in;
+}
+
+.iframe-embed__open:hover,
+.iframe-embed__open:focus-visible {
+  text-decoration: none !important;
+  outline: none;
+}
+
+.iframe-embed__open svg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+}

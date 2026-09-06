@@ -1,0 +1,10 @@
+format:
+  html:
+    sidebar: releases
+    navbar: false
+    search: false
+    theme: ../../../../assets/themes/minimal/styles.scss
+    syntax-highlighting: ../../../../assets/themes/minimal/code.theme
+    css: no-top-nav.css
+    grid:
+      sidebar-width: 500px

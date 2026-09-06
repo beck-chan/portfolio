@@ -70,4 +70,4 @@ You're able to send this custom field along with the user creation in order to t
 
 #### Citation
 
-[SaaSquatch Help Center: View original guide](https://docs.saasquatch.com/csv-programs){.button}
+[SaaSquatch Help Center: View Original Guide](https://docs.saasquatch.com/csv-programs){.button}

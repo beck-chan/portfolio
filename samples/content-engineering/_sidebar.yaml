@@ -11,7 +11,7 @@ website:
           contents:
             - text: "Developer Library"
               file: samples/content-engineering/validmind/library.qmd
-            - text: "Training"
+            - text: "Training Academy"
               file: samples/content-engineering/validmind/academy.qmd
             - text: "Release Notes"
               file: samples/content-engineering/validmind/releases.qmd
@@ -19,9 +19,32 @@ website:
               file: samples/content-engineering/validmind/quickstarts.qmd
             - text: "Documentation Redesign"
               file: samples/content-engineering/validmind/redesign.qmd
-        - samples/content-engineering/validmind/atryum.qmd
-        - samples/content-engineering/personal/portfolio.qmd
+        - samples/content-engineering/atryum/index.qmd
         # - section: "Personal"
+        #   href: samples/content-engineering/personal/index.qmd
         #   contents:
-        #     - samples/content-engineering/personal/portfolio.qmd
-            # - samples/content-engineering/personal/guestbook.qmd
+        #     - section: "Portfolio"
+        #       href: samples/content-engineering/personal/portfolio/index.qmd
+        #       contents:
+        #         - text: "Framework"
+        #           file: samples/content-engineering/personal/portfolio/framework.qmd
+        #         - text: "Deployment"
+        #           file: samples/content-engineering/personal/portfolio/deployment.qmd
+        #     - section: "y2k Guestbook"
+        #       href: samples/content-engineering/personal/guestbook/index.qmd
+        #       contents:
+        #         - text: "Framework"
+        #           file: samples/content-engineering/personal/guestbook/framework.qmd
+        #         - text: "Deployment"
+        #           file: samples/content-engineering/personal/guestbook/deployment.qmd
+        #         - text: "Customization"
+        #           file: samples/content-engineering/personal/guestbook/customization.qmd
+        #         - text: "Documentation"
+        #           file: samples/content-engineering/personal/guestbook/documentation.qmd
+        - section: "Portfolio"
+          href: samples/content-engineering/personal/portfolio/index.qmd
+          contents:
+            - text: "Framework"
+              file: samples/content-engineering/personal/portfolio/framework.qmd
+            - text: "Deployment"
+              file: samples/content-engineering/personal/portfolio/deployment.qmd

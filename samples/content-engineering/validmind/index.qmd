@@ -13,6 +13,27 @@ listing:
     - library.qmd
     - academy.qmd
     - releases.qmd
+    - redesign.qmd
+  - id: validmind-sample
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: ../../technical-writing/validmind/index.qmd
+      description: "Browse some of the documentation I produced for ValidMind."
+categories: ["Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Release Notes", "Quarto", "Cursor Code", "Agent Skills", "Large Language Models", "Integrations", "CI/CD Workflows", "Frontend Development"]
 ---
 
-testing?
+{{< include /samples/single-source/validmind/_validmind.qmd >}}
+
+::: {.category-filter}
+:::
+
+{{< include /samples/single-source/validmind/_architecture.qmd >}}
+
+## ValidMind User Guidance
+
+:::{#validmind-sample}
+:::

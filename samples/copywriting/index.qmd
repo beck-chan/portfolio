@@ -1,6 +1,8 @@
 ---
 title: "Copywriting"
 subtitle: "Samples"
+aliases: 
+  - /copy/index.html
 listing:
   - id: validmind-copywriting
     type: grid
@@ -22,10 +24,13 @@ listing:
     contents:
     - saasquatch/growth-automation.qmd
     categories: true
-categories: ["Blog", "Feature Highlights"]
+categories: ["Blog", "Feature Highlights", "Software as a Service"]
 ---
 
 {{< include /samples/single-source/_copywriting.qmd >}}
+
+::: {.category-filter}
+:::
 
 ## ValidMind
 

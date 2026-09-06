@@ -1,0 +1,279 @@
+---
+title: "Library feature highlights"
+subtitle: "ValidMind release notes guides"
+---
+
+Human-driven authoring process for `validmind-library` feature release notes (`vX.Y.Z`) highlights.
+
+## Prerequisites
+
+- [x] **[Access requirements](/samples/content-engineering/validmind/release-notes/access-requirements.qmd)** — `.env` setup, GitHub authentication, Poetry, `LIBRARY_RELEASE_DELTA`, Zendesk & Shortcut tokens, `OPENAI_API_KEY` for LLM edits
+- [x] **Stable library release draft has been generated** (`-rc#` tags are rejected) — For example: `v2.14.0` 
+
+## Why do we generate library feature highlights?
+
+Library feature highlights group a library release into topics, providing a cohesive story for customers:
+
+- Feature highlights are also required to generate[customer release notifications — notification emails pull highlight titles from curated theme pages (`pr-*-highlights.qmd`), not from individual per-PR `highlight` category release notes (`pr-{n}.qmd`). 
+- Materializing highlights creates those theme pages — without them, notifications have nothing to summarize except customer Zendesk ticket status. Skipping materialize leaves nothing theme-grouped for notifications to summarize, even if individual `pr-{n}.qmd` wrappers carry a `highlight` category.
+
+## When should I generate library feature highlights?
+
+Only library feature releases need highlights. Patch v.s. feature is determined from the new tag relative to the previous stable tag:
+
+| Patch release | Feature release |
+| --- | --- |
+| Same major.minor bump (for example, `v2.13.4` → `v2.13.5`) | Major or minor bump (for example, `v2.13.5` → `v2.14.0`, or `v2.14.0` → `v3.0.0`) |
+| First in-scope tag with non-zero patch (for example, `v2.14.3`) | First in-scope tag with patch `.0` (for example, `v2.14.0`) |
+
+Generate library feature highlights when initial library release note drafts have been created on a feature release, whether by GitHub Actions automation or by you as a human.
+
+| Scenario | Branch context | When to run | Full context |
+| --- | --- | --- | --- |
+| **A — Automation creates library release drafts, branch, & PRs** | `automated/library-v{version}` (Refer to: [Library release automation](automation.qmd)) | After checking out the open `release-notes` draft PR | Automation opens the branch and drafts library `release-notes.qmd` plus partials; *does not* curate highlights |
+| **B — You create library release drafts & branch/worktree** | Local batch or individual generate (Refer to: [Manual library releases](generation.qmd)) | After `generate_library_release_notes.py` (or `generate_library_batch.py`) writes draft partials on your branch | Generation drafts library shell plus partials; no branch/worktree or PR unless you create/open |
+
+## How should I generate library feature highlights?
+
+### 1. Curate library highlight topics
+
+i. Run the interactive library feature curation script:
+
+```bash
+poetry run python scripts/curate_library_highlights.py --version {version}
+# Include untagged highlight candidates when grouping topics:
+# poetry run python scripts/curate_library_highlights.py --version {version} --include-candidates
+# Resume after quitting with q:
+# poetry run python scripts/curate_library_highlights.py --version {version} --resume
+```
+
+The script will:
+
+- Build suggested topics from GitHub `highlight` labels (+ optional `--include-candidates` for untagged candidates)
+- Show interactive prompts including each topic's PR `TITLE` and `CONTENTS` preview (shared monthly partial helpers)
+- At each topic, choose from:
+
+  | Input | Action |
+  | --- | --- |
+  | `1` or Enter | *Approve* topic |
+  | `2` | *Skip* topic |
+  | `3` | *Rename* title and/or subtitle, then approve |
+  | `q` | *Quit* — Save progress to gitignored draft; re-run with `--resume` |
+- Write committed **`library-highlights.json`**
+
+ii. Spot-check `library-highlights.json` to confirm approved topics and PR lists look correct:
+
+- Open `releases/validmind-library/v{version}/library-highlights.json` — Verify topic titles, slugs, and each topic's `prs[]` entries before you commit.
+- Quitting with `q` saves a gitignored draft only — finish the session or use `--resume` before committing the manifest.
+
+iii. Commit curated topics before reviewing orphan PRs:
+
+```bash
+git add releases/validmind-library/v{version}/library-highlights.json
+git commit -m "Curate library highlights for v{version}"
+git push
+# Example — commit topics for 2.14.0 on the automation branch
+```
+
+### 2. Review orphan PRs
+
+We'll perform an interactive review for PRs not linked to any approved highlight topic (therefore not wrapped up into highlights and still listed under their independent library category sections).
+
+i. Run the interactive orphan reporting script:
+
+```bash
+poetry run python scripts/report_library_orphan_prs.py --version {version}
+# Report only (no prompts):
+# poetry run python scripts/report_library_orphan_prs.py --version {version} --report-only
+```
+
+The script will:
+
+- Show interactive prompts including a PR's `TITLE`, `CONTENTS` preview, and `TAGS` (when present)
+- Auto-keep PRs with both `support` and `bug` labels before the interactive loop (those orphans are not shown in prompts)
+- For each orphan, choose from:
+
+  | Input | Action |
+  | --- | --- |
+  | `1` | *Promote* to a highlight topic — Select a topic by number; syncs `library-highlights.json` |
+  | `2` | *Hide* PR — Sets `hidden` on the wrapper and comment-outs the library shell include in `release-notes.qmd` |
+  | `3` | *Keep* PR — leave as an independent library category section |
+  | `q` | *Quit* — Save progress to `library-orphan-prs.json` and continue later |
+- Write `releases/validmind-library/v{version}/library-orphan-prs.json` after orphan review completes or on quit; on a full session (every orphan reviewed), also write pre-materialize `{version}-library-highlights-overview.json` and `{version}-library-highlights-overview.md`
+
+:::: {.callout-tip collapse="true"}
+## Can you rerun orphan review?
+
+Yes — before materializing highlights, rerun the same command to resume an incomplete session or review newly orphaned PRs:
+
+- The script reloads `library-orphan-prs.json`; orphans that already have a disposition are skipped, so only pending PRs appear in prompts.
+- **`q` quit** saves progress to `library-orphan-prs.json` so you can continue later.
+- Use `--dry-run` to walk prompts without writing `library-orphan-prs.json`, hide side effects, topic syncs, or overview files.
+- Use `--report-only` to list orphans without interactive orphan review (add `--acknowledge` to write a timestamped report).
+- To change an earlier orphan assignment, remove that PR from the `orphans[]` array in `library-orphan-prs.json` and undo any side effects before rerunning:
+  - **Hidden** — Restore the wrapper's `hidden` category and uncomment the library shell include in `release-notes.qmd`
+  - **Promoted** — Remove the PR from the target topic's `prs[]` in `library-highlights.json` (otherwise it stays linked and will not reappear as an orphan)
+  - **Kept** — Remove the `library-orphan-prs.json` entry only; no other files change
+
+
+If you already materialized highlights and need to change orphan reviews:
+
+a. Update orphan records and related topic or hide files as above.
+
+b. Rerun orphan review, then materialize highlights —
+- Rerun orphan review after undoing side effects — `report_library_orphan_prs.py` has no `--preserve-human-edits` flag (that flag applies to initial generate/batch regenerate only):
+
+```bash
+poetry run python scripts/report_library_orphan_prs.py --version {version}
+```
+- Use `--dry-run` first on materialize to inspect planned changes without writing files — the script prints a JSON summary of topics and paths it *would* create or update (highlight partials, wrappers, library shell include comment-outs, promoted to highlight wrapper `hidden` tags) plus any warnings; it skips disk writes, `--edit-highlights` polish, and overview output until you rerun without the flag:
+
+```bash
+poetry run python scripts/curate_library_highlights.py --version {version} --materialize --dry-run
+```
+
+
+
+::::
+
+ii. Spot-check `{version}-library-highlights-overview.md` to confirm that PRs are grouped as expected:
+
+- After a full orphan review session (every pending orphan reviewed), the script writes pre-materialize overview files under `releases/validmind-library/v{version}/`:
+  - `{version}-library-highlights-overview.md` — Human-readable roll-up of highlight topics, orphans, and hidden PRs
+  - `{version}-library-highlights-overview.json` — Same payload in structured form
+- Quitting with `q` saves progress to `library-orphan-prs.json` only; it does *not* write or refresh the overview files — resume and finish the session before spot-checking.
+- Confirm topics, promoted orphans, hidden PRs, and kept orphans look correct before you commit and materialize.
+
+iii. Commit updated orphan output before materializing highlights:
+
+  - `releases/validmind-library/v{version}/library-orphan-prs.json` (from orphan review)
+  - `releases/validmind-library/v{version}/{version}-library-highlights-overview.md` (human-readable pre-materialize overview, full session)
+  - `releases/validmind-library/v{version}/{version}-library-highlights-overview.json` (structured pre-materialize overview, full session)
+  - `releases/validmind-library/v{version}/library-highlights.json` (promote sync)
+  - `releases/validmind-library/v{version}/release-notes.qmd` (hide — library shell include comment-outs)
+  - `releases/validmind-library/v{version}/pr-{n}.qmd` wrappers (hide — `hidden` category)
+
+```bash
+git add releases/validmind-library/v{version}/library-orphan-prs.json \
+        releases/validmind-library/v{version}/{version}-library-highlights-overview.md \
+        releases/validmind-library/v{version}/{version}-library-highlights-overview.json \
+        releases/validmind-library/v{version}/library-highlights.json \
+        releases/validmind-library/v{version}/release-notes.qmd
+git add releases/validmind-library/v{version}/pr-*.qmd  # Example — hidden wrappers if any
+git commit -m "Add orphan PR review output for v{version}"
+git push
+# Example — commit orphan output for 2.14.0 on the automation branch
+```
+
+### 3. Materialize library highlights
+
+Finally, let's put it all together.
+
+i. We'll materialize the library feature highlights and pass in:
+
+  - **`--edit-highlights`** — LLM polish on library highlight partials (`_pr-*-highlights.qmd`): rewrites `###` heading + prose columns when present; include-only partials are skipped. Does not touch topic wrappers (`pr-*-highlights.qmd`), individual `_pr-{n}.qmd`, or hidden PRs. Pass this flag every time you materialize.
+
+```bash
+# Inspect planned changes first
+poetry run python scripts/curate_library_highlights.py --version {version} --materialize --dry-run
+
+poetry run python scripts/curate_library_highlights.py --version {version} --materialize --edit-highlights
+# Fail when orphan review is missing or stale:
+# poetry run python scripts/curate_library_highlights.py --version {version} --materialize --edit-highlights --require-orphan-review
+```
+
+Materialize will:
+
+- Embed `_pr-{n}.qmd` into `pr-{slug}-highlights.qmd` / `_pr-{slug}-highlights.qmd`
+- Add `hidden` to promoted to highlight `pr-{n}.qmd` wrappers
+- Update library `release-notes.qmd` `## Highlights` includes and comment-out promoted to highlight category lines
+- Write post-materialize `{version}-library-release-overview.json` and `{version}-library-release-overview.md`
+- Warn (or fail with `--require-orphan-review`) when `library-orphan-prs.json` is missing or stale
+
+:::: {.callout-tip collapse="true"}
+## Can you rerun materialize highlights?
+
+Yes — after upstream curate or orphan fixes, rerun the same command to refresh highlight output:
+
+- The script re-reads `library-highlights.json` and rebuilds every approved topic from its `prs[]` mappings, **overwriting** highlight partials (`_pr-*-highlights.qmd`) and topic wrappers (`pr-*-highlights.qmd`) — scaffold and any prior prose in those files is replaced.
+- Use `--dry-run` to inspect planned changes without writing files — the script prints a JSON summary of topics and paths it *would* create or update (highlight partials, wrappers, library shell include comment-outs, promoted to highlight `pr-{n}.qmd` wrapper `hidden` tags) plus any warnings; it skips disk writes, `--edit-highlights` polish, and overview output until you rerun without the flag.
+- Use `--require-orphan-review` to block materialize when orphan disposition is incomplete.
+- Unlike orphan review, there is no human-edit protection on highlight partials — on every rerun it refreshes library shell and wrapper output:
+  - **Highlight partials** — `_pr-*-highlights.qmd` scaffold and prose replaced (`--edit-highlights` rewrites prose when present)
+  - **Topic wrappers** — `pr-*-highlights.qmd` title and structure replaced
+  - **Source partials** — `_pr-{n}.qmd` draft partials are *not* overwritten — materialize only embeds them via include expressions
+
+If you need to refresh highlights after upstream curate or orphan changes:
+
+a. Update `library-highlights.json`, orphan disposition side effects, or curation files as needed.
+
+b. Rerun materialize —
+- Use `--dry-run` first:
+
+```bash
+poetry run python scripts/curate_library_highlights.py --version {version} --materialize --dry-run
+```
+- Rerun without `--dry-run` to write highlight output and `--edit-highlights` for LLM polish — updates library `release-notes.qmd` `## Highlights` includes and comment-outs, sets `hidden` on promoted to highlight `pr-{n}.qmd` wrappers, and post-materialize overview files:
+
+```bash
+poetry run python scripts/curate_library_highlights.py --version {version} --materialize --edit-highlights
+```
+
+| Scenario | Rerun? | Notes |
+| --- | --- | --- |
+| `library-highlights.json` changed | Yes | Re-read topics and rebuild highlight output |
+| Orphan disposition side-effect fixes (promote/hide/keep) | Yes | Refresh wrappers, partials, and library includes |
+| `--dry-run` surfaced missing partials or other upstream issues | Yes | Fix upstream, then rerun without `--dry-run` |
+| Only hand-polished highlight prose (`--edit-highlights` or manual edits) you intend to keep | No | Materialize overwrites highlight partials and wrappers |
+| Stable refresh on automation branch | Yes | Automation re-dispatch preserves automatically via `refresh_in_place`; manual batch regenerate passes `--preserve-human-edits`. Feature releases set `preserve_materialized=not is_patch` so `library-highlights.json`, `*highlights*`, `hidden` wrappers, orphan JSON, and overview pairs on disk are kept |
+
+::::
+
+ii. Spot-check `{version}-library-release-overview.md` to confirm materialized highlights look correct:
+
+- Open `releases/validmind-library/v{version}/{version}-library-release-overview.md` — Verify topic groupings, promoted orphans, hidden PRs, and kept orphans align with orphan review (§2) and curation (§1).
+- Cross-check highlight partials under `releases/validmind-library/v{version}/_pr-*-highlights.qmd` and topic wrappers `pr-*-highlights.qmd` when you ran with `--edit-highlights`.
+- Use the `--dry-run` command above first if you want a JSON summary of planned paths before writing files.
+
+iii. Commit materialized highlight work:
+
+  - `releases/validmind-library/v{version}/release-notes.qmd` (library shell — `## Highlights` sections and promoted include comment-outs)
+  - `releases/validmind-library/v{version}/_pr-*-highlights.qmd` (embedded highlight partials; `--edit-highlights` targets)
+  - `releases/validmind-library/v{version}/pr-*-highlights.qmd` (topic wrappers)
+  - `releases/validmind-library/v{version}/pr-{n}.qmd` (promoted to highlight PR wrappers — `hidden` category)
+  - `releases/validmind-library/v{version}/{version}-library-release-overview.md` (post-materialize overview)
+  - `releases/validmind-library/v{version}/{version}-library-release-overview.json` (structured post-materialize overview)
+
+```bash
+git add releases/validmind-library/v{version}/release-notes.qmd \
+        releases/validmind-library/v{version}/{version}-library-release-overview.md \
+        releases/validmind-library/v{version}/{version}-library-release-overview.json
+git add releases/validmind-library/v{version}/*-highlights.qmd \
+        releases/validmind-library/v{version}/pr-*.qmd  # Example — topic wrappers and promoted hidden wrappers
+git commit -m "Materialize library feature highlights for v{version}"
+git push
+# Example — commit materialized highlights for 2.14.0 on the automation branch
+```
+
+## Appendix
+
+::: {.callout-tip collapse="true"}
+## Scripts
+
+| Script | Purpose | Phase |
+| --- | --- | --- |
+| `curate_library_highlights.py` | Interactive topic curation → `library-highlights.json` | 1 — Curate |
+| `report_library_orphan_prs.py` | Orphan review for unlinked partials | 2 — Orphans |
+| `curate_library_highlights.py --materialize` | Embed partials, library shell, overview | 3 — Materialize |
+
+:::
+
+::: {.callout-tip collapse="true"}
+## Skills
+
+| Skill | When |
+| --- | --- |
+| `generate-release-notes` | Use in the final human proofread only, NOT to generate release notes as that is now taken care of by the automations/updated scripts — apply the **Editing generated release notes** process content rules |
+
+:::
+

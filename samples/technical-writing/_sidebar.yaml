@@ -42,8 +42,6 @@ website:
                   file: samples/technical-writing/saasquatch/integrations/sfdc/attribution-lookup.qmd
                 - text: "User & Account IDs"
                   file: samples/technical-writing/saasquatch/integrations/sfdc/user-account-ids.qmd
-                - text: "Integration Guide"
-                  file: samples/technical-writing/saasquatch/integrations/sfdc/integration-guide.qmd
               - section: "Other"
                 contents:
                 - text: "Stripe"

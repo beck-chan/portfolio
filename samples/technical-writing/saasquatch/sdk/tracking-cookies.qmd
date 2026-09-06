@@ -1,7 +1,6 @@
 ---
 title: "Tracking Cookies"
 subtitle: "JavaScript SDK"
-categories: ["Developer Content", "JavaScript SDK", "Referrals & Attributions", "eCommerce", "Software as a Service", "Marketing Technology", "SaaSquatch"]
 ---
 
 > I owned this entire guide from start to finish. 
@@ -34,4 +33,4 @@ As there are several ways to attribute a referred participant to a referrer, the
 
 #### Citation
 
-[SaaSquatch Help Center: View original guide](https://docs.saasquatch.com/developer/squatchjs/cookies){.button}
+[SaaSquatch Help Center: View Original Guide](https://docs.saasquatch.com/developer/squatchjs/cookies){.button}
