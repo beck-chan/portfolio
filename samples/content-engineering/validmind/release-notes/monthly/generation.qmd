@@ -1,0 +1,238 @@
+---
+title: "Manual monthly releases generation"
+subtitle: "ValidMind release notes guides"
+---
+
+Locally generate monthly (full, feature) release notes (`YY.MM`, stable tag `cmvm/YY.MM.01`).
+
+## Prerequisites
+
+- [ ] **[Access requirements](../access-requirements.md)** — `.env` setup, GitHub authentication, Poetry, `VM_RELEASE_DELTA`, Zendesk & Shortcut tokens
+- [ ] **Stable CMVM monthly tag ([`-rc` tags are rejected](release-candidate-testing.md)) for discovery** — For example: `cmvm/26.07.01` 
+- [ ] You're on the `release-notes` repo and are up-to-date with `main`
+
+## Batch vs individual monthly release generation
+
+- Use *batch* when you need the full automation workflow (PRs, Shortcut, Slack). 
+- Use *individual* when you only need the generator to write `.qmd` files on your local branch or worktree. 
+- *Scope* — How many monthly versions are generated during a run — comes from discovery for batch paths (`targets[]` in `discovery.json`) or from the single `--version` you pass for individual paths.
+
+| Path | What it does | Scope | When to use | Section |
+| --- | --- | --- | --- | --- |
+| **Batch — generate** | Discovery plus `generate_monthly_batch.py`: drafts release notes, opens automation PRs (release-notes and docs preview), creates a Shortcut Story, sends Slack | Every entry in `targets[]` — Refer to [Discovery scope](#discovery-scope) | Net-new monthly not yet on `main`; you want the full PR workflow locally | [Generate batch](#generate-batch-monthly-releases) |
+| **Batch — regenerate** | Same as batch generate with `--refresh-in-place` discovery and `--preserve-human-edits` | Same as batch generate (discovered delta drives scope) | Open automation PR needs a refresh; human edits on branch/worktree must be kept | [Regenerate batch](#regenerate-batch-monthly-releases) |
+| **Individual — generate** | `generate_monthly_release_notes.py` only — writes `.qmd` with explicit `--release-label`; no PRs or Shortcut Stories automatically created or Slack notifications sent | Exactly one version from `--version` / `--start-tag` / `--end-tag` | Single edge case monthly version tag | [Generate individual](#generate-individual-monthly-releases) |
+| **Individual — regenerate** | Same as individual generate with `--preserve-human-edits` on an existing file | Same single version | Refresh one release monthly tag in place without opening or updating automation PRs | [Regenerate individual](#regenerate-individual-monthly-releases) |
+
+<details id="discovery-scope">
+<summary><strong>Discovery scope</strong></summary>
+
+- `discover_undocumented_cmvm_monthlies.py` builds `targets[]`; `generate_monthly_batch.py` runs the full workflow once per target. 
+- Per-target `start_tag` and `gap_start_tag` are the **previous monthly stable** tag (`cmvm/YY.MM.01`), not the last patch in the prior month. Fetch, generate, and cross-check all use this monthly-to-monthly window — same rules as [Monthly release automation](monthly-release-automation.md#1-discovery). [`VM_RELEASE_DELTA`](../access-requirements.md#repository-variables) is discovery-only and does not widen per-target fetch windows.
+
+| Flag | Scope | When to use |
+| --- | --- | --- |
+| `--tag cmvm/26.07.01` | **Ceiling/trigger tag** — matches [Monthly release automation](monthly-release-automation.md) (GitHub workflow always passes `--tag`). Discovers undocumented monthlies up to and including `26.07`. Usually one target when the triggered tag is the newest and earlier monthlies are on `main`; can return several if gaps exist below the ceiling. | **Normal release** — net-new monthly from a stable tag trigger. |
+| `--catch-up` | **Local/manual only** — full backfill of all undocumented stable monthlies with **no upper bound**. Not available through [Monthly release automation](monthly-release-automation.md). | **Backfill** — document every missing monthly when catching up across multiple versions locally. |
+| `--refresh-in-place 26.07` | Force a refresh target when the file is not on `main`. Required for `--catch-up` or when the triggered `--tag` does not match; redundant when re-running the same `--tag` with an open automation PR (auto-detected). | **Regenerate** — refresh an open automation draft in place. |
+
+</details>
+
+## Generating batch monthlies locally
+
+### Generate batch monthly releases
+
+#### 1. Release delta discovery
+
+Discover the scope of undocumented monthly releases within the delta. See [Discovery scope](#discovery-scope) for `--tag`, `--catch-up`, and other flag options.
+
+```bash
+# Local backfill alternative: --catch-up (no --tag); see Discovery scope above
+poetry run python scripts/discover_undocumented_cmvm_monthlies.py \
+  --tag cmvm/26.07.01 --json | tee discovery.json  # Example — replace with your stable monthly tag
+jq '.targets[] | {version, start_tag, end_tag, release_label}' discovery.json
+```
+
+#### 2. Generate monthly batches
+
+Run the monthly batch generation script (**omit `--edit` for structural/raw draft** — LLM polish is done at materialize during [Monthly highlights](monthly-highlights.md) curation to reduce token spend):
+
+```bash
+poetry run python scripts/generate_monthly_batch.py --discovery discovery.json
+```
+
+#### 3. Human follow-up
+
+Review the automatically generated draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), run [Monthly highlights](monthly-highlights.md) process, polish customer-facing prose, then merge PRs in sequence. 
+
+> [!NOTE] 
+> Refer to [What happens when monthly drafts are automatically generated?](monthly-release-automation.md#what-happens-when-monthly-drafts-are-automatically-generated) for full instructions.
+
+### Regenerate batch monthly releases
+
+#### 1. Release delta discovery
+
+Rediscover delta scope when an open automation PR on `automated/monthly-{version}` needs a fresh fetch/generate pass and you must keep existing human edits on your branch/worktree. See [Discovery scope](#discovery-scope) for `--tag`, `--catch-up`, and `--refresh-in-place`; add `--refresh-in-place` when discovery would otherwise skip an in-flight version:
+
+- Re-running the *same* `--tag` while the monthly is not on `main` and an automation PR is open auto-sets `refresh_in_place`.
+- With `--catch-up` or a different `--tag`, discovery skips in-flight versions — pass `--refresh-in-place {version}` (`YY.MM`) to force a refresh target (`refresh_in_place: true` in `targets[]`).
+- Batch generation checks out the existing `automated/monthly-{version}` branch, re-fetches Shortcut/Zendesk/GitHub data, regenerates `release-notes.qmd`, commits, and pushes — updating the open PR, not opening a new one. It reuses the existing Shortcut story and PR bodies, and sets up the human-edit protection baseline. 
+
+```bash
+# Local backfill alternative: --catch-up (no --tag); add --refresh-in-place {version} for in-flight targets — see Discovery scope above
+poetry run python scripts/discover_undocumented_cmvm_monthlies.py \
+  --tag cmvm/26.07.01 --refresh-in-place 26.07 --json | tee discovery.json  # Example — replace with your stable monthly tag and version
+jq '.targets[] | {version, start_tag, end_tag, release_label}' discovery.json
+```
+
+#### 2. Regenerate monthly batches
+
+- Run the monthly batch generation script (omit `--edit` for structural/raw draft). 
+- Pass `--preserve-human-edits` so git-diff protection skips blocks you changed *since the automation baseline commit*, keeping your edits intact.
+
+```bash
+poetry run python scripts/generate_monthly_batch.py \
+  --discovery discovery.json --preserve-human-edits
+```
+
+#### 3. Human follow-up
+
+Review the automatically refreshed draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), rerun the [Monthly highlights](monthly-highlights.md) process when refreshed generated partials need rematch or rematerialize, polish customer-facing prose, then merge PRs in sequence.
+
+> [!NOTE] 
+> Refer to [What happens when monthly drafts are automatically generated?](monthly-release-automation.md#what-happens-when-monthly-drafts-are-automatically-generated) for full instructions.
+
+## Generating individual monthly releases locally
+
+The individual path is draft generation only — it writes `.qmd` files on your current branch with no PR automation, no Shortcut Story created, and no Slack notifications, and no `automated/monthly-{version}` branch is created for you.
+
+### Generate individual monthly releases
+
+#### 1. Create branch or worktree
+
+- Create a branch from up-to-date `main` before running the generator. 
+- If you use `git worktree add`, copy the repo-root `.env` from your main checkout into the worktree — worktrees do not share `.env` automatically.
+
+#### 2. Release delta discovery
+
+- Discovery resolves `version`, `start_tag`, `end_tag`, and `release_label` for one provided monthly. 
+- `generate_monthly_release_notes.py` does not read `discovery.json` — copy those values into your generation step, or skip discover if you already know the tag range.
+- **Tag range:** Set only one `--start-tag` at a time (previous monthly stable tag, `cmvm/YY.MM.01`). To document multiple monthlies, use [batch discovery](#generate-batch-monthly-releases) with `--catch-up` — do not widen `--start-tag` on individual runs.
+
+```bash
+poetry run python scripts/discover_undocumented_cmvm_monthlies.py \
+  --tag cmvm/26.07.01 --json | tee discovery.json  # Example — replace with your stable monthly tag
+jq '.targets[] | {version, start_tag, end_tag, release_label}' discovery.json
+# Copy jq output into step 3, for example:
+# ONLY SET ONE TAG AT A TIME — widening --start-tag skips monthlies that batch discovery would document in separate per-target windows.
+# To generate several monthlies at once, use the batch generation instructions instead.
+# --start-tag sets the GitHub compare baseline for PR fetch, note generation, and Zendesk cross-check merge window.
+# --start-tag sets discovery metadata; fetch/cross-check use --gap-start-tag (defaults to --start-tag).
+# Optional --gap-start-tag when stale discovery.json or fetch baseline must differ from metadata start_tag.
+# --start-tag is the previous monthly stable tag (cmvm/YY.MM.01).
+# poetry run python scripts/generate_monthly_release_notes.py \
+#   --version 26.07 \
+#   --start-tag cmvm/26.06.01 \   # compare baseline (PRs, notes, Zendesk)
+#   --end-tag cmvm/26.07.01 \     # target release tag being generated
+#   --release-label "Release 26.07"
+```
+
+#### 3. Generate monthly release notes
+
+Run the individual monthly release notes generator for the monthly you want (**omit `--edit` for structural/raw draft** — LLM polish is done at materialize during [Monthly highlights](monthly-highlights.md) curation to reduce token spend):
+
+```bash
+# ONLY SET ONE TAG AT A TIME — widening --start-tag skips monthlies that batch discovery would document in separate per-target windows.
+# To generate several monthlies at once, use the batch generation instructions instead.
+# --start-tag sets the GitHub compare baseline for PR fetch, note generation, and Zendesk cross-check merge window.
+# --start-tag sets discovery metadata; fetch/cross-check use --gap-start-tag (defaults to --start-tag).
+# Optional --gap-start-tag when stale discovery.json or fetch baseline must differ from metadata start_tag.
+# --start-tag is the previous monthly stable tag (cmvm/YY.MM.01).
+poetry run python scripts/generate_monthly_release_notes.py \
+  --version 26.07 \
+  --start-tag cmvm/26.06.01 \   # compare baseline (PRs, notes, Zendesk)
+  --end-tag cmvm/26.07.01 \     # target release tag being generated
+  --release-label "Release 26.07"  # Example — replace with your monthly version, tag range, and label
+```
+
+#### 4. Human follow-up
+
+Review and edit `releases/cmvm/{version}/release-notes.qmd` on your branch/worktree (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `26.07` → `cross_check_26_07.json`) or [Zendesk cross-check review](../processes/zendesk-cross-check-review.md)), run the [Monthly highlights](monthly-highlights.md) process, polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
+
+> [!NOTE] 
+> Refer to [What happens when monthly drafts are automatically generated?](monthly-release-automation.md#what-happens-when-monthly-drafts-are-automatically-generated) for full instructions.
+
+### Regenerate individual monthly releases
+
+#### 1. Switch to release branch or worktree
+
+- Check out the branch or worktree that already holds the release notes file when you need a fresh fetch/generate pass and must keep existing human edits on your branch/worktree.
+- Use your manual branch/worktree or an open automation branch — the individual path writes `.qmd` files on your current branch, unlike batch runs that check out `automated/monthly-{version}`.
+
+#### 2. Release delta discovery
+
+- Discovery resolves `version`, `start_tag`, `end_tag`, and `release_label` for one provided monthly. 
+- `generate_monthly_release_notes.py` does not read `discovery.json` — copy those values into your generation step, or skip discover if you already know the tag range.
+- **Tag range:** Set only one `--start-tag` at a time (previous monthly stable tag, `cmvm/YY.MM.01`). To document multiple monthlies, use [batch discovery](#generate-batch-monthly-releases) with `--catch-up` — do not widen `--start-tag` on individual runs.
+
+```bash
+poetry run python scripts/discover_undocumented_cmvm_monthlies.py \
+  --tag cmvm/26.07.01 --json | tee discovery.json  # Example — replace with your stable monthly tag
+jq '.targets[] | {version, start_tag, end_tag, release_label}' discovery.json
+# Copy jq output into step 3, for example:
+# ONLY SET ONE TAG AT A TIME — widening --start-tag skips monthlies that batch discovery would document in separate per-target windows.
+# To generate several monthlies at once, use the batch generation instructions instead.
+# --start-tag sets the GitHub compare baseline for PR fetch, note generation, and Zendesk cross-check merge window.
+# --start-tag sets discovery metadata; fetch/cross-check use --gap-start-tag (defaults to --start-tag).
+# Optional --gap-start-tag when stale discovery.json or fetch baseline must differ from metadata start_tag.
+# --start-tag is the previous monthly stable tag (cmvm/YY.MM.01).
+# poetry run python scripts/generate_monthly_release_notes.py \
+#   --version 26.07 \
+#   --start-tag cmvm/26.06.01 \   # compare baseline (PRs, notes, Zendesk)
+#   --end-tag cmvm/26.07.01 \     # target release tag being generated
+#   --release-label "Release 26.07"
+```
+
+When an open automation PR exists and you need to refresh that version in place:
+
+- Re-running discovery with the *same* `--tag` auto-sets `refresh_in_place` when the monthly release is not on `main` and an automation PR is open.
+- With `--catch-up` or when discovery would otherwise skip the version as in-flight, pass `--refresh-in-place {version}` (`YY.MM`).
+- Individual regeneration writes `.qmd` files on your current branch or worktree; you do not check out `automated/monthly-{version}`, but discovery still needs `--refresh-in-place` when the triggered `--tag` does not match.
+
+```bash
+poetry run python scripts/discover_undocumented_cmvm_monthlies.py \
+  --tag cmvm/26.07.01 --refresh-in-place 26.07 --json | tee discovery.json  # Example — replace with your stable monthly tag and version
+jq '.targets[] | {version, start_tag, end_tag, release_label}' discovery.json
+```
+
+#### 3. Regenerate monthly release notes
+
+- Run the individual monthly release notes generator (omit `--edit` for structural/raw draft).
+- If you skipped discover, pass explicit `--version`, `--start-tag`, `--end-tag`, and `--release-label`.
+- Pass `--preserve-human-edits` so git-diff protection skips blocks you changed *since the automation baseline commit*, keeping your edits intact.
+- When refreshing on `automated/monthly-{version}`, also pass `--refresh-in-place` so human-edit protection requires the automation baseline commit.
+
+```bash
+# ONLY SET ONE TAG AT A TIME — widening --start-tag skips monthlies that batch discovery would document in separate per-target windows.
+# To generate several monthlies at once, use the batch generation instructions instead.
+# --start-tag sets the GitHub compare baseline for PR fetch, note generation, and Zendesk cross-check merge window.
+# --start-tag sets discovery metadata; fetch/cross-check use --gap-start-tag (defaults to --start-tag).
+# Optional --gap-start-tag when stale discovery.json or fetch baseline must differ from metadata start_tag.
+# --start-tag is the previous monthly stable tag (cmvm/YY.MM.01).
+# Example — replace with your monthly versions, tag ranges, and label
+poetry run python scripts/generate_monthly_release_notes.py \
+  --version 26.07 \
+  --start-tag cmvm/26.06.01 \   # compare baseline (PRs, notes, Zendesk)
+  --end-tag cmvm/26.07.01 \     # target release tag being generated
+  --release-label "Release 26.07" \
+  --preserve-human-edits
+# Add --refresh-in-place when checked out on automated/monthly-{version} (requires automation baseline commit)
+```
+
+#### 4. Human follow-up
+
+Review the refreshed `.qmd` with human edits preserved (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `26.07` → `cross_check_26_07.json`) or [Zendesk cross-check review](../processes/zendesk-cross-check-review.md)), rerun the [Monthly highlights](monthly-highlights.md) process when refreshed partials need rematch or rematerialize, polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
+
+> [!NOTE] 
+> Refer to [What happens when monthly drafts are automatically generated?](monthly-release-automation.md#what-happens-when-monthly-drafts-are-automatically-generated) for full instructions.
+

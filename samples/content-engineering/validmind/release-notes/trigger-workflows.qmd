@@ -1,0 +1,63 @@
+---
+title: "Trigger release notes workflows manually"
+subtitle: "ValidMind release notes guides"
+---
+
+Manually run the release notes automation for a specific release tag using GitHub Actions.
+
+> [!IMPORTANT]
+> Manual `workflow_dispatch` is *ungated* — it runs regardless of the defined `RELEASE_AUTOMATION` variable on `validmind/installation` or `validmind/validmind-library`.
+
+## Prerequisites
+
+- Write access (or equivalent) to the `validmind/release-notes` repository so you can use **Run workflow**.
+- The release tag you want to document already exists on the source repository.
+- Repository secrets and variables configured — refer to the [Access requirements](../access-requirements.md) for setup.
+
+
+## When would a human manually trigger release notes workflows?
+
+- [x] When you need to rerun workflows for a particular release. (This will usually refresh any open `release-notes` branch with editing protections in place if any automated branches/PRs exist.)
+- [x] When an automatic tag-push dispatch did not run or failed to run. (Edge-case, should be rare.)
+
+## Which workflow should be triggered?
+
+All three listener workflows live in `validmind/release-notes` under [**Actions**](https://github.com/validmind/release-notes/actions):
+
+| Workflow | GitHub Actions name | Enter this tag format | Source repo |
+| --- | --- | --- | --- |
+| [Library release notes](https://github.com/validmind/release-notes/actions/workflows/library_release_notes.yml) | **Library release notes** | `v2.13.5` (semver) | [`validmind/validmind-library`](https://github.com/validmind/validmind-library/tags) |
+| [Monthly release notes](https://github.com/validmind/release-notes/actions/workflows/monthly_release_notes.yml) | **Monthly release notes** | `cmvm/26.06.01` (stable monthly ending in `.01`) | [`validmind/installation`](https://github.com/validmind/installation/tags) |
+| [Patch release notes](https://github.com/validmind/release-notes/actions/workflows/patch_release_notes.yml) | **Patch release notes** | `cmvm/26.06.07` (not ending in `.01`)| [`validmind/installation`](https://github.com/validmind/installation/tags) |
+
+
+For track-specific behavior after the workflow completes, refer to:
+
+- [Library release automation](../library-releases/library-release-automation.md)
+- [Patch release automation](../patch-releases/patch-release-automation.md)
+- [Monthly release automation](../monthly-releases/monthly-release-automation.md)
+
+## How does a human manually trigger a release notes workflow?
+
+1. Open: [https://github.com/validmind/release-notes/actions](https://github.com/validmind/release-notes/actions)
+
+2. Select the workflow you want to run from the left sidebar:
+
+   - **Library release notes**
+   - **Monthly release notes**
+   - **Patch release notes**
+
+3. Click the **Run workflow**:
+
+  - **Use workflow from** — `main` (production). For feature-branch testing, select your branch; checkout uses `ref: ${{ github.ref }}`, so scripts and workflow YAML both come from the selected branch.
+  - **{release-type} tag** — Enter in the correct tag format for your release type for the release delta discovery.
+  - **Skip LLM `--edit` ...** — Leave this UNCHECKED for library and patch releases, but make sure to CHECK for monthly releases.
+  - **Shortcut preflight** (Monthly releases only) — dropdown: `none`, `exists`, or `nonempty` (default `nonempty`)
+    - `nonempty` — Shortcut release epic label must exist and have at least one tagged epic or story
+    - Use `none` or `exists` only when you understand the Shortcut preflight implications (refer to [monthly release automation](../monthly-releases/monthly-release-automation.md))
+    - Tag-push `repository_dispatch` runs always use `nonempty`; this dropdown applies to manual `workflow_dispatch` only
+
+> [!IMPORTANT]
+> Run **one workflow at a time per tag**. Each track workflow uses a concurrency group keyed on the tag (`library-${{ tag }}`, `patch-${{ tag }}`, `monthly-${{ tag }}`) so duplicate dispatches for the same tag queue rather than overlap. Parallel runs for the *same* version can still race on Shortcut story creation if concurrency is bypassed — avoid double-triggering the same tag.
+
+4. Click **Run workflow**.

@@ -1,0 +1,80 @@
+---
+title: "Access requirements"
+subtitle: "ValidMind release notes guides"
+---
+
+Required credentials and setup for `release-notes` automation/generation. 
+
+- Release notes scripts read your **`validmind/release-notes/.env`** locally.
+- Cursor MCP servers use **`~/.cursor/mcp.json`** separately — Recommended when you use Cursor agents or skills to investigate or refine drafts (using information from Shortcut, GitHub, Zendesk).
+- The **[generate-release-notes](https://github.com/validmind/skills/blob/main/generate-release-notes/SKILL.md)** skill ([setup](tools/release-notes-helper.md#install-and-setup)) uses the same credentials as manual release notes generation runs.
+
+## Required per release path
+
+| Credential / access | Patch | Library (patch & feature) | Monthly |
+| --- | --- | --- | --- |
+| `GITHUB_TOKEN` / `gh` | **Yes** (frontend, backend, installation) | **Yes** (validmind-library) | **Yes** (+ documentation) |
+| [SHORTCUT_API_TOKEN](https://start.1password.com/open/i?a=6SU5KJDDYBFJ7LSSHVNSOLAHBA&v=tguinwdssqazsqz6at3xvhe54u&i=yhfdbzrdlgwt3g7yhinpkmhhxu&h=validmind.1password.com) | **Yes** | **Yes** | **Yes** |
+| `ZENDESK_SUBDOMAIN`, `ZENDESK_EMAIL`, [ZENDESK_API_TOKEN](https://start.1password.com/open/i?a=6SU5KJDDYBFJ7LSSHVNSOLAHBA&v=fpq4ybxeeyihgcnybgefvrnvx4&i=epurt5lxxk6vhasevcufenvr7m&h=validmind.1password.com) | **Yes** | **Yes** | **Yes** |
+| [OPENAI_API_KEY](https://start.1password.com/open/i?a=6SU5KJDDYBFJ7LSSHVNSOLAHBA&v=fpq4ybxeeyihgcnybgefvrnvx4&i=fttvcovk6hahztckqr44czqduq&h=validmind.1password.com) | **Yes** for LLM-assisted edits | **Yes** for LLM-assisted edits | **Yes** for LLM-assisted edits |
+| [RELEASE_NOTES_GITHUB_TOKEN](https://start.1password.com/open/i?a=6SU5KJDDYBFJ7LSSHVNSOLAHBA&v=fpq4ybxeeyihgcnybgefvrnvx4&i=kxtqv53btwjk4exccsmnnif7my&h=validmind.1password.com) | **Yes** for local batch generation when `gh auth login` lacks write on `validmind/documentation` (docs preview PRs, discover, and in-flight checks); optional for individual generation | Same as patch | Same as patch |
+| [VM_RELEASE_DELTA](https://github.com/validmind/release-notes/settings/variables/actions/VM_RELEASE_DELTA) | **Yes** (discovery floor — mirror GitHub) | No | **Yes** (discovery floor — mirror GitHub) |
+| [LIBRARY_RELEASE_DELTA](https://github.com/validmind/release-notes/settings/variables/actions/LIBRARY_RELEASE_DELTA) | No | **Yes** (discovery floor — mirror GitHub) | No |
+| ValidMind Releases One-Pagers | No | No | **[ValidMind Releases One-Pagers](https://drive.google.com/drive/folders/1qTfa7N_ISCrQdPvQ_6pVU6X6lh_NWG82)** when generating feature highlights |
+| Cursor MCP | Recommended | Recommended  | Recommended |
+| `POSTMARK_API_KEY` | Optional (customer notifications) | No | Optional (customer notifications) |
+
+## Setting up your local environment
+
+> [!NOTE]
+> Make sure you're in the `release-notes` repo on `main` before beginning.
+
+### Install poetry
+
+GitHub Actions and your local environment use the same [`pyproject.toml`](../pyproject.toml). You'll need `poetry` to run the release notes scripts:
+
+```bash
+poetry install
+```
+
+### Provide `.env` keys
+
+> [!NOTE]
+> Copy [`.env.example`](../.env.example) to `.env` and fill in values.  Refer to [Required per release path](#required-per-release-path) for more context.
+
+For normal release generation runs, add your keys to repo-root `.env` and run the scripts — they read that file automatically. You do not need to `export` values or `source` `.env` first:
+
+- For GitHub API access, when `GITHUB_TOKEN` / `GH_TOKEN` are unset, `gh` subprocesses use your `gh auth login` — use that instead of storing tokens in `.env` if you prefer. Local batch generation that opens docs preview PRs needs **write** on `validmind/documentation` (via `gh auth login` or `RELEASE_NOTES_GITHUB_TOKEN` from 1Password).
+- Set `VM_RELEASE_DELTA` (patch/monthly) and/or `LIBRARY_RELEASE_DELTA` (library) in `.env` — **Required** for discover runs; mirror the repository variables on `validmind/release-notes` (see [Repository variables](#repository-variables)).
+- Add `RELEASE_NOTES_GITHUB_TOKEN` to `.env` when `gh auth login` cannot write to `validmind/documentation` — required for local batch generation in that case; optional for individual generation. This token covers all `validmind/documentation` API access for release-notes automation (read and write).
+- Export a value only when you need to override `.env` for a single run — exported shell values win over `.env`:
+
+    ```bash
+    export RELEASE_NOTES_GITHUB_TOKEN=ghp_...  # Example — override for one batch run
+    ```
+
+## GitHub workflow automation credential reference
+
+Secrets or variables that have already been set up.
+
+### GitHub Actions secrets
+
+| Secret | Repositories | Role |
+| --- | --- | --- |
+| `RELEASE_NOTES_GITHUB_TOKEN` | `validmind/release-notes`, `validmind/installation`, `validmind/validmind-library` | Dispatch `release-notes` workflows, discover undocumented releases, push automated branches/open draft PRs on `validmind/release-notes`, and push docs preview branches/open PRs/merge-guard reviews on `validmind/documentation` — *Same token value* on all three repos; token must have **write** on `validmind/documentation` |
+| `SLACK_WEBHOOK_RELEASE_NOTES` | `validmind/release-notes` | Success/failure posts to `#release-notes` channel |
+| `OPENAI_API_KEY` | `validmind/release-notes` | LLM-assisted release notes editing, for example: `--edit`, `--edit-highlights`, `add_doc_links.py` |
+| `SHORTCUT_API_TOKEN` | `validmind/release-notes` | Fetch stories/epics and linked PRs; build `zendesk_pr_mapping` for Zendesk cross-check and ticket links in release notes, `--add-support-labels` for patch/monthly releases |
+| `ZENDESK_API_TOKEN` | `validmind/release-notes` | Zendesk ticket fetch (API authentication) |
+
+### Repository variables
+
+| Variable | Repositories | Purpose |
+| --- | --- | --- |
+| `ZENDESK_SUBDOMAIN`, `ZENDESK_EMAIL` | `validmind/release-notes` | Zendesk help-center subdomain and API user email (non-sensitive; used with `ZENDESK_API_TOKEN`) |
+| `VM_RELEASE_DELTA` | `validmind/release-notes` | Discovery floor for CMVM catch-up (fallback when no prior CMVM tag exists); does not widen per-target fetch/generate windows |
+| `LIBRARY_RELEASE_DELTA` | `validmind/release-notes` | Required env mirror for library discover; library scope uses the `v2.13.2+` automation floor — does not widen per-target fetch/generate windows |
+| `RELEASE_AUTOMATION` | `validmind/installation`, `validmind/validmind-library` | Turns the release notes automation workflows for each repo on (`true`) or off (`false`) |
+
+> [!IMPORTANT]
+> Setting `VM_RELEASE_DELTA` and `LIBRARY_RELEASE_DELTA` is required because some releases were deliberately skipped before automation. These variables are **discovery-only** floors for catch-up scans — they do not widen the GitHub fetch or note-generation window for individual targets. Each automated release uses an incremental per-target window (previous tag → current tag). Leaving these values unset can cause discover to miss or mis-scope catch-up targets.

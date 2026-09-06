@@ -1,0 +1,250 @@
+---
+title: "Manual library releases generation"
+subtitle: "ValidMind release notes guides"
+---
+
+Locally generate `validmind-library` semver release notes (`vX.Y.Z`, version without `v` prefix).
+
+## Prerequisites
+
+- [ ] **[Access requirements](../access-requirements.md)** — `.env` setup, GitHub authentication, Poetry, `LIBRARY_RELEASE_DELTA`, Zendesk & Shortcut tokens, `OPENAI_API_KEY` when passing `--edit`
+- [ ] **Stable library tag (no prerelease suffix) for discovery** — For example: `v2.13.5`
+- [ ] You're on the `release-notes` repo and are up-to-date with `main`
+
+## Batch vs individual library release generation
+
+- Use *batch* when you need the full automation workflow (PRs, Shortcut, Slack). 
+- Use *individual* when you only need the generator to write `.qmd` files on your local branch or worktree. 
+- *Scope* — How many library versions are generated during a run — comes from discovery for batch paths (`targets[]` in `discovery.json`) or from the single `--version` you pass for individual paths.
+
+| Path | What it does | Scope | When to use | Section |
+| --- | --- | --- | --- | --- |
+| **Batch — generate** | Discovery plus `generate_library_batch.py`: drafts release notes, opens automation PRs (release-notes and docs preview), creates a Shortcut Story, sends Slack | Every entry in `targets[]` — Refer to [Discovery scope](#discovery-scope) | Net-new library release not yet on `main`; you want the full PR workflow locally | [Generate batch](#generate-batch-library-releases) |
+| **Batch — regenerate** | Same as batch generate with `--refresh-in-place` discovery and `--preserve-human-edits` | Same as batch generate (discovered delta drives scope) | Open automation PR needs a refresh; human edits on branch/worktree must be kept | [Regenerate batch](#regenerate-batch-library-releases) |
+| **Individual — generate** | `generate_library_release_notes.py` only — writes `.qmd` with explicit `--edit` and `--release-type-hint`; no PRs or Shortcut Stories automatically created or Slack notifications sent | Exactly one version from `--version` / `--start-tag` / `--end-tag` | Single edge case library version tag | [Generate individual](#generate-individual-library-releases) |
+| **Individual — regenerate** | Same as individual generate with `--preserve-human-edits` on an existing file | Same single version | Refresh one release library tag in place without opening or updating automation PRs | [Regenerate individual](#regenerate-individual-library-releases) |
+
+<details id="discovery-scope">
+<summary><strong>Discovery scope</strong></summary>
+
+- `discover_undocumented_library_releases.py` builds `targets[]`; `generate_library_batch.py` runs the full workflow once per target. 
+- Per-target `start_tag` and `gap_start_tag` are the previous stable library tag. Fetch, generate, and cross-check all use this incremental window — same rules as [Library release automation](library-release-automation.md#1-discovery). [`LIBRARY_RELEASE_DELTA`](../access-requirements.md#repository-variables) is discovery-only and does not widen per-target fetch windows.
+
+| Flag | Scope | When to use |
+| --- | --- | --- |
+| `--tag v2.13.5` | **Ceiling/trigger tag** — matches [Library release automation](library-release-automation.md) (GitHub workflow always passes `--tag`). Discovers undocumented library releases up to and including `2.13.5`. Usually one target when the triggered tag is the newest and earlier releases are on `main`; can return several if gaps exist below the ceiling. | **Normal release** — net-new library release from a stable tag trigger. |
+| `--catch-up` | **Local/manual only** — full backfill of all undocumented library tags with **no upper bound**. Not available through [Library release automation](library-release-automation.md). | **Backfill** — document every missing library release when catching up across multiple versions locally. |
+| `--refresh-in-place 2.13.5` | Force a refresh target when an open automation PR exists and the file is not on `main`. | **Regenerate** — refresh an open automation draft in place. |
+
+</details>
+
+## Generating batch library releases locally
+
+### Generate batch library releases
+
+#### 1. Release delta discovery
+
+Discover the scope of undocumented library releases within the delta. See [Discovery scope](#discovery-scope) for `--tag`, `--catch-up`, and other flag options.
+
+```bash
+# Local backfill alternative: --catch-up (no --tag); see Discovery scope above
+poetry run python scripts/discover_undocumented_library_releases.py \
+  --tag v2.13.5 --json | tee discovery.json  # Example — replace with your stable library tag
+jq '.targets[] | {version, start_tag, end_tag, release_type_hint}' discovery.json
+```
+
+#### 2. Generate library batches
+
+Run the library batch generation script with initial LLM cleanup (with `--edit`):
+
+```bash
+poetry run python scripts/generate_library_batch.py --discovery discovery.json --edit
+```
+
+#### 3. Human follow-up
+
+Review the automatically generated draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), run [library-highlights](library-highlights.md) for feature releases on the automation branch, polish customer-facing prose, then merge PRs in sequence. 
+
+> [!NOTE] 
+> Refer to [What happens when library drafts are automatically generated?](library-release-automation.md#what-happens-when-library-drafts-are-automatically-generated) for full instructions.
+
+### Regenerate batch library releases
+
+#### 1. Release delta discovery
+
+Rediscover delta scope when an open automation PR on `automated/library-v{version}` needs a fresh fetch/generate pass and you must keep existing human edits on your branch/worktree. See [Discovery scope](#discovery-scope) for `--tag`, `--catch-up`, and `--refresh-in-place`; add `--refresh-in-place` when discovery would otherwise skip an in-flight version:
+
+- If `releases/validmind-library/v{version}/release-notes.qmd` is not on `main` yet and an automation PR is already open on `automated/library-v{version}`, normal discovery treats that version as *in-flight* and skips it — correct for net-new work, wrong when you want to update the existing draft.
+- Pass `--refresh-in-place {version}` (semver without `v`) to force a refresh target (discovery emits `refresh_in_place: true` instead of skipping).
+- Batch generation checks out the existing `automated/library-v{version}` branch, re-fetches Shortcut/Zendesk/GitHub data, regenerates `release-notes.qmd`, commits, and pushes — updating the open PR, not opening a new one. It reuses the existing Shortcut story and PR bodies, and sets up the human-edit protection baseline. Feature releases also protect materialized highlight paths (`preserve_materialized=True`).
+
+```bash
+# Local backfill alternative: --catch-up (no --tag); add --refresh-in-place {version} for in-flight targets — see Discovery scope above
+poetry run python scripts/discover_undocumented_library_releases.py \
+  --tag v2.13.5 --refresh-in-place 2.13.5 --json | tee discovery.json  # Example — replace with your stable library tag and version
+jq '.targets[] | {version, start_tag, end_tag, release_type_hint}' discovery.json
+```
+
+#### 2. Regenerate library batches
+
+- Run the library batch generation script with LLM cleanup (with `--edit`). 
+- Pass `--preserve-human-edits` so git-diff protection skips blocks you changed *since the automation baseline commit*, keeping your edits intact.
+
+```bash
+poetry run python scripts/generate_library_batch.py \
+  --discovery discovery.json --edit --preserve-human-edits
+```
+
+#### 3. Human follow-up
+
+Review the automatically refreshed draft `release-notes` and `documentation` PRs (resolve **What needs special review?**, such as Zendesk cross-check gaps), polish customer-facing prose, then merge PRs in sequence.
+
+> [!NOTE] 
+> Refer to [What happens when library drafts are automatically generated?](library-release-automation.md#what-happens-when-library-drafts-are-automatically-generated) for full instructions.
+
+## Generating individual library releases locally
+
+The individual path is draft generation only — it writes `.qmd` files on your current branch with no PR automation, no Shortcut Story created, and no Slack notifications, and no `automated/library-v{version}` branch is created for you.
+
+### Generate individual library releases
+
+#### 1. Create branch or worktree
+
+- Create a branch from up-to-date `main` before running the generator. 
+- If you use `git worktree add`, copy the repo-root `.env` from your main checkout into the worktree — worktrees do not share `.env` automatically.
+
+#### 2. Release delta discovery
+
+- Discovery resolves `version`, `start_tag`, `end_tag`, and `release_type_hint` for one provided library release. 
+- `generate_library_release_notes.py` does not read `discovery.json` — copy those values into your generation step, or skip discover if you already know the tag range.
+- **Tag range:** Set only one `--start-tag` at a time (immediate previous library tag). To document multiple releases, use [batch discovery](#generate-batch-library-releases) with `--catch-up` — do not widen `--start-tag` on individual runs.
+
+```bash
+poetry run python scripts/discover_undocumented_library_releases.py \
+  --tag v2.13.5 --json | tee discovery.json  # Example — replace with your stable library tag
+jq '.targets[] | {version, start_tag, end_tag, release_type_hint}' discovery.json
+# Copy jq output into step 3, for example (patch):
+# ONLY SET ONE TAG AT A TIME — widening --start-tag skips library releases that batch discovery would document in separate per-target windows.
+# To generate several releases at once, use the batch generation instructions instead.
+# --start-tag sets the GitHub compare baseline for PR fetch, note generation, and Zendesk cross-check merge window.
+# --start-tag sets discovery metadata; fetch/cross-check use --gap-start-tag (defaults to --start-tag).
+# Optional --gap-start-tag when stale discovery.json or fetch baseline must differ from metadata start_tag.
+# --start-tag is the immediate previous library tag (incremental).
+# poetry run python scripts/generate_library_release_notes.py \
+#   --version 2.13.5 \
+#   --start-tag v2.13.4 \   # compare baseline (PRs, notes, Zendesk)
+#   --end-tag v2.13.5 \     # target release tag being generated
+#   --release-type-hint patch \
+#   --edit
+```
+
+#### 3. Generate library release notes
+
+Run the individual library release notes generator for the release you want with initial LLM cleanup (with `--edit`):
+
+```bash
+# ONLY SET ONE TAG AT A TIME — widening --start-tag skips library releases that batch discovery would document in separate per-target windows.
+# To generate several releases at once, use the batch generation instructions instead.
+# --start-tag sets the GitHub compare baseline for PR fetch, note generation, and Zendesk cross-check merge window.
+# --start-tag sets discovery metadata; fetch/cross-check use --gap-start-tag (defaults to --start-tag).
+# Optional --gap-start-tag when stale discovery.json or fetch baseline must differ from metadata start_tag.
+# --start-tag is the immediate previous library tag (incremental).
+# Example — replace with your library version, tag range, and release type hint
+poetry run python scripts/generate_library_release_notes.py \
+  --version 2.13.5 \
+  --start-tag v2.13.4 \   # compare baseline (PRs, notes, Zendesk)
+  --end-tag v2.13.5 \     # target release tag being generated
+  --release-type-hint patch \
+  --edit
+
+# Feature example
+poetry run python scripts/generate_library_release_notes.py \
+  --version 2.14.0 \
+  --start-tag v2.13.5 \   # compare baseline (PRs, notes, Zendesk)
+  --end-tag v2.14.0 \     # target release tag being generated
+  --release-type-hint feature \
+  --edit
+```
+
+#### 4. Human follow-up
+
+Review and edit `releases/validmind-library/v{version}/release-notes.qmd` on your branch/worktree (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/validmind-library/v{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `2.13.5` → `cross_check_2_13_5.json`) or [Zendesk cross-check review](../processes/zendesk-cross-check-review.md)), run [library-highlights](library-highlights.md) for feature releases, polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
+
+> [!NOTE] 
+> Refer to [What happens when library drafts are automatically generated?](library-release-automation.md#what-happens-when-library-drafts-are-automatically-generated) for full instructions.
+
+### Regenerate individual library releases
+
+#### 1. Switch to release branch or worktree
+
+- Check out the branch or worktree that already holds the release notes file when you need a fresh fetch/generate pass and must keep existing human edits on your branch/worktree.
+- Use your manual branch/worktree or an open automation branch — the individual path writes `.qmd` files on your current branch, unlike batch runs that check out `automated/library-v{version}`.
+
+#### 2. Release delta discovery
+
+- Discovery resolves `version`, `start_tag`, `end_tag`, and `release_type_hint` for one provided library release. 
+- `generate_library_release_notes.py` does not read `discovery.json` — copy those values into your generation step, or skip discover if you already know the tag range.
+- **Tag range:** Set only one `--start-tag` at a time (immediate previous library tag). To document multiple releases, use [batch discovery](#generate-batch-library-releases) with `--catch-up` — do not widen `--start-tag` on individual runs.
+
+```bash
+poetry run python scripts/discover_undocumented_library_releases.py \
+  --tag v2.13.5 --json | tee discovery.json  # Example — replace with your stable library tag
+jq '.targets[] | {version, start_tag, end_tag, release_type_hint}' discovery.json
+# Copy jq output into step 3, for example:
+# ONLY SET ONE TAG AT A TIME — widening --start-tag skips library releases that batch discovery would document in separate per-target windows.
+# To generate several releases at once, use the batch generation instructions instead.
+# --start-tag sets the GitHub compare baseline for PR fetch, note generation, and Zendesk cross-check merge window.
+# --start-tag sets discovery metadata; fetch/cross-check use --gap-start-tag (defaults to --start-tag).
+# Optional --gap-start-tag when stale discovery.json or fetch baseline must differ from metadata start_tag.
+# --start-tag is the immediate previous library tag (incremental).
+# poetry run python scripts/generate_library_release_notes.py \
+#   --version 2.13.5 \
+#   --start-tag v2.13.4 \   # compare baseline (PRs, notes, Zendesk)
+#   --end-tag v2.13.5 \     # target release tag being generated
+#   --release-type-hint patch \
+#   --edit
+```
+
+When an open automation PR exists and you need to refresh that version in place:
+
+- If `releases/validmind-library/v{version}/release-notes.qmd` is not on `main` yet and an automation PR is already open on `automated/library-v{version}`, normal discovery treats that version as *in-flight* and skips it — correct for net-new work, wrong when you want to update the existing draft.
+- Pass `--refresh-in-place {version}` (semver without `v`) to force a refresh target (discovery emits `refresh_in_place: true` instead of skipping).
+- Individual regeneration writes `.qmd` files on your current branch or worktree; you do not check out `automated/library-v{version}`, but discover still needs the flag when that open PR exists.
+
+```bash
+poetry run python scripts/discover_undocumented_library_releases.py \
+  --tag v2.13.5 --refresh-in-place 2.13.5 --json | tee discovery.json  # Example — replace with your stable library tag and version
+jq '.targets[] | {version, start_tag, end_tag, release_type_hint}' discovery.json
+```
+
+#### 3. Regenerate library release notes
+
+- Run the individual library release notes generator with LLM cleanup (with `--edit`).
+- If you skipped discover, pass explicit `--version`, `--start-tag`, `--end-tag`, and `--release-type-hint`.
+- Pass `--preserve-human-edits` so git-diff protection skips blocks you changed *since the automation baseline commit*, keeping your edits intact.
+- When refreshing on `automated/library-v{version}`, also pass `--refresh-in-place` so human-edit protection requires the automation baseline commit.
+
+```bash
+# ONLY SET ONE TAG AT A TIME — widening --start-tag skips library releases that batch discovery would document in separate per-target windows.
+# To generate several releases at once, use the batch generation instructions instead.
+# --start-tag sets the GitHub compare baseline for PR fetch, note generation, and Zendesk cross-check merge window.
+# --start-tag sets discovery metadata; fetch/cross-check use --gap-start-tag (defaults to --start-tag).
+# Optional --gap-start-tag when stale discovery.json or fetch baseline must differ from metadata start_tag.
+# --start-tag is the immediate previous library tag (incremental).
+# Example — replace with your library versions, tag ranges, and release type hint
+poetry run python scripts/generate_library_release_notes.py \
+  --version 2.13.5 \
+  --start-tag v2.13.4 \   # compare baseline (PRs, notes, Zendesk)
+  --end-tag v2.13.5 \     # target release tag being generated
+  --release-type-hint patch \
+  --edit \
+  --preserve-human-edits
+# Add --refresh-in-place when checked out on automated/library-v{version} (requires automation baseline commit)
+```
+
+#### 4. Human follow-up
+
+Review the refreshed `.qmd` with human edits preserved (complete manual human tasks such as **Zendesk cross-check gaps** — refer to `releases-data/validmind-library/v{version}/cross_check_{version}.json` (dots in `{version}` become underscores in the filename, e.g. `2.13.5` → `cross_check_2_13_5.json`) or [Zendesk cross-check review](../processes/zendesk-cross-check-review.md)), polish customer-facing prose, then open PRs manually if you are shipping through the normal workflow.
+
+> [!NOTE] 
+> Refer to [What happens when library drafts are automatically generated?](library-release-automation.md#what-happens-when-library-drafts-are-automatically-generated) for full instructions.

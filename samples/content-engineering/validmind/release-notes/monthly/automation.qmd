@@ -1,0 +1,237 @@
+---
+title: "Monthly release automation"
+subtitle: "ValidMind release notes guides"
+---
+
+Automated monthly (full, feature) release notes (`YY.MM`, stable tag `cmvm/YY.MM.01`).
+
+## When are monthly release drafts automatically generated?
+
+| Scenario | Trigger | `installation` `RELEASE_AUTOMATION` repo variable | Notes |
+| --- | --- | --- | --- |
+| **A (tag push)** | When `validmind/installation` receives a new stable `cmvm/YY.MM.01` tag | `vars.RELEASE_AUTOMATION == 'true'` | A [notifier on `installation`](https://github.com/validmind/installation/blob/main/.github/workflows/notify-monthly-release-notes.yaml) dispatches `monthly-release-notes` to the `release-notes` repo |
+| **B (`workflow_dispatch`)** — Fallback | A human manually runs [monthly_release_notes.yml](https://github.com/validmind/release-notes/blob/main/.github/workflows/monthly_release_notes.yml) with a tag | Ungated | Example: `gh workflow run monthly_release_notes.yml --repo validmind/release-notes -f tag=cmvm/26.06.01` |
+
+- Monthly release automation is triggered by stable `cmvm/YY.MM.01` tags only — release candidate `-rc#` tags and patch tags (`NN ≥ 02`) are rejected by discovery; patch tags dispatch [Patch release automation](../patch-releases/patch-release-automation.md) instead.
+- Discovery *skips* a monthly release when `releases/cmvm/{version}/release-notes.qmd` is already on `validmind/release-notes` `main`, or when an open automation PR (release-notes draft and/or documentation preview) is already in flight for that version.
+- Re-dispatching the *same* stable tag (for example, running the workflow again) while a draft PR on `automated/monthly-{version}` is still open—and the file is not yet on `main` — sets `refresh_in_place` and regenerates on that branch instead of skipping or opening a new PR.
+
+
+## What happens when monthly drafts are automatically generated?
+
+### 1. Discovery
+
+- `discover_undocumented_cmvm_monthlies.py` builds `targets[]`; `generate_monthly_batch.py` runs the full workflow once per target (each monthly release tag identified in the delta).
+- Per-target `start_tag` and `gap_start_tag` are the **previous monthly stable** tag (`cmvm/YY.MM.01`), not the last patch in the prior month. Fetch, generate, and Zendesk cross-check all use this window — each monthly target documents PRs from the prior monthly stable through the current monthly stable (e.g. `cmvm/26.06.01 → cmvm/26.07.01`, not `cmvm/26.06.04 → cmvm/26.07.01`). Refer to [Zendesk cross-check review](../processes/zendesk-cross-check-review.md).
+- [`VM_RELEASE_DELTA`](../access-requirements.md#repository-variables) is discovery-only — used as a fallback when discover cannot resolve a previous monthly stable tag (first monthly at the automation floor). It does not widen fetch or generate windows across batch targets.
+- **Stale `discovery.json`:** targets created before the dedupe fix may have a wide `start_tag` without `gap_start_tag`. Batch warns and uses `gap_start_tag` when present; re-dispatch open `automated/*` branches with fresh discover output after merging dedupe fixes — do not reuse pre-fix `discovery.json`.
+- **Shortcut release-label preflight** — before building targets, discover validates the `Release {YY.MM}` label in Shortcut. Mode is controlled by `validate_release_label`:
+
+| Mode | Behavior |
+| --- | --- |
+| **`nonempty`** (default) | Label must exist in the workspace and have at least one tagged epic or story |
+| **`exists`** | Label must exist in the workspace (no content check) |
+| **`none`** | Skip preflight entirely |
+
+- **Manual `workflow_dispatch`:** the Actions form exposes **Shortcut preflight** as a dropdown (`none` / `exists` / `nonempty`; default `nonempty`).
+- **Tag-push `repository_dispatch`:** notifiers do not pass this input; the workflow hardcodes `nonempty` for discover regardless of the dropdown default.
+
+### 2. Automation branch checked out, release notes drafted, and pushed
+
+Before generating, `generate_monthly_batch.py` runs `_ensure_branch` (`ensure_batch_branch` in `batch_git.py`) so the working tree is on `automated/monthly-{version}` (creating or checking out from base when needed). The draft lands on that automation branch — not on `main`.
+
+a. `generate_monthly_batch.py` runs `generate_monthly_release_notes.py` with **no `--edit`** by default (`skip_edit: true` in the workflow — structural/raw output only). LLM polish belongs at author-stage `materialize_monthly_highlights.py --edit` / `--edit-highlights` in [Monthly highlights](monthly-highlights.md).
+
+b. **Written on `release-notes` branch (`automated/monthly-{version}`)** — `releases/cmvm/{version}/release-notes.qmd` plus `_pr-{n}.qmd` and `pr-{n}.qmd` for all in-scope PRs, expanded CMVM shell, and `file-manifest.json`. *No* curated `*-highlights.qmd` files automatically generated in the initial draft — human authors run the [Monthly highlights](monthly-highlights.md) process. `validmind-library` is **not** auto-generated here — use [Library release automation](../library-releases/library-release-automation.md); authors may manually embed library highlight partials in the CMVM shell when relevant (see monthly PR template).
+
+c. **Committed and pushed** to `validmind/release-notes` on `automated/monthly-{version}`. No branch is created in `validmind/documentation` at this step.
+
+### 3. Shortcut Story created or reused
+
+Batch automation resolves a Shortcut Story using one of three paths:
+
+| Path | When | How the story is resolved |
+| --- | --- | --- |
+| **create** | First run for a version (no automation branch yet, or new branch from base) | Title search (`Edit {version} release notes`) → reuse existing story if found, otherwise POST a new chore story |
+| **refresh** | Discover sets `refresh_in_place: true` (same tag re-dispatch, `release-notes.qmd` not on `main`, open release-notes PR on `automated/monthly-{version}`) | Parse the Shortcut blockquote from the open release-notes PR body (no new POST) |
+| **orphan** | Remote automation branch exists but there is no open PR (partial/failed prior run) | Same as **create** — title search then POST or reuse; batch then opens the release-notes PR |
+
+`release-notes` and `documentation` PRs link to the Shortcut Story via the Story blockquote in the PR template. On **refresh**, if the blockquote is missing or malformed, batch falls back to the **create** path (title search) instead of failing.
+
+<details>
+<summary><strong>Shortcut story fields</strong></summary>
+
+| Field | Value |
+| --- | --- |
+| Story type | `chore` |
+| Title | `Edit {version} release notes` |
+| State | In progress |
+| Epic | Automated Release Notes |
+| Group | Docs |
+| Estimate | 2 |
+| Iteration | Current iteration when started |
+| Technical Area | Product Documentation |
+
+</details>
+
+### 4. Release-notes PR opened
+
+Draft PR on `validmind/release-notes` from `automated/monthly-{version}`. Follows the template: [monthly_pr_body.md](../../scripts/templates/monthly_pr_body.md).
+
+On **refresh** (`refresh_in_place`), an open PR already exists — batch updates the branch in place and reuses the existing PR (no new `gh pr create`). On **orphan** resume, batch opens the release-notes PR after Shortcut story resolution (§3).
+
+### 5. Documentation preview deployed
+
+The **Documentation preview** check on the release-notes PR dispatches the reusable preview workflow on `validmind/documentation`. It renders the exact release-notes PR commit and deploys it to `pr_previews/release-notes/pr-{pr_number}`. Every new commit redeploys the same preview URL; no documentation branch or PR is created.
+
+### 6. Slack notification sent
+
+- Posts success or failure to `#release-notes`. Follows templates: [`monthly-success.md`](../../scripts/templates/slack/monthly-success.md), [`monthly-failure.md`](../../scripts/templates/slack/monthly-failure.md).
+- Slack messages use **mrkdwn** (not GitHub Markdown): line 1 is fully bold (`*…*`), links use `<url|label>`, to-do items use `•` bullets, and failure error text is shown in a monospace code block so subprocess output cannot break link formatting.
+- `generate_monthly_batch.py` calls `render_slack_batch_notify.py` per target on success or failure when run locally. In GitHub Actions, batch scripts skip in-process Slack; workflow steps post from `batch_results.json` (`--batch-successes` on success/partial, `--batch-failures` / `--batch-crashed` on failure). Handled per-target failures do not trigger duplicate Slack messages.
+- When Initial draft `--edit` is opted in via `workflow_dispatch` and soft-fails, the Slack message includes an edit-skipped line.
+
+<details>
+<summary><strong>Slack notification examples</strong></summary>
+
+| Scenario | Channel | When | Example message |
+| --- | --- | --- | --- |
+| **Success** | `#release-notes` | Target completes in `generate_monthly_batch.py` | *Monthly release notes draft ready — June 2026*<br>Triggered by cmvm/26.06.01<br>&lt;shortcut URL\|sc-12345&gt; \| &lt;PR URL\|release-notes #42&gt; \| &lt;docs PR URL\|documentation #99&gt;<br>Tag window: cmvm/25.05.01 → cmvm/26.06.01 \| Cross-check gaps: 1 \| Bugs: 2 \| Manifest pending: 12<br>…<br>To-do: • Complete *What needs special review?* on release-notes PR — including generating the [Monthly highlights](monthly-highlights.md); • Confirm docs preview CI green |
+| **Success (refresh)** | `#release-notes` | Same tag re-dispatch while an automation PR is open (`refresh_in_place`) | Same as success; title includes (refresh): *Monthly release notes draft ready — June 2026 (refresh)* |
+| **Success (edit skipped)** | `#release-notes` | Initial draft `--edit` soft-fails when opted in (`edit_skipped: true`) | Same as success, with an extra line after the tag-range summary:<br>⚠️ LLM --edit skipped — review draft wording manually. |
+| **Failure (target step)** | `#release-notes` | `BatchStepError` or unhandled exception in `process_target` | *⚠️ Monthly release notes automation FAILED — June 2026*<br>Triggered by cmvm/26.06.01<br>Error (step: `release_notes_pr`):<br>```<br>{subprocess error text}<br>```<br>Workflow run: &lt;run URL\|View workflow run&gt;<br>Branches:<br>• &lt;release-notes tree URL\|automated/monthly-26.06&gt; — pushed<br>• documentation preview: _none created_ (failed at step: `release_notes_pr`)<br>Artifacts:<br>• Shortcut story: created — &lt;shortcut URL\|sc-12345&gt;<br>• Release-notes PR: not created<br>• Documentation PR: not created<br>…<br>To-do: • Inspect logs; • Delete orphan branches; • Re-run workflow_dispatch |
+| **Failure (discovery)** | `#release-notes` | `discover` step fails in [`monthly_release_notes.yml`](https://github.com/validmind/release-notes/blob/main/.github/workflows/monthly_release_notes.yml) | *⚠️ Monthly release notes automation FAILED — June 2026*<br>Error (step: `discover`):<br>```<br>Discovery failed<br>```<br>Branches: _none created_ (failed at step: `discover`)<br>Artifacts:<br>• Shortcut story: not created<br>• Release-notes PR: not created<br>• Documentation PR: not created |
+| **Failure (batch crashed)** | `#release-notes` | Batch step fails **before** `batch_results.json` is written (true crash only) | Error (step: `generate`):<br>```<br>Batch crashed before writing batch_results.json<br>```<br>— one failure message per target in discovery.json |
+
+</details>
+
+## What does a human have to do after the monthly release automation runs?
+
+### 1. Zendesk cross-check
+
+Monthly draft generation runs an initial Zendesk cross-check automatically — `generate_monthly_release_notes.py` fetches Shortcut `zendesk_pr_mapping` and GitHub tag-delta, evaluates PR merge windows against CMVM tag timestamps, and injects qualifying customer-linked fixes into the draft. 
+
+- Cross-check gaps flagged by automation under **What needs special review?** on the `release-notes` automation PR; gap count also appears in the `#release-notes` Slack success message (`Cross-check gaps: N`).
+- Confirm every qualifying fix is in `releases/cmvm/{version}/release-notes.qmd` with Zendesk ticket HTML comments; resolve each gap row; spot-check 1–2 tickets in Zendesk for wording and monthly scope.
+
+> [!NOTE]
+> Full guide: [Zendesk cross-check review](../processes/zendesk-cross-check-review.md)
+
+### 2. Monthly feature highlights
+
+- Prepare release memory to make theme naming, bullet grouping, and PR matching faster and more accurate.
+- Generate feature highlights automation PR branch: provide & generate themes → match PRs to themes → orphan (unhighlighted PRs) disposition → materialize highlights (`extract_release_themes.py` → `match_theme_bullets_to_prs.py` → `report_orphan_prs.py` → `materialize_monthly_highlights.py`).
+- **Materialize highlights with LLM polish** — Initial monthly draft does not run `--edit` and provides raw prose only, so LLM-cleanup happens here when we've pared down files enough not to waste tokens. After themes, match, and orphan disposition are committed, run `materialize_monthly_highlights.py` with `--edit` (highlight partial prose in `_pr-*-highlights.qmd`) and/or `--edit-highlights` (wrapper title, subtitle, and `.hidden` description).
+
+> [!NOTE]
+> Full guide: [Monthly highlights](monthly-highlights.md)
+
+### 3. Editing & proofreading
+
+#### a. **LLM polish non-highlight partials**
+
+Initial draft generation skips `--edit` to save on tokens for PRs we intend to hide or reorganize into highlights, and materialize `--edit` / `--edit-highlights` edit highlight artifacts only:
+
+- This means that "orphan" (not highlighted, support/bug, or hidden) are not edited by the LLM.
+- After orphan review is completed and assignments are committed (preferable before materialize, when promoted/hidden PRs are already decided): Run `edit_non_highlight_partials.py` with ` --require-orphan-review --edit` to edit all other relevant orphan files.
+- This edit will skip theme-linked partials (`release-themes.json` / `theme-pr-matches.json` `prs[]`), hidden wrappers, and `*-highlights.qmd` paths.
+
+#### b. Human editing & review
+
+- Proofread customer-facing wording in all files that will be visible in the CMVM or public releases portals — refer to [Editing generated release notes](../processes/editing-generated-release-notes.md).
+- Confirm that `releases/validmind-platform-releases.qmd` has been updated with the right `subtitle: "Latest: `{version}`"` and `date` from your release tag
+
+### 5. Archive release memory
+
+- Initial monthly release draft automation seeded retrieval artifacts and a draft brief to accelerate theme work, and then your interactive human-lead editing finalized customer-facing prose.
+- Archiving now persists those investigation conclusions, final theme narratives, PR functional deltas, and any human corrections into the release memory store so future monthly passes do not re-derive the same context from tag-delta alone.
+- Run on archival when you are satisfied with your release notes and ready to mark the associated PRs ready-for-review.
+
+i. Invoke the ([`release-memory-archivist` skill](https://github.com/validmind/skills/tree/main/release-memory-archivist)) for `{version}`, then validate and regenerate the memory site:
+
+```bash
+poetry run python scripts/validate_release_memory.py
+poetry run python scripts/generate_release_memory_site.py --release {version} --render
+```
+
+ii. Commit and push all `memory/` changes on this branch:
+
+```bash
+git add memory/
+git commit -m "Archive release memory for {version}"
+git push
+```
+
+### 6. Merge release notes
+
+After the **Documentation preview** check passes, merge `release-notes` > `main`. There is no paired documentation PR to clean up or merge. The merge automatically rebuilds the documentation staging site from the updated release-notes source.
+
+### 7. Publish documentation site
+
+After **Publish release notes to documentation staging** passes, push `documentation` to production: `staging` > `prod`.
+
+## Do monthly drafts automatically get regenerated?
+
+| Scenario | What happens | Notes |
+| --- | --- | --- |
+| **Stable refresh** | Re-dispatch with the same tag while an open automation PR exists (and `release-notes.qmd` is not on `main`) sets `refresh_in_place` on the discover target; batch regenerates automation-owned paths and preserves human edits automatically. *Never* regenerates themes via batch — protects `release-themes.json`, materialized highlights, and `hidden` wrappers. | Same installation tag; workflow re-dispatched — not a new tag. |
+| **New tag** | A new monthly stable tag opens a new automation PR. | |
+
+> [!NOTE] 
+> Discovery auto-detects an open PR and a file not yet on `main` when the same tag is re-dispatched and sets `refresh_in_place: true`: 
+> - If `releases/cmvm/{version}/release-notes.qmd` is not on `main` yet and an automation PR is already open on `automated/monthly-{version}`, normal discovery treats that version as *in-flight* and skips it — correct for net-new work, wrong when you want to update the existing draft.
+> - Generation checks out the existing `automated/monthly-{version}` branch, re-fetches Shortcut/Zendesk/GitHub data, regenerates `release-notes.qmd`, commits, and pushes — updating the open PR, not opening a new one. It reuses the existing Shortcut story and PR bodies, and sets up the human-edit protection baseline.
+
+## Appendix
+
+<details>
+<summary><strong>Scripts</strong></summary>
+
+| Script | Role |
+| --- | --- |
+| [`discover_undocumented_cmvm_monthlies.py`](https://github.com/validmind/release-notes/blob/main/scripts/discover_undocumented_cmvm_monthlies.py) | Find undocumented monthly targets |
+| [`generate_monthly_release_notes.py`](https://github.com/validmind/release-notes/blob/main/scripts/generate_monthly_release_notes.py) | Initial automated drafts |
+| [`generate_monthly_batch.py`](https://github.com/validmind/release-notes/blob/main/scripts/generate_monthly_batch.py) | Batch orchestration (PR, Shortcut, preview) |
+| [`extract_release_themes.py`](https://github.com/validmind/release-notes/blob/main/scripts/extract_release_themes.py) | Extract themes during interactive highlight curation |
+| [`match_theme_bullets_to_prs.py`](https://github.com/validmind/release-notes/blob/main/scripts/match_theme_bullets_to_prs.py) | Match PR themes to bullets f during interactive highlight curation |
+| [`report_orphan_prs.py`](https://github.com/validmind/release-notes/blob/main/scripts/report_orphan_prs.py) | Review orphan PRs during interactive highlight curation |
+| [`materialize_monthly_highlights.py`](https://github.com/validmind/release-notes/blob/main/scripts/materialize_monthly_highlights.py) | Materialize curated highlights |
+| [`validate_release_memory.py`](https://github.com/validmind/release-notes/blob/main/scripts/validate_release_memory.py) | Validate memory store before merge |
+| [`generate_release_memory_site.py`](https://github.com/validmind/release-notes/blob/main/scripts/generate_release_memory_site.py) | Regenerate memory site pages  |
+
+</details>
+
+<details>
+<summary><strong>GitHub workflows</strong></summary>
+
+| Workflow | Trigger |
+| --- | --- |
+| [`monthly_release_notes.yml`](https://github.com/validmind/release-notes/blob/main/.github/workflows/monthly_release_notes.yml) | `repository_dispatch` / `workflow_dispatch` |
+| [`documentation_preview.yml`](https://github.com/validmind/release-notes/blob/main/.github/workflows/documentation_preview.yml) | Commits to release-notes PRs that change `releases/**` |
+| [`installation` notifier](https://github.com/validmind/installation/blob/main/.github/workflows/notify-monthly-release-notes.yaml) | Tag push on `validmind/installation` when `RELEASE_AUTOMATION=true` (monthly stable tags `cmvm/YY.MM.01`, no `-rc`) |
+| [`release_memory_ingest.yml`](https://github.com/validmind/release-notes/blob/main/.github/workflows/release_memory_ingest.yml) | Optional single-PR memory ingest — Refer to [future-automations.md](../wip/future-automations.md) |
+
+</details>
+
+<details>
+<summary><strong>Skills</strong></summary>
+
+| Skill | When |
+| --- | --- |
+| [`generate-release-notes`](https://github.com/validmind/skills/blob/main/generate-release-notes/SKILL.md) | Use in the final human proofread only, NOT to generate release notes as that is now taken care of by the automations/updated scripts — apply [editing-generated-release-notes.md](../processes/editing-generated-release-notes.md) content rules |
+| [`nosy-neighbour`](https://github.com/validmind/skills/blob/main/nosy-neighbour/SKILL.md) | Optional pre-theme investigation |
+| [`release-memory-archivist`](https://github.com/validmind/skills/blob/main/release-memory-archivist/SKILL.md) | Post-edit archive — persist final narratives to memory layer before merge |
+| [`generate-release-notifications`](https://github.com/validmind/skills/blob/main/generate-release-notifications/SKILL.md) | Post-merge customer emails |
+
+</details>
+
+<details>
+<summary><strong>Other</strong></summary>
+
+| Item | Notes |
+| --- | --- |
+| PR body template | [`monthly_pr_body.md`](../../scripts/templates/monthly_pr_body.md) |
+| Discovery floor | [`VM_RELEASE_DELTA`](../access-requirements.md#repository-variables) — discovery-only; does not widen per-target fetch windows |
+| Highlight depth | [Monthly feature highlights](monthly-highlights.md) — not duplicated here |
+
+</details>

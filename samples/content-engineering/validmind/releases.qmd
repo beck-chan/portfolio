@@ -1,11 +1,27 @@
 ---
 title: "ValidMind Release Notes"
 subtitle: "Content Engineering"
-categories: ["Release Notes", "Cursor Code", "Agent Skills", "Large Language Models", "CI/CD Workflows"]
+categories: ["Content Enablement", "User Guides", "Release Notes", "Cursor Code", "Agent Skills", "Large Language Models", "CI/CD Workflows"]
 ---
 
 I automated our fragmented and manual release notes process using Python scripts and use of agent skills supported by large language models, reducing writer input time from almost a week to less than a day.
 
 ## Situation
 
+At the end of my tenure at ValidMind, the volume of our release notes required a writer to spend almost a week:
+
+- Collating and verifying information on features for multiple products in our offering from many competing sources, including cloud storage, project management boards, and scattered GitHub repositories.
+- Creating multiple versions of release notes, one for public consumption, and one tailored for on-prem customers. 
+
 ## Solution
+
+...
+
+## Citation
+
+While the solution I engineered was proprietary and cannot be shared publicly, I was permitted to showcase the documentation I created to capture my automation's functionality and the standard operating procedures users were expected to follow.
+
+You can view a modified version of these artifacts with only the best guides included with references to proprietary content or repositories removed using the portal below:
+
+::: {.iframe url="release-notes/index.html" title="Previous ValidMind Developer Library"}
+:::

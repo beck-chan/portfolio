@@ -21,6 +21,7 @@ metadata-files:
   - samples/copywriting/_sidebar.yaml
   # - samples/developer-advocacy/_sidebar.yaml
   - samples/organizations/_sidebar.yaml
+  - samples/content-engineering/validmind/release-notes/_sidebar.yaml
 
 website:
   title: "Portfolio"
