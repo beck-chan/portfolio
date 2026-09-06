@@ -6,7 +6,7 @@ page-layout: full
 sidebar: false
 toc: false
 listing:
-  - id: samples-type
+  - id: samples
     type: grid
     max-description-length: 250
     grid-columns: 3
@@ -17,82 +17,6 @@ listing:
     - samples/technical-writing/index.qmd
     - samples/copywriting/index.qmd
     # - samples/developer-advocacy/index.qmd
-  - id: samples-content
-    type: grid
-    max-description-length: 250
-    grid-columns: 3
-    sort: false
-    fields: [title, subtitle]
-    contents:
-    - samples/content-engineering/validmind/index.qmd
-    - samples/content-engineering/atryum/index.qmd
-    # - samples/content-engineering/personal/index.qmd
-    - samples/content-engineering/personal/portfolio/index.qmd
-  - id: samples-developer # Add y2k guestbook API docs
-    type: grid
-    max-description-length: 250
-    grid-columns: 2
-    sort: false
-    fields: [title, subtitle]
-    contents:
-    - samples/technical-writing/validmind/jupyter-notebooks.qmd
-    - samples/technical-writing/saasquatch/sdk/index.qmd
-  - id: samples-training
-    type: grid
-    max-description-length: 250
-    grid-columns: 2
-    sort: false
-    fields: [title, subtitle]
-    contents:
-    - samples/technical-writing/validmind/training.qmd
-  - id: samples-guides # Add y2k guestbook docs
-    type: grid
-    max-description-length: 250
-    grid-columns: 2
-    sort: false
-    fields: [title, subtitle]
-    contents:
-    - samples/technical-writing/validmind/user-guides.qmd
-    - samples/technical-writing/atryum/integrations.qmd
-    - samples/technical-writing/atryum/user-guides.qmd
-    - samples/technical-writing/saasquatch/user-guides/index.qmd
-  - id: samples-tutorials # add y2k guestbook quickstart
-    type: grid
-    max-description-length: 250
-    grid-columns: 2
-    sort: false
-    fields: [title, subtitle]
-    contents:
-    - samples/technical-writing/validmind/quickstarts.qmd
-    - samples/technical-writing/atryum/quickstart.qmd
-  - id: samples-enablement
-    type: grid
-    max-description-length: 250
-    grid-columns: 2
-    sort: false
-    fields: [title, subtitle]
-    contents:
-    - samples/technical-writing/validmind/enablement.qmd
-  - id: samples-storytelling
-    type: grid
-    max-description-length: 250
-    grid-columns: 2
-    sort: false
-    fields: [title, subtitle]
-    contents:
-    - samples/copywriting/validmind/honor-the-human.qmd
-    - samples/copywriting/validmind/reduce-culture-risk.qmd
-    - samples/copywriting/validmind/osff-takeaways.qmd
-    - samples/copywriting/saasquatch/growth-automation.qmd
-  - id: all-samples
-    type: grid
-    max-description-length: 250
-    grid-columns: 2
-    sort: false
-    fields: [title, subtitle]
-    contents:
-    - samples/index.qmd
-    - samples/organizations/index.qmd
 ---
 
 {{< include /samples/single-source/_bio.qmd >}}
@@ -156,54 +80,10 @@ listing:
 ::::
 
 
-## Samples by Type
+## Samples
 
-:::{#samples-type}
+:::{#samples}
 :::
-
-## Samples by Format
-
-::: {.panel-tabset}
-
-### Content Architecture
-
-:::{#samples-content}
-:::
-
-
-### Developer Content
-
-:::{#samples-developer}
-:::
-
-### Training
-
-:::{#samples-training}
-:::
-
-### User Guides
-
-:::{#samples-guides}
-:::
-
-### Quickstart Tutorials 
-
-:::{#samples-tutorials}
-:::
-
-### Content Enablement
-
-:::{#samples-enablement}
-:::
-
-### Storytelling
-
-:::{#samples-storytelling}
-:::
-
-:::
-
-## All Samples
 
 
 

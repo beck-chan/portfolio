@@ -34,7 +34,7 @@ website:
       # - samples/developer-advocacy/index.qmd
       - text: "All Samples"
         menu:
-        - text: "Filter by Topic"
+        - text: "Filter by Criteria"
           file: samples/index.qmd
         - text: "Collated by Organization"
           file: samples/organizations/index.qmd

@@ -1,6 +1,6 @@
 ---
 title: "All Samples"
-subtitle: "Filter by Topic"
+subtitle: "Filter by Criteria"
 search: false
 listing:
   - id: validmind-technical
