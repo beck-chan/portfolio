@@ -101,3 +101,4 @@ filters:
   - tachyons
   - fold-code
   - iframe
+  - category-filter

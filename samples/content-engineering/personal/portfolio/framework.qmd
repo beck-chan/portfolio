@@ -462,13 +462,13 @@ With CSS I applied a fixed top navigation bar, causing anchor links to scroll to
 
 ## Extensions
 
-I've also written a couple of Quarto Extensions^[**Quarto:** [Extensions](https://quarto.org/docs/extensions/){target="_blank"}] in Lua for custom functionality I found myself reusing and wanted to simplify the implementation of.
+I've also written a few Quarto Extensions^[**Quarto:** [Extensions](https://quarto.org/docs/extensions/){target="_blank"}] in Lua for custom functionality I found myself reusing and wanted to simplify the implementation of.
 
 ::: {.panel-tabset}
 
 ### Code Folding
 
-Quarto's build-in option for folding code^[**Quarto:** [HTML Code Blocks](https://quarto.org/docs/output-formats/html-code.html#folding-code){target="_blank"}] only covers executable cell output. This extension allows non-executable fenced code blocks to be wrapped in a `<details>` toggle used below:^[**{{< fa brands github >}} beck-chan/portfolio/`_`{=html}extensions/beck-chan/:** [fold-code.lua](https://github.com/beck-chan/portfolio/blob/main/_extensions/beck-chan/fold-code/fold-code.lua){target="_blank"}]
+Quarto's build-in option for folding code^[**Quarto:** [HTML Code Blocks](https://quarto.org/docs/output-formats/html-code.html#folding-code){target="_blank"}] only covers executable cell output. This extension allows non-executable fenced code blocks to be wrapped in a `<details>` toggle used below:^[**{{< fa brands github >}} beck-chan/portfolio/:** [`fold-code.lua`](https://github.com/beck-chan/portfolio/blob/main/_extensions/beck-chan/fold-code/fold-code.lua){target="_blank"}]
 
 ```{.lua .fold summary="view code"}
 local function is_html()
@@ -532,10 +532,16 @@ end
 
 ### Embedded Iframes
 
-Embeds an iframe with a fenced div with options to include a caption under the iframe, as well as adjust zoom, sizing, and loading configurations:^[**{{< fa brands github >}} beck-chan/portfolio/`_`{=html}extensions/beck-chan/:** [iframe.lua](https://github.com/beck-chan/portfolio/blob/main/_extensions/beck-chan/iframe/iframe.lua){target="_blank"}]
+Embeds an iframe with a fenced div with options to include a caption under the iframe, as well as adjust zoom, sizing, and loading configurations:^[**{{< fa brands github >}} beck-chan/portfolio/:** [`iframe.lua`](https://github.com/beck-chan/portfolio/blob/main/_extensions/beck-chan/iframe/iframe.lua){target="_blank"}]
 
 ::: {.iframe url="https://beck-chan.github.io/" title="Embedded Portfolio in Iframe"}
 :::
+
+### Mobile Category Filter
+
+When enabled, Quarto's category page filters display in the right margin on desktop,^[**Quarto:** [Document Listings](https://quarto.org/docs/websites/website-listings.html#categories){target="_blank"}] but are hidden by default on mobile. To solve this, I embedded a category filter as an inline drop-down for mobile view:^[**{{< fa brands github >}} beck-chan/portfolio/:** [`category-filter.lua`](https://github.com/beck-chan/portfolio/blob/main/_extensions/beck-chan/category-filter/category-filter.lua){target="_blank"}]
+
+![Inline Category Filter on Mobile](category-dropdown.png){.pics}
 
 :::
 

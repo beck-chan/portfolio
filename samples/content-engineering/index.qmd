@@ -40,6 +40,9 @@ categories: ["Content Architecture", "Developer Content", "Feature Documentation
 
 {{< include /samples/single-source/_content.qmd >}}
 
+::: {.category-filter}
+:::
+
 ## ValidMind
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}

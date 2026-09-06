@@ -78,6 +78,10 @@ I was the sole **Senior Technical Writer** for ValidMind, where I employed docs-
 
 {{< include /samples/single-source/_static-links.qmd >}}
 
+::: {.category-filter}
+:::
+
+
 ## Content Engineering
 
 {{< include /samples/single-source/_content.qmd >}}

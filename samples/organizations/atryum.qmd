@@ -44,6 +44,9 @@ Atryum is an open-source agentic orchestration tool developed by ValidMind. I wa
 
 {{< include /samples/single-source/atryum/_atryum.qmd >}}
 
+::: {.category-filter}
+:::
+
 ## Content Engineering
 
 {{< include /samples/single-source/_content.qmd >}}

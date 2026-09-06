@@ -26,10 +26,12 @@ listing:
 categories: ["Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Release Notes", "Quarto", "Cursor Code", "Agent Skills", "Large Language Models", "CI/CD Workflows", "Frontend Development"]
 ---
 
-{{< include /samples/single-source/atryum/_atryum.qmd >}}
+{{< include /samples/single-source/validmind/_validmind.qmd >}}
 
-:::{#validmind-content}
+::: {.category-filter}
 :::
+
+{{< include /samples/single-source/validmind/_architecture.qmd >}}
 
 ## ValidMind User Guidance
 

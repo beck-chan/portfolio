@@ -29,6 +29,9 @@ categories: ["Blog", "Feature Highlights", "Software as a Service"]
 
 {{< include /samples/single-source/_copywriting.qmd >}}
 
+::: {.category-filter}
+:::
+
 ## ValidMind
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}

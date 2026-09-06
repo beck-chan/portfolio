@@ -93,8 +93,6 @@ listing:
     # - ../content-engineering/personal/guestbook/index.qmd
     categories: true
 categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Blog", "Feature Highlights"]
-filters:
-  - category-filter
 ---
 
 {{< include /samples/single-source/_bio.qmd >}}
@@ -161,11 +159,11 @@ filters:
 ## View Samples
 
 ::: {.hidden-mobile}
-Use [filter by category]{.smallcaps} in the right-hand sidebar to narrow down samples by topic. Select a tab to view samples by type.
+Use [filter by category]{.smallcaps} in the right-hand sidebar to narrow down samples by criteria. Select a tab to view samples by group.
 :::
 
 ::: {.hidden-desktop}
-Use [filter by category]{.smallcaps} below to narrow down samples by topic. Select a tab to view samples by type.
+Use [filter by category]{.smallcaps} below to narrow down samples by criteria. Select a tab to view samples by group.
 :::
 
 ::: {.category-filter}

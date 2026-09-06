@@ -33,7 +33,10 @@ Before we had any formal technical writers at SaaSquatch, I created and maintain
 
 {{< include /samples/single-source/saasquatch/_saasquatch.qmd >}}
 
-### Technical Writing
+::: {.category-filter}
+:::
+
+## Technical Writing
 
 {{< include /samples/single-source/_technical.qmd >}}
 

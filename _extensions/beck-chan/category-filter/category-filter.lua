@@ -22,7 +22,7 @@ local function ensure_deps()
   end
   quarto.doc.add_html_dependency({
     name = "category-filter",
-    version = "1.0.0",
+    version = "1.0.1",
     stylesheets = { "category-filter.css" },
     scripts = { "category-filter.js" }
   })
@@ -59,7 +59,7 @@ function Div(div)
   local html = table.concat({
     '<div' .. id_attr .. ' class="' .. table.concat(classes, " ") .. '">',
     '  <label class="category-filter__label" for="category-filter-select">',
-    '    <span class="category-filter__label-text">filter by category</span>',
+    '    <span class="category-filter__label-text smallcaps">filter by category</span>',
     "  </label>",
     '  <select id="category-filter-select" class="category-filter__select"',
     '    aria-label="Filter by category">',
