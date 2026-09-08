@@ -47,7 +47,7 @@ sidebar: false
 - Designed and led solo migration of support processes to Zendesk built to scale, increasing efficiency by 74%.
 - Managed team escalations from complex technical cases, ensuring delivery of solutions to customers.
 - Proactively identified opportunities for customer growth and product improvements during ticket management.
-- Provided advanced technical support for web and mobile SDKs built on JavaScript, REST API, and GraphQL.
+- Provided advanced technical support for web and mobile SDKs built on JavaScript, REST API, and GraphQL API.
 
 :::
 
@@ -59,7 +59,7 @@ sidebar: false
 - Streamlined workload by 51% through improvement of implementation processes and onboarding strategies.
 - Proactively created and maintained public documentation, focusing on accuracy, accessibility, and extensibility.
 - Produced tangible results for customers by collaborating cross-functionally to deliver custom features.
-- Designed and executed solutions for custom JavaScript, REST API, and GraphQL software installations.
+- Designed and executed solutions for custom JavaScript, REST API, and GraphQL API software installations.
 
 :::
 
@@ -130,7 +130,8 @@ AbeBooks.com, Amazon subsidiary
 - Docs-as-code engineering
 - Quarto publishing
 - Jupyter Notebooks
-<!-- - MDX -->
+- Scalar
+- MDX
 - Markdown
 
 
@@ -140,11 +141,11 @@ AbeBooks.com, Amazon subsidiary
 - GitHub
 - Cursor Code
 - Visual Studio Code
-<!-- - Supabase -->
+- Supabase
 - Docker
 - Postman
 - Netlify
-<!-- - Vercel -->
+- Vercel
 
 
 **Solutions Architecture & Implementation**
@@ -157,7 +158,7 @@ AbeBooks.com, Amazon subsidiary
 - Python
 - Rust
 - HTML
-<!-- - Tailwind CSS -->
+- Tailwind CSS
 - CSS
 - TypeScript
 - SQL
@@ -225,29 +226,26 @@ Bachelor of Arts, English Literature & Japanese Studies
 
 ::: {.timeline .tl-diamond .tl-label-badge .vertical}
 
-<!-- ::: {.event data-label="Launched October 2026" style="--tl-color-label: #ffb3ba; --tl-color-dot: #ffb3ba;" .tl-card}
+::: {.event data-label="Launched October 2026" style="--tl-color-label: #ffb3ba; --tl-color-dot: #ffb3ba;" .tl-card}
 ### y2k Guestbook
-*[https://beck-chan.vercel.app](https://beck-chan.vercel.app){target="_blank"}*^[[Content Engineering: Guestbook](/guestbook)]
+*[https://beck-chan.vercel.app](https://beck-chan.vercel.app){target="_blank"}*
 
 - Mobile-responsive frontend built on Next.js and Tailwind CSS, integrated Supabase edge functions and backend.
 - Built-in rate limiting and profanity filtering. Admin functionality for comment management and customization.
-- LLM-friendly docs in MDX, API reference implemented with Scalar. Admin auth via Google OAuth 2.0.
+- LLM-friendly docs in MDX, API reference implemented with Scalar. Admin gating via Google OAuth 2.0.
 
- -->
+[Content Engineering: Guestbook](/guestbook){.button .cta}
 
-<!-- 
-::: -->
+::: 
 
 
-::: {.event data-label="Launched August 2026" style="--tl-color-label: #0b2a12; --tl-color-dot: #0b2a12;" .tl-card}
+::: {.event data-label="August 2026 &ndash; Present" style="--tl-color-label: #0b2a12; --tl-color-dot: #0b2a12;" .tl-card}
 ### Personal Portfolio
-*[https://beck-chan.github.io](https://beck-chan.github.io)*^[[Content Engineering: Portfolio](/portfolio)]
+*[https://beck-chan.github.io](https://beck-chan.github.io)*
 
 - Mobile-responsive build using Quarto, deployed to GitHub Pages and Netlify via GitHub CI/CD Workflows.
 - Custom themes and styling using Bootstrap. Custom functionality added with JavaScript and Lua.
 - Local deployment fallbacks via Justfile in Rust.
+
+[Content Engineering: Portfolio](/portfolio){.button .cta}
 :::
-
-:::
-
-
