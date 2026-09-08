@@ -188,8 +188,15 @@ nav[aria-label="breadcrumb"] {
 // Leave room for the fixed header on in-page hash navigation.
 // scroll-padding on html covers every target (headings, sections, listings),
 // including those inside Quarto's page-columns grid where scroll-margin is unreliable.
+// Mobile stacks the navbar and quarto-secondary-nav (see _mobile.scss).
 html {
   scroll-padding-top: 80px;
+}
+
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 160px;
+  }
 }
 
 

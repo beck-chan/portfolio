@@ -1,0 +1,102 @@
+name: Check Quarto render for broken links
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  render-check:
+    name: Render and check warnings
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          version: pre-release
+
+      - name: Render site
+        id: render
+        run: |
+          set +e
+          set -o pipefail
+          quarto render 2>&1 | tee render-output.txt
+          status=${PIPESTATUS[0]}
+          set -e
+
+          sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' render-output.txt \
+            | grep -E 'WARNING:|\[WARNING\]|ERROR:|\[ERROR\]|Unable to resolve' \
+            > render-warnings.txt || true
+
+          if [ ! -s render-warnings.txt ] && [ "$status" != "0" ]; then
+            tail -n 80 render-output.txt > render-warnings.txt
+          fi
+
+          failed=false
+          if [ "$status" != "0" ] || [ -s render-warnings.txt ]; then
+            failed=true
+          fi
+
+          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
+          echo "failed=$failed" >> "$GITHUB_OUTPUT"
+          cat render-warnings.txt
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- quarto-render-pr-comment -->';
+            const failed = '${{ steps.render.outputs.failed }}' === 'true';
+            const renderFailed = '${{ steps.render.outputs.exit_code }}' !== '0';
+            let output = '';
+            if (fs.existsSync('render-warnings.txt')) {
+              output = fs.readFileSync('render-warnings.txt', 'utf8').trim();
+            }
+            const max = 60000;
+            if (output.length > max) {
+              output = output.slice(0, max) + '\n\n…truncated';
+            }
+
+            const heading = renderFailed
+              ? 'Quarto render failed'
+              : failed
+                ? 'Render warnings found'
+                : 'No render warnings found';
+            const body = failed
+              ? `${marker}\n## ${heading}\n\n\`\`\`text\n${output}\n\`\`\``
+              : `${marker}\n## ${heading}`;
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find((c) => c.body?.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+      - name: Fail if render warnings found
+        if: steps.render.outputs.failed == 'true'
+        run: exit 1

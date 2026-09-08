@@ -12,6 +12,7 @@ A lovingly handed-coded portfolio, built on [Quarto](https://quarto.org/):
 PRs are required to merge changes into `main` to ensure that release notes are automatically generated:
 
 - Relevant `.qmd`s in PRs automatically checked for spelling errors with [spellcheck.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/spellcheck.yaml)
+- PRs must have a `major`, `minor`, `patch`, or `internal` label, enforced by [check-release-label.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/check-release-label.yaml)
 - Open PRs deploy a preview to [https://beckchan-staging.netlify.app/](https://beckchan-staging.netlify.app/) with [preview-site.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/preview-site.yaml) &mdash; when the PR closes, the staging site is replaced by a redirect to the live site.
 
 ## Copyright

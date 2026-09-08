@@ -581,8 +581,7 @@ Each PR top-level comment is autopopulated with content from a PR template,^[**{
 ```markdown
 <!-- Any internal notes go here -->
 
-
-## Release notes
+## Release Notes
 
 <!-- 
 
@@ -598,24 +597,30 @@ Include any release notes you want displayed under this section.
 
 -->
 
-
 <!-- Leave below untouched -->
 
-**Browse the updated portfolio at: [https://beck-chan.github.io/](https://beck-chan.github.io/)**
+> **Browse the updated portfolio at: [https://beck-chan.github.io/](https://beck-chan.github.io/)**
+
+[How are releases generated?](https://beck-chan.github.io/samples/content-engineering/personal/portfolio/deployment.html#release-notes)
 ```
 
 Utilizing pull requests allows me to streamline a few additional things with GitHub Workflows and automate (more on the last three in [Portfolio Deployment](deployment.qmd)):
 
-- [x] Spellchecking relevant files as part of PR checks.
+- [x] Spellchecking relevant files and looking for broken links as part of PR checks.
 - [x] Rendering and deploying the rendered files to Netlify for an open PR to my staging site.
 - [x] Generating release notes from PRs tagged with specific labels.
 - [x] Rendering and deploying the rendered files to GitHub Pages production site when the PR is merged into `main`.
 
+
+The following GitHub Workflows run when a PR is opened, or when a commit is sent up to a branch connected to a PR:
+
+::: {.panel-tabset}
+
 #### Spellcheck
 
-`.github/workflows/spellcheck.yaml`^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [spellcheck.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/spellcheck.yaml){target="_blank"}] runs when a PR is opened, or when a commit is sent up to a branch connected to a PR, checking for spelling errors in relevant `*.qmd` files and adding a comment with the results when complete:[^spellcheck]
+`.github/workflows/spellcheck.yaml`^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [spellcheck.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/spellcheck.yaml){target="_blank"}] Checks for spelling errors in relevant `*.qmd` files, then adds a comment with the results when complete:[^spellcheck]
 
-```yaml
+```{.yaml .fold}
         # Set up steps ...
 
       - name: Run spell checker
@@ -697,5 +702,102 @@ Words to be ignored are defined in `cspell.json`.^[**{{< fa brands github >}} be
     poetry/random/taken.qmd:39:8 - Unknown word (impeity)
     poetry/random/to-dc.qmd:14:1 - Unknown word (Aegeas)
     ```
+
+#### Broken Link Check
+
+`.github/workflows/link-check.yaml`^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [link-check.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/link-check.yaml){target="_blank"}] Generates the static output site files with the default profile (no production PostHog tracking) and checks the output for broken links and other warnings, then adds a comment with the results when complete:[^linkcheck]
+
+```{.yaml .fold}
+        # Set up steps ...
+
+      - name: Render site
+        id: render
+        run: |
+          set +e
+          set -o pipefail
+          quarto render 2>&1 | tee render-output.txt
+          status=${PIPESTATUS[0]}
+          set -e
+
+          sed 's/\x1b\[[0-9;]*[a-zA-Z]//g' render-output.txt \
+            | grep -E 'WARNING:|\[WARNING\]|ERROR:|\[ERROR\]|Unable to resolve' \
+            > render-warnings.txt || true
+
+          if [ ! -s render-warnings.txt ] && [ "$status" != "0" ]; then
+            tail -n 80 render-output.txt > render-warnings.txt
+          fi
+
+          failed=false
+          if [ "$status" != "0" ] || [ -s render-warnings.txt ]; then
+            failed=true
+          fi
+
+          echo "exit_code=$status" >> "$GITHUB_OUTPUT"
+          echo "failed=$failed" >> "$GITHUB_OUTPUT"
+          cat render-warnings.txt
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- quarto-render-pr-comment -->';
+            const failed = '${{ steps.render.outputs.failed }}' === 'true';
+            const renderFailed = '${{ steps.render.outputs.exit_code }}' !== '0';
+            let output = '';
+            if (fs.existsSync('render-warnings.txt')) {
+              output = fs.readFileSync('render-warnings.txt', 'utf8').trim();
+            }
+            const max = 60000;
+            if (output.length > max) {
+              output = output.slice(0, max) + '\n\n…truncated';
+            }
+
+            const heading = renderFailed
+              ? 'Quarto render failed'
+              : failed
+                ? 'Render warnings found'
+                : 'No render warnings found';
+            const body = failed
+              ? `${marker}\n## ${heading}\n\n\`\`\`text\n${output}\n\`\`\``
+              : `${marker}\n## ${heading}`;
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find((c) => c.body?.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+```
+
+Quarto can finish a render with a successful exit code even when links do not resolve, so the workflow treats `WARNING` and `ERROR` lines as failures.
+
+[^linkcheck]: **Broken Link Check Comment**:
+
+    ```{.markdown .fold summary="view example"}
+    ### Render warnings found
+
+    WARNING: Unable to resolve link target: samples/content-engineering/validmind/missing.html
+    WARNING: Unable to resolve link target: #fig-not-real
+    WARNING: Unable to resolve crossref: fig-missing
+    ```
+
+:::
 
 :::

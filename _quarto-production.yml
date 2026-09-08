@@ -3,7 +3,9 @@ project:
 
 format:
   html:
-    include-in-header: assets/posthog-tracking.html
+    include-in-header:
+      - assets/margin-below-toc-head.html
+      - assets/posthog-tracking.html
     include-after-body:
       - assets/margin-below-toc.html
       - assets/sticky-toc-toggle.html

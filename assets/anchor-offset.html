@@ -2,8 +2,92 @@
   // Keep in-page hash targets below the fixed header. Quarto's hashchange
   // offset looks for header.fixed-top and can fire before native scroll, and
   // CSS scroll-margin is unreliable on page-columns grid sections.
+  // Desktop is the navbar only; mobile stacks navbar + quarto-secondary-nav.
+  // Margin footnotes also clear the accordion TOC / category filters.
   (() => {
-    const OFFSET = 80;
+    const GAP = 8;
+    const NAVBAR_FALLBACK = 80;
+
+    const visibleFixedBottom = (el) => {
+      if (!el) return 0;
+      const style = window.getComputedStyle(el);
+      if (style.display === "none" || style.visibility === "hidden") return 0;
+      if (style.position !== "fixed" && style.position !== "sticky") return 0;
+      const rect = el.getBoundingClientRect();
+      return rect.height > 0 && rect.bottom > 0 ? rect.bottom : 0;
+    };
+
+    const headerOffset = () => {
+      const navbar =
+        document.querySelector("#quarto-header nav.navbar") ||
+        document.querySelector("#quarto-header") ||
+        document.querySelector("nav.navbar");
+      const secondary = document.querySelector("nav.quarto-secondary-nav");
+      const bottom = Math.max(
+        visibleFixedBottom(navbar),
+        visibleFixedBottom(secondary)
+      );
+      if (bottom > 0) return Math.ceil(bottom) + GAP;
+      // Empty #quarto-header still exists on navbar:false pages.
+      const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
+      return navbarHeight > 0 ? NAVBAR_FALLBACK : 0;
+    };
+
+    // Desktop margin notes share a column with the accordion TOC and
+    // listing category filters. Measure whatever of that chrome is
+    // still on screen (fixed accordion after scroll, in-flow panel
+    // near the top).
+    const visibleBoxBottom = (el) => {
+      if (!el || el.hidden) return 0;
+      const style = window.getComputedStyle(el);
+      if (style.display === "none" || style.visibility === "hidden") return 0;
+      const rect = el.getBoundingClientRect();
+      if (rect.height <= 0) return 0;
+      if (rect.bottom <= 0 || rect.top >= window.innerHeight) return 0;
+      return rect.bottom;
+    };
+
+    const marginChromeBottom = () => {
+      const selectors = [
+        "#portfolio-toc-toggle",
+        "#quarto-margin-sidebar nav#TOC",
+        "#quarto-margin-sidebar nav[role='doc-toc']",
+        "#quarto-margin-sidebar .quarto-listing-category-title",
+        "#quarto-margin-sidebar .quarto-listing-category",
+      ];
+      let bottom = 0;
+      for (const selector of selectors) {
+        bottom = Math.max(bottom, visibleBoxBottom(document.querySelector(selector)));
+      }
+      return bottom;
+    };
+
+    const isMarginTarget = (el) => {
+      if (!el) return false;
+      if (el.id && /^fn\d/.test(el.id)) return true;
+      return Boolean(
+        el.closest(
+          ".column-margin, .aside, .tabset-margin-container, #quarto-margin-sidebar"
+        )
+      );
+    };
+
+    const targetOffset = (el) => {
+      const header = headerOffset();
+      if (!isMarginTarget(el)) return header;
+      const margin = marginChromeBottom();
+      if (margin > 0) return Math.max(header, Math.ceil(margin) + GAP);
+      return header;
+    };
+
+    const syncScrollPadding = () => {
+      const offset = headerOffset();
+      if (offset > 0) {
+        document.documentElement.style.scrollPaddingTop = `${offset}px`;
+      } else {
+        document.documentElement.style.removeProperty("scroll-padding-top");
+      }
+    };
 
     const targetEl = (hash) => {
       if (!hash) return null;
@@ -17,7 +101,9 @@
 
     const scrollToEl = (el) => {
       if (!el) return;
-      const top = el.getBoundingClientRect().top + window.scrollY - OFFSET;
+      const offset = targetOffset(el);
+      if (offset <= 0) return;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
     };
 
@@ -55,6 +141,7 @@
     });
 
     const onReady = () => {
+      syncScrollPadding();
       if (!window.location.hash) return;
       applyHash();
       setTimeout(applyHash, 250);
@@ -66,5 +153,6 @@
       onReady();
     }
     window.addEventListener("load", onReady);
+    window.addEventListener("resize", syncScrollPadding);
   })();
 </script>

@@ -14,7 +14,7 @@ listing:
       - validmind.qmd
       - atryum.qmd
       - saasquatch.qmd
-categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Training & Onboarding", "Content Enablement", "Blog", "Feature Highlights"]
+categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Blog", "Feature Highlights"]
 ---
 
 {{< include /samples/single-source/_bio.qmd >}}

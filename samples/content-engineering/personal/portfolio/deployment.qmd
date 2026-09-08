@@ -316,6 +316,32 @@ Label precedence matches the PR template (1. [major]{.bubble}, 2. [minor]{.bubbl
 
 Comments are stripped, and an empty section falls back to "No public-facing release notes." PRs without one of the release-linked labels skip release generation.
 
+#### Release Label Check
+
+Open PRs merging into `main` must have one of the [major]{.bubble}, [minor]{.bubble}, [patch]{.bubble}, or [internal]{.bubble} labels. `.github/workflows/check-release-label.yaml`^[**{{< fa brands github >}} beck-chan/portfolio/.github/workflows:** [check-release-label.yaml](https://github.com/beck-chan/portfolio/blob/main/.github/workflows/check-release-label.yaml){target="_blank"}] fails the check if no required labels are present, so a merge cannot silently skip release generation:
+
+```yaml
+      - name: Require a release label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            const labels = (pr.labels || []).map((label) => label.name.toLowerCase());
+            const allowed = ['major', 'minor', 'patch', 'internal'];
+            const found = allowed.filter((name) => labels.includes(name));
+
+            if (found.length === 0) {
+              core.setFailed(
+                'PR needs a release label: major, minor, or patch to generate a release on merge, or internal to skip release generation.'
+              );
+              return;
+            }
+
+            core.info(`Release label present: ${found.join(', ')}`);
+```
+
+The check re-runs when labels are added or removed, so adding [internal]{.bubble} clears the error without another push. [internal]{.bubble} is the opt-out for PRs that should not create a GitHub release.
+
 :::
 
 ## Local Fallbacks
