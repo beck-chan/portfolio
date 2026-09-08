@@ -2,8 +2,44 @@
   // Keep in-page hash targets below the fixed header. Quarto's hashchange
   // offset looks for header.fixed-top and can fire before native scroll, and
   // CSS scroll-margin is unreliable on page-columns grid sections.
+  // Desktop is the navbar only; mobile stacks navbar + quarto-secondary-nav.
   (() => {
-    const OFFSET = 80;
+    const GAP = 8;
+    const NAVBAR_FALLBACK = 80;
+
+    const visibleFixedBottom = (el) => {
+      if (!el) return 0;
+      const style = window.getComputedStyle(el);
+      if (style.display === "none" || style.visibility === "hidden") return 0;
+      if (style.position !== "fixed" && style.position !== "sticky") return 0;
+      const rect = el.getBoundingClientRect();
+      return rect.height > 0 && rect.bottom > 0 ? rect.bottom : 0;
+    };
+
+    const headerOffset = () => {
+      const navbar =
+        document.querySelector("#quarto-header nav.navbar") ||
+        document.querySelector("#quarto-header") ||
+        document.querySelector("nav.navbar");
+      const secondary = document.querySelector("nav.quarto-secondary-nav");
+      const bottom = Math.max(
+        visibleFixedBottom(navbar),
+        visibleFixedBottom(secondary)
+      );
+      if (bottom > 0) return Math.ceil(bottom) + GAP;
+      // Empty #quarto-header still exists on navbar:false pages.
+      const navbarHeight = navbar ? navbar.getBoundingClientRect().height : 0;
+      return navbarHeight > 0 ? NAVBAR_FALLBACK : 0;
+    };
+
+    const syncScrollPadding = () => {
+      const offset = headerOffset();
+      if (offset > 0) {
+        document.documentElement.style.scrollPaddingTop = `${offset}px`;
+      } else {
+        document.documentElement.style.removeProperty("scroll-padding-top");
+      }
+    };
 
     const targetEl = (hash) => {
       if (!hash) return null;
@@ -17,7 +53,9 @@
 
     const scrollToEl = (el) => {
       if (!el) return;
-      const top = el.getBoundingClientRect().top + window.scrollY - OFFSET;
+      const offset = headerOffset();
+      if (offset <= 0) return;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
     };
 
@@ -55,6 +93,7 @@
     });
 
     const onReady = () => {
+      syncScrollPadding();
       if (!window.location.hash) return;
       applyHash();
       setTimeout(applyHash, 250);
@@ -66,5 +105,6 @@
       onReady();
     }
     window.addEventListener("load", onReady);
+    window.addEventListener("resize", syncScrollPadding);
   })();
 </script>
