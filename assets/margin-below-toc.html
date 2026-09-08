@@ -1,5 +1,4 @@
 <style>
-  /* After-body fallback if theme CSS has not rebuilt yet. */
   @media (max-width: 767.98px) {
     .tabset-margin-container {
       display: none !important;
@@ -19,6 +18,7 @@
     const GAP_AFTER_SIDEBAR = "0.5rem";
     const GAP_BEFORE_FOOTER = "1.5rem";
     const READY_CLASS = "margin-below-toc-ready";
+    const MEASURING_CLASS = "margin-notes-measuring";
 
     const remPx = (raw) => {
       const root = window.getComputedStyle(document.documentElement);
@@ -239,7 +239,16 @@
       });
     };
 
+    const currentTranslateY = (el) => {
+      const match = String(el.style.transform || "").match(
+        /translateY\(([-\d.]+)px\)/
+      );
+      return match ? parseFloat(match[1]) : 0;
+    };
+
     const layoutMarginBelowToc = () => {
+      document.documentElement.classList.add(MEASURING_CLASS);
+      document.documentElement.offsetHeight;
       syncTabsetMargins();
 
       const marginChildren = document.querySelectorAll(MARGIN_SEL);
@@ -248,22 +257,42 @@
         return;
       }
 
+      // Quarto's layoutMarginEls resets margin-top. Keep the desktop
+      // cascade in translateY, and never zero it before writing the next
+      // value — clearing first is what flashes notes over the TOC.
+      const persistShift = !marginsAreInline();
       let lastBottom = sidebarContentBottom();
       for (const el of marginChildren) {
         if (el.offsetParent === null) continue;
 
-        el.style.marginTop = null;
-        const top = el.getBoundingClientRect().top + window.scrollY;
+        const shiftNow = persistShift ? currentTranslateY(el) : 0;
+        const visualTop =
+          el.getBoundingClientRect().top + window.scrollY;
+        const top = visualTop - shiftNow;
+        let nextShift = 0;
         if (lastBottom > 0 && top < lastBottom) {
           const marginBottom =
             parseFloat(window.getComputedStyle(el).marginBottom) || 0;
-          el.style.marginTop = `${lastBottom - top + marginBottom}px`;
+          nextShift = lastBottom - top + marginBottom;
         }
 
+        if (persistShift) {
+          if (nextShift) {
+            el.style.transform = `translateY(${nextShift}px)`;
+          } else {
+            el.style.removeProperty("transform");
+          }
+          el.style.marginTop = null;
+        } else {
+          el.style.removeProperty("transform");
+          el.style.marginTop = nextShift ? `${nextShift}px` : null;
+        }
+
+        const placedTop = top + nextShift;
         const marginTop =
           parseFloat(window.getComputedStyle(el).marginTop) || 0;
-        const height = el.getBoundingClientRect().height;
-        lastBottom = top + height + marginTop;
+        lastBottom =
+          placedTop + el.getBoundingClientRect().height + marginTop;
       }
 
       expandContentForMargins(lastBottom);
@@ -271,17 +300,64 @@
 
     const reveal = () => {
       document.documentElement.classList.add(READY_CLASS);
+      document.documentElement.classList.remove(MEASURING_CLASS);
     };
 
+    const sidebarHasPanel = () => {
+      const sidebar = document.getElementById("quarto-margin-sidebar");
+      if (!sidebar) return false;
+      if (window.getComputedStyle(sidebar).display === "none") return false;
+      return Boolean(
+        sidebar.querySelector(
+          "nav#TOC, nav[role='doc-toc'], .quarto-listing-category"
+        )
+      );
+    };
+
+    // Never unhide over the TOC: a 0px sidebar read used to look "settled".
+    const sidebarSettled = () => {
+      if (marginsAreInline()) return true;
+      if (!sidebarHasPanel()) return true;
+      return sidebarContentBottom() > 0;
+    };
+
+    // Don't paint notes until the cascade has run and the sidebar
+    // height has settled, so first load never shows a TOC collision.
     const layoutAndReveal = () => {
       layoutMarginBelowToc();
-      reveal();
+      if (!sidebarSettled()) {
+        if (!document.documentElement.classList.contains(READY_CLASS)) {
+          schedule();
+        }
+        return;
+      }
+      if (marginsAreInline()) {
+        reveal();
+        return;
+      }
+      requestAnimationFrame(() => {
+        layoutMarginBelowToc();
+        if (!sidebarSettled()) {
+          if (!document.documentElement.classList.contains(READY_CLASS)) {
+            schedule();
+          }
+          return;
+        }
+        reveal();
+      });
     };
 
-    // Run after Quarto's own throttled layoutMarginEls (50ms).
+    // After the first paint, only re-cascade — don't run the reveal
+    // rAF path again (that used to clear transforms while visible).
     const schedule = () => {
       clearTimeout(schedule._timer);
-      schedule._timer = setTimeout(layoutAndReveal, 60);
+      schedule._timer = setTimeout(() => {
+        if (document.documentElement.classList.contains(READY_CLASS)) {
+          layoutMarginBelowToc();
+        } else {
+          layoutAndReveal();
+        }
+      }, 60);
     };
 
     const onInlineChange = () => {
@@ -298,7 +374,10 @@
     const onReady = () => {
       schedule();
       // Failsafe: never leave footnotes hidden if layout is delayed.
-      setTimeout(reveal, 1500);
+      setTimeout(() => {
+        layoutMarginBelowToc();
+        reveal();
+      }, 1500);
       const inlineMq = window.matchMedia(INLINE_MARGIN_MQ);
       if (inlineMq.addEventListener) {
         inlineMq.addEventListener("change", onInlineChange);
@@ -312,6 +391,9 @@
       window.document.querySelectorAll(".column-margin img").forEach((img) => {
         if (!img.complete) img.addEventListener("load", schedule, { once: true });
       });
+      if (document.fonts?.ready) {
+        document.fonts.ready.then(schedule);
+      }
       if (window.ResizeObserver) {
         const ro = new ResizeObserver(schedule);
         ro.observe(window.document.body);

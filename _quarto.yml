@@ -102,4 +102,4 @@ filters:
   - tachyons
   - fold-code
   - iframe
-  # - category-filter
+  - category-filter

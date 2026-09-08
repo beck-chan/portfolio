@@ -1,0 +1,34 @@
+<style>
+  /* First paint: take notes out of the box entirely. visibility/opacity
+     still lets overflow:visible margin notes paint over the TOC. */
+  html:not(.margin-below-toc-ready):not(.margin-notes-measuring) .column-margin.column-container > *,
+  html:not(.margin-below-toc-ready):not(.margin-notes-measuring) .tabset-margin-content,
+  html:not(.margin-below-toc-ready):not(.margin-notes-measuring) .margin-caption,
+  html:not(.margin-below-toc-ready):not(.margin-notes-measuring) .aside,
+  html:not(.margin-below-toc-ready):not(.margin-notes-measuring) div[id^="fn"] {
+    display: none !important;
+  }
+
+  html.margin-notes-measuring:not(.margin-below-toc-ready) .column-margin.column-container > *,
+  html.margin-notes-measuring:not(.margin-below-toc-ready) .tabset-margin-content,
+  html.margin-notes-measuring:not(.margin-below-toc-ready) .margin-caption,
+  html.margin-notes-measuring:not(.margin-below-toc-ready) .aside,
+  html.margin-notes-measuring:not(.margin-below-toc-ready) div[id^="fn"] {
+    display: block !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+</style>
+<noscript>
+  <style>
+    html .column-margin.column-container > *,
+    html .tabset-margin-content,
+    html .margin-caption,
+    html .aside,
+    html div[id^="fn"] {
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+  </style>
+</noscript>

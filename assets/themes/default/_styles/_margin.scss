@@ -116,15 +116,11 @@ nav#TOC.portfolio-toc-rolled-up {
   visibility: hidden !important;
 }
 
-html:not(.margin-below-toc-ready) main.content .column-margin.column-container,
-html:not(.margin-below-toc-ready) .tabset-margin-container {
-  visibility: hidden !important;
-  opacity: 0;
-}
-
-html.margin-below-toc-ready main.content .column-margin.column-container {
-  opacity: 1;
-  transition: opacity 0.18s ease;
+html:not(.margin-below-toc-ready):not(.margin-notes-measuring) main.content .column-margin.column-container > *,
+html:not(.margin-below-toc-ready):not(.margin-notes-measuring) main.content .margin-caption,
+html:not(.margin-below-toc-ready):not(.margin-notes-measuring) main.content .aside,
+html:not(.margin-below-toc-ready):not(.margin-notes-measuring) main.content div[id^="fn"] {
+  display: none !important;
 }
 
 // Hoisted tabset notes sit above the tabs in source order. On mobile
