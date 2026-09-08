@@ -1,6 +1,5 @@
 <!-- Any internal notes go here -->
 
-
 ## Release Notes
 
 <!-- 
@@ -16,7 +15,6 @@ Tagging with more than one label will give precedence in the order as numbered.
 Include any release notes you want displayed under this section.
 
 -->
-
 
 <!-- Leave below untouched -->
 
