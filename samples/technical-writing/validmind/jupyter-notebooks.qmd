@@ -1,7 +1,7 @@
 ---
 title: "ValidMind Jupyter Notebooks"
 subtitle: "Developer Content"
-categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Python Library"]
+categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Python Library"]
 listing:
   - id: validmind-notebooks-authored
     type: grid
