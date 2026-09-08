@@ -1,6 +1,8 @@
 ---
 title: "Portfolio"
 subtitle: "Content Engineering"
+aliases: 
+  - /portfolio/index.html
 categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "PostHog", "CI/CD Workflows", "Frontend Development"]
 listing:
   - id: content-portfolio

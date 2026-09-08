@@ -227,11 +227,12 @@ Bachelor of Arts, English Literature & Japanese Studies
 
 <!-- ::: {.event data-label="Launched October 2026" style="--tl-color-label: #ffb3ba; --tl-color-dot: #ffb3ba;" .tl-card}
 ### y2k Guestbook
-*[https://beck-chan.vercel.app](https://beck-chan.vercel.app){target="_blank"}*
+*[https://beck-chan.vercel.app](https://beck-chan.vercel.app){target="_blank"}*^[[Content Engineering: Guestbook](/guestbook)]
 
-- Mobile-responsive frontend built on Next.js, backend powered by Supabase. Custom styling with Tailwind CSS. 
+- Mobile-responsive frontend built on Next.js and Tailwind CSS, integrated Supabase edge functions and backend.
 - Built-in rate limiting and profanity filtering. Admin functionality for comment management and customization.
-- Documentation including API reference written in MDX. Admin authentication handled by Google Cloud Platform.
+- LLM-friendly docs in MDX, API reference implemented with Scalar. Admin auth via Google OAuth 2.0.
+
  -->
 
 <!-- 
@@ -240,7 +241,7 @@ Bachelor of Arts, English Literature & Japanese Studies
 
 ::: {.event data-label="Launched August 2026" style="--tl-color-label: #0b2a12; --tl-color-dot: #0b2a12;" .tl-card}
 ### Personal Portfolio
-*[https://beck-chan.github.io](https://beck-chan.github.io)*
+*[https://beck-chan.github.io](https://beck-chan.github.io)*^[[Content Engineering: Portfolio](/portfolio)]
 
 - Mobile-responsive build using Quarto, deployed to GitHub Pages and Netlify via GitHub CI/CD Workflows.
 - Custom themes and styling using Bootstrap. Custom functionality added with JavaScript and Lua.
