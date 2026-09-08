@@ -1,3 +1,11 @@
+<style>
+  /* After-body fallback if theme CSS has not rebuilt yet. */
+  @media (max-width: 767.98px) {
+    .tabset-margin-container {
+      display: none !important;
+    }
+  }
+</style>
 <script>
   // Quarto's layoutMarginEls only separates margin notes from each other.
   // Seed that same cascade with the TOC/category panel bottom so footnotes
@@ -276,15 +284,26 @@
       schedule._timer = setTimeout(layoutAndReveal, 60);
     };
 
-    window.document.addEventListener("DOMContentLoaded", () => {
+    const onInlineChange = () => {
+      syncTabsetMargins();
+      if (marginsAreInline()) reveal();
+      schedule();
+    };
+
+    // include-after-body: tabsets are already in the DOM. Place notes
+    // before the 60ms cascade so mobile never reveals them above.
+    syncTabsetMargins();
+    if (marginsAreInline()) reveal();
+
+    const onReady = () => {
       schedule();
       // Failsafe: never leave footnotes hidden if layout is delayed.
       setTimeout(reveal, 1500);
       const inlineMq = window.matchMedia(INLINE_MARGIN_MQ);
       if (inlineMq.addEventListener) {
-        inlineMq.addEventListener("change", schedule);
+        inlineMq.addEventListener("change", onInlineChange);
       } else if (inlineMq.addListener) {
-        inlineMq.addListener(schedule);
+        inlineMq.addListener(onInlineChange);
       }
       // Re-cascade when Quarto toggles tabset margin note visibility.
       window.document.querySelectorAll('.panel-tabset a[data-bs-toggle="tab"]').forEach((tab) => {
@@ -303,6 +322,12 @@
         );
         if (margin) ro.observe(margin);
       }
-    });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", onReady);
+    } else {
+      onReady();
+    }
   })();
 </script>
