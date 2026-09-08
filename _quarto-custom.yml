@@ -2,6 +2,6 @@ format:
   html:
     include-after-body:
       - assets/margin-below-toc.html
-      - assets/sticky-toc-toggle.html
-      - assets/pin-sidenav.html
-      - assets/anchor-offset.html
+      # - assets/sticky-toc-toggle.html
+      # - assets/pin-sidenav.html
+      # - assets/anchor-offset.html

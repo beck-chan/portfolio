@@ -85,56 +85,154 @@
 
     // Quarto leaves margin footnotes inside tab panes and marks the
     // tabset with page-columns/page-full, nesting a full page grid in
-    // the body column. Move those notes into the sibling
-    // .tabset-margin-container so the tabset can lay out normally and
-    // Quarto's shown.bs.tab handler can toggle note visibility.
-    const hoistTabsetMargins = () => {
-      document.querySelectorAll(".panel-tabset").forEach((tabset) => {
-        const margins = [
-          ...tabset.querySelectorAll(".column-margin.column-container"),
-        ];
-        if (!margins.length) return;
+    // the body column. On desktop, move those notes into a sibling
+    // .tabset-margin-container so they sit in the page margin and
+    // Quarto's shown.bs.tab handler can toggle visibility.
+    // On mobile, Quarto inlines .column-margin in document order —
+    // keep notes after their host (same as outside tabsets) instead
+    // of leaving the hoisted container above the tabset.
+    const INLINE_MARGIN_MQ = "(max-width: 767.98px)";
+    const marginsAreInline = () =>
+      window.matchMedia(INLINE_MARGIN_MQ).matches;
 
-        let container = tabset.previousElementSibling;
-        if (!container?.classList.contains("tabset-margin-container")) {
-          container = document.createElement("div");
-          container.className = "tabset-margin-container";
-          tabset.parentElement?.insertBefore(container, tabset);
+    const escapeAttr = (value) =>
+      window.CSS?.escape ? window.CSS.escape(value) : value;
+
+    const findTabsetMarginContainer = (tabset) => {
+      for (const sib of [
+        tabset.previousElementSibling,
+        tabset.nextElementSibling,
+      ]) {
+        if (sib?.classList.contains("tabset-margin-container")) return sib;
+      }
+      return null;
+    };
+
+    const paneForMarginWrap = (tabset, wrap) => {
+      const paneId = wrap.dataset.tabPaneId;
+      if (paneId) {
+        const byId = document.getElementById(paneId);
+        if (byId) return byId;
+      }
+      for (const cls of wrap.classList) {
+        if (cls === "tabset-margin-content") continue;
+        const fromPane = cls.match(/^(.+)-tab-margin-content$/);
+        if (fromPane) {
+          const pane = document.getElementById(fromPane[1]);
+          if (pane) return pane;
+        }
+        const fromTab = cls.match(/^(.+)-margin-content$/);
+        if (fromTab) {
+          const pane = tabset.querySelector(
+            `.tab-pane[aria-labelledby="${escapeAttr(fromTab[1])}"]`
+          );
+          if (pane) return pane;
+        }
+      }
+      return null;
+    };
+
+    const stripNestedPageGrid = (tabset) => {
+      const strip = (el) => {
+        el.classList.remove("page-columns", "page-full");
+      };
+      strip(tabset);
+      tabset.querySelectorAll(".page-columns, .page-full").forEach(strip);
+    };
+
+    const hoistTabsetMargins = (tabset) => {
+      const margins = [
+        ...tabset.querySelectorAll(".column-margin.column-container"),
+      ];
+      if (!margins.length) return;
+
+      let container = findTabsetMarginContainer(tabset);
+      if (!container) {
+        container = document.createElement("div");
+        container.className = "tabset-margin-container";
+      }
+      if (tabset.previousElementSibling !== container) {
+        tabset.parentElement?.insertBefore(container, tabset);
+      }
+
+      // Sit in the parent section's page grid as the margin column.
+      container.classList.add(
+        "column-margin",
+        "column-container",
+        "no-row-height"
+      );
+
+      margins.forEach((margin) => {
+        const pane = margin.closest(".tab-pane");
+        const tabBtnId =
+          pane?.getAttribute("aria-labelledby") ||
+          (pane?.id ? `${pane.id}-tab` : null);
+        const wrap = document.createElement("div");
+        wrap.className = "tabset-margin-content";
+        if (tabBtnId) wrap.classList.add(`${tabBtnId}-margin-content`);
+        if (pane?.id) wrap.dataset.tabPaneId = pane.id;
+        const host = margin.previousElementSibling;
+        if (host) {
+          const hostId =
+            host.dataset.marginHost ||
+            `mhost-${Math.random().toString(36).slice(2, 10)}`;
+          host.dataset.marginHost = hostId;
+          wrap.dataset.marginHost = hostId;
+        }
+        if (!pane?.classList.contains("active")) {
+          wrap.classList.add("collapse");
+        }
+        while (margin.firstChild) wrap.appendChild(margin.firstChild);
+        container.appendChild(wrap);
+        margin.remove();
+      });
+    };
+
+    const restoreTabsetMargins = (tabset) => {
+      const container = findTabsetMarginContainer(tabset);
+      if (!container) return;
+
+      [...container.children].forEach((child) => {
+        const pane = paneForMarginWrap(tabset, child);
+        if (!pane) return;
+
+        child.classList.remove("collapse");
+        const hostId = child.dataset.marginHost;
+        const host =
+          hostId && pane.querySelector(`[data-margin-host="${escapeAttr(hostId)}"]`);
+
+        if (child.classList.contains("column-margin")) {
+          // Quarto already hoisted the whole .column-margin node.
+          if (host) host.insertAdjacentElement("afterend", child);
+          else pane.appendChild(child);
+          return;
         }
 
-        // Sit in the parent section's page grid as the margin column.
-        container.classList.add(
-          "column-margin",
-          "column-container",
-          "no-row-height"
-        );
+        const margin = document.createElement("div");
+        margin.className = "column-margin column-container no-row-height";
+        while (child.firstChild) margin.appendChild(child.firstChild);
+        for (const note of margin.children) {
+          note.style.marginTop = null;
+        }
+        if (host) host.insertAdjacentElement("afterend", margin);
+        else pane.appendChild(margin);
+        child.remove();
+      });
 
-        margins.forEach((margin) => {
-          const pane = margin.closest(".tab-pane");
-          const tabBtnId =
-            pane?.getAttribute("aria-labelledby") ||
-            (pane?.id ? `${pane.id}-tab` : null);
-          const wrap = document.createElement("div");
-          wrap.className = "tabset-margin-content";
-          if (tabBtnId) wrap.classList.add(`${tabBtnId}-margin-content`);
-          if (!pane?.classList.contains("active")) {
-            wrap.classList.add("collapse");
-          }
-          while (margin.firstChild) wrap.appendChild(margin.firstChild);
-          container.appendChild(wrap);
-          margin.remove();
-        });
+      if (!container.children.length) container.remove();
+    };
 
-        const strip = (el) => {
-          el.classList.remove("page-columns", "page-full");
-        };
-        strip(tabset);
-        tabset.querySelectorAll(".page-columns, .page-full").forEach(strip);
+    const syncTabsetMargins = () => {
+      const inline = marginsAreInline();
+      document.querySelectorAll(".panel-tabset").forEach((tabset) => {
+        stripNestedPageGrid(tabset);
+        if (inline) restoreTabsetMargins(tabset);
+        else hoistTabsetMargins(tabset);
       });
     };
 
     const layoutMarginBelowToc = () => {
-      hoistTabsetMargins();
+      syncTabsetMargins();
 
       const marginChildren = document.querySelectorAll(MARGIN_SEL);
       if (!marginChildren.length) {
@@ -182,6 +280,12 @@
       schedule();
       // Failsafe: never leave footnotes hidden if layout is delayed.
       setTimeout(reveal, 1500);
+      const inlineMq = window.matchMedia(INLINE_MARGIN_MQ);
+      if (inlineMq.addEventListener) {
+        inlineMq.addEventListener("change", schedule);
+      } else if (inlineMq.addListener) {
+        inlineMq.addListener(schedule);
+      }
       // Re-cascade when Quarto toggles tabset margin note visibility.
       window.document.querySelectorAll('.panel-tabset a[data-bs-toggle="tab"]').forEach((tab) => {
         tab.addEventListener("shown.bs.tab", schedule);

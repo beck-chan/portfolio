@@ -97,9 +97,9 @@ format:
     footnotes-hover: true
     lightbox: true
 
-filters:
-  - timeline
-  - tachyons
-  - fold-code
-  - iframe
-  - category-filter
+# filters:
+#   - timeline
+#   - tachyons
+#   - fold-code
+#   - iframe
+#   - category-filter

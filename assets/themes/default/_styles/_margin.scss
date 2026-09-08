@@ -123,7 +123,8 @@ html:not(.margin-below-toc-ready) main.content .column-margin.column-container {
 // Quarto nests a full page-columns grid inside tabsets that contain
 // margin footnotes, which squeezes the tab body and floats the note
 // across a wide empty gutter. Keep tabsets as normal block layout;
-// margin-below-toc.html hoists the notes into .tabset-margin-container.
+// margin-below-toc.html hoists notes into .tabset-margin-container
+// on desktop and leaves them after their host on mobile.
 .panel-tabset.page-columns,
 .panel-tabset .tab-content.page-columns {
   display: block !important;
