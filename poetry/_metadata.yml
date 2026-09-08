@@ -1,6 +1,0 @@
-format:
-  html:
-    lightbox: false
-    page-layout: full
-    sidebar: false
-    toc: false

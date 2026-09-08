@@ -54,8 +54,9 @@ website:
         target: _blank
         aria-label: Email
       - text: '[{{< fa feather >}}]{title="Poetry"}'
-        href: poetry/index.qmd
-        aria-label: Poetry
+        href: https://beck-chan.vercel.app/
+        aria-label: Guestbook
+        target: _blank
 
   sidebar: 
     style: docked
