@@ -132,6 +132,7 @@ AbeBooks.com, Amazon subsidiary
 - Jupyter Notebooks
 - Scalar
 - MDX
+- Contentful
 - Markdown
 
 
@@ -158,10 +159,9 @@ AbeBooks.com, Amazon subsidiary
 - Python
 - Rust
 - HTML
-- Tailwind CSS
 - CSS
 - TypeScript
-- SQL
+- PostgreSQL
 - FTP
 
 **Agents**
