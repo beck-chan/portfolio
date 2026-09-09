@@ -2,6 +2,8 @@
 title: "ValidMind Training Academy"
 subtitle: "Content Engineering"
 categories: ["Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Instructional Design", "Quarto", "CI/CD Workflows", "Frontend Development"]
+aliases: 
+  - /validmind/training/index.html
 listing:
   - id: validmind-jupyter
     type: grid
