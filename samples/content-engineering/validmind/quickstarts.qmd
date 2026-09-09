@@ -1,6 +1,8 @@
 ---
 title: "ValidMind Quickstart Guides"
 subtitle: "Content Engineering"
+aliases:
+  - /validmind/quickstarts/index.html
 categories: ["Training & Onboarding", "Instructional Design", "Quarto", "Frontend Development"]
 listing:
   - id: validmind-jupyter
