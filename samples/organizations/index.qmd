@@ -22,7 +22,8 @@ listing:
     fields: [title, subtitle, description]
     contents:
       - saasquatch.qmd
-categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Blog", "Feature Highlights"]
+categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Frontend Development", "Blog", "Feature Highlights"]
+search: false
 ---
 
 {{< include /samples/single-source/_bio.qmd >}}

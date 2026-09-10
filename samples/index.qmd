@@ -102,7 +102,7 @@ listing:
       - content-engineering/personal/guestbook/index.qmd
       - content-engineering/personal/portfolio/index.qmd
     categories: true
-categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Blog", "Feature Highlights"]
+categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Frontend Development", "Blog", "Feature Highlights"]
 ---
 
 {{< include /samples/single-source/_bio.qmd >}}

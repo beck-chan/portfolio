@@ -53,9 +53,10 @@ website:
         href: mailto:beckchan.tech@gmail.com
         target: _blank
         aria-label: Email
-      - text: '[{{< fa feather >}}]{title="Poetry"}'
-        href: poetry/index.qmd
-        aria-label: Poetry
+      - text: '[{{< fa feather >}}]{title="Guestbook"}'
+        target: _blank
+        href: https://beck-chan.vercel.app/
+        aria-label: Guestbook
 
   sidebar: 
     collapse-level: 3

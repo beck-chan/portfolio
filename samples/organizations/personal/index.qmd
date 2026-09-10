@@ -11,7 +11,8 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-    - ../../content-engineering/personal/index.qmd
+    - ../../content-engineering/personal/guestbook/index.qmd
+    - ../../content-engineering/personal/portfolio/index.qmd
   - id: personal-technical
     type: grid
     grid-columns: 2
@@ -27,6 +28,8 @@ categories: ["Content Architecture", "Developer Content", "Feature Documentation
 I love to write and build things, so much so that I do it recreationally.
 
 ## Content Engineering
+
+{{< include /samples/single-source/personal/_content.qmd >}}
 
 :::{#personal-content}
 :::
