@@ -2,5 +2,20 @@
 title: "y2k Guestbook"
 subtitle: "Technical Writing"
 categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar","Feature Flags", "Next.js", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "Resend", "Google Cloud Platform"]
-search: false
+listing:
+  - id: personal-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - library.qmd
+      - developer.qmd
+      - guides.qmd
 ---
+
+wip pls update remember to remove all the search: falses self
+
+:::{#personal-technical}
+:::

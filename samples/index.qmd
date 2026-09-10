@@ -11,7 +11,7 @@ listing:
     fields: [title, subtitle, description]
     contents:
       - technical-writing/personal/guestbook/library.qmd
-      - technical-writing/personal/guestbook/installation.qmd
+      - technical-writing/personal/guestbook/developer.qmd
       - technical-writing/personal/guestbook/guides.qmd
   - id: validmind-technical
     type: grid
@@ -99,8 +99,8 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-    - ../content-engineering/personal/guestbook/index.qmd
-    - ../content-engineering/personal/portfolio/index.qmd
+      - content-engineering/personal/guestbook/index.qmd
+      - content-engineering/personal/portfolio/index.qmd
     categories: true
 categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Blog", "Feature Highlights"]
 ---
@@ -188,6 +188,9 @@ Use [filter by category]{.smallcaps} below to narrow down samples by criteria. S
 ### Personal
 
 {{< include /samples/single-source/personal/_content.qmd >}}
+
+:::{#personal-content}
+:::
 
 ### ValidMind
 

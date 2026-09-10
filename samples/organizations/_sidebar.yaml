@@ -9,14 +9,10 @@ website:
         - section: "Personal"
           href: samples/organizations/personal/index.qmd
           contents:
-            - section: "y2k Guestbook"
-              href: samples/organizations/personal/guestbook.qmd
-              contents:
-                - text: "Content Engineering"
-                  file: samples/content-engineering/personal/guestbook/index.qmd
-                - text: "Technical Writing"
-                  file: samples/technical-writing/personal/guestbook/index.qmd
-        - samples/content-engineering/personal/portfolio/index.qmd
+            - text: "Content Engineering"
+              file: samples/content-engineering/personal/index.qmd
+            - text: "Technical Writing"
+              file: samples/technical-writing/personal/guestbook/index.qmd
         - section: "ValidMind"
           href: samples/organizations/validmind.qmd
           contents:

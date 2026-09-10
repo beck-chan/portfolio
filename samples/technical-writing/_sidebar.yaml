@@ -12,7 +12,7 @@ website:
             - text: "API Library Reference"
               file: samples/technical-writing/personal/guestbook/library.qmd
             - text: "Developer Installation Guides"
-              file: samples/technical-writing/personal/guestbook/installation.qmd
+              file: samples/technical-writing/personal/guestbook/developer.qmd
             - text: "User Guides"
               file: samples/technical-writing/personal/guestbook/guides.qmd
         - section: "ValidMind"

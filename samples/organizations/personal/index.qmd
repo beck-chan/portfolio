@@ -1,7 +1,6 @@
 ---
 title: "Personal"
 subtitle: "Collated Samples"
-search: false
 aliases: 
   - /personal/index.html
 listing:
@@ -12,8 +11,7 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-    - ../content-engineering/personal/portfolio/index.qmd
-    - ../content-engineering/personal/guestbook/index.qmd
+    - ../../content-engineering/personal/index.qmd
   - id: personal-technical
     type: grid
     grid-columns: 2
@@ -21,7 +19,7 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - ../technical-writing/personal/guestbook/index.qmd
+      - ../../technical-writing/personal/guestbook/index.qmd
     categories: true
 categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides",  "OpenAPI", "Scalar", "Next.js", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Resend", "Google Cloud Platform", "Feature Flags", "CI/CD Workflows", "Frontend Development"]
 ---
