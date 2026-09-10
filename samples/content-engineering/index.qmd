@@ -34,7 +34,6 @@ listing:
       - personal/guestbook/index.qmd
       - personal/portfolio/index.qmd
     categories: true
-# categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Instructional Design", "Content Enablement", "Release Notes", "Quarto", "Cursor Code", "Agent Skills", "Large Language Models", "GitHub Pages", "Netlify", "PostHog", "Integrations", "CI/CD Workflows", "Frontend Development"]
 categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Instructional Design", "Release Notes",  "OpenAPI", "Scalar", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Quarto", "Cursor Code", "Agent Skills", "GitHub Pages", "Netlify", "PostHog", "Resend", "CI/CD Workflows", "Frontend Development"]
 ---
 
