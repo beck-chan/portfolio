@@ -6,7 +6,7 @@ aliases:
 listing:
   - id: organizations
     type: grid
-    grid-columns: 2
+    grid-columns: 3
     max-description-length: 450
     sort: false
     fields: [title, subtitle, description]
@@ -14,6 +14,13 @@ listing:
       - personal/index.qmd
       - validmind.qmd
       - atryum.qmd
+  - id: archive
+    type: grid
+    grid-columns: 2
+    max-description-length: 450
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
       - saasquatch.qmd
 categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Blog", "Feature Highlights"]
 ---
@@ -82,4 +89,11 @@ categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", 
 ## Samples by Organization 
 
 :::{#organizations}
+:::
+
+## Archive
+
+{{< include /samples/single-source/_archive.qmd >}}
+
+:::{#archive}
 :::

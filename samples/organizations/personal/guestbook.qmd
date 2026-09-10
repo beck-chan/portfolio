@@ -2,5 +2,4 @@
 title: "y2k Guestbook"
 subtitle: "Technical Writing"
 categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar","Feature Flags", "Next.js", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "Resend", "Google Cloud Platform"]
-search: false
 ---

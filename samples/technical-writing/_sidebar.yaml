@@ -37,38 +37,41 @@ website:
               file: samples/technical-writing/atryum/user-guides.qmd
             - text: "Quickstart"
               file: samples/technical-writing/atryum/quickstart.qmd
-        - section: "SaaSquatch"
-          href: samples/technical-writing/saasquatch/index.qmd
+        - text: "---"
+        - section: "Archive"
           contents:
-            - section: "Integrations"
-              href: samples/technical-writing/saasquatch/integrations/index.qmd
-              contents:
-              - section: "Salesforce"
+          - section: "SaaSquatch"
+            href: samples/technical-writing/saasquatch/index.qmd
+            contents:
+              - section: "Integrations"
+                href: samples/technical-writing/saasquatch/integrations/index.qmd
                 contents:
-                - text: "Invocable Methods"
-                  file: samples/technical-writing/saasquatch/integrations/sfdc/invocable-methods.qmd
-                - text: "Attribution via Contact"
-                  file: samples/technical-writing/saasquatch/integrations/sfdc/attribution-lookup.qmd
-                - text: "User & Account IDs"
-                  file: samples/technical-writing/saasquatch/integrations/sfdc/user-account-ids.qmd
-              - section: "Other"
+                - section: "Salesforce"
+                  contents:
+                  - text: "Invocable Methods"
+                    file: samples/technical-writing/saasquatch/integrations/sfdc/invocable-methods.qmd
+                  - text: "Attribution via Contact"
+                    file: samples/technical-writing/saasquatch/integrations/sfdc/attribution-lookup.qmd
+                  - text: "User & Account IDs"
+                    file: samples/technical-writing/saasquatch/integrations/sfdc/user-account-ids.qmd
+                - section: "Other"
+                  contents:
+                  - text: "Stripe"
+                    file: samples/technical-writing/saasquatch/integrations/stripe.qmd
+                  - text: "Recurly"
+                    file: samples/technical-writing/saasquatch/integrations/recurly.qmd
+                  - text: "Tango Card"
+                    file: samples/technical-writing/saasquatch/integrations/tango-card.qmd
+              - section: "JavaScript SDK"
+                href: samples/technical-writing/saasquatch/sdk/index.qmd
                 contents:
-                - text: "Stripe"
-                  file: samples/technical-writing/saasquatch/integrations/stripe.qmd
-                - text: "Recurly"
-                  file: samples/technical-writing/saasquatch/integrations/recurly.qmd
-                - text: "Tango Card"
-                  file: samples/technical-writing/saasquatch/integrations/tango-card.qmd
-            - section: "JavaScript SDK"
-              href: samples/technical-writing/saasquatch/sdk/index.qmd
-              contents:
-              - samples/technical-writing/saasquatch/sdk/key-sjs.qmd
-              - text: "`squatch.js` Advanced"
-                file: samples/technical-writing/saasquatch/sdk/sjs-advanced.qmd
-              - samples/technical-writing/saasquatch/sdk/tracking-cookies.qmd
-            - section: "User Guides"
-              href: samples/technical-writing/saasquatch/user-guides/index.qmd
-              contents:
-              - samples/technical-writing/saasquatch/user-guides/sharelinks.qmd
-              - text: "CSV Import"
-                file: samples/technical-writing/saasquatch/user-guides/csv-import.qmd
+                - samples/technical-writing/saasquatch/sdk/key-sjs.qmd
+                - text: "`squatch.js` Advanced"
+                  file: samples/technical-writing/saasquatch/sdk/sjs-advanced.qmd
+                - samples/technical-writing/saasquatch/sdk/tracking-cookies.qmd
+              - section: "User Guides"
+                href: samples/technical-writing/saasquatch/user-guides/index.qmd
+                contents:
+                - samples/technical-writing/saasquatch/user-guides/sharelinks.qmd
+                - text: "CSV Import"
+                  file: samples/technical-writing/saasquatch/user-guides/csv-import.qmd

@@ -24,18 +24,14 @@ listing:
 categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides",  "OpenAPI", "Scalar", "Next.js", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Resend", "Google Cloud Platform", "Feature Flags", "CI/CD Workflows", "Frontend Development"]
 ---
 
-wip
+I love to write and build things, so much so that I do it recreationally.
 
 ## Content Engineering
-
-wip
 
 :::{#personal-content}
 :::
 
 ## Technical Writing
-
-wip
 
 :::{#personal-technical}
 :::

@@ -1,7 +1,7 @@
 ---
 title: "Portfolio"
 subtitle: "Content Engineering"
-categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "PostHog", "CI/CD Workflows", "Frontend Development"]
+categories: ["PostHog"]
 aliases: 
   - /portfolio/index.html
 listing:
@@ -16,7 +16,7 @@ listing:
     - deployment.qmd
 ---
 
-How this portfolio website is built and maintained, more or less.
+I designed and built this mobile-responsive portfolio website with Quarto and Bootstrap CSS, which automatically deploys to GitHub Pages and Netlify.
 
 :::{#content-portfolio}
 :::

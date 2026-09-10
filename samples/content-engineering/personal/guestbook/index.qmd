@@ -2,5 +2,6 @@
 title: "y2k Guestbook"
 subtitle: "Content Engineering"
 categories: ["Developer Content", "Feature Documentation", "User Guides",  "OpenAPI", "Scalar", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Resend", "Google Cloud Platform", "Feature Flags"]
-search: false
 ---
+
+{{< include /samples/single-source/personal/_guestbook.qmd >}}

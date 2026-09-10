@@ -15,7 +15,7 @@ listing:
       - guides.qmd
 ---
 
-wip pls update remember to remove all the search: falses self
+{{< include /samples/single-source/personal/_guestbook.qmd >}}
 
 :::{#personal-technical}
 :::

@@ -58,6 +58,7 @@ website:
         aria-label: Poetry
 
   sidebar: 
+    collapse-level: 3
     style: docked
     border: false
 

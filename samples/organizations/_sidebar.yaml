@@ -29,10 +29,13 @@ website:
               file: samples/content-engineering/atryum/index.qmd
             - text: "Technical Writing"
               file: samples/technical-writing/atryum/index.qmd
-        - section: "SaaSquatch"
-          href: samples/organizations/saasquatch.qmd
+        - text: "---"
+        - section: "Archive"
           contents:
-            - text: "Technical Writing"
-              file: samples/technical-writing/saasquatch/index.qmd
-            - text: "Copywriting"
-              file: samples/copywriting/index.qmd#saasquatch
+          - section: "SaaSquatch"
+            href: samples/organizations/saasquatch.qmd
+            contents:
+              - text: "Technical Writing"
+                file: samples/technical-writing/saasquatch/index.qmd
+              - text: "Copywriting"
+                file: samples/copywriting/index.qmd#saasquatch

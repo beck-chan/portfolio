@@ -56,15 +56,14 @@ listing:
       - saasquatch/sdk/index.qmd
       - saasquatch/user-guides/index.qmd
     categories: true
-categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement"]
-# categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "PostHog", "Frontend Development"]
+categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "OpenAPI", "Scalar", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "PostHog", "Resend", "Frontend Development"]
 ---
 
 {{< include /samples/single-source/_technical.qmd >}}
 
 ## Personal
 
-wip
+{{< include /samples/single-source/personal/_guestbook.qmd >}}
 
 :::{#personal-technical}
 :::
@@ -91,8 +90,11 @@ wip
 You can learn more about my involvement with ValidMind, Atryum, and the impact I had on content and content architecture under [Content Engineering](/samples/content-engineering/index.qmd).
 :::
 
+## Archive
 
-## SaaSquatch
+{{< include /samples/single-source/_archive.qmd >}}
+
+### SaaSquatch
 
 {{< include /samples/single-source/saasquatch/_saasquatch.qmd >}}
 

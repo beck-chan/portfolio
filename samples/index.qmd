@@ -217,7 +217,7 @@ Use [filter by category]{.smallcaps} below to narrow down samples by criteria. S
 
 ### Personal
 
-WIP
+{{< include /samples/single-source/personal/_guestbook.qmd >}}
 
 :::{#personal-technical}
 :::
@@ -243,9 +243,11 @@ WIP
 :::{#atryum-technical}
 :::
 
-<!-- ### Personal -->
+### Archive
 
-### SaaSquatch
+{{< include /samples/single-source/_archive.qmd >}}
+
+#### SaaSquatch
 
 {{< include /samples/single-source/saasquatch/_saasquatch.qmd >}}
 
@@ -267,7 +269,11 @@ WIP
 :::{#validmind-copywriting}
 :::
 
-### SaaSquatch
+### Archive
+
+{{< include /samples/single-source/_archive.qmd >}}
+
+#### SaaSquatch
 
 {{< include /samples/single-source/saasquatch/_saasquatch.qmd >}}
 

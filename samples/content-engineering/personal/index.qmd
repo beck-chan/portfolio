@@ -1,7 +1,6 @@
 ---
 title: "Personal"
 subtitle: "Content Engineering"
-search: false
 aliases: 
   - /personal/index.html
 listing:
@@ -12,12 +11,12 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-    - portfolio/index.qmd
     - guestbook/index.qmd
-categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "Netlify", "PostHog", "Vercel", "Supabase", "Google Cloud Platform"]
+    - portfolio/index.qmd
+categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Quarto", "Frontend Development", "GitHub Pages", "Netlify", "CI/CD Workflows"]
 ---
 
-wip
+{{< include /samples/single-source/personal/_content.qmd >}}
 
 :::{#personal-content}
 :::

@@ -1,0 +1,1 @@
+I designed and built a mobile-responsive interactive Next.js application, complete with LLM-friendly documentation in MDX and an API reference implemented with Scalar.
