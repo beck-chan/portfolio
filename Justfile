@@ -2,6 +2,8 @@
 # Rehearse without publishing:
 #   just deploy --test
 #   just production --test
+#   just netlify --test
+#   just github --test
 #   just refresh --test
 #   just release --test
 #   just staging --test
@@ -56,13 +58,29 @@ deploy *args:
 production *args:
     #!/usr/bin/env bash
     set -euo pipefail
+    set -- {{args}}
+    for arg in "$@"; do
+      case "$arg" in
+        --test) ;;
+        *) echo "Unknown argument: $arg" >&2; echo "Usage: just production [--test]" >&2; exit 1 ;;
+      esac
+    done
+    status=0
+    just netlify "$@" || status=$?
+    just github "$@" || status=$?
+    exit "$status"
+
+# Deploy stripped theme to Netlify FOLIO
+netlify *args:
+    #!/usr/bin/env bash
+    set -euo pipefail
     dry=0
     if [ "${TEST:-}" = "1" ] || [ "${TEST:-}" = "true" ]; then dry=1; fi
     set -- {{args}}
     for arg in "$@"; do
       case "$arg" in
         --test) dry=1 ;;
-        *) echo "Unknown argument: $arg" >&2; echo "Usage: just production [--test]" >&2; exit 1 ;;
+        *) echo "Unknown argument: $arg" >&2; echo "Usage: just netlify [--test]" >&2; exit 1 ;;
       esac
     done
     just _require NETLIFY_PAT FOLIO_PROJECT
@@ -70,13 +88,30 @@ production *args:
     if [ "$dry" -eq 1 ]; then
       echo "Would: quarto render --profile stripped"
       echo "Would: netlify deploy --prod --dir=_output --site=${FOLIO_PROJECT} --message=${message}"
+      exit 0
+    fi
+    just _render stripped
+    just _netlify _output "$FOLIO_PROJECT" "$message"
+
+# Deploy production profile to GitHub Pages
+github *args:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    dry=0
+    if [ "${TEST:-}" = "1" ] || [ "${TEST:-}" = "true" ]; then dry=1; fi
+    set -- {{args}}
+    for arg in "$@"; do
+      case "$arg" in
+        --test) dry=1 ;;
+        *) echo "Unknown argument: $arg" >&2; echo "Usage: just github [--test]" >&2; exit 1 ;;
+      esac
+    done
+    if [ "$dry" -eq 1 ]; then
       echo "Would: quarto render --profile production"
       echo "Would: clone {{pages_repo}}, replace with _output, commit, push origin main"
       echo "{{pages_repo_url}}"
       exit 0
     fi
-    just _render stripped
-    just _netlify _output "$FOLIO_PROJECT" "$message"
     just _render production
     just _pages_sync
     echo "{{pages_repo_url}}"

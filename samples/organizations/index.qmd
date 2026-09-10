@@ -6,11 +6,12 @@ aliases:
 listing:
   - id: organizations
     type: grid
-    grid-columns: 3
+    grid-columns: 2
     max-description-length: 450
     sort: false
     fields: [title, subtitle, description]
     contents:
+      - personal/index.qmd
       - validmind.qmd
       - atryum.qmd
       - saasquatch.qmd
@@ -18,7 +19,6 @@ categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", 
 ---
 
 {{< include /samples/single-source/_bio.qmd >}}
-
 
 :::: {.flex .flex-wrap .items-center .justify-around .mb4 .cta-bar}
 

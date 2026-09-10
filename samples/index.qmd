@@ -3,6 +3,16 @@ title: "All Samples"
 subtitle: "Filter by Criteria"
 search: false
 listing:
+  - id: personal-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - technical-writing/personal/guestbook/library.qmd
+      - technical-writing/personal/guestbook/installation.qmd
+      - technical-writing/personal/guestbook/guides.qmd
   - id: validmind-technical
     type: grid
     grid-columns: 3
@@ -89,8 +99,8 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
+    - ../content-engineering/personal/guestbook/index.qmd
     - ../content-engineering/personal/portfolio/index.qmd
-    # - ../content-engineering/personal/guestbook/index.qmd
     categories: true
 categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Blog", "Feature Highlights"]
 ---
@@ -175,6 +185,10 @@ Use [filter by category]{.smallcaps} below to narrow down samples by criteria. S
 
 {{< include /samples/single-source/_content.qmd >}}
 
+### Personal
+
+{{< include /samples/single-source/personal/_content.qmd >}}
+
 ### ValidMind
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}
@@ -191,16 +205,19 @@ Use [filter by category]{.smallcaps} below to narrow down samples by criteria. S
 :::{#atryum-content}
 :::
 
-### Personal
-
-{{< include /samples/single-source/personal/_content.qmd >}}
-
 :::{#personal-content}
 :::
 
 ## Technical Writing
 
 {{< include /samples/single-source/_technical.qmd >}}
+
+### Personal
+
+WIP
+
+:::{#personal-technical}
+:::
 
 ### ValidMind
 
