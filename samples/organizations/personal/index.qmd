@@ -22,7 +22,7 @@ listing:
     contents:
       - ../../technical-writing/personal/guestbook/index.qmd
     categories: true
-categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides",  "OpenAPI", "Scalar", "Next.js", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Resend", "Google Cloud Platform", "Feature Flags", "CI/CD Workflows", "Frontend Development"]
+categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides",  "OpenAPI", "Scalar", "Next.js", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Cucumber", "Google Cloud Platform", "Feature Flags", "CI/CD Workflows", "Frontend Development"]
 ---
 
 I love to write and build things, so much so that I do it recreationally.

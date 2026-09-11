@@ -13,7 +13,7 @@ listing:
     contents:
     - guestbook/index.qmd
     - portfolio/index.qmd
-categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Quarto", "Frontend Development", "GitHub Pages", "Netlify", "Resend", "CI/CD Workflows"]
+categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Quarto", "Frontend Development", "GitHub Pages", "Netlify", "Cucumber", "CI/CD Workflows"]
 ---
 
 {{< include /samples/single-source/personal/_content.qmd >}}

@@ -1,5 +1,5 @@
 ---
 title: "y2k Guestbook User Guides"
 subtitle: "Technical Writing"
-categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "PostHog", "Resend", "Google Cloud Platform"]
+categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "PostHog", "Google Cloud Platform"]
 ---

@@ -1,7 +1,7 @@
 ---
 title: "y2k Guestbook"
 subtitle: "Content Engineering"
-categories: ["Developer Content", "Feature Documentation", "User Guides",  "OpenAPI", "Scalar", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Resend", "Google Cloud Platform", "Feature Flags"]
+categories: ["Developer Content", "Feature Documentation", "User Guides",  "OpenAPI", "Scalar", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Cucumber", "Google Cloud Platform", "Feature Flags"]
 aliases:
     - /guestbook/index.html
 ---
