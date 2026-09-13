@@ -2,4 +2,67 @@
 title: "y2k Guestbook"
 subtitle: "Content Engineering"
 categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Feature Flags"]
+listing:
+  - id: guestbook-citations
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://beck-chan.vercel.app/docs/docs-build
+      title: "Documentation Build"
+      subtitle: "y2k Guestbook Docs"
+    - path: https://beck-chan.vercel.app/docs/example
+      title: "Documentation Reference"
+      subtitle: "y2k Guestbook Docs"
+    - path: https://beck-chan.vercel.app/docs/book-build
+      title: "Guestbook Build"
+      subtitle: "y2k Guestbook Docs"
 ---
+
+WIP
+
+::: {.iframe url="https://beck-chan.vercel.app/" title="REPLACE ME"}
+:::
+
+::: {.iframe url="https://beck-chan.vercel.app/" title="REPLACE ME Mobile View" zoom="100%" width="70%" new-window="false"}
+:::
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/" title="REPLACE ME"}
+:::
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/" title="REPLACE ME Mobile View" zoom="100%" width="70%" new-window="false"}
+:::
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/docs" title="REPLACE ME"}
+:::
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/docs" title="REPLACE ME Mobile View" zoom="100%" width="70%" new-window="false"}
+:::
+
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/docs" title="REPLACE ME"}
+:::
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/docs" title="REPLACE ME Mobile View" zoom="100%" width="70%" new-window="false"}
+:::
+
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/docs/api" title="REPLACE ME"}
+:::
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/docs/api" title="REPLACE ME Mobile View" zoom="100%" width="70%" new-window="false"}
+:::
+
+## Citations
+
+::: {.guestbook-citations}
+::: 
+
+
+::: {.column-margin}
+
+[{{< fa brands github >}} **beck-chan**: `guestbook`](https://github.com/beck-chan/guestbook){target="_blank" .button}
+
+:::

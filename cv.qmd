@@ -46,10 +46,7 @@ sidebar: false
 
 - Designed and led solo migration of support processes to Zendesk built to scale, increasing efficiency by 74%.
 - Proactively identified opportunities for customer growth and product improvements during ticket management.
-<<<<<<< HEAD
-=======
 - Managed team escalations from complex technical cases, ensuring delivery of solutions to customers.
->>>>>>> 93a83f9637975ce151194c3f0cdd7db78a59088f
 - Provided advanced technical support for web and mobile SDKs built on JavaScript, REST API, and GraphQL API.
 
 :::
@@ -232,13 +229,12 @@ Bachelor of Arts, English Literature & Japanese Studies
 
 ::: {.timeline .tl-diamond .tl-label-badge .vertical}
 
-::: {.event data-label="August 2026 &ndash; October 2026" style="--tl-color-label: #ffb3ba; --tl-color-dot: #ffb3ba;" .tl-card}
+::: {.event data-label="August 2026 &ndash; September 2026" style="--tl-color-label: #ffb3ba; --tl-color-dot: #ffb3ba;" .tl-card}
 ### y2k Guestbook
 *[https://beck-chan.vercel.app](https://beck-chan.vercel.app){target="_blank"}*
 
 - Mobile-responsive frontend built on Next.js and Tailwind CSS, integrated Supabase edge functions and backend.
 - Built-in rate limiting and profanity filtering. Admin functionality for comment management and customization.
-- Admin gating via Google OAuth 2.0.
 - LLM-friendly docs in MDX, API reference implemented with Scalar. Admin gating via Google OAuth 2.0.
 
 [Content Engineering: Guestbook](/guestbook){.button .cta}
