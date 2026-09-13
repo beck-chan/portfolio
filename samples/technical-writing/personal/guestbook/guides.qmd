@@ -2,4 +2,38 @@
 title: "y2k Guestbook User Guides"
 subtitle: "Technical Writing"
 categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "PostHog", "Google Cloud Platform"]
+listing:
+  - id: guestbook-user-guides
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://beck-chan.vercel.app/docs/notifs
+      title: "Enable Notifications"
+      subtitle: "User Guides"
+    - path: https://beck-chan.vercel.app/docs/admin
+      title: "Manage Admin Auth"
+      subtitle: "User Guides"
+    - path: https://beck-chan.vercel.app/docs/analytics
+      title: "Add Analytics"
+      subtitle: "User Guides"
+    - path: https://beck-chan.vercel.app/docs/quickstart
+      title: "Quickstart"
+      subtitle: "User Guides"
+    - path: https://beck-chan.vercel.app/docs/prerequisites
+      title: "Prerequisites"
+      subtitle: "User Guides"
+    - path: https://beck-chan.vercel.app/docs/settings
+      title: "Customize Settings"
+      subtitle: "User Guides"
+    - path: https://beck-chan.vercel.app/docs/manage
+      title: "Manage Comments"
+      subtitle: "User Guides"
 ---
+
+wip
+
+::: {.user-guides}
+::: 

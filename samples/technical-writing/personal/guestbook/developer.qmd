@@ -2,4 +2,26 @@
 title: "y2k Guestbook Developer Guides"
 subtitle: "Technical Writing"
 categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar","Feature Flags", "Next.js", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "Cucumber", "Google Cloud Platform"]
+listing:
+  - id: guestbook-developer-guides
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle]
+    contents:
+    - path: https://y2k-guestbook.vercel.app/docs/api
+      title: "API Library"
+      subtitle: "Developer Guides"
+    - path: https://beck-chan.vercel.app/docs/specs
+      title: "Cucumber Specs"
+      subtitle: "Developer Guides"
+    - path: https://beck-chan.vercel.app/docs/install
+      title: "Install with npm"
+      subtitle: "Developer Guides"
 ---
+
+WIP
+
+::: {.developer-guides}
+::: 
