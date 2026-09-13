@@ -154,7 +154,7 @@ local function ensure_css()
   end
   quarto.doc.add_html_dependency({
     name = "iframe",
-    version = "1.1.0",
+    version = "1.1.1",
     stylesheets = { "iframe.css" }
   })
   css_injected = true

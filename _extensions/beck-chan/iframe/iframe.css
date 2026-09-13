@@ -88,3 +88,15 @@ figure.iframe-embed {
   fill: none;
   stroke: currentColor;
 }
+
+/* Footnote hover clones keep the source --iframe-width (often 70% for
+   mobile previews). Fill the tooltip instead, without touching margin notes. */
+.tippy-content .iframe-embed {
+  --iframe-width: 100% !important;
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.tippy-box:has(.iframe-embed) {
+  overflow: hidden;
+}
