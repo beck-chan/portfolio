@@ -1,9 +1,9 @@
 ---
 title: "Portfolio"
 subtitle: "Content Engineering"
-categories: ["PostHog"]
 aliases: 
   - /portfolio/index.html
+categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "PostHog", "CI/CD Workflows", "Frontend Development"]
 listing:
   - id: content-portfolio
     type: grid
@@ -20,13 +20,3 @@ I designed and built this mobile-responsive portfolio website with Quarto and Bo
 
 :::{#content-portfolio}
 :::
-
-
-
-
-
-
-
-
-
-

@@ -131,6 +131,8 @@ AbeBooks.com, Amazon subsidiary
 - MDX
 - Quarto publishing
 - Jupyter Notebooks
+- Scalar
+- MDX
 - Contentful
 - Markdown
 
@@ -235,18 +237,20 @@ Bachelor of Arts, English Literature & Japanese Studies
 - Built-in rate limiting and profanity filtering. Admin functionality for comment management and customization.
 - LLM-friendly docs in MDX, API reference implemented with Scalar. Admin gating via Google OAuth 2.0.
 
+[Content Engineering: Guestbook](/guestbook){.button .cta}
+
 ::: 
 
 
-::: {.event data-label="Launched August 2026" style="--tl-color-label: #0b2a12; --tl-color-dot: #0b2a12;" .tl-card}
+::: {.event data-label="August 2026 &ndash; Present" style="--tl-color-label: #0b2a12; --tl-color-dot: #0b2a12;" .tl-card}
 ### Personal Portfolio
 *[https://beck-chan.github.io](https://beck-chan.github.io)*
 
 - Mobile-responsive build using Quarto, deployed to GitHub Pages and Netlify via GitHub CI/CD Workflows.
 - Custom themes and styling using Bootstrap. Custom functionality added with JavaScript and Lua.
 - Local deployment fallbacks via Justfile in Rust.
+
+[Content Engineering: Portfolio](/portfolio){.button .cta}
 :::
 
 :::
-
-

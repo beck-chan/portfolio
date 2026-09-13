@@ -11,7 +11,8 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - personal/index.qmd
+      # - personal/index.qmd
+      - ../content-engineering/personal/index.qmd
       - validmind.qmd
       - atryum.qmd
   - id: archive

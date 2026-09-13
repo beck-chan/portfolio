@@ -6,17 +6,24 @@ website:
         - text: "Content Engineering"
           file: samples/content-engineering/index.qmd
         - text: "---"
-        - section: "Personal"
-          href: samples/content-engineering/personal/index.qmd
+        - section: "Portfolio"
+          href: samples/content-engineering/personal/portfolio/index.qmd
           contents:
-            - samples/content-engineering/personal/guestbook/index.qmd
-            - section: "Portfolio"
-              href: samples/content-engineering/personal/portfolio/index.qmd
-              contents:
-                - text: "Framework"
-                  file: samples/content-engineering/personal/portfolio/framework.qmd
-                - text: "Deployment"
-                  file: samples/content-engineering/personal/portfolio/deployment.qmd
+            - text: "Framework"
+              file: samples/content-engineering/personal/portfolio/framework.qmd
+            - text: "Deployment"
+              file: samples/content-engineering/personal/portfolio/deployment.qmd
+        # - section: "Personal"
+        #   href: samples/content-engineering/personal/index.qmd
+        #   contents:
+        #     - samples/content-engineering/personal/guestbook/index.qmd
+        #     - section: "Portfolio"
+        #       href: samples/content-engineering/personal/portfolio/index.qmd
+        #       contents:
+        #         - text: "Framework"
+        #           file: samples/content-engineering/personal/portfolio/framework.qmd
+        #         - text: "Deployment"
+        #           file: samples/content-engineering/personal/portfolio/deployment.qmd
         - section: "ValidMind"
           href: samples/content-engineering/validmind/index.qmd
           contents:
