@@ -235,9 +235,10 @@ Bachelor of Arts, English Literature & Japanese Studies
 
 - Mobile-responsive frontend built on Next.js and Tailwind CSS, integrated Supabase edge functions and backend.
 - Built-in rate limiting and profanity filtering. Admin functionality for comment management and customization.
-- LLM-friendly docs in MDX, API reference implemented with Scalar. Admin gating via Google OAuth 2.0.
+- Admin gating via Google OAuth 2.0.
+<!-- - LLM-friendly docs in MDX, API reference implemented with Scalar. Admin gating via Google OAuth 2.0. -->
 
-[Content Engineering: Guestbook](/guestbook){.button .cta}
+<!-- [Content Engineering: Guestbook](/guestbook){.button .cta} -->
 
 ::: 
 
