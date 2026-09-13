@@ -14,7 +14,10 @@ website:
               file: samples/copywriting/validmind/reduce-culture-risk.qmd
             - text: "OSFF Takeaways"
               file: samples/copywriting/validmind/osff-takeaways.qmd
-        - text: "SaaSquatch"
+        - text: "---"
+        - section: "Archive"
           contents:
-            - text: "Growth Automation"
-              file: samples/copywriting/saasquatch/growth-automation.qmd
+          - text: "SaaSquatch"
+            contents:
+              - text: "Growth Automation"
+                file: samples/copywriting/saasquatch/growth-automation.qmd

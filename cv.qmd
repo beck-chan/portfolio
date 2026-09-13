@@ -13,13 +13,13 @@ sidebar: false
 
 **ValidMind, Inc**
 
-- Owned Agile feature development from design to release supported by storytelling alongside SWEs in GitHub.
 - Improved documentation and training through quality auditing and comprehensive redesigns using Quarto.
 - Authored 53% of user guidance content, including Jupyter Notebook samples for models and agentic systems.
-- Bridged gap between product design and user experience, verifying feature functionality and applying bug fixes.
 - Contributed to CI/CD infrastructure, open-source code libraries and software frontend built on TypeScript.
+- Owned Agile feature development from design to release supported by storytelling alongside SWEs in GitHub.
 - Designed, standardized, and implemented processes built to scale to close gaps and reduce team workload.
 - Spearheaded the implementation of an extensible custom Zendesk solution.
+- Bridged gap between product design and user experience, verifying feature functionality and applying bug fixes.
 
 :::
 
@@ -32,10 +32,10 @@ sidebar: false
 
 **SaaSquatch by impact.com**
 
-- Executed migration of evolving support processes to Freshdesk, resulting in a team 100% CSAT satisfaction rate.
-- Pioneered comprehensive reporting solutions, maintaining systematic report history to identify long-term trends.
 - Created exhaustive documentation, feedback metrics, and learning curriculums to onboard and train new agents.
 - Empowered users to understand and maximize the use of products by auditing and overhauling documentation.
+- Executed migration of evolving support processes to Freshdesk, resulting in a team 100% CSAT satisfaction rate.
+- Pioneered comprehensive reporting solutions, maintaining systematic report history to identify long-term trends.
 
 :::
 
@@ -45,8 +45,11 @@ sidebar: false
 **SaaSquatch by impact.com**
 
 - Designed and led solo migration of support processes to Zendesk built to scale, increasing efficiency by 74%.
-- Managed team escalations from complex technical cases, ensuring delivery of solutions to customers.
 - Proactively identified opportunities for customer growth and product improvements during ticket management.
+<<<<<<< HEAD
+=======
+- Managed team escalations from complex technical cases, ensuring delivery of solutions to customers.
+>>>>>>> 93a83f9637975ce151194c3f0cdd7db78a59088f
 - Provided advanced technical support for web and mobile SDKs built on JavaScript, REST API, and GraphQL API.
 
 :::
@@ -56,8 +59,8 @@ sidebar: false
 
 **SaaSquatch by impact.com**
 
-- Streamlined workload by 51% through improvement of implementation processes and onboarding strategies.
 - Proactively created and maintained public documentation, focusing on accuracy, accessibility, and extensibility.
+- Streamlined workload by 51% through improvement of implementation processes and onboarding strategies.
 - Produced tangible results for customers by collaborating cross-functionally to deliver custom features.
 - Designed and executed solutions for custom JavaScript, REST API, and GraphQL API software installations.
 
@@ -128,6 +131,7 @@ AbeBooks.com, Amazon subsidiary
 **Technical Writing**
 
 - Docs-as-code engineering
+- MDX
 - Quarto publishing
 - Jupyter Notebooks
 - Scalar
@@ -135,63 +139,65 @@ AbeBooks.com, Amazon subsidiary
 - Contentful
 - Markdown
 
+**Integration & API Architecture**
 
-**Software Development**
+- OpenAPI
+- Scalar
+- Rest API
+- GraphQL API
+- JSONata
+- Postman
 
-- CI/CD workflows
+**Languages & Libraries**
+
+- Node.js
+- TypeScript
+- JavaScript
+- Tailwind CSS
+- Bootstrap CSS
+- HTML5
+- CSS3
+- Python
+- Lua
+- Rust
+
+**Data & Cloud Infrastructure**
+
 - GitHub
-- Cursor Code
-- Visual Studio Code
+- PostgreSQL
 - Supabase
 - Docker
-- Postman
 - Netlify
 - Vercel
+- CI/CD workflows
 
+**Enterprise Operations & Automation**
 
-**Solutions Architecture & Implementation**
-
-- REST API
-- GraphQL
-- JavaScript
-- Next.js
-- JSONata
-- Python
-- Rust
-- HTML
-- CSS
-- TypeScript
-- PostgreSQL
-- FTP
-
-**Agents**
-
-- Cursor
-- Claude
-- ChatGPT
-- Gemini
-- Copilot
-
-**Support Engineering & Lifecycle Automation**
-
+- Salesforce
 - Zendesk
 - Freshdesk
-- Zapier
-- Salesforce
 - HubSpot
+- Zapier
 - Intercom
 - Front
 
-**Project Management**
+**Agile Project Management**
 
-- Confluence
 - Jira
+- Confluence
 - Shortcut
-- Notion
 - Asana
+- Notion
 - Google Workspace
 - Microsoft 365
-- Adobe Creative Cloud
+
+**AI & Agentic Workflows**
+
+- Cursor
+- Claude
+- GitHub Copilot
+- ChatGPT
+- Gemini
 
 **Integrations**
 
@@ -199,7 +205,7 @@ AbeBooks.com, Amazon subsidiary
 - Recurly
 - Stripe
 - Branch
-- AppsFlyer
+- AppsFlyer 
 
 :::
 
@@ -226,7 +232,7 @@ Bachelor of Arts, English Literature & Japanese Studies
 
 ::: {.timeline .tl-diamond .tl-label-badge .vertical}
 
-::: {.event data-label="Launched October 2026" style="--tl-color-label: #ffb3ba; --tl-color-dot: #ffb3ba;" .tl-card}
+::: {.event data-label="August 2026 &ndash; October 2026" style="--tl-color-label: #ffb3ba; --tl-color-dot: #ffb3ba;" .tl-card}
 ### y2k Guestbook
 *[https://beck-chan.vercel.app](https://beck-chan.vercel.app){target="_blank"}*
 

@@ -1,0 +1,40 @@
+---
+title: "Personal"
+subtitle: "Collated Samples"
+aliases: 
+  - /personal/index.html
+listing:
+  - id: personal-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - ../../content-engineering/personal/guestbook/index.qmd
+    - ../../content-engineering/personal/portfolio/index.qmd
+  - id: personal-technical
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - ../../technical-writing/personal/guestbook/index.qmd
+    categories: true
+categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides",  "OpenAPI", "Scalar", "Next.js", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Cucumber", "Google Cloud Platform", "Feature Flags", "CI/CD Workflows", "Frontend Development"]
+---
+
+I love to write and build things, so much so that I do it recreationally.
+
+## Content Engineering
+
+{{< include /samples/single-source/personal/_content.qmd >}}
+
+:::{#personal-content}
+:::
+
+## Technical Writing
+
+:::{#personal-technical}
+:::

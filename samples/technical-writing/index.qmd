@@ -35,14 +35,16 @@ listing:
       title: "Atryum Quickstart"
       subtitle: "Tutorial"
       description: "Quickstart and installation guide for Atryum."
-  # - id: personal-technical
-  #   type: grid
-  #   grid-columns: 2
-  #   max-description-length: 250
-  #   sort: false
-  #   fields: [title, subtitle, description]
-  #   contents:
-  #     - personal/guestbook/index.qmd
+  - id: personal-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - personal/guestbook/library.qmd
+      - personal/guestbook/developer.qmd
+      - personal/guestbook/guides.qmd
   - id: saasquatch-technical
     type: grid
     grid-columns: 3
@@ -54,11 +56,17 @@ listing:
       - saasquatch/sdk/index.qmd
       - saasquatch/user-guides/index.qmd
     categories: true
-categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement"]
-# categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "PostHog", "Frontend Development"]
+categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Frontend Development"]
 ---
 
 {{< include /samples/single-source/_technical.qmd >}}
+
+## Personal
+
+{{< include /samples/single-source/personal/_guestbook.qmd >}}
+
+:::{#personal-technical}
+:::
 
 ## ValidMind
 
@@ -82,15 +90,11 @@ categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation",
 You can learn more about my involvement with ValidMind, Atryum, and the impact I had on content and content architecture under [Content Engineering](/samples/content-engineering/index.qmd).
 :::
 
-<!-- ## Personal
+## Archive
 
-wip
+{{< include /samples/single-source/_archive.qmd >}}
 
-:::{#personal-technical}
-::: -->
-
-
-## SaaSquatch
+### SaaSquatch
 
 {{< include /samples/single-source/saasquatch/_saasquatch.qmd >}}
 

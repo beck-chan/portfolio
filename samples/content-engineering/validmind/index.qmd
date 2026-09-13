@@ -28,10 +28,15 @@ categories: ["Developer Content", "Feature Documentation", "User Guides", "Jupyt
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}
 
+
 ::: {.category-filter}
 :::
 
 {{< include /samples/single-source/validmind/_architecture.qmd >}}
+
+:::{#validmind-content}
+:::
+
 
 ## ValidMind User Guidance
 
