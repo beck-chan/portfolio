@@ -37,12 +37,11 @@ listing:
       description: "Quickstart and installation guide for Atryum."
   - id: personal-technical
     type: grid
-    grid-columns: 3
+    grid-columns: 2
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - personal/guestbook/library.qmd
       - personal/guestbook/developer.qmd
       - personal/guestbook/guides.qmd
   - id: saasquatch-technical

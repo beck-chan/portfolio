@@ -5,12 +5,11 @@ search: false
 listing:
   - id: personal-technical
     type: grid
-    grid-columns: 3
+    grid-columns: 2
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - technical-writing/personal/guestbook/library.qmd
       - technical-writing/personal/guestbook/developer.qmd
       - technical-writing/personal/guestbook/guides.qmd
   - id: validmind-technical

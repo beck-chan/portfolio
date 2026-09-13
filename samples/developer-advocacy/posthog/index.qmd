@@ -1,4 +1,4 @@
 ---
-title: "Posthog"
+title: "Implement visitor hit counter with PostHog"
 subtitle: "Developer Advocacy"
 ---

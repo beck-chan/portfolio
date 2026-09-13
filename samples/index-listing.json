@@ -1,0 +1,30 @@
+{
+  "listing": "/samples/index.html",
+  "items": [
+    "/samples/technical-writing/personal/guestbook/developer.html",
+    "/samples/technical-writing/personal/guestbook/guides.html",
+    "/samples/technical-writing/validmind/jupyter-notebooks.html",
+    "/samples/technical-writing/validmind/training.html",
+    "/samples/technical-writing/validmind/user-guides.html",
+    "/samples/technical-writing/validmind/quickstarts.html",
+    "/samples/technical-writing/validmind/enablement.html",
+    "/samples/content-engineering/validmind/quickstarts.html",
+    "/samples/content-engineering/validmind/library.html",
+    "/samples/content-engineering/validmind/academy.html",
+    "/samples/content-engineering/validmind/releases.html",
+    "/samples/content-engineering/validmind/redesign.html",
+    "/samples/technical-writing/atryum/integrations.html",
+    "/samples/technical-writing/atryum/user-guides.html",
+    "/samples/technical-writing/atryum/quickstart.html",
+    "/samples/content-engineering/atryum/index.html",
+    "/samples/copywriting/validmind/honor-the-human.html",
+    "/samples/copywriting/validmind/reduce-culture-risk.html",
+    "/samples/copywriting/validmind/osff-takeaways.html",
+    "/samples/copywriting/saasquatch/growth-automation.html",
+    "/samples/technical-writing/saasquatch/integrations/index.html",
+    "/samples/technical-writing/saasquatch/sdk/index.html",
+    "/samples/technical-writing/saasquatch/user-guides/index.html",
+    "/samples/content-engineering/personal/guestbook/index.html",
+    "/samples/content-engineering/personal/portfolio/index.html"
+  ]
+}
