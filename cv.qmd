@@ -46,10 +46,7 @@ sidebar: false
 
 - Designed and led solo migration of support processes to Zendesk built to scale, increasing efficiency by 74%.
 - Proactively identified opportunities for customer growth and product improvements during ticket management.
-<<<<<<< HEAD
-=======
 - Managed team escalations from complex technical cases, ensuring delivery of solutions to customers.
->>>>>>> 93a83f9637975ce151194c3f0cdd7db78a59088f
 - Provided advanced technical support for web and mobile SDKs built on JavaScript, REST API, and GraphQL API.
 
 :::
@@ -254,4 +251,6 @@ Bachelor of Arts, English Literature & Japanese Studies
 - Local deployment fallbacks via Justfile in Rust.
 
 [Content Engineering: Portfolio](/portfolio){.button .cta}
+:::
+
 :::

@@ -35,16 +35,16 @@ listing:
       title: "Atryum Quickstart"
       subtitle: "Tutorial"
       description: "Quickstart and installation guide for Atryum."
-  - id: personal-technical
-    type: grid
-    grid-columns: 3
-    max-description-length: 250
-    sort: false
-    fields: [title, subtitle, description]
-    contents:
-      - personal/guestbook/library.qmd
-      - personal/guestbook/developer.qmd
-      - personal/guestbook/guides.qmd
+  # - id: personal-technical
+  #   type: grid
+  #   grid-columns: 3
+  #   max-description-length: 250
+  #   sort: false
+  #   fields: [title, subtitle, description]
+  #   contents:
+  #     - personal/guestbook/library.qmd
+  #     - personal/guestbook/developer.qmd
+  #     - personal/guestbook/guides.qmd
   - id: saasquatch-technical
     type: grid
     grid-columns: 3
@@ -61,12 +61,12 @@ categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation",
 
 {{< include /samples/single-source/_technical.qmd >}}
 
-## Personal
+<!-- ## Personal
 
 {{< include /samples/single-source/personal/_guestbook.qmd >}}
 
 :::{#personal-technical}
-:::
+::: -->
 
 ## ValidMind
 

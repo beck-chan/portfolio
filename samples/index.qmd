@@ -3,16 +3,16 @@ title: "All Samples"
 subtitle: "Filter by Criteria"
 search: false
 listing:
-  - id: personal-technical
-    type: grid
-    grid-columns: 3
-    max-description-length: 250
-    sort: false
-    fields: [title, subtitle, description]
-    contents:
-      - technical-writing/personal/guestbook/library.qmd
-      - technical-writing/personal/guestbook/developer.qmd
-      - technical-writing/personal/guestbook/guides.qmd
+  # - id: personal-technical
+  #   type: grid
+  #   grid-columns: 3
+  #   max-description-length: 250
+  #   sort: false
+  #   fields: [title, subtitle, description]
+  #   contents:
+  #     - technical-writing/personal/guestbook/library.qmd
+  #     - technical-writing/personal/guestbook/developer.qmd
+  #     - technical-writing/personal/guestbook/guides.qmd
   - id: validmind-technical
     type: grid
     grid-columns: 3
@@ -99,7 +99,7 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - content-engineering/personal/guestbook/index.qmd
+      # - content-engineering/personal/guestbook/index.qmd
       - content-engineering/personal/portfolio/index.qmd
     categories: true
 categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Frontend Development", "Blog", "Feature Highlights"]
@@ -190,7 +190,8 @@ Use [filter by category]{.smallcaps} below to narrow down samples by criteria. S
 {{< include /samples/single-source/personal/_content.qmd >}}
 
 :::{#personal-content}
-:::
+::: 
+
 
 ### ValidMind
 
@@ -215,12 +216,13 @@ Use [filter by category]{.smallcaps} below to narrow down samples by criteria. S
 
 {{< include /samples/single-source/_technical.qmd >}}
 
-### Personal
+<!-- ### Personal
 
 {{< include /samples/single-source/personal/_guestbook.qmd >}}
 
 :::{#personal-technical}
-:::
+::: 
+-->
 
 ### ValidMind
 
