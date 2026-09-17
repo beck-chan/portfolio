@@ -11,8 +11,7 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-      # - personal/index.qmd
-      - ../content-engineering/personal/index.qmd
+      - personal/index.qmd
       - validmind.qmd
       - atryum.qmd
   - id: archive
@@ -24,7 +23,6 @@ listing:
     contents:
       - saasquatch.qmd
 categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Frontend Development", "Blog", "Feature Highlights"]
-search: false
 ---
 
 {{< include /samples/single-source/_bio.qmd >}}

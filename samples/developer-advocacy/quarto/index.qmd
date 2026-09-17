@@ -1,4 +1,4 @@
 ---
-title: "Quarto"
+title: "Build developer docs with Quarto"
 subtitle: "Developer Advocacy"
 ---

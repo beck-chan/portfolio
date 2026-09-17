@@ -1,6 +1,113 @@
 ---
 title: "y2k Guestbook"
 subtitle: "Content Engineering"
-categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Feature Flags"]
-search: false
+aliases:
+  - /guestbook/index.html
+categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Tailwind CSS", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Feature Flags"]
+listing:
+  - id: guestbook-citations
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://beck-chan.vercel.app/docs/docs-build
+      title: "Documentation Build"
+      subtitle: "y2k Guestbook Docs"
+      description: "Learn how I built the documentation for my guestbook, including details on the API reference implemented with Scalar and how search and LLM-ingestion is supported."
+    - path: https://beck-chan.vercel.app/docs/book-build
+      title: "Guestbook Build"
+      subtitle: "y2k Guestbook Docs"
+      description: "Learn how I built the guestbook, including details on admin authentication gated by Google OAuth 2.0 and notifications powered by Supabase Edge Functions."
 ---
+
+::: {.hidden}
+{{< include /samples/single-source/personal/_guestbook.qmd >}}
+
+:::
+
+I designed and built a mobile-responsive Next.js application styled with Tailwind CSS and a backend powered by Supabase, featuring:
+
+- Admin functionality for comment management and customization, dashboard gated via Google OAuth 2.0.
+- Built-in rate limiting and profanity filtering, and admin notifications powered by Supabase Edge Functions.
+- LLM-friendly docs in MDX, API reference implemented with Scalar. 
+
+## Concept
+
+Nostalgic for the days of Geocities, anonymous guestbooks, and Adobe Flash animation websites, I built a modernized version with a poetic twist:
+
+
+::: {.iframe url="https://beck-chan.vercel.app/" title="My Modernized Guestbook" zoom="50%"}
+:::
+
+::: {.column-margin}
+
+::: {.iframe url="https://beck-chan.vercel.app/" title="Modernized Guestbook Mobile View" zoom="100%" width="70%" new-window="false"}
+:::
+
+:::
+
+## Documentation
+
+Documentation guides include search functionality, and the API reference features an interactive explorer where users can input their own credentials to test the API when their applications are fully installed:
+
+::: {.panel-tabset}
+
+### Documentation Landing
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/docs" title="y2k Guestbook Docs" zoom="50%"}
+:::
+
+
+### API Library
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/docs/api" title="y2k Guestbook API Library" zoom="50%"}
+:::
+
+:::
+
+## Feature Flags
+
+Using feature flags I implemented, I can toggle between different versions of the application, like the deployment below which doesn't feature the poetry volume and instead serves the guestbook commenting board at full size:
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/" title="Guestbook Alternate Version" zoom="50%"}
+:::
+
+::: {.column-margin}
+::: {.iframe url="https://y2k-guestbook.vercel.app/" title="Guestbook Alternate Version Mobile View" zoom="100%" width="70%" new-window="false"}
+:::
+
+:::
+
+Or display two different versions of the documentation, such as one that reflects the features of my custom install, and one that reflects the features of the public install:
+
+::: {.panel-tabset}
+
+### Custom Install
+
+::: {.iframe url="https://beck-chan.vercel.app/docs/policy" title="y2k Guestbook Custom Docs" zoom="50%"}
+:::
+
+
+### Public Install
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/docs/policy" title="y2k Guestbook Public Docs" zoom="50%"}
+:::
+
+:::
+
+
+## Citations
+
+Learn more about how I built my guestbook and the accompanying documentation:
+
+::: {.guestbook-citations}
+::: 
+
+
+::: {.column-margin}
+
+[{{< fa brands github >}} **beck-chan**: `guestbook`](https://github.com/beck-chan/guestbook){target="_blank" .button}
+
+:::

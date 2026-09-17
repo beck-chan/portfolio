@@ -1,6 +1,30 @@
 ---
 title: "y2k Guestbook Developer Guides"
 subtitle: "Technical Writing"
-categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar","Feature Flags", "Next.js", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "Cucumber", "Google Cloud Platform"]
-search: false
+categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar","Feature Flags", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "Cucumber", "Google Cloud Platform"]
+listing:
+  - id: guestbook-developer-guides
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://y2k-guestbook.vercel.app/docs/api
+      title: "API Library"
+      subtitle: "Developer Guides"
+      description: "API Library reference featuring a custom Scalar explorer implementation where users can input their own credentials to test the API."
+    - path: https://beck-chan.vercel.app/docs/tests
+      title: "Cucumber Tests"
+      subtitle: "Developer Guides"
+      description: "Cucumber testing guide, including sample Gherkin `.feature` files and step definitions users can run to test their own installations with Playwright."
+    - path: https://y2k-guestbook.vercel.app/docs/install
+      title: "Install with npm"
+      subtitle: "Developer Guides"
+      description: "End-to-end installation guide for integrating the y2k Guestbook package into your own Next.js application using Node Package Manager (npm)."
 ---
+
+Developer-focused guides I created for my y2k Guestbook application.
+
+::: {.developer-guides}
+::: 

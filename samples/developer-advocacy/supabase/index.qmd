@@ -1,4 +1,4 @@
 ---
-title: "Supabase"
+title: "Build user activity registry with Next.js and Supabase"
 subtitle: "Developer Advocacy"
 ---

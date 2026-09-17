@@ -6,15 +6,13 @@ website:
         - text: "Technical Writing"
           file: samples/technical-writing/index.qmd
         - text: "---"
-        # - section: "Personal / y2k Guestbook"
-        #   href: samples/technical-writing/personal/guestbook/index.qmd
-        #   contents:
-        #     - text: "API Library Reference"
-        #       file: samples/technical-writing/personal/guestbook/library.qmd
-        #     - text: "Developer Installation Guides"
-        #       file: samples/technical-writing/personal/guestbook/developer.qmd
-        #     - text: "User Guides"
-        #       file: samples/technical-writing/personal/guestbook/guides.qmd
+        - section: "Personal / y2k Guestbook"
+          href: samples/technical-writing/personal/guestbook/index.qmd
+          contents:
+            - text: "Developer Guides"
+              file: samples/technical-writing/personal/guestbook/developer.qmd
+            - text: "User Guides"
+              file: samples/technical-writing/personal/guestbook/guides.qmd
         - section: "ValidMind"
           href: samples/technical-writing/validmind/index.qmd
           contents:

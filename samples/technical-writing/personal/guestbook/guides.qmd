@@ -1,6 +1,34 @@
 ---
 title: "y2k Guestbook User Guides"
 subtitle: "Technical Writing"
-categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "PostHog", "Google Cloud Platform"]
-search: false
+categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "PostHog", "Google Cloud Platform"]
+listing:
+  - id: guestbook-user-guides
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://beck-chan.vercel.app/docs/notifs
+      title: "Enable Notifications"
+      subtitle: "User Guides"
+      description: "Guide walking users through enabling administrator notifications using Supabase Edge Functions and Gmail API."
+    - path: https://beck-chan.vercel.app/docs/admin
+      title: "Manage Admin Auth"
+      subtitle: "User Guides"
+      description: "Guide on how to invite and revoke administrator access to the y2k Guestbook using a command packaged with the application."
+    - path: https://beck-chan.vercel.app/docs/analytics
+      title: "Add Analytics"
+      subtitle: "User Guides"
+      description: "Guide walking users through how to enable the packaged hit counter and web tracking powered by PostHog."
+    - path: https://beck-chan.vercel.app/docs/prerequisites
+      title: "Prerequisites"
+      subtitle: "User Guides"
+      description: "Guide walking users through initial setup required by the application in Supabase and Google OAuth 2.0."
 ---
+
+Some of the general user guides I created for my y2k Guestbook application.
+
+::: {.user-guides}
+::: 

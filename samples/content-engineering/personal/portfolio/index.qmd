@@ -3,7 +3,7 @@ title: "Portfolio"
 subtitle: "Content Engineering"
 aliases: 
   - /portfolio/index.html
-categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "PostHog", "CI/CD Workflows", "Frontend Development"]
+categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "PostHog", "HTML", "Bootstrap CSS", "CI/CD Workflows", "Frontend Development"]
 listing:
   - id: content-portfolio
     type: grid
@@ -16,7 +16,21 @@ listing:
     - deployment.qmd
 ---
 
+::: {.hidden}
+
 I designed and built this mobile-responsive portfolio website with Quarto and Bootstrap CSS, which automatically deploys to GitHub Pages and Netlify.
+
+:::
+
+
+I designed and built this mobile-responsive portfolio website with Quarto and Bootstrap CSS, which automatically deploys to GitHub Pages and Netlify via GitHub CI/CD Workflows, featuring:
+
+- Custom functionality added with JavaScript and Lua.
+- Local deployment fallbacks via Justfile in Rust.
+- Custom themes and styling using Bootstrap. 
+
+## Citations
+
 
 :::{#content-portfolio}
 :::

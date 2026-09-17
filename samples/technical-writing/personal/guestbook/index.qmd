@@ -1,11 +1,11 @@
 ---
 title: "y2k Guestbook"
 subtitle: "Technical Writing"
-categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar","Feature Flags", "Next.js", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "Cucumber", "Google Cloud Platform"]
+categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar","Feature Flags", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "Cucumber", "Google Cloud Platform"]
 listing:
   - id: personal-technical
     type: grid
-    grid-columns: 3
+    grid-columns: 2
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
@@ -13,10 +13,28 @@ listing:
       - library.qmd
       - developer.qmd
       - guides.qmd
-search: false
+  - id: guestbook
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - path: ../../../content-engineering/personal/guestbook/index.qmd
+        description: "Learn how I built the guestbook application, the accompanying documentation, and my custom installation of the guestbook."
 ---
+
+::: {.hidden}
+To support installation and usage of my guestbook application, I created comprehensive documentation in MDX, including an API reference implemented with Scalar.
+
+:::
 
 {{< include /samples/single-source/personal/_guestbook.qmd >}}
 
 :::{#personal-technical}
 :::
+
+## Citation
+
+::: {.guestbook}
+::: 

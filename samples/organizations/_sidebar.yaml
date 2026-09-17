@@ -7,16 +7,12 @@ website:
           file: samples/organizations/index.qmd
         - text: "---"
         - section: "Personal"
+          href: samples/organizations/personal/index.qmd
           contents:
             - text: "Content Engineering"
-              file: samples/content-engineering/personal/portfolio/index.qmd
-        # - section: "Personal"
-        #   href: samples/organizations/personal/index.qmd
-        #   contents:
-        #     - text: "Content Engineering"
-        #       file: samples/content-engineering/personal/index.qmd
-            # - text: "Technical Writing"
-            #   file: samples/technical-writing/personal/guestbook/index.qmd
+              file: samples/content-engineering/personal/index.qmd
+            - text: "Technical Writing"
+              file: samples/technical-writing/personal/guestbook/index.qmd
         - section: "ValidMind"
           href: samples/organizations/validmind.qmd
           contents:
