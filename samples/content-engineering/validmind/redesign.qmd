@@ -1,7 +1,7 @@
 ---
 title: "ValidMind Documentation Redesign"
 subtitle: "Content Engineering"
-categories: ["Quarto", "Frontend Development"]
+categories: ["Quarto", "Frontend Development", "HTML", "CSS"]
 listing:
   - id: validmind-overhauls
     type: grid

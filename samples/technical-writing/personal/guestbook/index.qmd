@@ -15,6 +15,11 @@ listing:
       - guides.qmd
 ---
 
+::: {.hidden}
+To support installation and usage of my guestbook application, I created comprehensive documentation in MDX, including an API reference implemented with Scalar.
+
+:::
+
 {{< include /samples/single-source/personal/_guestbook.qmd >}}
 
 :::{#personal-technical}

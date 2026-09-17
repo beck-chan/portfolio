@@ -23,7 +23,17 @@ listing:
       subtitle: "y2k Guestbook Docs"
 ---
 
-WIP
+::: {.hidden}
+{{< include /samples/single-source/personal/_guestbook.qmd >}}
+
+:::
+
+I designed and built a mobile-responsive Next.js application styled with Tailwind CSS and a backend powered by Supabase, featuring:
+
+- Admin functionality for comment management and customization, dashboard gated via Google OAuth 2.0.
+- Built-in rate limiting and profanity filtering, and admin notifications powered by Supabase Edge Functions.
+- LLM-friendly docs in MDX, API reference implemented with Scalar. 
+
 
 ::: {.iframe url="https://beck-chan.vercel.app/" title="REPLACE ME"}
 :::

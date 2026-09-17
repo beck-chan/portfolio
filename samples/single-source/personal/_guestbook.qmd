@@ -1,1 +1,2 @@
-I designed and built a mobile-responsive interactive Next.js application, complete with LLM-friendly documentation in MDX and an API reference implemented with Scalar.
+I designed and built a retro-inspired, mobile-responsive Next.js guestbook application styled with Tailwind CSS and a backend powered by Supabase, complete with comprehensive documentation in MDX, including an API reference implemented with Scalar.
+
