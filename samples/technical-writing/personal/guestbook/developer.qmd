@@ -24,7 +24,7 @@ listing:
       description: "End-to-end installation guide for integrating the y2k Guestbook package into your own Next.js application using Node Package Manager (npm)."
 ---
 
-Developer-focused guides I created for the y2k Guestbook application, including the API library, Cucumber specs, and installation instructions.
+Developer-focused guides I created for my y2k Guestbook application.
 
 ::: {.developer-guides}
 ::: 
