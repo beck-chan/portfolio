@@ -3,7 +3,7 @@ title: "Portfolio Framework"
 subtitle: "Content Engineering"
 includes:
     portfolio: true
-categories: ["HTML", "CSS"]
+categories: ["HTML", "Bootstrap CSS"]
 ---
 
 ::: {.hidden}

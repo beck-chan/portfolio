@@ -3,7 +3,7 @@ title: "Portfolio"
 subtitle: "Content Engineering"
 aliases: 
   - /portfolio/index.html
-categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "PostHog", "HTML", "CSS", "CI/CD Workflows", "Frontend Development"]
+categories: ["Content Architecture", "Quarto", "GitHub Pages", "Netlify", "PostHog", "HTML", "Bootstrap CSS", "CI/CD Workflows", "Frontend Development"]
 listing:
   - id: content-portfolio
     type: grid

@@ -32,7 +32,7 @@ listing:
     contents:
       - ../content-engineering/atryum/index.qmd
     categories: true
-categories: ["Content Architecture", "Feature Documentation", "User Guides", "Quickstart", "Integrations", "Agentic Orchestration", "Artificial Intelligence (AI)", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Risk Governance", "Software as a Service", "Python", "Rust", "HTML", "CSS", "Atryum", "ValidMind"]
+categories: ["Content Architecture", "Feature Documentation", "User Guides", "Quickstart", "Integrations", "Agentic Orchestration", "Artificial Intelligence (AI)", "AI Risk", "Agents", "Large Language Models", "Model Context Protocol Servers", "Risk Governance", "Software as a Service", "Python", "Rust", "HTML", "Bootstrap CSS", "Atryum", "ValidMind"]
 includes:
   organizations: true
 ---
