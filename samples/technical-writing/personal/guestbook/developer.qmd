@@ -8,20 +8,23 @@ listing:
     grid-columns: 3
     max-description-length: 250
     sort: false
-    fields: [title, subtitle]
+    fields: [title, subtitle, description]
     contents:
     - path: https://y2k-guestbook.vercel.app/docs/api
       title: "API Library"
       subtitle: "Developer Guides"
-    - path: https://beck-chan.vercel.app/docs/specs
-      title: "Cucumber Specs"
+      description: "API Library reference featuring a custom Scalar explorer implementation where users can input their own credentials to test the API."
+    - path: https://beck-chan.vercel.app/docs/tests
+      title: "Cucumber Tests"
       subtitle: "Developer Guides"
-    - path: https://beck-chan.vercel.app/docs/install
+      description: "Cucumber testing guide, including sample Gherkin `.feature` files and step definitions users can run to test their own installations with Playwright."
+    - path: https://y2k-guestbook.vercel.app/docs/install
       title: "Install with npm"
       subtitle: "Developer Guides"
+      description: "End-to-end installation guide for integrating the y2k Guestbook package into your own Next.js application using Node Package Manager (npm)."
 ---
 
-WIP
+Developer-focused guides I created for the y2k Guestbook application, including the API library, Cucumber specs, and installation instructions.
 
 ::: {.developer-guides}
 ::: 
