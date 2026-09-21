@@ -336,7 +336,7 @@ div.quarto-post .thumbnail img {
   gap: 0.75rem;
   box-sizing: border-box;
   width: 100%;
-  min-width: 12rem;
+  min-width: min(12rem, 100%);
   margin: 0;
   padding: 0.5rem 1rem;
   color: #0b2a1290;
@@ -346,6 +346,7 @@ div.quarto-post .thumbnail img {
   font-size: 16px;
   line-height: 1.5;
   text-align: left;
+  white-space: nowrap;
   cursor: pointer;
   transition: color 0.15s ease-in, background-color 0.15s ease-in,
     border-color 0.15s ease-in;
@@ -361,6 +362,7 @@ div.quarto-post .thumbnail img {
 
 .inline-quarto-search__label {
   flex: 1;
+  white-space: nowrap;
 }
 
 .inline-quarto-search__hint {
@@ -375,16 +377,69 @@ div.quarto-post .thumbnail img {
   line-height: 1.5;
 }
 
-// Homepage search + social CTA row: kill Quarto <p> margins that lift buttons
+// Homepage search + social CTA row: kill Quarto <p> margins that lift buttons.
+// Desktop keeps Tachyons w-*-l percentages (search = same 20% as the portrait).
+// Below 60em, drop those widths and wrap instead of shrinking labels to two lines.
 .cta-bar {
   > div {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
+    max-width: 100%;
   }
 
   p {
     margin: 0;
+  }
+
+  .button {
+    white-space: nowrap;
+  }
+
+  // Desktop: 75% of the column, centered (100% + side margins sat off-center).
+  @media screen and (min-width: 60em) {
+    gap: 0;
+
+    .inline-quarto-search {
+      width: 80%;
+      max-width: 100%;
+      min-width: min(12rem, 100%);
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  // Phone: one full-width row each so labels never clip.
+  @media screen and (max-width: 29.99em) {
+    gap: 0.5rem 1rem;
+    padding-inline: 0.75rem;
+
+    > div {
+      flex: 1 0 100%;
+      width: 100% !important;
+      min-width: 0;
+    }
+
+    .inline-quarto-search {
+      width: 100%;
+    }
+
+    .inline-quarto-search__trigger {
+      min-width: 0;
+    }
+  }
+
+  // Tablet: two-up, wrap before a third column can squeeze text.
+  @media screen and (min-width: 30em) and (max-width: 59.99em) {
+    gap: 0.5rem 1rem;
+    padding-inline: 0.5rem;
+
+    > div {
+      flex: 1 1 calc(50% - 1rem);
+      width: auto !important;
+      min-width: min(12rem, 100%);
+    }
   }
 }
 

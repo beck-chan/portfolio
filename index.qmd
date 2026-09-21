@@ -23,7 +23,7 @@ listing:
 
 :::: {.flex .flex-wrap .items-center .justify-around .mb4 .cta-bar}
 
-::: {.w-25-ns .w-20-l .tc}
+::: {.w-20-l .tc}
 ```{=html}
 <div class="inline-quarto-search">
   <button
@@ -62,17 +62,17 @@ listing:
 
 :::
 
-::: {.w-25-ns .w-20-l .tc}
+::: {.w-20-l .tc}
 [{{< fa brands github >}} beck-chan](https://github.com/beck-chan){target="_blank" .button .cta}
 
 :::
 
-::: {.w-25-ns .w-20-l .tc}
+::: {.w-20-l .tc}
 [{{< fa brands linkedin >}} beck-chan](https://linkedin.com/in/beck-chan){target="_blank" .button .cta}
 
 :::
 
-::: {.w-50-ns .w-30-l .tc}
+::: {.w-30-l .tc}
 [{{< fa envelope >}} beckchan.tech@gmail.com](mailto:beckchan.tech@gmail.com){target="_blank" .button .cta}
 
 :::
