@@ -35,7 +35,7 @@ I designed and built a mobile-responsive Next.js application styled with Tailwin
 
 - Admin functionality for comment management and customization, dashboard gated via Google OAuth 2.0.
 - Built-in rate limiting and profanity filtering, and admin notifications powered by Supabase Edge Functions.
-- LLM-friendly docs in MDX, API reference implemented with Scalar. 
+- Docs in MDX with Gemini chatbot, API reference implemented with Scalar. 
 
 ## Concept
 
