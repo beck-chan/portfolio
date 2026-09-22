@@ -7,7 +7,7 @@ categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.
 listing:
   - id: guestbook-citations
     type: grid
-    grid-columns: 2
+    grid-columns: 3
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
@@ -16,6 +16,10 @@ listing:
       title: "Documentation Build"
       subtitle: "y2k Guestbook Docs"
       description: "Learn how I built the documentation for my guestbook, including details on the API reference implemented with Scalar and how search and LLM-ingestion is supported."
+    - path: https://beck-chan.vercel.app/docs/bot-build
+      title: "Chatbot Build"
+      subtitle: "y2k Guestbook Docs"
+      description: "Learn how I built the chatbot for the documentation, using Supabase's `pgvector` extension and Gemini API."
     - path: https://beck-chan.vercel.app/docs/book-build
       title: "Guestbook Build"
       subtitle: "y2k Guestbook Docs"
@@ -66,6 +70,41 @@ Documentation guides include search functionality, and the API reference feature
 :::
 
 :::
+
+Alongside the interactive API library, I built a chatbot powered by Gemini that can answer questions about the documentation:
+
+::: {.panel-tabset}
+
+### Live Chatbot
+
+The live chatbot uses Supabase's `pgvector` extension to store the embeddings of the documentation, and the Gemini API to answer questions:
+
+![Live Chatbot Powered by `pgvector`](livebot.gif){.pics width="100%"}
+
+### Proof-of-Concept Chatbot
+
+My initial, more complex proof-of-concept chatbot used a local Elasticsearch instance served via Docker and the Gemini API to answer questions about the documentation:
+
+```{=html}
+<figure class="iframe-embed figure iframe-embed--align-center iframe-embed--valign-center iframe-embed--new-window" style="--iframe-zoom: 0.5; --iframe-width: 100%; --iframe-height: 560px;">
+  <div class="iframe-embed__chrome pics">
+    <div class="iframe-embed__frame">
+      <iframe src="https://www.youtube.com/embed/zpzFcJU4MtU" title="Proof-of-Concept Chatbot Built with Elasticsearch" loading="lazy"></iframe>
+    </div>
+    <a class="iframe-embed__open" href="https://www.youtube.com/embed/zpzFcJU4MtU" target="_blank" rel="noopener noreferrer" title="Open Proof-of-Concept Chatbot Built with Elasticsearch" aria-label="Open Proof-of-Concept Chatbot Built with Elasticsearch">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+    </a>
+  </div>
+  <figcaption>Proof-of-Concept Chatbot Built with Elasticsearch</figcaption>
+</figure>
+```
+
+:::
+
+::: {.column-margin}
+[{{< fa flask >}} Try Chatbot Yourself!](https://beck-chan.vercel.app/docs/){.button}
+:::
+
 
 ## Feature Flags
 
