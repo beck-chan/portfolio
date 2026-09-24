@@ -14,8 +14,8 @@ listing:
     fields: [title, description]
     contents:
     - samples/content-engineering/index.qmd
-    - samples/developer-advocacy/index.qmd
     - samples/technical-writing/index.qmd
+    - samples/developer-advocacy/index.qmd
     - samples/copywriting/index.qmd
 ---
 

@@ -15,6 +15,7 @@ listing:
     - personal/api/index.qmd
     - personal/posthog/index.qmd
     - personal/google-sheets/index.qmd
+categories: ["Supabase", "Backend as a Service", "Frontend Development", "Next.js", "Scalar", "OpenAPI", "PostHog", "Google Sheets API"]
 ---
 
 {{< include /samples/single-source/_advocacy.qmd >}}

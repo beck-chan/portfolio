@@ -1,4 +1,7 @@
 ---
 title: "Build API documentation with Scalar"
 subtitle: "Developer Advocacy"
+categories: ["Scalar", "OpenAPI"]
 ---
+
+Implement OpenAPI Specification documentation with Scalar.

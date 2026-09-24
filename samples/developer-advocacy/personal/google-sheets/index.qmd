@@ -1,4 +1,7 @@
 ---
 title: "Build apps with Google Sheets API"
 subtitle: "Developer Advocacy"
+categories: ["Google Sheets API"]
 ---
+
+Integrate custom functions into your Google Sheets.

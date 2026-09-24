@@ -1,4 +1,7 @@
 ---
 title: "Build applications with Supabase"
 subtitle: "Developer Advocacy"
+categories: ["Supabase", "Backend as a Service", "Frontend Development", "Next.js"]
 ---
+
+Use Supabase as your comprehensive backend solution.

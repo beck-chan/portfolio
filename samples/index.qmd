@@ -222,15 +222,6 @@ Use [filter by category]{.smallcaps} below to narrow down samples by criteria. S
 :::{#personal-content}
 :::
 
-## Developer Advocacy
-
-{{< include /samples/single-source/_advocacy.qmd >}}
-
-### Personal
-
-:::{#personal-advocacy}
-:::
-
 ## Technical Writing
 
 {{< include /samples/single-source/_technical.qmd >}}
@@ -274,6 +265,15 @@ Use [filter by category]{.smallcaps} below to narrow down samples by criteria. S
 {{< include /samples/single-source/saasquatch/_writing.qmd >}}
 
 :::{#saasquatch-technical}
+:::
+
+## Developer Advocacy
+
+{{< include /samples/single-source/_advocacy.qmd >}}
+
+### Personal
+
+:::{#personal-advocacy}
 :::
 
 ## Copywriting

@@ -1,4 +1,7 @@
 ---
 title: "Implement hit counters with PostHog"
 subtitle: "Developer Advocacy"
+categories: ["PostHog"]
 ---
+
+Display user-facing analytics with PostHog.

@@ -7,14 +7,14 @@ website:
           file: samples/organizations/index.qmd
         - text: "---"
         - section: "Personal"
-          href: samples/organizations/personal/index.qmd
+          href: samples/organizations/personal.qmd
           contents:
             - text: "Content Engineering"
               file: samples/content-engineering/personal/index.qmd
-            - text: "Developer Advocacy"
-              file: samples/developer-advocacy/index.qmd#personal
             - text: "Technical Writing"
               file: samples/technical-writing/personal/guestbook/index.qmd
+            - text: "Developer Advocacy"
+              file: samples/developer-advocacy/index.qmd#personal
         - section: "ValidMind"
           href: samples/organizations/validmind.qmd
           contents:

@@ -45,12 +45,12 @@ I love to write and build things, so much so that I do it recreationally.
 :::{#personal-content}
 :::
 
-## Developer Advocacy
-
-:::{#personal-advocacy}
-:::
-
 ## Technical Writing
 
 :::{#personal-technical}
+:::
+
+## Developer Advocacy
+
+:::{#personal-advocacy}
 :::
