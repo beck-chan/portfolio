@@ -9,7 +9,9 @@ website:
         - section: "Personal"
           contents:
           - samples/developer-advocacy/personal/supabase/index.qmd
+          - samples/developer-advocacy/personal/api/index.qmd
+          - text: "Test with Cucumber and Playwright"
+            file: samples/developer-advocacy/personal/cucumber/index.qmd
           - text: "Implement counters with PostHog"
             file: samples/developer-advocacy/personal/posthog/index.qmd
-          - samples/developer-advocacy/personal/api/index.qmd
           - samples/developer-advocacy/personal/google-sheets/index.qmd

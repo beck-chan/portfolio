@@ -5,3 +5,9 @@ categories: ["Supabase", "Backend as a Service", "Frontend Development", "Next.j
 ---
 
 Use Supabase as your comprehensive backend solution.
+
+## Introduction
+
+## Authentication
+
+## Edge Functions

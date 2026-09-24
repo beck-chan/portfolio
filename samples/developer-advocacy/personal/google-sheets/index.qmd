@@ -5,3 +5,5 @@ categories: ["Google Sheets API"]
 ---
 
 Integrate custom functions into your Google Sheets.
+
+## Introduction

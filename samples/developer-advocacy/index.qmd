@@ -13,9 +13,10 @@ listing:
     contents:
     - personal/supabase/index.qmd
     - personal/api/index.qmd
+    - personal/cucumber/index.qmd
     - personal/posthog/index.qmd
     - personal/google-sheets/index.qmd
-categories: ["Supabase", "Backend as a Service", "Frontend Development", "Next.js", "Scalar", "OpenAPI", "PostHog", "Google Sheets API"]
+categories: ["Supabase", "Backend as a Service", "Frontend Development", "Next.js", "Scalar", "OpenAPI", "PostHog", "Quality Assurance", "Cucumber", "Playwright", "Google Sheets API"]
 ---
 
 {{< include /samples/single-source/_advocacy.qmd >}}

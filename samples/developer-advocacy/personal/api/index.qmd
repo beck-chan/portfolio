@@ -5,3 +5,7 @@ categories: ["Scalar", "OpenAPI"]
 ---
 
 Implement OpenAPI Specification documentation with Scalar.
+
+## Introduction
+
+
