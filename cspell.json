@@ -4,7 +4,7 @@
 // npx cspell "**/*" --exclude "_output" --exclude ".quarto"
 
 // Just .qmd sample files
-// npx --yes cspell "**/*.qmd" --exclude "_output" --exclude ".quarto" --exclude "poetry/random/*"
+// npx --yes cspell "**/*.qmd" --exclude "_output" --exclude ".quarto"
 
 // Omitted words:
 

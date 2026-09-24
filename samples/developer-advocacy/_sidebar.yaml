@@ -6,11 +6,9 @@ website:
         - text: "Developer Advocacy"
           file: samples/developer-advocacy/index.qmd
         - text: "---"
-        - text: "Next.js and Supabase"
-          file:  samples/developer-advocacy/supabase/index.qmd
-        - text: "PostHog"
-          file: samples/developer-advocacy/posthog/index.qmd
-        - text: "Quarto"
-          file: samples/developer-advocacy/quarto/index.qmd
-        - text: "Google Sheets API"
-          file: samples/developer-advocacy/google-sheets/index.qmd
+        - section: "Personal"
+          contents:
+          - samples/developer-advocacy/personal/supabase/index.qmd
+          - samples/developer-advocacy/personal/posthog/index.qmd
+          - samples/developer-advocacy/personal/api/index.qmd
+          - samples/developer-advocacy/personal/google-sheets/index.qmd

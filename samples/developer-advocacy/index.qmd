@@ -11,13 +11,15 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-    - supabase/index.qmd
-    - quarto/index.qmd
-    - posthog/index.qmd
-    - google-sheets/index.qmd
+    - personal/supabase/index.qmd
+    - personal/api/index.qmd
+    - personal/posthog/index.qmd
+    - personal/google-sheets/index.qmd
 ---
 
-> "lorem ipsum etc."
+{{< include /samples/single-source/_advocacy.qmd >}}
+
+## Personal
 
 ::: {developer}
 :::

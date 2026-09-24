@@ -22,7 +22,18 @@ listing:
     contents:
       - ../../technical-writing/personal/guestbook/index.qmd
     categories: true
-categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides",  "OpenAPI", "Scalar", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Cucumber", "Google Cloud Platform", "Feature Flags", "CI/CD Workflows", "Frontend Development"]
+  - id: personal-advocacy
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - ../../developer-advocacy/personal/supabase/index.qmd
+      - ../../developer-advocacy/personal/posthog/index.qmd
+      - ../../developer-advocacy/personal/api/index.qmd
+      - ../../developer-advocacy/personal/google-sheets/index.qmd
+categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides",  "OpenAPI", "Scalar", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Cucumber", "Google Cloud Platform", "Feature Flags", "CI/CD Workflows", "Frontend Development", "Developer Advocacy", "Integrations", "Blog", "Feature Highlights"]
 ---
 
 I love to write and build things, so much so that I do it recreationally.
@@ -32,6 +43,11 @@ I love to write and build things, so much so that I do it recreationally.
 {{< include /samples/single-source/personal/_content.qmd >}}
 
 :::{#personal-content}
+:::
+
+## Developer Advocacy
+
+:::{#personal-advocacy}
 :::
 
 ## Technical Writing
