@@ -11,3 +11,7 @@ Use Supabase as your comprehensive backend solution.
 ## Authentication
 
 ## Edge Functions
+
+## Rate Limiting
+
+## Extensions
