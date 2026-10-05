@@ -55,12 +55,12 @@ The **[Supabase Data REST API](https://supabase.com/docs/guides/api/rest/overvie
 
 Supabase eliminates the need to build and run a separate server just to read and write the database. Instead, you can connect directly to the database from your website using the Data REST API. Instead of inventing an address for each action, you name the table, and Supabase turns that name into the address. 
 
-Instead of putting a separate check on each address, Supabase enforces the check on the table itself using [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security){target="_blank"}. Each request carries a token that says who is calling and what they are allowed to do, for example:
+Instead of putting a separate check on each address, Supabase enforces the check on the table itself using Row Level Security.[^row-level-security] Each request carries a token that says who is calling and what they are allowed to do, for example:
 
-- Visitors have access to read public comments and submit comments without needing to sign in, authenticated with Supabase's [publishable key](https://supabase.com/docs/guides/getting-started/api-keys#which-key-do-you-use){target="_blank"}.
-- Approved administrators have access to manage comments and settings after they sign in. That sign-in carries a note — [when the note says `admin`](#auth), the database runs a check called `is_admin()` and allows the change.
+- Visitors have access to read public comments and submit comments without needing to sign in, authenticated with Supabase's publishable key.[^publishable-key]
+- Approved administrators have access to manage comments and settings after they sign in. That sign-in carries a note — when the note says `admin`,[^admin-note] the database runs a check called `is_admin()` and allows the change.
 
-The API URL is your "RESTful endpoint for querying and managing your database." For example, `https://<your-project>.supabase.co/rest/v1/` is the front door to your tables. In our guestbook, a helper called `createClient()` in [`src/lib/supabase/server.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/supabase/server.ts){target="_blank"} opens that door:
+The API URL is your "RESTful endpoint for querying and managing your database." For example, `https://<your-project>.supabase.co/rest/v1/` is the front door to your tables. In our guestbook, a helper called `createClient()` in `src/lib/supabase/server.ts`[^server-ts] opens that door:
 
 ```typescript
 return createServerClient(
@@ -78,7 +78,7 @@ Under the hood, asking for a table becomes a normal web request to `https://<you
 
 #### Retrieve comments
 
-`comments_public` is a table with a view of submitted `comments` that exclude submitted email addresses from display. The `getPublicCommentsPage` function reads that table in [`src/app/actions/comments.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/comments.ts){target="_blank"}:
+`comments_public` is a table with a view of submitted `comments` that exclude submitted email addresses from display. The `getPublicCommentsPage` function reads that table in `src/app/actions/comments.ts`:[^comments-ts]
 
 ```typescript
 supabase
@@ -89,9 +89,9 @@ supabase
 
 #### Save comments
 
-`comments` is the private table that stores submitted comments. The `submitComment` function in [`src/app/actions/comments.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/comments.ts){target="_blank"} writes to this table.
+`comments` is the private table that stores submitted comments. The `submitComment` function in `src/app/actions/comments.ts`[^comments-ts] writes to this table.
 
-Comments are first checked for length, content, and [frequency](#limits). Only if all checks pass, then the comment is written to the `comments` table:
+Comments are first checked for length, content, and frequency.[^comment-frequency] Only if all checks pass, then the comment is written to the `comments` table:
 
 ```typescript
 const supabase = await createClient();
@@ -104,7 +104,7 @@ const { error } = await supabase.from("comments").insert({
 
 #### Modify comments
 
-The `loadAdminComments` function in in [`src/app/actions/comments.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/comments.ts){target="_blank"} reads the private `comments` table for the dashboard:
+The `loadAdminComments` function in `src/app/actions/comments.ts`[^comments-ts] reads the private `comments` table for the dashboard:
 
 ```typescript
 supabase
@@ -137,7 +137,7 @@ supabase.from("comments").update({ is_read: read }).eq("id", id)
 supabase.from("comments").update({ is_read: read }).in("id", uniqueIds)
 ```
 
-Permission to modify comments is enforced by row-level security rules, that we set when we created the `comments` table with our [schema.sql](https://github.com/beck-chan/y2k-guestbook/blob/main/schema.sql){target="_blank"}:
+Permission to modify comments is enforced by row-level security rules, that we set when we created the `comments` table with our `schema.sql`:[^schema-sql]
 
 ```sql
 create policy "admin_update_comments"
@@ -154,7 +154,7 @@ create policy "admin_delete_comments"
   using (public.is_admin());
 ```
 
-Both policies call the `is_admin()` function defined in [`src/app/actions/auth.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/auth.ts){target="_blank"}:
+Both policies call the `is_admin()` function defined in `src/app/actions/auth.ts`:[^auth-ts]
 
 ```typescript
 export async function isAdmin() {
@@ -174,7 +174,7 @@ select coalesce(
 
 #### Apply settings
 
-The `guestbook_settings` table is one record with the comment length, the speed limit, and how many notes fit on a page. The `loadGuestbookSettings` function in [`src/lib/loadGuestbookSettings.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/loadGuestbookSettings.ts){target="_blank"} reads these saved settings:
+The `guestbook_settings` table is one record with the comment length, the speed limit, and how many notes fit on a page. The `loadGuestbookSettings` function in `src/lib/loadGuestbookSettings.ts`[^load-settings-ts] reads these saved settings:
 
 ```typescript
 supabase
@@ -184,7 +184,7 @@ supabase
   .maybeSingle()
 ```
 
-`saveGuestbookSettings` in [`src/app/actions/settings.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/settings.ts){target="_blank"} allows administrators to adjust these settings, first checking that the user is an admin:
+`saveGuestbookSettings` in `src/app/actions/settings.ts`[^settings-ts] allows administrators to adjust these settings, first checking that the user is an admin:
 
 ```typescript
 const { supabase, error: authError } = await requireAdmin();
@@ -223,7 +223,7 @@ For our guestbook, Supabase Auth holds the admin users in a table for you, manag
 
 ### Admin allowlist
 
-The `admin_allowlist` table is the approved list of users who are allowed to access the administrator dashboard after they've successfully signed in with Google. The `loadAllowlist` function in [`supabase/functions/_shared/allowlist.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/allowlist.ts){target="_blank"} reads this private table with [your Supabase secret keys](https://supabase.com/docs/guides/functions/secrets){target="_blank"}:
+The `admin_allowlist` table is the approved list of users who are allowed to access the administrator dashboard after they've successfully signed in with Google. The `loadAllowlist` function in `supabase/functions/_shared/allowlist.ts`[^allowlist-ts] reads this private table with your Supabase secret keys:[^function-secrets]
 
 ```typescript
 const url = Deno.env.get("SUPABASE_URL");
@@ -238,7 +238,7 @@ const { data, error } = await supabase.from("admin_allowlist").select("email");
 
 #### Admin user creation
 
-When an authorized admin user signs in for the first time, the `hook_before_user_created` function created by [`scripts/schema.sql`](https://github.com/beck-chan/y2k-guestbook/blob/main/scripts/schema.sql){target="_blank"} reads the `admin_allowlist`:
+When an authorized admin user signs in for the first time, the `hook_before_user_created` function created by `scripts/schema.sql`[^scripts-schema-sql] reads the `admin_allowlist`:
 
 ```sql
 if user_email is null
@@ -293,7 +293,7 @@ where id = uid
 
 ### Admin dashboard
 
-The `is_admin()` function defined in [`src/app/actions/auth.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/auth.ts){target="_blank"} trusts only the `app_metadata.role` note set to `admin`. [`src/proxy.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/proxy.ts){target="_blank"} runs this check on `/admin`:
+The `is_admin()` function defined in `src/app/actions/auth.ts`[^auth-ts] trusts only the `app_metadata.role` note set to `admin`. `src/proxy.ts`[^proxy-ts] runs this check on `/admin`:
 
 The role on the session is read first:
 
@@ -368,7 +368,7 @@ Supabase eliminates the need to build and run a separate server just to send ema
 
 ### Edge Function secrets
 
-`NOTIFY_WEBHOOK_SECRET` and `FLAG_NOTIF` are secrets stored on the Edge Function. [`supabase/functions/_shared/env.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/env.ts){target="_blank"} reads them with `Deno.env`:
+`NOTIFY_WEBHOOK_SECRET` and `FLAG_NOTIF` are secrets stored on the Edge Function. `supabase/functions/_shared/env.ts`[^env-ts] reads them with `Deno.env`:
 
 ```typescript
 const expected = Deno.env.get("NOTIFY_WEBHOOK_SECRET") ?? "";
@@ -392,7 +392,7 @@ if (!flagNotifOn()) {
 
 ### Webhook payloads
 
-Supabase posts the row change to [`supabase/functions/notify-admins/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/notify-admins/index.ts){target="_blank"}, which sends admin notifications on comments received, edited, deleted, or guestbook settings updated. The body names the table, the kind of change, and the row:
+Supabase posts the row change to `supabase/functions/notify-admins/index.ts`,[^notify-admins-ts] which sends admin notifications on comments received, edited, deleted, or guestbook settings updated. The body names the table, the kind of change, and the row:
 
 ```typescript
 type WebhookPayload = {
@@ -438,7 +438,7 @@ if (table === "admin_allowlist") {
 }
 ```
 
-[`supabase/functions/on-user-created/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/on-user-created/index.ts){target="_blank"} reads the email from the body Supabase posts to notify admins on the allow-list when a new admin has signed in for the first time:
+`supabase/functions/on-user-created/index.ts`[^on-user-created-ts] reads the email from the body Supabase posts to notify admins on the allow-list when a new admin has signed in for the first time:
 
 ```typescript
 const record = root.record;
@@ -476,7 +476,7 @@ With **[Supabase Database](https://supabase.com/docs/guides/database/overview){t
 
 :::
 
-Supabase eliminates the need to build and run a separate counter store. The counters live in the Postgres database the project already has — `submitComment` spends one chance by calling `consumeCommentRateLimit` in [`src/lib/rate-limit.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/rate-limit.ts){target="_blank"}:
+Supabase eliminates the need to build and run a separate counter store. The counters live in the Postgres database the project already has — `submitComment` spends one chance by calling `consumeCommentRateLimit` in `src/lib/rate-limit.ts`:[^rate-limit-ts]
 
 ::: {.panel-tabset}
 
@@ -495,7 +495,7 @@ return pgPool.query({
 
 ### Counter table
 
-[`rate-limiter-flexible`](https://github.com/animir/node-rate-limiter-flexible){target="_blank"} saves the counts in a table called `guestbook_rate_limits` — a visitor's browser cannot change that table, preventing users from overriding the limit:
+`rate-limiter-flexible`[^rate-limiter-flexible] saves the counts in a table called `guestbook_rate_limits` — a visitor's browser cannot change that table, preventing users from overriding the limit:
 
 ```typescript
 new RateLimiterPostgres({
@@ -555,7 +555,7 @@ Supabase eliminates the need to build and run that second search server. Instead
 
 Gemini turns each chunk of the docs into a list of numbers that stands in for its meaning. Those numbers are called an embedding. `pgvector` stores that list in `docs_section` as a `vector` of 768 numbers, next to the words they came from. 
 
-When the `docs_query_embedding ` table was created, this column is defined in [`scripts/supabot.sql`](https://github.com/beck-chan/guestbook/blob/main/scripts/supabot.sql){target="_blank"}:
+When the `docs_query_embedding ` table was created, this column is defined in `scripts/supabot.sql`:[^supabot-sql]
 
 ```sql
 embedding extensions.vector(768) not null,
@@ -563,7 +563,7 @@ embedding extensions.vector(768) not null,
 
 ### Searching relevant pages
 
-A question becomes the same kind of list. The `match_docs_sections` function created in [`scripts/supabot.sql`](https://github.com/beck-chan/guestbook/blob/main/scripts/supabot.sql){target="_blank"} finds the chunks whose lists are closest. `<=>` is cosine distance. A smaller distance means the meanings are closer:
+A question becomes the same kind of list. The `match_docs_sections` function created in `scripts/supabot.sql`[^supabot-sql] finds the chunks whose lists are closest. `<=>` is cosine distance. A smaller distance means the meanings are closer:
 
 ```sql
 select *
@@ -594,13 +594,55 @@ The chat keeps the pages that do well on either test, and the reply links back t
 
 My dilemma before I built the application was the number of separate programs a simple guestbook interface seems to need. A server to read and write comments. A login service for the admin dashboard, another server to send notifications when a row changes, a counter store so a script cannot fill the board, a second search server for the docs chatbot. 
 
-Each one has to stay running, and each one needs its own check so a stranger cannot do what only an admin should do. Phew — I wasn't sure I wanted to take on all of that just to pay idle homage to a childhood memory.
+Each one has to stay running, and each one needs its own check so a stranger cannot do what only an admin should do. Phew — I wasn't sure I wanted to take on all of that just to pay idle homage to a fond childhood memory.
 
 For a moment, I understood why the guestbooks of yore were so, well, rudimentary, and why they relied on insecure methods to allow users to make changes to frontend code instead of integrating a proper backend, and had absolutely no checks in place to prevent a stranger from potentially doing some very nefarious things. 
 
 I suppose the 90s were a more trusting time, or maybe I just didn't think about it as much. Probably a mix of both.
 
 ::: {.callout}  
-Luckily for me, Supabase seamlessly holds those jobs in one project — the Supa-suite solution to the backend feeling like a pile of unrelated tools. 
+# Luckily for me, Supabase seamlessly holds those jobs in one project — the Supa-suite solution to the backend feeling like a pile of unrelated tools. 
+
+Supabase is free to use and open-source, so you can build your own Supabase-powered applications with a very low barrier to entry.
 
 :::
+
+[^row-level-security]: **Supabase Docs:** [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security){target="_blank"}
+
+[^publishable-key]: **Supabase Docs:** [Which key do you use?](https://supabase.com/docs/guides/getting-started/api-keys#which-key-do-you-use){target="_blank"}
+
+[^admin-note]: [Authentication gating by Google](#auth)
+
+[^server-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/lib/supabase/server.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/supabase/server.ts){target="_blank"}
+
+[^comments-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/app/actions/comments.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/comments.ts){target="_blank"}
+
+[^comment-frequency]: [Full functionality in one database](#limits)
+
+[^schema-sql]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [schema.sql](https://github.com/beck-chan/y2k-guestbook/blob/main/schema.sql){target="_blank"}
+
+[^auth-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/app/actions/auth.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/auth.ts){target="_blank"}
+
+[^load-settings-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/lib/loadGuestbookSettings.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/loadGuestbookSettings.ts){target="_blank"}
+
+[^settings-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/app/actions/settings.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/settings.ts){target="_blank"}
+
+[^allowlist-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [supabase/functions/_shared/allowlist.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/allowlist.ts){target="_blank"}
+
+[^function-secrets]: **Supabase Docs:** [Function secrets](https://supabase.com/docs/guides/functions/secrets){target="_blank"}
+
+[^scripts-schema-sql]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [scripts/schema.sql](https://github.com/beck-chan/y2k-guestbook/blob/main/scripts/schema.sql){target="_blank"}
+
+[^proxy-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/proxy.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/proxy.ts){target="_blank"}
+
+[^env-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [supabase/functions/_shared/env.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/env.ts){target="_blank"}
+
+[^notify-admins-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [supabase/functions/notify-admins/index.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/notify-admins/index.ts){target="_blank"}
+
+[^on-user-created-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [supabase/functions/on-user-created/index.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/on-user-created/index.ts){target="_blank"}
+
+[^rate-limit-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/lib/rate-limit.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/rate-limit.ts){target="_blank"}
+
+[^rate-limiter-flexible]: **{{< fa brands github >}} animir:** [node-rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible){target="_blank"}
+
+[^supabot-sql]: **{{< fa brands github >}} beck-chan/guestbook:** [scripts/supabot.sql](https://github.com/beck-chan/guestbook/blob/main/scripts/supabot.sql){target="_blank"}
