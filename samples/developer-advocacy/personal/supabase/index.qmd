@@ -524,45 +524,44 @@ await burst.consume(key);
 
 <!-- DO NOT EDIT ABOVE HERE -->
 
-## Effortless extensibility 
+## Effortless extensibility
 
-The usual way to search docs for questions asked in different words is to build a second search server. You copy the docs into it and keep that copy in step with the real pages, or the answers drift.
+The usual way to build a chatbot that searches documentation for questions asked is to build a second search server. You copy the docs into that server, and keep that copy in step with the real pages, or the answers drift.
 
 For example, the docs chatbot needs functionality to:
 
-- **Embeddings:** Store a list of numbers for the meaning of each chunk of text.
-- **Closest pages:** Find the chunks whose numbers are close, and also run an ordinary word search.
-- **Public pages:** Search only the pages marked public.
+- **Store embeddings:** Store a list of numbers for the meaning of each chunk of text.
+- **Search relevant pages:** Find the chunks whose numbers are close, and also run an ordinary word search.
 
-So you invent a search address for "the meaning of this question," and another for "these exact words." Each address is an instruction in that second server — when a question shows up, find the closest pages and send the excerpts back.
+So you invent a search address for "the meaning of this question," and another for "these exact words." Each address is an instruction in that second server — when a question shows up, find the closest pages and send the excerpts back. The program that holds the copy of the docs is the search server you keep running.
 
-You also have to protect that search, since the browser must not read private notes. The program that holds the copy of the docs is the search server you keep running.
+### pgvector extension
 
-### pgvector
-
-::: {.callout}
-## **[pgvector](https://supabase.com/docs/guides/database/extensions/pgvector){target="_blank"}** "is a Postgres extension for vector similarity search. It can also be used for storing embeddings."
+::: {.column-margin}
+![Docs Chatbot Powered by `pgvector`](/samples/content-engineering/personal/guestbook/livebot.gif){.pics width="100%"}
 
 :::
 
-Supabase eliminates the need to build and run that second search server. The numbers live in the same Postgres database, in a table called `docs_section`:
+::: {.callout}
+# Supabase offers many extensions that make it easy extend the functionality of your database.
+
+I've used **[pgvector](https://supabase.com/docs/guides/database/extensions/pgvector){target="_blank"}**, "a Postgres extension for vector similarity search," to power my docs chatbot. Learn more about how I build this functionality in [Chatbot Build](https://beck-chan.vercel.app/docs/bot-build){target="_blank"} .
+
+:::
+
+Supabase eliminates the need to build and run that second search server. Instead, documentation chunks are stored in a table called `docs_section`:
 
 ::: {.panel-tabset}
 
-### Embeddings
+### Storing embeddings
 
-`pgvector` stores a list of numbers standing in for the meaning of a chunk of text. Those numbers are called an embedding. Gemini creates them, and they are kept in `docs_section`, next to the words they came from.
+Gemini turns each chunk of the docs into a list of numbers that stands in for its meaning. Those numbers are called an embedding. They sit in `docs_section`, next to the words they came from.
 
-### Closest pages
+### Searching relevant pages
 
-When someone asks a question, that question becomes the same kind of list of numbers. Postgres looks for the chunks whose numbers are close, and it also does an ordinary word search. The chat keeps the few pages that do well on either test, and Gemini may only answer from those excerpts. The reply includes links back to those pages.
-
-### Public pages
-
-On the public version of the site, only pages marked public are searched. The visitor's browser never reads `docs_section` directly. The chat page on the server does, with a key that stays on the server. The build notes are in the [chatbot build](https://beck-chan.vercel.app/docs/bot-build){target="_blank"}.
+A question becomes the same kind of list. Postgres finds the chunks whose lists are close, and it also looks for the exact words. The chat keeps the pages that do well on either test, and the reply links back to those pages.
 
 :::
 
-The docs chatbot counts questions the same way, in a table called `docs_chat_limits`: five an hour, and ten a day, again from a scrambled internet address. Every question costs a call to Gemini, the model that writes the reply.
 
 ## Conclusion
