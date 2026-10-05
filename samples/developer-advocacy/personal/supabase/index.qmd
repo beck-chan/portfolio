@@ -33,11 +33,13 @@ That split is what the later pieces rely on. Sign-in checks the role. Mail reads
 
 ## The Data API reads and writes the tables
 
-The guestbook never adds a route for each table. Supabase already serves one. In the dashboard, open Project Settings and select Data API. The API URL on that page ends in `/rest/v1`. That path is the interface over the tables.
+When I wanted the page to show the comments, I did not have to invent a web address for "get the comments" and another for "save a comment." Supabase already has those addresses. They call the whole set the Data API.
 
-`createClient()` in `src/lib/supabase/server.ts` is how the app reaches it. The client is built from `NEXT_PUBLIC_SUPABASE_URL` and the anon key, so a `.from(...)` call goes to `https://<your-project>.supabase.co/rest/v1/<table>`.
+If you open the project, go to Project Settings, and select Data API, you will see an API URL. It ends in `/rest/v1`. That ending is the front door to the tables. A table here is just the place a kind of information lives, the way a sheet in a spreadsheet holds one kind of list.
 
-`getPublicCommentsPage` in `src/app/actions/comments.ts` reads the board:
+In the guestbook, a helper called `createClient()` in `src/lib/supabase/server.ts` opens that door. It uses the project address, `NEXT_PUBLIC_SUPABASE_URL`, and a public key called the anon key. The anon key says which project I mean. It is not a master key. The database still decides what that caller is allowed to see. Under the hood, asking for a table becomes a normal web request to `https://<your-project>.supabase.co/rest/v1/<table>`.
+
+Reading the board is `getPublicCommentsPage` in `src/app/actions/comments.ts`. This is the actual request:
 
 ```typescript
 supabase
@@ -46,48 +48,62 @@ supabase
   .order("created_at", { ascending: false })
 ```
 
-The email is not in that list. Visitors see the name, the message, and the time. `submitComment` writes the other way. After the length, profanity, and rate-limit checks, it inserts `display_name`, `email`, and `body` into `comments`. `loadAdminComments` reads `comments` itself, including the email. That read only succeeds for a session the row rules allow. Postgres still checks those rules before it returns or writes a row.
+I left the email address out of that list on purpose. Visitors see a name, a message, and a time, newest first. `comments_public` is a window onto the real comment list that simply does not include the email column.
 
-Settings, poem-heart counts, and the docs chat tables use the same client.
+Saving a comment is `submitComment`. It first checks that the note is not empty or too long, that it is not rude, and that this person has not posted too many times. Only then does it write the name, the email, and the message into the private `comments` table.
+
+`loadAdminComments` is the version on the dashboard. It asks for that private table, email included. Editing, deleting, and marking a comment read (`updateComment`, `deleteComment`, `setCommentRead`, and `setCommentsRead`) aim at that same private table. If you are not an admin, the database refuses. Those refusals are row rules: instructions saved on the table about who may read or change each row. I do not have to remember to repeat that check on every screen. Postgres, the database itself, checks before it hands anything back or lets a write through.
+
+The rest of the app uses that same door.
+
+The settings row is one record, `guestbook_settings`, with the comment length, the speed limit, and how many notes fit on a page. `loadGuestbookSettings` in `src/lib/loadGuestbookSettings.ts` reads it. `saveGuestbookSettings` in `src/app/actions/settings.ts` writes it back, and only after it has checked that the signed-in person is an admin.
+
+Poem hearts do not let the browser write the heart table. `getDeskHeartSeed` in `src/lib/actions/hearts.ts` reads two public count windows, `poem_heart_counts` and `poem_heart_total`. Liking a poem calls a small database function, `toggle_poem_heart`, and `poem_heart_state` answers whether this visitor already liked it. A function call is still the Data API. It goes to `/rest/v1/rpc/<name>` instead of `/rest/v1/<table>`. Signing in as an admin uses that same kind of call: `resolveAdminSession` in `src/lib/adminAuth.ts` calls `ensure_admin_role`.
+
+The admin address list is the one the browser is not supposed to see. The mail function reads it with a server key, in `loadAllowlist` at `supabase/functions/_shared/allowlist.ts`. The docs chatbot does the same kind of thing for its own notes. In `src/app/docs/chat/route.ts`, the server saves a conversation in `docs_chat_session` and each turn in `docs_chat_message`, again with a key that stays on the server.
 
 ## Google OAuth 2.0 stamps the admin role
 
-A Google account proves who someone is. It does not prove they should moderate the board. Without a second check, anyone who can click "Sign in with Google" could open the dashboard. The allowlist is that second check. A stranger who signs in is signed back out. An admin keeps a session the dashboard will accept.
+Signing in with Google tells me who a person is. It does not tell me they should be allowed to run the guestbook. Anyone with a Google account can click the button. I keep a short list of admin email addresses, called `admin_allowlist`. If the account is not on that list, I sign them back out.
 
-`/admin/login` starts Google OAuth 2.0. After Google sends the visitor back, `ensure_admin_role` looks up their address on `admin_allowlist` and stamps `app_metadata.role` onto the login token. That stamp sits where the visitor cannot edit it. A database hook reads the allowlist when the account is created, and `is_admin()` later trusts only that role.
+The login page is `/admin/login`. After Google sends the person back, a function called `ensure_admin_role` looks up their address and writes a small note onto the login: `app_metadata.role` set to `admin`. That note sits where the visitor cannot edit it. When the account is first created, a database hook reads the list. Later, a check named `is_admin()` trusts only that note. A session, by the way, is just the site remembering that this browser already signed in.
 
-The app checks the session only on the admin path. Everyone else can use the guestbook without an account.
+I only run this check on the admin pages. Everyone else can sign the book with no account at all.
 
-- With no admin session, the visitor goes to `/admin/login`.
-- A sign-in that does not carry the admin role ends the session and sends them home with `?admin_error=1`.
-- An admin who is already signed in goes straight to the dashboard.
+- If there is no admin session yet, they are sent to `/admin/login`.
+- If they sign in and the note does not say admin, they are signed out and sent home with `?admin_error=1` on the address, so the page can show an error.
+- If they are already signed in as an admin, they go straight to the dashboard.
 
-If the dashboard has been moved off `/admin`, the same check follows `NEXT_PUBLIC_GUESTBOOK_ADMIN_PATH`. The OAuth client setup is in [Prerequisites](https://beck-chan.vercel.app/docs/prerequisites){target="_blank"}.
+If I ever move the dashboard off `/admin`, the same check follows whatever path I put in `NEXT_PUBLIC_GUESTBOOK_ADMIN_PATH`. The Google setup steps are in [Prerequisites](https://beck-chan.vercel.app/docs/prerequisites){target="_blank"}.
 
 ## Edge Functions mail on a write
 
-Admins should hear about a new comment without watching the dashboard. The database already knows the write happened, so the mail starts there. A webhook calls an Edge Function, and the function sends the message. Moderation can begin from the inbox. When you want quiet, one flag turns the mail off and leaves the functions in place.
+I did not want to sit on the dashboard waiting for a new comment. Supabase can run a small program in the cloud whenever a row changes. They call these Edge Functions. The database taps the function on the shoulder (that tap is called a webhook), and the function sends the email. I can moderate from my inbox. When I want quiet, one on/off switch, `FLAG_NOTIF`, stops the mail and leaves the functions where they are.
 
-Two functions receive those webhooks. `notify-admins` covers changes to comments, settings, hearts, and the allowlist. `on-user-created` covers a new account. Both refuse the call unless it carries a shared secret, and both stay silent unless `FLAG_NOTIF` is on. The recipient list is the allowlist, read with the server key.
+I have two. `notify-admins` covers changes to comments, settings, poem hearts, and the admin list. `on-user-created` covers a brand-new account. Both ignore the tap unless it carries a shared password, `NOTIFY_WEBHOOK_SECRET`, so a stranger on the internet cannot trigger the mail. Both also stay quiet unless `FLAG_NOTIF` is on. The people who receive the mail are the addresses on the allowlist. The function reads that list with a server key the browser never sees.
 
-A new comment is the message you will actually see. The function fills a short template and sends it through the Gmail API. An edit sends mail only when the name, the email, or the text changed, so a touch to a timestamp does not page anyone.
+The message I actually read is the new-comment email. The function fills in a short template and sends it with the Gmail API. If someone edits a comment, I only get mail when the name, the email, or the text changed. A behind-the-scenes timestamp does not bother me.
 
-How to turn the hook on is in [Enable Notifications](https://beck-chan.vercel.app/docs/notifs){target="_blank"}.
+How I turned this on is in [Enable Notifications](https://beck-chan.vercel.app/docs/notifs){target="_blank"}.
 
 ## Rate limits live in Postgres
 
-An open comment box will be filled by a script if nothing slows it down. The limit has to survive a restart and agree across every server, so the counters live in Postgres rather than in the memory of one Node process. The board stays readable. By default a visitor can leave one comment every five minutes, and two in a day. An admin can raise those caps in the guestbook settings.
+Leave a comment box wide open and a script can fill the board in a minute. I needed a speed limit that would still be there after a restart, and that would agree no matter which copy of the site answered the request. So the counters live in the database, rather than in the short-term memory of one running program.
 
-The Next.js action that accepts the comment spends the limit. It keys the bucket by a hash of the visitor's IP address, using `rate-limiter-flexible`. The database holds the buckets. The browser never writes them.
+By default a visitor can leave one comment every five minutes, and two in a day. I can raise those numbers in the guestbook settings.
 
-The docs chatbot uses the same pattern for a different reason. Each question costs a call to Gemini, so one browser should not be able to empty the quota. Questions are counted in `docs_chat_limits`: five an hour, and ten a day, again by a hash of the IP address. Those rows are closed to the browser. The server writes them.
+`submitComment`, the same function that saves a note, spends one of those chances. It does not store the visitor's raw internet address. It stores a scrambled version of it, so the limit can tell people apart without keeping a readable address in the table. The counting tool is called `rate-limiter-flexible`. The browser cannot write those counters. Only the server can.
+
+The docs chatbot has the same kind of limit, for a different reason. Every question costs a call to Gemini, the model that writes the reply. I did not want one browser to use up that allowance. Questions are counted in a table called `docs_chat_limits`: five an hour, and ten a day, again from a scrambled internet address.
 
 ## pgvector searches the docs
 
-The docs are long enough that a search for matching words misses the question someone actually asked. `pgvector` stores a numeric picture of each section, an embedding from Gemini, in a table called `docs_section`. A question is turned into the same kind of picture. Postgres finds the sections that are close in meaning, and it also checks ordinary wording. The chat route keeps the few pages that do well on either test and asks Gemini to answer from those excerpts only.
+The docs are long, and searching for the exact words someone typed misses questions asked a different way. `pgvector` is an add-on for Postgres that lets me store a list of numbers standing in for the meaning of a chunk of text. Those numbers are called an embedding. Gemini creates them, and I keep them in a table called `docs_section`, next to the words they came from.
 
-The visitor gets an answer tied to real guides, with links to those pages, and the model is not free to invent from the rest of the docs. On a public install, only the pages marked public are searched, so the chatbot cannot quote the private notes.
+When someone asks the chatbot a question, that question becomes the same kind of list of numbers. Postgres looks for the chunks whose numbers are close, which is a way of saying the meaning is close. It also does an ordinary word search. The chat keeps the few pages that do well on either test, and Gemini may only answer from those excerpts. The reply includes links, so you can go read the pages yourself.
 
-The browser never reads `docs_section` directly. The chat route reads it with the server key. The build notes are in the [chatbot build](https://beck-chan.vercel.app/docs/bot-build){target="_blank"}.
+On the public version of the site, only pages I have marked public are searched. The chatbot cannot quote my private notes.
 
-The same tables are the catalog in [Build API documentation with Scalar](../api/index.qmd). The comment path, including the rate limit, is what [Automate tests with Cucumber and Playwright](../cucumber/index.qmd) locks. The number on the page is [Implement hit counters with PostHog](../posthog/index.qmd).
+The visitor's browser never reads `docs_section` directly. The chat page on the server does, with a key that stays on the server. I wrote up how I built that in the [chatbot build](https://beck-chan.vercel.app/docs/bot-build){target="_blank"}.
+
+Those same tables are the catalog in [Build API documentation with Scalar](../api/index.qmd). The comment path, speed limit included, is what [Automate tests with Cucumber and Playwright](../cucumber/index.qmd) checks. The number on the page is [Implement hit counters with PostHog](../posthog/index.qmd).
