@@ -16,10 +16,15 @@ listing:
     - personal/cucumber/index.qmd
     - personal/posthog/index.qmd
     - personal/google-sheets/index.qmd
+    categories: true
 categories: ["Supabase", "Backend as a Service", "Frontend Development", "Next.js", "Scalar", "OpenAPI", "PostHog", "Quality Assurance", "Cucumber", "Playwright", "Google Sheets API"]
 ---
 
 {{< include /samples/single-source/_advocacy.qmd >}}
+
+::: {.category-filter}
+:::
+
 
 ## Personal
 

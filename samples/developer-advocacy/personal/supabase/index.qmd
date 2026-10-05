@@ -31,6 +31,25 @@ One project only helps if the database itself refuses the wrong read. Visitors c
 
 That split is what the later pieces rely on. Sign-in checks the role. Mail reads the allowlist from the server. The chatbot reads its own tables the same way, from the server, with the browser kept outside. -->
 
+## The Data API reads and writes the tables
+
+The guestbook never adds a route for each table. Supabase already serves one. In the dashboard, open Project Settings and select Data API. The API URL on that page ends in `/rest/v1`. That path is the interface over the tables.
+
+`createClient()` in `src/lib/supabase/server.ts` is how the app reaches it. The client is built from `NEXT_PUBLIC_SUPABASE_URL` and the anon key, so a `.from(...)` call goes to `https://<your-project>.supabase.co/rest/v1/<table>`.
+
+`getPublicCommentsPage` in `src/app/actions/comments.ts` reads the board:
+
+```typescript
+supabase
+  .from("comments_public")
+  .select("id, display_name, body, created_at, updated_at", { count: "exact" })
+  .order("created_at", { ascending: false })
+```
+
+The email is not in that list. Visitors see the name, the message, and the time. `submitComment` writes the other way. After the length, profanity, and rate-limit checks, it inserts `display_name`, `email`, and `body` into `comments`. `loadAdminComments` reads `comments` itself, including the email. That read only succeeds for a session the row rules allow. Postgres still checks those rules before it returns or writes a row.
+
+Settings, poem-heart counts, and the docs chat tables use the same client.
+
 ## Google OAuth 2.0 stamps the admin role
 
 A Google account proves who someone is. It does not prove they should moderate the board. Without a second check, anyone who can click "Sign in with Google" could open the dashboard. The allowlist is that second check. A stranger who signs in is signed back out. An admin keeps a session the dashboard will accept.
