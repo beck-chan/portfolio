@@ -8,35 +8,84 @@ Display user-facing analytics with PostHog.
 
 ## Introduction
 
-A hit counter is a promise to the person looking at the page: this many people have been here. The promise falls apart if the number includes every event in the project, or every page under the site. The digits on the [public guestbook](https://y2k-guestbook.vercel.app/){target="_blank"} are unique visitors to one page, since a time you choose.
+A hit counter on a page is a number a visitor can check. Keeping that count yourself means a table of visits, a job that writes a row on every page load, and a query you hope still means "people who saw this page."
 
-[Add Analytics](https://beck-chan.vercel.app/docs/analytics){target="_blank"} also turns on click tracking and session replay. Those are for you. This article is the number the visitor sees.
+## A visit log you maintain
 
-## What the digits are
+The usual way to show a counter is to record each visit in your own database, then count the rows. A refresh writes another row. A trip to another page writes another row. Restart the count, or count the wrong table, and the digits on the page stop meaning what they say.
 
-A refresh should not inflate the count, and a trip to the docs should not inflate the guestbook. The query counts distinct people who loaded that one path, and it ignores anything earlier than the timestamp you set. You can run the same query in PostHog and see the same number the page is showing, which is what makes the digits defensible.
+For example, the guestbook needs functionality to:
 
-```sql
-SELECT uniq(distinct_id)
-FROM events
-WHERE event = '$pageview'
-  AND properties.$host = '<host>'
-  AND properties.$pathname = '/'
-  AND timestamp >= toDateTime('<YYYY-MM-DD HH:mm:ss>', 'UTC')
+- **Count people, not loads:** One person refreshing the page should not add three.
+- **Count one page:** A visit to the docs should not add to the guestbook.
+- **Count since a time:** The number should be able to start at a moment you choose.
+
+So you invent a visits table, a write on every request, and a query that tries to undo the double-counting. The table is the log you have to keep honest.
+
+### PostHog Query API
+
+::: {.callout}
+
+**[PostHog](https://posthog.com/docs/api/query){target="_blank"}** already records a `$pageview` when the site loads its snippet. The counter does not write those events. It asks PostHog's Query API how many distinct people loaded one page.
+
+How to turn the snippet and the counter on is in [Add Analytics](https://beck-chan.vercel.app/docs/analytics){target="_blank"}.
+
+:::
+
+PostHog eliminates the visits table. `getUniqueVisitors` sends a HogQL query. The page shows the number that comes back.
+
+::: {.panel-tabset}
+
+#### Ask for the count
+
+`uniqueVisitorsQuery` in `src/lib/uniqueVisitors.ts`[^visitors-ts] builds the question. `uniq(distinct_id)` is one person. `$pageview` is a page load. The host, the path, and the start time are added only when those settings are set:
+
+```typescript
+let query =
+  "SELECT uniq(distinct_id) FROM events WHERE event = '$pageview'";
 ```
 
-`FLAG_COUNTER_URL` and `FLAG_COUNTER_DATE` are that scope. They are read when the page is requested, so a change does not require a new client bundle. An empty URL counts every pageview in the project, which is rarely what you want on a public counter. A filled-in URL counts one page. Full URLs need the trailing slash PostHog stored. Subpages stay out of the count, so `/guestbook/admin` does not add to `/guestbook`.
+`fetchUniqueVisitors` posts that string to PostHog. The personal API key stays on the server. `refresh: "force_blocking"` asks for a fresh count instead of PostHog's cached one:
 
-## Why the query runs on the server
+```typescript
+const response = await fetch(
+  `${apiHost}/api/projects/${projectId}/query/`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      query: { kind: "HogQLQuery", query: hogql },
+      refresh: "force_blocking",
+      name: "guestbook_unique_visitors",
+    }),
+  },
+);
+```
 
-The key that can read analytics can also read the rest of the project. In the browser, anyone who can view source could reuse it. The page asks your server, and the server asks PostHog with a personal API key limited to `query:read`. The secret stays in the server environment. Visitors see a number. They do not receive a credential.
+In development the function returns an error and does not call PostHog. A missing key does the same.
 
-`FLAG_COUNTER` turns the counter on in a production build. The page paints the server's count, then asks `/api/hits` on load and about every 15 seconds. Each ask is a fresh count. PostHog's cached answer is skipped, so a new visitor can show up while the tab is open, without a redeploy. `npm run dev` shows `ERROR!` and does not call PostHog, so a laptop does not burn the query quota or flash a number from the wrong project.
+#### Show it on the page
 
-## How it fails in public
+`src/app/api/hits/route.ts`[^hits-route] is the address the browser is allowed to call. It runs `getUniqueVisitors` and returns the JSON. The PostHog key never goes to the browser:
 
-Visitors will see either digits or the word `ERROR!`, and those mean different things. `000000` is a real count of zero: nobody in the window yet. `ERROR!` means the counter could not get a result at all. That is local development, missing or wrong keys, a timeout, or a `429` from PostHog. A quiet page and a broken counter should not look the same, and here they do not.
+```typescript
+export async function GET() {
+  const result = await getUniqueVisitors();
+  return NextResponse.json(result, {
+    headers: { "Cache-Control": "no-store" },
+  });
+}
+```
 
-The digit also will not tick the instant you load the tab. PostHog has to ingest the pageview first. After that, the counter is at most about one 15-second poll behind a query you run by hand. Several tabs left open can wait in line, because PostHog only runs three of these queries at once.
+`HitCounter` paints the server's first number, then asks `/api/hits` again every 15 seconds while the tab is open.[^hit-counter] That interval is `HIT_COUNT_REFRESH_MS` in `src/lib/hitCount.ts`.
 
-Clicks and session replay from `posthog-js` are the other half of the same project. Both are wired up in [Add Analytics](https://beck-chan.vercel.app/docs/analytics){target="_blank"}.
+:::
+
+[^visitors-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/lib/uniqueVisitors.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/uniqueVisitors.ts){target="_blank"}
+
+[^hits-route]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/app/api/hits/route.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/api/hits/route.ts){target="_blank"}
+
+[^hit-counter]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/components/_guestbook/HitCounter.tsx](https://github.com/beck-chan/y2k-guestbook/blob/main/src/components/_guestbook/HitCounter.tsx){target="_blank"}

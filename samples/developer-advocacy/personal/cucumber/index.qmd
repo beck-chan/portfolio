@@ -8,44 +8,87 @@ Run automated tests with Cucumber and Playwright.
 
 ## Introduction
 
-Installing the package and hoping the board behaves is a weak check. The guestbook ships the sentences that describe what your install should do, and Playwright carries them out in a real browser. `npx y2k-guestbook test` runs them against the app you have, at the URL you have. You can see whether this install matches the guestbook you expected before anyone is invited to sign it.
+A guestbook you can install needs a way to show that the install behaves. Clicking through it by hand does not travel with the package. A test that only calls functions never opens the page a visitor sees.
 
-A `.feature` file is the contract, in plain sentences. A step definition is the TypeScript that makes one of those sentences true in the browser. The shipped steps cover the board: comments, navigation, and the admin screens that do not need extra services. Mail and analytics are off unless you turn them on, so those sentences are left for you to write.
+## A script that has to know the page
 
-## One scenario runs end to end
+The usual way to automate a browser is to write a script that finds buttons by their code names and fails when the layout changes. The sentences a person would use, "submit a comment," live in a document no one runs. The script and the document drift apart.
 
-The whole suite has the same shape, so one scenario is enough to see it. "User submits a valid comment" starts as a sentence, becomes a click, and ends as a report you can open when it fails. The failure shows the browser, which is the surface your visitors actually use.
+For example, the guestbook package needs functionality to:
 
-```gherkin
-Scenario: User submits a valid comment
-    When a user enters in a valid display name and comment body
-    And they click the `submit` button
-    Then their comment displays as the topmost guestbook entry
+- **Read the sentences:** Take a `.feature` file as the thing to run.
+- **Perform them in a browser:** Turn each sentence into a Playwright step.
+- **Open a report:** Write an HTML report when a sentence fails.
+
+So you keep a test script, a list of CSS selectors, and a separate write-up of what the script is supposed to prove. Change the dashboard path and every hard-coded `/admin` has to be found by hand.
+
+### Playwright and Cucumber
+
+::: {.callout}
+
+**[Cucumber](https://cucumber.io/docs/gherkin/){target="_blank"}** describes behavior in Gherkin. **[playwright-bdd](https://github.com/vitalets/playwright-bdd){target="_blank"}** runs those sentences with Playwright. `npx y2k-guestbook test` is the command that wires the two together.
+
+The file tree and the rest of the commands are in the [feature tests guide](https://beck-chan.vercel.app/docs/tests){target="_blank"}.
+
+:::
+
+playwright-bdd eliminates the gap between the sentences and the browser. The package writes a Playwright config that points at the `.feature` files and the step definitions, then Playwright runs that config.
+
+::: {.panel-tabset}
+
+#### Point Playwright at the sentences
+
+`writePlaywrightConfig` in `scripts/cli.mjs`[^cli-mjs] writes `features/reports/playwright.config.ts` for the files you asked to run. The text it writes calls `defineBddConfig`, which is the integration. It tells Playwright that the tests are Gherkin, and where the steps live:
+
+```javascript
+const testDir = defineBddConfig({
+  features: ${JSON.stringify(featurePaths.map((file) => posix(resolve(projectRoot, file))))},
+  steps: ${JSON.stringify(stepGlobs(runtime))},
+  featuresRoot: ${JSON.stringify(featuresRoot)},
+  outputDir: ${JSON.stringify(outputDir)},
+  missingSteps: "fail-on-run",
+});
 ```
 
-The step fills the name and the comment, clicks the button labeled `submit`, and expects the new entry at the top of the board. The report lands at `features/reports/results/index.html`:
+`features` is the list of `.feature` files for this run. `steps` is `features/support/fixtures.ts` plus `features/step_definitions`. `missingSteps: "fail-on-run"` means a sentence with no TypeScript step fails the run instead of being skipped. The HTML reporter writes to `features/reports/results/` for a visitor run, or `features/reports/admin/` when the command is `-p admin`.
 
-```bash
-npx y2k-guestbook test features/features/guestbook/guestbook-comments.feature --name "User submits a valid comment"
-```
+#### Hand each sentence a page
 
-## Support files keep the wording stable
-
-The sentences should survive a redesign and a moved dashboard. If a step mentions a CSS class, a visual change breaks the test even though the guestbook still works. If the sentence hard-codes `/admin`, moving the dashboard breaks it too. The support files hold the details that change, and the English stays put.
-
-`world.ts` remembers the real guestbook path and the real admin path for the install. The feature file can keep saying `/admin`.
+`features/support/fixtures.ts`[^fixtures-ts] connects Cucumber's `Given`, `When`, and `Then` to a Playwright page. `createBdd` is that connection. Every sentence receives the same `world`:
 
 ```typescript
-this.guestbookPath = process.env.NEXT_PUBLIC_GUESTBOOK_PATH || "/";
-this.adminPath = process.env.NEXT_PUBLIC_GUESTBOOK_ADMIN_PATH || "/admin";
+import { createBdd, test as base } from "playwright-bdd";
+
+export const { Given, When, Then } = createBdd(test, {
+  worldFixture: "world",
+});
 ```
 
-`ui.ts` clicks the words on the screen, such as `submit` and `display name`. `seed.ts` puts rows on the board when a scenario needs them already there, and it clears rate limits and settings afterward. One run does not spend the quota the next run needs.
+#### Keep the paths out of the sentences
 
-## These tests write real rows
+`PlaywrightWorld` in `features/support/world.ts`[^world-ts] reads the installed guestbook path and admin path. The `.feature` file can keep saying `/admin`. The step asks the world for the real address:
 
-These scenarios are not mocks. They submit comments, spend rate limits, and edit the board through the same doors a visitor uses. Pointed at a production database, a passing test leaves a real comment and uses up a real slot in the limit from [Build applications with Supabase](../supabase/index.qmd). Run them against a development database. Treat a run against production as a write.
+```typescript
+const fromEnv = process.env.BASE_URL;
+this.baseUrl = String(fromEnv ?? "http://localhost:3000").replace(/\/$/, "");
+const guestbook = process.env.NEXT_PUBLIC_GUESTBOOK_PATH || "/";
+const admin = process.env.NEXT_PUBLIC_GUESTBOOK_ADMIN_PATH || "/admin";
+```
 
-Playwright also cannot finish Google's login screen. Admin scenarios open a visible browser and wait while you sign in with an allow-listed admin. Those runs use `-p admin`, which writes a separate report under `features/reports/admin/` so the admin results are not mixed into the visitor run.
+The sentence itself is the step name. `When` in `features/step_definitions/guestbook.ts`[^guestbook-steps] binds "they click the `submit` button" to a Playwright action:
 
-The other commands and the file tree are in the [feature tests guide](https://beck-chan.vercel.app/docs/tests){target="_blank"}.
+```typescript
+When("they click the `submit` button", async function (this: PlaywrightWorld) {
+  await clickSubmit(this.page);
+});
+```
+
+:::
+
+[^cli-mjs]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [scripts/cli.mjs](https://github.com/beck-chan/y2k-guestbook/blob/main/scripts/cli.mjs){target="_blank"}
+
+[^fixtures-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [features/support/fixtures.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/features/support/fixtures.ts){target="_blank"}
+
+[^world-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [features/support/world.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/features/support/world.ts){target="_blank"}
+
+[^guestbook-steps]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [features/step_definitions/guestbook.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/features/step_definitions/guestbook.ts){target="_blank"}

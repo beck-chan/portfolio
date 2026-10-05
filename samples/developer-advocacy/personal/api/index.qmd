@@ -8,26 +8,98 @@ Implement OpenAPI Specification documentation with Scalar.
 
 ## Introduction
 
-API docs go stale the moment the database changes and the spec file does not. The guestbook skips the file. Building the docs here means showing, in Scalar, the OpenAPI document that PostgREST already publishes for the project. After a migration, the reference describes the tables that are actually there.
+The Data API already publishes a description of every table. The hard part is showing that description as a page someone can read and try, without keeping a second copy of the API in a file that goes stale.
 
-`loadDatabaseOpenApi` fetches that document from `{project}/rest/v1/` with the service role and reuses it for about a minute. It adds a title, the two ways to authenticate (an `apikey` and a bearer token), and the server list. `FLAG_PUBLIC` chooses which project to read: the custom install, or the public example.
+## A spec file that has to stay in step
 
-## A reference that is the database
+The usual way to publish API docs is to write an OpenAPI file by hand, then render it with a documentation tool. Every new table, column, or permission means editing that file to match the database. Miss one edit and the page describes an API you no longer have.
 
-The page at `/docs/api` is that live document. The sidebar and the explorer share one fetch, so they cannot disagree. The rest of the guides leave it alone.
+For example, the guestbook docs need functionality to:
 
-The service role is what lets admin tables and functions appear in the list. If the fetch used only the public key, half of the API would be missing from the docs, and installers would think those calls did not exist. The key stays on the server that loads the spec. A try-it from the browser sends the visitor's own anon key and admin token. On the custom install, `FLAG_APITEST` turns that try-it on for internal checks. The public build turns it on for everyone.
+- **Show the live tables:** List the calls the database actually exposes.
+- **Try a request:** Send a call at the reader's own Supabase project.
+- **Sit in the docs:** Use the same page as the rest of the guides, not a separate product.
 
-The tables and policies in the document are the ones in [Build applications with Supabase](../supabase/index.qmd).
+So you keep a spec file, a renderer, and a rule that says the file must be updated whenever `schema.sql` changes. The file is the copy you have to keep in step.
 
-## Test Request on your project
+### Scalar
 
-A reference you cannot call against your own project is a picture of someone else's database. On the public build, the visitor types their Supabase project id. The page remembers it in the browser and points Send at that project. The example database never receives the try-it. You can check a filter or a header against the guestbook you installed.
+::: {.callout}
 
-On Send, the saved anon `apikey` and the admin token both go with the request. Focusing one Authentication tab keeps the other credential, so a call that needs both still has both. Filters that PostgREST requires on update and delete are written into the form once, so the same parameter is not offered twice.
+**[Scalar](https://github.com/scalar/scalar){target="_blank"}** renders an API reference from an OpenAPI document. The guestbook does not author that document. It fetches the one PostgREST already serves and hands it to Scalar.
 
-## The explorer uses the docs theme
+The rendered page is the [API library](https://y2k-guestbook.vercel.app/docs/api){target="_blank"}. The tables in it are the ones in [Build applications with Supabase](../supabase/index.qmd).
 
-Scalar's own chrome would make the API page feel like a different product sitting in the middle of the guides. The guestbook turns that theme off, hides Scalar's sidebar and search bar, and hides the models list. Tags start collapsed. The docs sidenav is the catalog: open a section, or click an operation, and the explorer moves to that call. Search in the sidenav opens Scalar's search.
+:::
 
-Someone can read a guide and try a request without the page changing costume. The public catalog is the [API library](https://y2k-guestbook.vercel.app/docs/api){target="_blank"}.
+Scalar eliminates the hand-written spec. `loadDatabaseOpenApi` asks the Data API for its own description, and `DocsApiReferenceView` mounts Scalar on that result.
+
+::: {.panel-tabset}
+
+#### Fetch the live spec
+
+`fetchOpenApiPair` in `src/lib/docs/loadDatabaseOpenApi.ts`[^openapi-ts] requests `{project}/rest/v1/` and asks for the OpenAPI document. The response is reused for about a minute:
+
+```typescript
+const response = await fetch(restRoot(url), {
+  headers: {
+    apikey: key,
+    Authorization: `Bearer ${key}`,
+    Accept: "application/openapi+json",
+  },
+  next: { revalidate: 60 },
+});
+```
+
+The fetch uses the server key so admin tables and functions appear in the catalog. That key stays on the server. The page then stamps the title and the two ways to authenticate, an `apikey` header and a bearer token:
+
+```typescript
+normalized.components.securitySchemes = {
+  ...normalized.components.securitySchemes,
+  apikey: API_KEY_SCHEME,
+  bearerAuth: BEARER_SCHEME,
+};
+```
+
+#### Mount Scalar
+
+`DocsApiReferenceView` loads the Scalar browser bundle and calls `createApiReference` with that document.[^reference-view] `content: spec` is the integration. The rest of the options are how the reference sits in the docs:
+
+```typescript
+instance = Scalar.createApiReference(hostRef.current, {
+  ...createScalarReferenceConfig(),
+  content: spec,
+});
+```
+
+`createScalarReferenceConfig` in `src/lib/docs/scalarConfig.ts`[^scalar-config] turns Scalar's own theme off, hides the models list, and starts with the tags collapsed. Guestbook CSS takes the place of Scalar's theme:
+
+```typescript
+hideModels: true,
+defaultOpenAllTags: false,
+customCss: SCALAR_CUSTOM_CSS,
+```
+
+#### Point Send at a project
+
+On the public build, Test Request is turned on. The visitor's project id becomes the server Scalar calls, so Send does not hit the example database.[^reference-view]
+
+```typescript
+...(flags.public
+  ? { servers: publicApiServers(appliedRef) }
+  : flags.apiTest
+    ? { servers: publicApiServers(envSupabaseProjectRef()) }
+    : {}),
+```
+
+`onBeforeRequest` in the same config runs `applyRememberedAuth`, which puts the saved anon key and the admin token on the outgoing request.[^api-key] Focusing one Authentication tab does not drop the other.
+
+:::
+
+[^openapi-ts]: **{{< fa brands github >}} beck-chan/guestbook:** [src/lib/docs/loadDatabaseOpenApi.ts](https://github.com/beck-chan/guestbook/blob/main/src/lib/docs/loadDatabaseOpenApi.ts){target="_blank"}
+
+[^reference-view]: **{{< fa brands github >}} beck-chan/guestbook:** [src/app/docs/_components/DocsApiReferenceView.tsx](https://github.com/beck-chan/guestbook/blob/main/src/app/docs/_components/DocsApiReferenceView.tsx){target="_blank"}
+
+[^scalar-config]: **{{< fa brands github >}} beck-chan/guestbook:** [src/lib/docs/scalarConfig.ts](https://github.com/beck-chan/guestbook/blob/main/src/lib/docs/scalarConfig.ts){target="_blank"}
+
+[^api-key]: **{{< fa brands github >}} beck-chan/guestbook:** [src/lib/docs/scalarApiKey.ts](https://github.com/beck-chan/guestbook/blob/main/src/lib/docs/scalarApiKey.ts){target="_blank"}
