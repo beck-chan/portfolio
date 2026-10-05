@@ -207,7 +207,15 @@ supabase.from("guestbook_settings").update(row).eq("id", 1)
 
 The usual way to allow users to log in using Google single sign-on is to run your own login service. You register your application with Google, store users in a table you maintain, hand the browser a cookie that says they are signed in, and remember to check that cookie on every private page. 
 
-For our guestbook, this would mean one missed check and a stranger could open your administrator dashboard.
+For example, our guestbook needs functionality to:
+
+- **Approve sign-in:** Accept a Google sign-in only when the address is on the admin list.
+- **Mark the admin:** Write `admin` onto the login, and again on a later sign-in if the mark is missing.
+- **Gate the dashboard:** Open `/admin` only when the session note says `admin`.
+
+So you invent one check for "is this address allowed," another for "does this session say admin," and so on. Each check is an instruction in that login service — when a sign-in shows up, look up the address and send the result back.
+
+You also have to protect each check, since not everyone who can sign in with Google should be able to open the dashboard. For our guestbook, one missed check and a stranger could open your administrator dashboard. The program that holds all of those checks is the login service you keep running.
 
 ### Supabase Auth
 
@@ -217,13 +225,15 @@ For our guestbook, this would mean one missed check and a stranger could open yo
 
 :::
 
-For our guestbook, Supabase Auth holds the admin users in a table for you, manages the browser cookies for signed-in sessions, and checks for that cookie on your administrator dashboard:
+Supabase eliminates the need to build and run a separate login service just to sign admins in with Google. Instead, Supabase Auth holds the admin users in a table for you, manages the browser cookies for signed-in sessions, and checks for that cookie on your administrator dashboard. 
+
+Instead of inventing a check for each private page, the session carries the `admin` note, and the dashboard reads that note:
 
 ::: {.panel-tabset}
 
-### Admin allowlist
+#### Approve sign-in
 
-The `admin_allowlist` table is the approved list of users who are allowed to access the administrator dashboard after they've successfully signed in with Google. The `loadAllowlist` function in `supabase/functions/_shared/allowlist.ts`[^allowlist-ts] reads this private table with your Supabase secret keys:[^function-secrets]
+`admin_allowlist` is the approved list of addresses that may open the administrator dashboard after a Google sign-in. The `loadAllowlist` function in `supabase/functions/_shared/allowlist.ts`[^allowlist-ts] reads this private table with your Supabase secret keys:[^function-secrets]
 
 ```typescript
 const url = Deno.env.get("SUPABASE_URL");
@@ -235,8 +245,6 @@ const supabase = createClient(url, key, {
 });
 const { data, error } = await supabase.from("admin_allowlist").select("email");
 ```
-
-#### Admin user creation
 
 When an authorized admin user signs in for the first time, the `hook_before_user_created` function created by `scripts/schema.sql`[^scripts-schema-sql] reads the `admin_allowlist`:
 
@@ -256,6 +264,10 @@ if user_email is null
 end if;
 ```
 
+Only if the address is on the `admin_allowlist`, then the sign-in is allowed to continue.
+
+#### Mark the admin
+
 Only if the address is on the `admin_allowlist`, then `app_metadata.role` set to `admin` is written onto the new login:
 
 ```sql
@@ -267,8 +279,6 @@ return jsonb_build_object(
   )
 );
 ```
-
-#### Admin user verification
 
 The `ensure_admin_role` function we created with `scripts/schema.sql` confirms that the user's email address is on the list:
 
@@ -291,7 +301,7 @@ where id = uid
   and coalesce(raw_app_meta_data->>'role', '') is distinct from 'admin';
 ```
 
-### Admin dashboard
+#### Gate the dashboard
 
 The `is_admin()` function defined in `src/app/actions/auth.ts`[^auth-ts] trusts only the `app_metadata.role` note set to `admin`. `src/proxy.ts`[^proxy-ts] runs this check on `/admin`:
 
