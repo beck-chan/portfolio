@@ -368,118 +368,92 @@ Supabase eliminates the need to build and run a separate server just to send ema
 
 ::: {.panel-tabset}
 
-### Verify and enable notifications
+### Edge Function secrets
 
-The function checks a shared password (`NOTIFY_WEBHOOK_SECRET`), and a call without this password is refused:
-
-```typescript
-if (!verifyNotifySecret(req)) {
-  return jsonResponse(401, { error: "Unauthorized" });
-}
-```
-
-The `verifyNotifySecret` function in [`supabase/functions/_shared/env.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/env.ts){target="_blank"} compares the request with that shared password:
+`NOTIFY_WEBHOOK_SECRET` and `FLAG_NOTIF` are secrets stored on the Edge Function. [`supabase/functions/_shared/env.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/env.ts){target="_blank"} reads them with `Deno.env`:
 
 ```typescript
 const expected = Deno.env.get("NOTIFY_WEBHOOK_SECRET") ?? "";
-if (!expected) return false;
-const auth = req.headers.get("authorization") ?? "";
-const header = req.headers.get("x-notify-webhook-secret") ?? "";
-const bearer = auth.match(/^Bearer\s+(.+)$/i)?.[1]?.trim() ?? "";
-return header === expected || bearer === expected || auth === expected;
 ```
-
-And only sends notifications if the on/off switch (`FLAG_NOTIF`) is set to `true`:
-
-```typescript
-if (!flagNotifOn()) {
-  return jsonResponse(200, { skipped: "FLAG_NOTIF" });
-}
-```
-
-`flagNotifOn` in [`supabase/functions/_shared/env.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/env.ts){target="_blank"} reads that switch:
 
 ```typescript
 const v = (Deno.env.get("FLAG_NOTIF") ?? "").trim().toLowerCase();
 return v === "true" || v === "1";
 ```
 
-
-### Notify admins
-
-`notify-admins` in [`supabase/functions/notify-admins/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/notify-admins/index.ts){target="_blank"} covers changes to comments, settings, and the admin list.
-
-The emails who receive the notifications are the addresses from `loadAllowlist()`, and messages are filled with an email template and sent with the Gmail API:
+Any call that doesn't carry the secret is refused, and no notifications are sent with the switch is set to `false`:
 
 ```typescript
-// New comments
-const copy = await loadMail("comment-insert", { admin, name, body });
-return allowlist.map((to) => ({
-  to,
-  ...copy,
-  idempotencyKey: `comment:insert:${id}:${to}`,
-}));
+if (!verifyNotifySecret(req)) {
+  return jsonResponse(401, { error: "Unauthorized" });
+}
+if (!flagNotifOn()) {
+  return jsonResponse(200, { skipped: "FLAG_NOTIF" });
+}
 ```
 
+### Webhook payloads
+
+Supabase posts the row change to [`supabase/functions/notify-admins/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/notify-admins/index.ts){target="_blank"}, which sends admin notifications on comments received, edited, deleted, or guestbook settings updated. The body names the table, the kind of change, and the row:
+
 ```typescript
-// Edited comments
-const keys = ["display_name", "email", "body"] as const;
-return keys.some((key) => str(oldRecord?.[key]) !== str(record?.[key]));
+type WebhookPayload = {
+  type?: string;
+  table?: string;
+  schema?: string;
+  record?: Record<string, unknown> | null;
+  old_record?: Record<string, unknown> | null;
+};
+
+const table = payload.table ?? "";
+const type = (payload.type ?? "").toUpperCase();
+const record = payload.record ?? null;
+const oldRecord = payload.old_record ?? null;
 ```
 
+`record` is the new row. `old_record` is the row before the change. The same function switches on `table` instead of a separate address for each message:
+
 ```typescript
-// Updated settings
-const changed = changedKeys(oldRecord, record, new Set(["id", "updated_at"]));
-const summary = changed
-  .map((key) => `${key}: ${snippet(str(record?.[key]), 80)}`)
-  .join("\n");
-const copy = await loadMail("settings-update", { admin, summary });
-return allowlist.map((to) => ({
-  to,
-  ...copy,
-  idempotencyKey: `settings:update:${changed.join(",")}:${to}`,
-}));
+if (table === "comments") {
+  if (type === "INSERT") {
+    const id = str(record?.id) || "new";
+  }
+  if (type === "UPDATE") {
+    if (!commentContentChanged(oldRecord, record)) return [];
+  }
+  if (type === "DELETE") {
+    const id = str(oldRecord?.id) || "deleted";
+  }
+}
+
+if (table === "guestbook_settings") {
+  if (type !== "UPDATE") return null;
+}
+
+if (table === "admin_allowlist") {
+  if (type === "INSERT") {
+    const added = asEmail(record?.email);
+  }
+  if (type === "DELETE") {
+    const removed = asEmail(oldRecord?.email);
+  }
+}
 ```
 
-```typescript
-// Admins added
-const vars = { admin, email: added };
-const selfCopy = await loadMail("allowlist-added-self", vars);
-const othersCopy = await loadMail("allowlist-added", vars);
-return allowlistMails(
-  recipients,
-  added,
-  selfCopy,
-  othersCopy,
-  `allowlist:insert:${added}`,
-);
-```
+[`supabase/functions/on-user-created/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/on-user-created/index.ts){target="_blank"} reads the email from the body Supabase posts to notify admins on the allow-list when a new admin has signed in for the first time:
 
 ```typescript
-// Admins removed
-const vars = { admin, email: removed };
-const othersCopy = await loadMail("allowlist-removed", vars);
-const selfCopy = await loadMail("allowlist-removed-self", vars);
-const mails = allowlist.map((to) => ({
-  to,
-  ...othersCopy,
-  idempotencyKey: `allowlist:delete:${removed}:to:${to}`,
-}));
-mails.push({
-  to: removed,
-  ...selfCopy,
-  idempotencyKey: `allowlist:delete:${removed}:self`,
-});
-return mails;
-```
+const record = root.record;
+if (record && typeof record === "object") {
+  const fromRecord = asEmail((record as Record<string, unknown>).email);
+  if (fromRecord) return fromRecord;
+}
 
-### New admin creation
-
-`on-user-created` in [`supabase/functions/on-user-created/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/on-user-created/index.ts){target="_blank"} covers the first login or a new allow-listed admin:
-
-```typescript
-const selfCopy = await loadMail("auth-created-self", vars);
-const othersCopy = await loadMail("auth-created", vars);
+const user = root.user;
+if (user && typeof user === "object") {
+  const fromUser = asEmail((user as Record<string, unknown>).email);
+  if (fromUser) return fromUser;
+}
 ```
 
 :::
