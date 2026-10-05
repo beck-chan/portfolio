@@ -67,7 +67,7 @@ return createServerClient(
   // Your Supabase project URL
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   // Your Supabase publishable key
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
   // ...
 );
 ```
@@ -76,7 +76,7 @@ Under the hood, asking for a table becomes a normal web request to `https://<you
 
 ::: {.panel-tabset}
 
-# Retrieve comments
+#### Retrieve comments
 
 `comments_public` is a table with a view of submitted `comments` that exclude submitted email addresses from display. The `getPublicCommentsPage` function reads that table in [`src/app/actions/comments.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/comments.ts){target="_blank"}:
 
@@ -87,11 +87,11 @@ supabase
   .order("created_at", { ascending: false })
 ```
 
-# Save comments
+#### Save comments
 
 `comments` is the private table that stores submitted comments. The `submitComment` function in [`src/app/actions/comments.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/comments.ts){target="_blank"} writes to this table.
 
-Comments are first checked for length, content, and frequency:
+Comments are first checked for length, content, and [frequency](#limits):
 
 ```typescript
 const lengthError = commentLengthError(
@@ -127,7 +127,7 @@ const { error } = await supabase.from("comments").insert({
 });
 ```
 
-# Modify comments
+#### Modify comments
 
 The `loadAdminComments` function in in [`src/app/actions/comments.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/comments.ts){target="_blank"} reads the private `comments` table for the dashboard:
 
@@ -197,7 +197,7 @@ select coalesce(
 );
 ```
 
-# Apply settings
+#### Apply settings
 
 The `guestbook_settings` table is one record with the comment length, the speed limit, and how many notes fit on a page. The `loadGuestbookSettings` function in [`src/lib/loadGuestbookSettings.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/loadGuestbookSettings.ts){target="_blank"} reads these saved settings:
 
@@ -230,34 +230,40 @@ supabase.from("guestbook_settings").update(row).eq("id", 1)
 
 ## Authentication gating by Google
 
-<!-- DO NOT EDIT ABOVE HERE -->
+The usual way to allow users to log in using Google single sign-on is to run your own login service. You register your application with Google, store users in a table you maintain, hand the browser a cookie that says they are signed in, and remember to check that cookie on every private page. 
 
-The usual way to add "Sign in with Google" is to run your own login service. You register the app with Google, store users in a table you maintain, hand the browser a cookie that says they are signed in, and remember to check that cookie on every private page. Miss one check and a stranger can open the dashboard.
+For our guestbook, this would mean one missed check and a stranger could open your administrator dashboard.
 
-Supabase Auth holds that Google conversation and the signed-in session. A session is the site remembering that this browser already signed in. Signing in still only says who the person is. `admin_allowlist` is the short list of admin email addresses.
+### Supabase Auth
 
-After Google sends the person back to `/admin/login`, `ensure_admin_role` in [`scripts/schema.sql`](https://github.com/beck-chan/y2k-guestbook/blob/main/scripts/schema.sql){target="_blank"} looks up their address. If it is not on the list, the function returns false:
+::: {.callout}
 
-```sql
-if user_email is null
-   or not exists (
-     select 1 from public.admin_allowlist where email = user_email
-   ) then
-  return false;
-end if;
+[Supabase Auth](https://supabase.com/docs/guides/auth){target="_blank"} "makes it easy to implement authentication and authorization in your app." 
+
+:::
+
+For our guestbook, Supabase Auth holds the admin users in a table for you, manages the browser cookies for signed-in sessions, and checks for that cookie on your administrator dashboard:
+
+::: {.panel-tabset}
+
+### Admin allowlist
+
+The `admin_allowlist` table is the approved list of users who are allowed to access the administrator dashboard after they've successfully signed in with Google. The `loadAllowlist` function in [`supabase/functions/_shared/allowlist.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/allowlist.ts){target="_blank"} reads this private table with a server key:
+
+```typescript
+const url = Deno.env.get("SUPABASE_URL");
+const secretKeys = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") ?? "{}");
+const key = secretKeys.default;
+
+const supabase = createClient(url, key, {
+  auth: { persistSession: false, autoRefreshToken: false },
+});
+const { data, error } = await supabase.from("admin_allowlist").select("email");
 ```
 
-Only if the address is on the list, then it writes `app_metadata.role` set to `admin`. That note sits where the visitor cannot edit it:
+#### Admin user creation
 
-```sql
-update auth.users
-set raw_app_meta_data =
-  coalesce(raw_app_meta_data, '{}'::jsonb) || '{"role":"admin"}'::jsonb
-where id = uid
-  and coalesce(raw_app_meta_data->>'role', '') is distinct from 'admin';
-```
-
-When the account is first created, `hook_before_user_created` in the same file reads that list. If the address is missing, sign-up is refused:
+When an authorized admin user signs in for the first time, the `hook_before_user_created` function created by [`scripts/schema.sql`](https://github.com/beck-chan/y2k-guestbook/blob/main/scripts/schema.sql){target="_blank"} reads the `admin_allowlist`:
 
 ```sql
 if user_email is null
@@ -275,7 +281,7 @@ if user_email is null
 end if;
 ```
 
-Only if the address is on the list, then the same role is written onto the new login:
+Only if the address is on the `admin_allowlist`, then `app_metadata.role` set to `admin` is written onto the new login:
 
 ```sql
 return jsonb_build_object(
@@ -287,7 +293,32 @@ return jsonb_build_object(
 );
 ```
 
-`is_admin()` trusts only that note. The `proxy` function in [`src/proxy.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/proxy.ts){target="_blank"} runs the check on admin pages. Everyone else can sign the book with no account at all.
+#### Admin user verification
+
+The `ensure_admin_role` function we created with `scripts/schema.sql` confirms that the user's email address is on the list:
+
+```sql
+if user_email is null
+   or not exists (
+     select 1 from public.admin_allowlist where email = user_email
+   ) then
+  return false;
+end if;
+```
+
+Only if the address is on the `admin_allowlist`, and the saved login does not already say `admin`, then it writes `app_metadata.role` set to `admin`. That covers a later sign-in where the mark may be missing:
+
+```sql
+update auth.users
+set raw_app_meta_data =
+  coalesce(raw_app_meta_data, '{}'::jsonb) || '{"role":"admin"}'::jsonb
+where id = uid
+  and coalesce(raw_app_meta_data->>'role', '') is distinct from 'admin';
+```
+
+### Admin dashboard
+
+The `is_admin()` function defined in [`src/app/actions/auth.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/auth.ts){target="_blank"} trusts only the `app_metadata.role` note set to `admin`. [`src/proxy.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/proxy.ts){target="_blank"} runs this check on `/admin`:
 
 The role on the session is read first:
 
@@ -299,9 +330,10 @@ const role =
 const isAdmin = role === "admin";
 ```
 
-If there is no session yet, they are sent to `/admin/login`. If the note does not say admin, they are signed out and sent home with `?admin_error=1`. If they are already signed in as an admin, they go straight to the dashboard:
+Then, depending on the user's authorization or session status, they are redirected to the appropriate page:
 
 ```typescript
+// If there is no session yet, they are sent to `/admin/login`
 if (!user) {
   const loginUrl = request.nextUrl.clone();
   loginUrl.pathname = loginPath;
@@ -310,6 +342,7 @@ if (!user) {
 }
 
 if (!isAdmin) {
+// If the note does not say admin, they are signed out and sent home with `?admin_error=1`
   await supabase.auth.signOut();
   const homeUrl = request.nextUrl.clone();
   homeUrl.pathname = guestbookHomePath();
@@ -318,6 +351,7 @@ if (!isAdmin) {
 }
 
 if (isLogin) {
+// If they are already signed in as an admin, they go straight to the dashboard
   const adminUrl = request.nextUrl.clone();
   adminUrl.pathname = adminPath;
   adminUrl.search = "";
@@ -325,19 +359,9 @@ if (isLogin) {
 }
 ```
 
-If the dashboard moves off `/admin`, the same check follows whatever path is in `NEXT_PUBLIC_GUESTBOOK_ADMIN_PATH`. The Google setup steps are in [Prerequisites](https://beck-chan.vercel.app/docs/prerequisites){target="_blank"}.
+:::
 
-`admin_allowlist` is the list the browser is not supposed to see. The `loadAllowlist` function in [`supabase/functions/_shared/allowlist.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/allowlist.ts){target="_blank"} reads it with a server key:
-
-```typescript
-const url = Deno.env.get("SUPABASE_URL");
-const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-
-const supabase = createClient(url, key, {
-  auth: { persistSession: false, autoRefreshToken: false },
-});
-const { data, error } = await supabase.from("admin_allowlist").select("email");
-```
+<!-- DO NOT EDIT ABOVE HERE -->
 
 ## Edge Functions mail on a write
 
@@ -388,6 +412,8 @@ return keys.some((key) => str(oldRecord?.[key]) !== str(record?.[key]));
 `on-user-created` in [`supabase/functions/on-user-created/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/on-user-created/index.ts){target="_blank"} covers a brand-new account. It uses those same two checks, then fills the `auth-created` template for the allowlist.
 
 How this is turned on is in [Enable Notifications](https://beck-chan.vercel.app/docs/notifs){target="_blank"}.
+
+<span id="limits"></span>
 
 ## Rate limits live in Postgres
 
