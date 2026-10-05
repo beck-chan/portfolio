@@ -60,6 +60,9 @@ categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation",
 
 {{< include /samples/single-source/_technical.qmd >}}
 
+::: {.category-filter}
+:::
+
 ## Personal
 
 {{< include /samples/single-source/personal/_guestbook.qmd >}}
