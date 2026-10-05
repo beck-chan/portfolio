@@ -522,8 +522,6 @@ await burst.consume(key);
 
 :::
 
-<!-- DO NOT EDIT ABOVE HERE -->
-
 ## Effortless extensibility
 
 The usual way to build a chatbot that searches documentation for questions asked is to build a second search server. You copy the docs into that server, and keep that copy in step with the real pages, or the answers drift.
@@ -590,5 +588,19 @@ The chat keeps the pages that do well on either test, and the reply links back t
 
 :::
 
+<!-- DO NOT EDIT ABOVE HERE -->
 
 ## Conclusion
+
+My dilemma before I built the application was the number of separate programs a simple guestbook interface seems to need. A server to read and write comments. A login service for the admin dashboard, another server to send notifications when a row changes, a counter store so a script cannot fill the board, a second search server for the docs chatbot. 
+
+Each one has to stay running, and each one needs its own check so a stranger cannot do what only an admin should do. Phew — I wasn't sure I wanted to take on all of that just to pay idle homage to a childhood memory.
+
+For a moment, I understood why the guestbooks of yore were so, well, rudimentary, and why they relied on insecure methods to allow users to make changes to frontend code instead of integrating a proper backend, and had absolutely no checks in place to prevent a stranger from potentially doing some very nefarious things. 
+
+I suppose the 90s were a more trusting time, or maybe I just didn't think about it as much. Probably a mix of both.
+
+::: {.callout}  
+Luckily for me, Supabase seamlessly holds those jobs in one project — the Supa-suite solution to the backend feeling like a pile of unrelated tools. 
+
+:::
