@@ -336,8 +336,6 @@ if (isLogin) {
 
 :::
 
-<!-- DO NOT EDIT ABOVE HERE -->
-
 ## Supa-erp serverless architecture
 
 The usual way to arrange for notifications is to build another small server of your own, whose only job is to notice changes to your database and send the email. Just like reading and writing the database, we run into similar things we have to consider.
@@ -460,39 +458,44 @@ if (user && typeof user === "object") {
 
 <span id="limits"></span>
 
-## Rate limits live in Postgres
+## Full functionality in one database
 
-The usual way to stop a script from filling the comment box is a separate counter store, often Redis, or the memory of whichever copy of the site happened to answer. Restart the site and the count forgets everyone. Two copies of the site can disagree about whether this person already posted.
+The usual way to stop spam is to build another small store of your own, or to keep the count in the memory of whichever copy of the site happened to answer. Restart that store and the count forgets everyone. Two copies of the site can disagree about whether this person already posted.
 
-### Postgres
+For example, our guestbook needs functionality to limit:
+
+- **Short window:** One comment every five minutes.
+- **Daily window:** Two comments in a day.
+
+So you invent one counter for the short window, another for the day, and so on. Each counter is a record in that store — when a comment shows up, spend one chance and send the result back. You also have to protect each counter, since the browser must not be able to reset it. The program that holds the counters is the store you keep running.
+
+### Postgres database
 
 ::: {.callout}
-
-**[Database](https://supabase.com/docs/guides/database/overview){target="_blank"}** "Every Supabase project gets a full Postgres database, not a Postgres abstraction."
+With **[Supabase Database](https://supabase.com/docs/guides/database/overview){target="_blank"}**s, "Every Supabase project gets a full Postgres database, not a Postgres abstraction."
 
 :::
 
-For our guestbook, the counters live in that database, so a restart does not wipe them and every copy of the site sees the same number. By default a visitor can leave one comment every five minutes, and two in a day. Those numbers can be raised in the guestbook settings.
-
-`submitComment` spends one of those chances by calling `consumeCommentRateLimit` in [`src/lib/rate-limit.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/rate-limit.ts){target="_blank"}:
+Supabase eliminates the need to build and run a separate counter store. The counters live in the Postgres database the project already has — `submitComment` spends one chance by calling `consumeCommentRateLimit` in [`src/lib/rate-limit.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/rate-limit.ts){target="_blank"}:
 
 ::: {.panel-tabset}
 
-### Scrambled address
+### Database connection
 
-The function does not store the visitor's raw internet address. It stores a scrambled version of it:
+Each count goes through a shared `DATABASE_URL` door that lends out a database connection for one query, then takes it back. The next query may get a different connection, so this code does not ask the database to remember the query under a name. It sends the query and the values again each time, and the count gets saved:
 
 ```typescript
-function hashIp(ip: string) {
-  return createHash("sha256").update(ip).digest("hex").slice(0, 32);
-}
+const connectionString = process.env.DATABASE_URL?.trim();
 
-const key = hashIp(ip || "unknown");
+return pgPool.query({
+  text: config.text,
+  values: config.values,
+});
 ```
 
 ### Counter table
 
-The counting tool is `rate-limiter-flexible`. It writes the counters to `guestbook_rate_limits`. The browser cannot write that table. Only the server can:
+[`rate-limiter-flexible`](https://github.com/animir/node-rate-limiter-flexible){target="_blank"} saves the counts in a table called `guestbook_rate_limits` — a visitor's browser cannot change that table, preventing users from overriding the limit:
 
 ```typescript
 new RateLimiterPostgres({
@@ -506,32 +509,43 @@ new RateLimiterPostgres({
 })
 ```
 
-### Spend a chance
+### Spending chances
 
-Only if both the short window and the daily window still have room, then the function spends one chance in each:
+The table stores a scrambled internet address, so the limit can tell people apart without keeping a readable address. The function spends one chance in the short window and one in the daily window only when both still have room:
 
 ```typescript
+const key = createHash("sha256").update(ip || "unknown").digest("hex").slice(0, 32);
+
 await daily.consume(key);
 await burst.consume(key);
 ```
 
 :::
 
-The docs chatbot counts questions the same way, in a table called `docs_chat_limits`: five an hour, and ten a day, again from a scrambled internet address. Every question costs a call to Gemini, the model that writes the reply.
+<!-- DO NOT EDIT ABOVE HERE -->
 
-## pgvector searches the docs
+## Effortless extensibility 
 
-The usual way to search docs for questions asked in different words is a second search engine. You copy the docs into it and keep that copy in step with the real pages, or the answers drift.
+The usual way to search docs for questions asked in different words is to build a second search server. You copy the docs into it and keep that copy in step with the real pages, or the answers drift.
+
+For example, the docs chatbot needs functionality to:
+
+- **Embeddings:** Store a list of numbers for the meaning of each chunk of text.
+- **Closest pages:** Find the chunks whose numbers are close, and also run an ordinary word search.
+- **Public pages:** Search only the pages marked public.
+
+So you invent a search address for "the meaning of this question," and another for "these exact words." Each address is an instruction in that second server — when a question shows up, find the closest pages and send the excerpts back.
+
+You also have to protect that search, since the browser must not read private notes. The program that holds the copy of the docs is the search server you keep running.
 
 ### pgvector
 
 ::: {.callout}
-
-**[pgvector](https://supabase.com/docs/guides/database/extensions/pgvector){target="_blank"}** "is a Postgres extension for vector similarity search. It can also be used for storing embeddings."
+## **[pgvector](https://supabase.com/docs/guides/database/extensions/pgvector){target="_blank"}** "is a Postgres extension for vector similarity search. It can also be used for storing embeddings."
 
 :::
 
-For our guestbook, the docs chatbot keeps that search in the same Postgres database:
+Supabase eliminates the need to build and run that second search server. The numbers live in the same Postgres database, in a table called `docs_section`:
 
 ::: {.panel-tabset}
 
@@ -549,4 +563,6 @@ On the public version of the site, only pages marked public are searched. The vi
 
 :::
 
-Those same tables are the catalog in [Build API documentation with Scalar](../api/index.qmd). The comment path, speed limit included, is what [Automate tests with Cucumber and Playwright](../cucumber/index.qmd) checks. The number on the page is [Implement hit counters with PostHog](../posthog/index.qmd).
+The docs chatbot counts questions the same way, in a table called `docs_chat_limits`: five an hour, and ten a day, again from a scrambled internet address. Every question costs a call to Gemini, the model that writes the reply.
+
+## Conclusion
