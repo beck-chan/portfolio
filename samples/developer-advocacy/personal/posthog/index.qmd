@@ -7,3 +7,36 @@ categories: ["PostHog"]
 Display user-facing analytics with PostHog.
 
 ## Introduction
+
+A hit counter is a promise to the person looking at the page: this many people have been here. The promise falls apart if the number includes every event in the project, or every page under the site. The digits on the [public guestbook](https://y2k-guestbook.vercel.app/){target="_blank"} are unique visitors to one page, since a time you choose.
+
+[Add Analytics](https://beck-chan.vercel.app/docs/analytics){target="_blank"} also turns on click tracking and session replay. Those are for you. This article is the number the visitor sees.
+
+## What the digits are
+
+A refresh should not inflate the count, and a trip to the docs should not inflate the guestbook. The query counts distinct people who loaded that one path, and it ignores anything earlier than the timestamp you set. You can run the same query in PostHog and see the same number the page is showing, which is what makes the digits defensible.
+
+```sql
+SELECT uniq(distinct_id)
+FROM events
+WHERE event = '$pageview'
+  AND properties.$host = '<host>'
+  AND properties.$pathname = '/'
+  AND timestamp >= toDateTime('<YYYY-MM-DD HH:mm:ss>', 'UTC')
+```
+
+`FLAG_COUNTER_URL` and `FLAG_COUNTER_DATE` are that scope. They are read when the page is requested, so a change does not require a new client bundle. An empty URL counts every pageview in the project, which is rarely what you want on a public counter. A filled-in URL counts one page. Full URLs need the trailing slash PostHog stored. Subpages stay out of the count, so `/guestbook/admin` does not add to `/guestbook`.
+
+## Why the query runs on the server
+
+The key that can read analytics can also read the rest of the project. In the browser, anyone who can view source could reuse it. The page asks your server, and the server asks PostHog with a personal API key limited to `query:read`. The secret stays in the server environment. Visitors see a number. They do not receive a credential.
+
+`FLAG_COUNTER` turns the counter on in a production build. The page paints the server's count, then asks `/api/hits` on load and about every 15 seconds. Each ask is a fresh count. PostHog's cached answer is skipped, so a new visitor can show up while the tab is open, without a redeploy. `npm run dev` shows `ERROR!` and does not call PostHog, so a laptop does not burn the query quota or flash a number from the wrong project.
+
+## How it fails in public
+
+Visitors will see either digits or the word `ERROR!`, and those mean different things. `000000` is a real count of zero: nobody in the window yet. `ERROR!` means the counter could not get a result at all. That is local development, missing or wrong keys, a timeout, or a `429` from PostHog. A quiet page and a broken counter should not look the same, and here they do not.
+
+The digit also will not tick the instant you load the tab. PostHog has to ingest the pageview first. After that, the counter is at most about one 15-second poll behind a query you run by hand. Several tabs left open can wait in line, because PostHog only runs three of these queries at once.
+
+Clicks and session replay from `posthog-js` are the other half of the same project. Both are wired up in [Add Analytics](https://beck-chan.vercel.app/docs/analytics){target="_blank"}.

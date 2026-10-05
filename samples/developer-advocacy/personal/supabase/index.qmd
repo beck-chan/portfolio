@@ -8,10 +8,54 @@ Use Supabase as your comprehensive backend solution.
 
 ## Introduction
 
-## Authentication
+A small app needs a database, user login, rules for who can read each row, a way to send mail when data changes, and search that can answer a question. If you build that yourself, you run and maintain each piece.
 
-## Edge Functions
+Supabase includes those pieces in one hosted Postgres project. Login, row rules, background functions, and vector search come with the project. Your code can stay on the app.
 
-## Rate Limiting
+A guestbook has to remember comments, know who the admin is, tell that admin when something changes, and answer questions about its own docs. The [public guestbook](https://y2k-guestbook.vercel.app/){target="_blank"} keeps all four in one Supabase project. Google OAuth 2.0 decides who is an admin. Edge Functions send the mail. Rate limits live in Postgres. The `pgvector` extension is how the chatbot searches the docs.
 
-## Extensions
+One project only helps if the database itself refuses the wrong read. Visitors can leave a comment, and they can see the board, but they never read the table that stores the email address. They read `comments_public`, which shows the name, the message, and the time. Poem likes work the same way. The heart table is closed, and the page reads a count that a small database function maintains. The list of admin addresses is closed too. Nothing in the browser can edit it. The door to the admin side is a role on the login token: `app_metadata.role` has to be `admin`.
+
+That split is what the later pieces rely on. Sign-in checks the role. Mail reads the allowlist from the server. The chatbot reads its own tables the same way, from the server, with the browser kept outside.
+
+## Google OAuth 2.0 stamps the admin role
+
+A Google account proves who someone is. It does not prove they should moderate the board. Without a second check, anyone who can click "Sign in with Google" could open the dashboard. The allowlist is that second check. A stranger who signs in is signed back out. An admin keeps a session the dashboard will accept.
+
+`/admin/login` starts Google OAuth 2.0. After Google sends the visitor back, `ensure_admin_role` looks up their address on `admin_allowlist` and stamps `app_metadata.role` onto the login token. That stamp sits where the visitor cannot edit it. A database hook reads the allowlist when the account is created, and `is_admin()` later trusts only that role.
+
+The app checks the session only on the admin path. Everyone else can use the guestbook without an account.
+
+- With no admin session, the visitor goes to `/admin/login`.
+- A sign-in that does not carry the admin role ends the session and sends them home with `?admin_error=1`.
+- An admin who is already signed in goes straight to the dashboard.
+
+If the dashboard has been moved off `/admin`, the same check follows `NEXT_PUBLIC_GUESTBOOK_ADMIN_PATH`. The OAuth client setup is in [Prerequisites](https://beck-chan.vercel.app/docs/prerequisites){target="_blank"}.
+
+## Edge Functions mail on a write
+
+Admins should hear about a new comment without watching the dashboard. The database already knows the write happened, so the mail starts there. A webhook calls an Edge Function, and the function sends the message. Moderation can begin from the inbox. When you want quiet, one flag turns the mail off and leaves the functions in place.
+
+Two functions receive those webhooks. `notify-admins` covers changes to comments, settings, hearts, and the allowlist. `on-user-created` covers a new account. Both refuse the call unless it carries a shared secret, and both stay silent unless `FLAG_NOTIF` is on. The recipient list is the allowlist, read with the server key.
+
+A new comment is the message you will actually see. The function fills a short template and sends it through the Gmail API. An edit sends mail only when the name, the email, or the text changed, so a touch to a timestamp does not page anyone.
+
+How to turn the hook on is in [Enable Notifications](https://beck-chan.vercel.app/docs/notifs){target="_blank"}.
+
+## Rate limits live in Postgres
+
+An open comment box will be filled by a script if nothing slows it down. The limit has to survive a restart and agree across every server, so the counters live in Postgres rather than in the memory of one Node process. The board stays readable. By default a visitor can leave one comment every five minutes, and two in a day. An admin can raise those caps in the guestbook settings.
+
+The Next.js action that accepts the comment spends the limit. It keys the bucket by a hash of the visitor's IP address, using `rate-limiter-flexible`. The database holds the buckets. The browser never writes them.
+
+The docs chatbot uses the same pattern for a different reason. Each question costs a call to Gemini, so one browser should not be able to empty the quota. Questions are counted in `docs_chat_limits`: five an hour, and ten a day, again by a hash of the IP address. Those rows are closed to the browser. The server writes them.
+
+## pgvector searches the docs
+
+The docs are long enough that a search for matching words misses the question someone actually asked. `pgvector` stores a numeric picture of each section, an embedding from Gemini, in a table called `docs_section`. A question is turned into the same kind of picture. Postgres finds the sections that are close in meaning, and it also checks ordinary wording. The chat route keeps the few pages that do well on either test and asks Gemini to answer from those excerpts only.
+
+The visitor gets an answer tied to real guides, with links to those pages, and the model is not free to invent from the rest of the docs. On a public install, only the pages marked public are searched, so the chatbot cannot quote the private notes.
+
+The browser never reads `docs_section` directly. The chat route reads it with the server key. The build notes are in the [chatbot build](https://beck-chan.vercel.app/docs/bot-build){target="_blank"}.
+
+The same tables are the catalog in [Build API documentation with Scalar](../api/index.qmd). The comment path, including the rate limit, is what [Automate tests with Cucumber and Playwright](../cucumber/index.qmd) locks. The number on the page is [Implement hit counters with PostHog](../posthog/index.qmd).

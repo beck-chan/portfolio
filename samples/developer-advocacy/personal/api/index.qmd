@@ -8,4 +8,26 @@ Implement OpenAPI Specification documentation with Scalar.
 
 ## Introduction
 
+API docs go stale the moment the database changes and the spec file does not. The guestbook skips the file. Building the docs here means showing, in Scalar, the OpenAPI document that PostgREST already publishes for the project. After a migration, the reference describes the tables that are actually there.
 
+`loadDatabaseOpenApi` fetches that document from `{project}/rest/v1/` with the service role and reuses it for about a minute. It adds a title, the two ways to authenticate (an `apikey` and a bearer token), and the server list. `FLAG_PUBLIC` chooses which project to read: the custom install, or the public example.
+
+## A reference that is the database
+
+The page at `/docs/api` is that live document. The sidebar and the explorer share one fetch, so they cannot disagree. The rest of the guides leave it alone.
+
+The service role is what lets admin tables and functions appear in the list. If the fetch used only the public key, half of the API would be missing from the docs, and installers would think those calls did not exist. The key stays on the server that loads the spec. A try-it from the browser sends the visitor's own anon key and admin token. On the custom install, `FLAG_APITEST` turns that try-it on for internal checks. The public build turns it on for everyone.
+
+The tables and policies in the document are the ones in [Build applications with Supabase](../supabase/index.qmd).
+
+## Test Request on your project
+
+A reference you cannot call against your own project is a picture of someone else's database. On the public build, the visitor types their Supabase project id. The page remembers it in the browser and points Send at that project. The example database never receives the try-it. You can check a filter or a header against the guestbook you installed.
+
+On Send, the saved anon `apikey` and the admin token both go with the request. Focusing one Authentication tab keeps the other credential, so a call that needs both still has both. Filters that PostgREST requires on update and delete are written into the form once, so the same parameter is not offered twice.
+
+## The explorer uses the docs theme
+
+Scalar's own chrome would make the API page feel like a different product sitting in the middle of the guides. The guestbook turns that theme off, hides Scalar's sidebar and search bar, and hides the models list. Tags start collapsed. The docs sidenav is the catalog: open a section, or click an operation, and the explorer moves to that call. Search in the sidenav opens Scalar's search.
+
+Someone can read a guide and try a request without the page changing costume. The public catalog is the [API library](https://y2k-guestbook.vercel.app/docs/api){target="_blank"}.

@@ -8,4 +8,44 @@ Run automated tests with Cucumber and Playwright.
 
 ## Introduction
 
+Installing the package and hoping the board behaves is a weak check. The guestbook ships the sentences that describe what your install should do, and Playwright carries them out in a real browser. `npx y2k-guestbook test` runs them against the app you have, at the URL you have. You can see whether this install matches the guestbook you expected before anyone is invited to sign it.
 
+A `.feature` file is the contract, in plain sentences. A step definition is the TypeScript that makes one of those sentences true in the browser. The shipped steps cover the board: comments, navigation, and the admin screens that do not need extra services. Mail and analytics are off unless you turn them on, so those sentences are left for you to write.
+
+## One scenario runs end to end
+
+The whole suite has the same shape, so one scenario is enough to see it. "User submits a valid comment" starts as a sentence, becomes a click, and ends as a report you can open when it fails. The failure shows the browser, which is the surface your visitors actually use.
+
+```gherkin
+Scenario: User submits a valid comment
+    When a user enters in a valid display name and comment body
+    And they click the `submit` button
+    Then their comment displays as the topmost guestbook entry
+```
+
+The step fills the name and the comment, clicks the button labeled `submit`, and expects the new entry at the top of the board. The report lands at `features/reports/results/index.html`:
+
+```bash
+npx y2k-guestbook test features/features/guestbook/guestbook-comments.feature --name "User submits a valid comment"
+```
+
+## Support files keep the wording stable
+
+The sentences should survive a redesign and a moved dashboard. If a step mentions a CSS class, a visual change breaks the test even though the guestbook still works. If the sentence hard-codes `/admin`, moving the dashboard breaks it too. The support files hold the details that change, and the English stays put.
+
+`world.ts` remembers the real guestbook path and the real admin path for the install. The feature file can keep saying `/admin`.
+
+```typescript
+this.guestbookPath = process.env.NEXT_PUBLIC_GUESTBOOK_PATH || "/";
+this.adminPath = process.env.NEXT_PUBLIC_GUESTBOOK_ADMIN_PATH || "/admin";
+```
+
+`ui.ts` clicks the words on the screen, such as `submit` and `display name`. `seed.ts` puts rows on the board when a scenario needs them already there, and it clears rate limits and settings afterward. One run does not spend the quota the next run needs.
+
+## These tests write real rows
+
+These scenarios are not mocks. They submit comments, spend rate limits, and edit the board through the same doors a visitor uses. Pointed at a production database, a passing test leaves a real comment and uses up a real slot in the limit from [Build applications with Supabase](../supabase/index.qmd). Run them against a development database. Treat a run against production as a write.
+
+Playwright also cannot finish Google's login screen. Admin scenarios open a visible browser and wait while you sign in with an allow-listed admin. Those runs use `-p admin`, which writes a separate report under `features/reports/admin/` so the admin results are not mixed into the visitor run.
+
+The other commands and the file tree are in the [feature tests guide](https://beck-chan.vercel.app/docs/tests){target="_blank"}.
