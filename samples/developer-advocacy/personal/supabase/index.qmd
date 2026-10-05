@@ -545,7 +545,7 @@ So you invent a search address for "the meaning of this question," and another f
 ::: {.callout}
 # Supabase offers many extensions that make it easy extend the functionality of your database.
 
-I've used **[pgvector](https://supabase.com/docs/guides/database/extensions/pgvector){target="_blank"}**, "a Postgres extension for vector similarity search," to power my docs chatbot. Learn more about how I build this functionality in [Chatbot Build](https://beck-chan.vercel.app/docs/bot-build){target="_blank"} .
+I've used **[pgvector](https://supabase.com/docs/guides/database/extensions/pgvector){target="_blank"}**, "a Postgres extension for vector similarity search," to power my docs chatbot. Learn more about how I build this functionality in [Chatbot Build](https://beck-chan.vercel.app/docs/bot-build){target="_blank"}.
 
 :::
 
@@ -555,11 +555,21 @@ Supabase eliminates the need to build and run that second search server. Instead
 
 ### Storing embeddings
 
-Gemini turns each chunk of the docs into a list of numbers that stands in for its meaning. Those numbers are called an embedding. They sit in `docs_section`, next to the words they came from.
+Gemini turns each chunk of the docs into a list of numbers that stands in for its meaning. Those numbers are called an embedding. `pgvector` stores that list in `docs_section` as a `vector` of 768 numbers, next to the words they came from. The column is in [`scripts/supabot.sql`](https://github.com/beck-chan/guestbook/blob/main/scripts/supabot.sql){target="_blank"}:
+
+```sql
+embedding vector(768)
+```
 
 ### Searching relevant pages
 
-A question becomes the same kind of list. Postgres finds the chunks whose lists are close, and it also looks for the exact words. The chat keeps the pages that do well on either test, and the reply links back to those pages.
+A question becomes the same kind of list. `pgvector` finds the chunks whose lists are closest by cosine distance. A smaller distance means the meanings are closer. That sort is `match_docs_sections` in [`scripts/supabot.sql`](https://github.com/beck-chan/guestbook/blob/main/scripts/supabot.sql){target="_blank"}:
+
+```sql
+order by embedding <=> query_embedding
+```
+
+Postgres also looks for the exact words. The chat keeps the pages that do well on either test, and the reply links back to those pages.
 
 :::
 
