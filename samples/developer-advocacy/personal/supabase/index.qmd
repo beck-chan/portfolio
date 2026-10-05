@@ -8,13 +8,13 @@ Use Supabase as your comprehensive backend solution.
 
 ## Introduction
 
-Building a web application is a lot of moving pieces. After all, what the user interacts with is just the surface of the iceberg, so to speak. 
-
-Maybe admitting this next bit will brand me as an imposter, but I have to be honest and say that while I'm fairly comfortable with digging around in the frontend, I've always felt a tad intimidated by backend infrastructure. Some of the reason being that traditionally, those moving pieces were generally discrete, meaning that you had juggle a lot of different tools and services without a unified platform to help you manage them.
-
-Enter **[Supabase](https://supabase.com/){target="_blank"}**: A comprehensive backend-as-a-service (BaaS) platform that provides a suite of tools to help you oversee all the moving pieces — from your database tables, to ready-made ways to read and write those tables, to user authentication, to functions that perform tasks when a row changes, and more. So incredibly user-friendly, that a self-professed backend novice like myself managed to cobble together a solution that does exactly what I wanted it to do.
-
+::: {.callout}
 Nostalgic for the websites of the last millennium, I used Supabase to build a retro-inspired [guestbook application](/samples/content-engineering/personal/guestbook/) with some modern touches: anti-spam measures, an admin dashboard gated by Google OAuth 2.0, and email notifications powered by Gmail API.
+
+<!-- ::: {.iframe url="https://y2k-guestbook.vercel.app/" title="y2k Guestbook" zoom="50%"} -->
+<!-- ::: -->
+
+:::
 
 ::: {.column-margin}
 **Install Your Own**:
@@ -23,21 +23,48 @@ Nostalgic for the websites of the last millennium, I used Supabase to build a re
 
 :::
 
+Building a web application is a lot of moving pieces. After all, what the user interacts with is just the surface of the iceberg, so to speak. 
+
+Maybe admitting this next bit will brand me as an imposter, but I have to be honest and say that while I'm fairly comfortable with digging around in the frontend, I've always felt a tad intimidated by backend infrastructure. Some of the reason being that traditionally, those moving pieces were generally discrete, meaning that you had juggle a lot of different tools and services without a unified platform to help you manage them.
+
+Enter **[Supabase](https://supabase.com/){target="_blank"}**: A comprehensive backend-as-a-service (BaaS) platform that provides a suite of tools to help you connect everything and oversee all the moving pieces — from your database tables, to ready-made ways to read and write those tables, to user authentication, to functions that perform tasks when a row changes, and more. So incredibly user-friendly, that a self-professed backend novice like myself managed to cobble together a solution that does exactly what I wanted it to do.
+
+## From Browser to Backend
+
+The usual way to read and write a database from a website is to build a small server of your own, whose only job is to answer web requests and talk to the database for you. Since the program can only answer requests while it's turned on, on a computer the internet can reach, you have to have a reliable way to keep that program running. You can keep a physical machine plugged in and connected to the internet, or hand the program to a hosting service that keeps a copy running for you.
+
+For example, our guestbook needs functionality to:
+
+- **Retrieve Comments:** Show a public version of comments that have been submitted.
+- **Save Comments:** Store comments after checks have passed for length, content, and frequency.
+- **Modify Comments:** Let administrators edit, delete, or mark a comment read.
+- **Apply Settings:** Adjust guestbook settings, such as allowed comment length and frequency limits.
+
+So you invent one web address for "get the comments," another for "save a comment," and so on. Each address is an instruction in that program — when a request shows up, run this database query and send the result back. 
+
+You also have to protect each instruction, since not everyone should be able to perform all actions. For example, the address that saves a comment must not let a stranger delete comments. Every interaction with the database needs its own address in that program, and its own check to make sure the person asking is allowed to do that. The program that holds all of those addresses is the server you keep running.
+
+### Supabase Data REST API
+
+::: {.callout}
+The Supabase [Data REST API](https://supabase.com/docs/guides/api/rest/overview){target="_blank"} "auto-generates an API directly from your database schema allowing you to connect to your database through a restful interface, directly from the browser."
+
+:::
+
+Supabase eliminates the need to build and run a separate server just to read and write the database. Instead, you can connect directly to the database from your website using the Data REST API. Instead of inventing an address for each action, you name the table, and Supabase turns that name into the address. 
+
+Instead of putting a separate check on each address, Supabase enforces the check on the table itself using [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security){target="_blank"}. Each request carries a token that says who is calling and what they are allowed to do, for example:
+
+- Visitors have access to read public comments and submit comments without needing to sign in, authenticated with Supabase's [publishable key](https://supabase.com/docs/guides/getting-started/api-keys#which-key-do-you-use){target="_blank"}.
+- Approved administrators have access to manage comments and settings after they sign in. That sign-in carries a note — [when the note says `admin`](#auth), the database runs a check called `is_admin()` and allows the change.
+
+The API URL is your "RESTful endpoint for querying and managing your database." For example, `https://<your-project>.supabase.co/rest/v1/` is the front door to your tables. 
+
 <!-- DO NOT EDIT ABOVE HERE -->
 
-<!-- A guestbook has to remember comments, know who the admin is, tell that admin when something changes, and answer questions about its own docs. The [public guestbook](https://y2k-guestbook.vercel.app/){target="_blank"} keeps all four in one Supabase project. Google OAuth 2.0 decides who is an admin. Edge Functions send the mail. Rate limits live in Postgres. The `pgvector` extension is how the chatbot searches the docs.
+In our guestbook, a helper called `createClient()` in [`src/lib/supabase/server.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/supabase/server.ts){target="_blank"} opens that door. It uses the project address, your `NEXT_PUBLIC_SUPABASE_URL`, and your `NEXT_PUBLIC_SUPABASE_ANON_KEY`. 
 
-One project only helps if the database itself refuses the wrong read. Visitors can leave a comment, and they can see the board, but they never read the table that stores the email address. They read `comments_public`, which shows the name, the message, and the time. Poem likes work the same way. The heart table is closed, and the page reads a count that a small database function maintains. The list of admin addresses is closed too. Nothing in the browser can edit it. The door to the admin side is a role on the login token: `app_metadata.role` has to be `admin`.
-
-That split is what the later pieces rely on. Sign-in checks the role. Mail reads the allowlist from the server. The chatbot reads its own tables the same way, from the server, with the browser kept outside. -->
-
-## The Data API reads and writes the tables
-
-When I wanted the page to show the comments, I did not have to invent a web address for "get the comments" and another for "save a comment." Supabase already has those addresses. They call the whole set the Data API.
-
-If you open the project, go to Project Settings, and select Data API, you will see an API URL. It ends in `/rest/v1`. That ending is the front door to the tables. A table here is just the place a kind of information lives, the way a sheet in a spreadsheet holds one kind of list.
-
-In the guestbook, a helper called `createClient()` in `src/lib/supabase/server.ts` opens that door. It uses the project address, `NEXT_PUBLIC_SUPABASE_URL`, and a public key called the anon key. The anon key says which project I mean. It is not a master key. The database still decides what that caller is allowed to see. Under the hood, asking for a table becomes a normal web request to `https://<your-project>.supabase.co/rest/v1/<table>`.
+The anon key says which project I mean. It is not a master key. The database still decides what that caller is allowed to see. Under the hood, asking for a table becomes a normal web request to `https://<your-project>.supabase.co/rest/v1/<table>`.
 
 Reading the board is `getPublicCommentsPage` in `src/app/actions/comments.ts`. This is the actual request:
 
@@ -58,15 +85,17 @@ The rest of the app uses that same door.
 
 The settings row is one record, `guestbook_settings`, with the comment length, the speed limit, and how many notes fit on a page. `loadGuestbookSettings` in `src/lib/loadGuestbookSettings.ts` reads it. `saveGuestbookSettings` in `src/app/actions/settings.ts` writes it back, and only after it has checked that the signed-in person is an admin.
 
-Poem hearts do not let the browser write the heart table. `getDeskHeartSeed` in `src/lib/actions/hearts.ts` reads two public count windows, `poem_heart_counts` and `poem_heart_total`. Liking a poem calls a small database function, `toggle_poem_heart`, and `poem_heart_state` answers whether this visitor already liked it. A function call is still the Data API. It goes to `/rest/v1/rpc/<name>` instead of `/rest/v1/<table>`. Signing in as an admin uses that same kind of call: `resolveAdminSession` in `src/lib/adminAuth.ts` calls `ensure_admin_role`.
-
 The admin address list is the one the browser is not supposed to see. The mail function reads it with a server key, in `loadAllowlist` at `supabase/functions/_shared/allowlist.ts`. The docs chatbot does the same kind of thing for its own notes. In `src/app/docs/chat/route.ts`, the server saves a conversation in `docs_chat_session` and each turn in `docs_chat_message`, again with a key that stays on the server.
 
-## Google OAuth 2.0 stamps the admin role
+<span id="auth"></span>
 
-Signing in with Google tells me who a person is. It does not tell me they should be allowed to run the guestbook. Anyone with a Google account can click the button. I keep a short list of admin email addresses, called `admin_allowlist`. If the account is not on that list, I sign them back out.
+## Authentication Gating by Google
 
-The login page is `/admin/login`. After Google sends the person back, a function called `ensure_admin_role` looks up their address and writes a small note onto the login: `app_metadata.role` set to `admin`. That note sits where the visitor cannot edit it. When the account is first created, a database hook reads the list. Later, a check named `is_admin()` trusts only that note. A session, by the way, is just the site remembering that this browser already signed in.
+The usual way to add "Sign in with Google" is to run your own login service. You register the app with Google, store users in a table you maintain, hand the browser a cookie that says they are signed in, and remember to check that cookie on every private page. Miss one check and a stranger can open the dashboard.
+
+Supabase Auth holds that Google conversation and the signed-in session for me. A session is just the site remembering that this browser already signed in. Signing in still only tells me who the person is. I keep a short list of admin email addresses, called `admin_allowlist`. If the account is not on that list, I sign them back out.
+
+The login page is `/admin/login`. After Google sends the person back, a function called `ensure_admin_role` looks up their address and writes a small note onto the login: `app_metadata.role` set to `admin`. That note sits where the visitor cannot edit it. When the account is first created, a database hook reads the list. Later, a check named `is_admin()` trusts only that note.
 
 I only run this check on the admin pages. Everyone else can sign the book with no account at all.
 
@@ -78,9 +107,11 @@ If I ever move the dashboard off `/admin`, the same check follows whatever path 
 
 ## Edge Functions mail on a write
 
-I did not want to sit on the dashboard waiting for a new comment. Supabase can run a small program in the cloud whenever a row changes. They call these Edge Functions. The database taps the function on the shoulder (that tap is called a webhook), and the function sends the email. I can moderate from my inbox. When I want quiet, one on/off switch, `FLAG_NOTIF`, stops the mail and leaves the functions where they are.
+The usual way to email yourself when a comment arrives is to run a second program next to the site. It watches the database, or you put new comments on a queue and a worker reads that queue, and you have to keep that worker awake overnight.
 
-I have two. `notify-admins` covers changes to comments, settings, poem hearts, and the admin list. `on-user-created` covers a brand-new account. Both ignore the tap unless it carries a shared password, `NOTIFY_WEBHOOK_SECRET`, so a stranger on the internet cannot trigger the mail. Both also stay quiet unless `FLAG_NOTIF` is on. The people who receive the mail are the addresses on the allowlist. The function reads that list with a server key the browser never sees.
+Supabase runs a small program in the cloud when a row changes. They call these Edge Functions. The database taps the function on the shoulder (that tap is called a webhook), and the function sends the email. I can moderate from my inbox, and I am not hosting a separate mail worker. When I want quiet, one on/off switch, `FLAG_NOTIF`, stops the mail and leaves the functions where they are.
+
+I have two. `notify-admins` covers changes to comments, settings, and the admin list. `on-user-created` covers a brand-new account. Both ignore the tap unless it carries a shared password, `NOTIFY_WEBHOOK_SECRET`, so a stranger on the internet cannot trigger the mail. Both also stay quiet unless `FLAG_NOTIF` is on. The people who receive the mail are the addresses on the allowlist. The function reads that list with a server key the browser never sees.
 
 The message I actually read is the new-comment email. The function fills in a short template and sends it with the Gmail API. If someone edits a comment, I only get mail when the name, the email, or the text changed. A behind-the-scenes timestamp does not bother me.
 
@@ -88,7 +119,9 @@ How I turned this on is in [Enable Notifications](https://beck-chan.vercel.app/d
 
 ## Rate limits live in Postgres
 
-Leave a comment box wide open and a script can fill the board in a minute. I needed a speed limit that would still be there after a restart, and that would agree no matter which copy of the site answered the request. So the counters live in the database, rather than in the short-term memory of one running program.
+Leave a comment box wide open and a script can fill the board in a minute. The usual fix is a separate counter store, often Redis, or the memory of whichever copy of the site happened to answer. Restart the site and the count forgets everyone. Two copies of the site can disagree about whether this person already posted.
+
+I did not add that extra store. The counters live in the Postgres database Supabase already hosts, so a restart does not wipe them and every copy of the site sees the same number.
 
 By default a visitor can leave one comment every five minutes, and two in a day. I can raise those numbers in the guestbook settings.
 
@@ -98,7 +131,9 @@ The docs chatbot has the same kind of limit, for a different reason. Every quest
 
 ## pgvector searches the docs
 
-The docs are long, and searching for the exact words someone typed misses questions asked a different way. `pgvector` is an add-on for Postgres that lets me store a list of numbers standing in for the meaning of a chunk of text. Those numbers are called an embedding. Gemini creates them, and I keep them in a table called `docs_section`, next to the words they came from.
+The docs are long, and searching for the exact words someone typed misses questions asked a different way. The usual fix is a second search engine. You copy the docs into it and keep that copy in step with the real pages, or the answers drift. My first chatbot did this with a local Elasticsearch instance.
+
+Supabase lets me keep that search in the same Postgres database. `pgvector` is an add-on that stores a list of numbers standing in for the meaning of a chunk of text. Those numbers are called an embedding. Gemini creates them, and I keep them in a table called `docs_section`, next to the words they came from. There is no second search server to run.
 
 When someone asks the chatbot a question, that question becomes the same kind of list of numbers. Postgres looks for the chunks whose numbers are close, which is a way of saying the meaning is close. It also does an ordinary word search. The chat keeps the few pages that do well on either test, and Gemini may only answer from those excerpts. The reply includes links, so you can go read the pages yourself.
 
