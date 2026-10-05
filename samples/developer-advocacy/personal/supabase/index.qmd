@@ -49,7 +49,7 @@ You also have to protect each instruction, since not everyone should be able to 
 ### Supabase Data REST API
 
 ::: {.callout}
-The Supabase [Data REST API](https://supabase.com/docs/guides/api/rest/overview){target="_blank"} "auto-generates an API directly from your database schema allowing you to connect to your database through a restful interface, directly from the browser."
+The **[Supabase Data REST API](https://supabase.com/docs/guides/api/rest/overview){target="_blank"}** "auto-generates an API directly from your database schema allowing you to connect to your database through a restful interface, directly from the browser."
 
 :::
 
@@ -91,32 +91,7 @@ supabase
 
 `comments` is the private table that stores submitted comments. The `submitComment` function in [`src/app/actions/comments.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/comments.ts){target="_blank"} writes to this table.
 
-Comments are first checked for length, content, and [frequency](#limits):
-
-```typescript
-const lengthError = commentLengthError(
-  name,
-  email,
-  body,
-  settings.commentLength,
-);
-if (lengthError) {
-  return { ok: false, error: lengthError };
-}
-
-const hit = checkCommentProfanity(name, body, settings.profanityAllowList);
-const profanityError = profanityErrorMessage(hit);
-if (profanityError) {
-  return { ok: false, error: profanityError };
-}
-
-const limited = await consumeCommentRateLimit(await clientIp(), settings);
-if (!limited.ok) {
-  return limited;
-}
-```
-
-Only if all checks pass, then the comment is written to the `comments` table:
+Comments are first checked for length, content, and [frequency](#limits). Only if all checks pass, then the comment is written to the `comments` table:
 
 ```typescript
 const supabase = await createClient();
@@ -238,7 +213,7 @@ For our guestbook, this would mean one missed check and a stranger could open yo
 
 ::: {.callout}
 
-[Supabase Auth](https://supabase.com/docs/guides/auth){target="_blank"} "makes it easy to implement authentication and authorization in your app." 
+**[Supabase Auth](https://supabase.com/docs/guides/auth){target="_blank"}** "makes it easy to implement authentication and authorization in your app." 
 
 :::
 
@@ -248,7 +223,7 @@ For our guestbook, Supabase Auth holds the admin users in a table for you, manag
 
 ### Admin allowlist
 
-The `admin_allowlist` table is the approved list of users who are allowed to access the administrator dashboard after they've successfully signed in with Google. The `loadAllowlist` function in [`supabase/functions/_shared/allowlist.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/allowlist.ts){target="_blank"} reads this private table with a server key:
+The `admin_allowlist` table is the approved list of users who are allowed to access the administrator dashboard after they've successfully signed in with Google. The `loadAllowlist` function in [`supabase/functions/_shared/allowlist.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/allowlist.ts){target="_blank"} reads this private table with [your Supabase secret keys](https://supabase.com/docs/guides/functions/secrets){target="_blank"}:
 
 ```typescript
 const url = Deno.env.get("SUPABASE_URL");
@@ -363,24 +338,47 @@ if (isLogin) {
 
 <!-- DO NOT EDIT ABOVE HERE -->
 
-## Edge Functions mail on a write
+## Supa-erp serverless architecture
 
-The usual way to email yourself when a comment arrives is to run a second program next to the site. It watches the database, or you put new comments on a queue and a worker reads that queue, and you have to keep that worker awake overnight.
+The usual way to arrange for notifications is to build another small server of your own, whose only job is to notice changes to your database and send the email. Just like reading and writing the database, we run into similar things we have to consider.
 
-Supabase runs a small program in the cloud when a row changes. They call these Edge Functions. The database calls the function with a webhook, and the function sends the email. `FLAG_NOTIF` is the on/off switch. When it is off, the functions stay where they are and send nothing.
+For example, our guestbook needs functionality to notify on:
 
-`notify-admins` in [`supabase/functions/notify-admins/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/notify-admins/index.ts){target="_blank"} covers changes to comments, settings, and the admin list. It ignores the call unless the request carries `NOTIFY_WEBHOOK_SECRET`, and it stays quiet unless `FLAG_NOTIF` is on:
+- **New comments:** Email the admins when someone signs the book.
+- **Edited or deleted comments:** Email again when the comment is edited or deleted.
+- **Settings updated:** Email when the guestbook settings change.
+- **Admin list changes:** Email when an address is added or removed to the admin allow-list.
+- **Admin creation:** Email when a new admin user signs in for the first time.
+
+So you invent one web address for "a new comment," another for "an edited comment," and so on. Each address is an instruction in that program — when a change shows up, fill in the message and send the email.
+
+You also have to protect each instruction, since not everyone should be able to trigger the mail just because they know the webhook endpoint. Every kind of mail needs its own address in that program, and its own check to make sure the call is allowed. The program that holds all of those addresses is the server you keep running.
+
+### Supabase Edge Functions
+
+::: {.callout}
+## **[Supabase Edge Functions](https://supabase.com/docs/guides/functions){target="_blank"}** "are server-side TypeScript functions, distributed globally at the edge—close to your users. They can be used for listening to webhooks."
+
+Learn more about how notifications are implemented in the guestbook: [Enable Notifications](https://beck-chan.vercel.app/docs/notifs){target="_blank"}
+
+:::
+
+Supabase eliminates the need to build and run a separate server just to send email notifications. The database calls an Edge Function when a row changes, and instead of inventing an address for each message, the webhook delivers that change to the function:
+
+
+::: {.panel-tabset}
+
+### Verify and enable notifications
+
+The function checks a shared password (`NOTIFY_WEBHOOK_SECRET`), and a call without this password is refused:
 
 ```typescript
 if (!verifyNotifySecret(req)) {
   return jsonResponse(401, { error: "Unauthorized" });
 }
-if (!flagNotifOn()) {
-  return jsonResponse(200, { skipped: "FLAG_NOTIF" });
-}
 ```
 
-`verifyNotifySecret` in [`supabase/functions/_shared/env.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/env.ts){target="_blank"} compares the request with that shared password:
+The `verifyNotifySecret` function in [`supabase/functions/_shared/env.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/env.ts){target="_blank"} compares the request with that shared password:
 
 ```typescript
 const expected = Deno.env.get("NOTIFY_WEBHOOK_SECRET") ?? "";
@@ -391,9 +389,30 @@ const bearer = auth.match(/^Bearer\s+(.+)$/i)?.[1]?.trim() ?? "";
 return header === expected || bearer === expected || auth === expected;
 ```
 
-The people who receive the mail are the addresses from `loadAllowlist()`. A new comment fills the `comment-insert` template and sends it with the Gmail API:
+And only sends notifications if the on/off switch (`FLAG_NOTIF`) is set to `true`:
 
 ```typescript
+if (!flagNotifOn()) {
+  return jsonResponse(200, { skipped: "FLAG_NOTIF" });
+}
+```
+
+`flagNotifOn` in [`supabase/functions/_shared/env.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/env.ts){target="_blank"} reads that switch:
+
+```typescript
+const v = (Deno.env.get("FLAG_NOTIF") ?? "").trim().toLowerCase();
+return v === "true" || v === "1";
+```
+
+
+### Notify admins
+
+`notify-admins` in [`supabase/functions/notify-admins/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/notify-admins/index.ts){target="_blank"} covers changes to comments, settings, and the admin list.
+
+The emails who receive the notifications are the addresses from `loadAllowlist()`, and messages are filled with an email template and sent with the Gmail API:
+
+```typescript
+// New comments
 const copy = await loadMail("comment-insert", { admin, name, body });
 return allowlist.map((to) => ({
   to,
@@ -402,26 +421,92 @@ return allowlist.map((to) => ({
 }));
 ```
 
-An edit sends mail only when the name, the email, or the text changed. A timestamp change does not:
-
 ```typescript
+// Edited comments
 const keys = ["display_name", "email", "body"] as const;
 return keys.some((key) => str(oldRecord?.[key]) !== str(record?.[key]));
 ```
 
-`on-user-created` in [`supabase/functions/on-user-created/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/on-user-created/index.ts){target="_blank"} covers a brand-new account. It uses those same two checks, then fills the `auth-created` template for the allowlist.
+```typescript
+// Updated settings
+const changed = changedKeys(oldRecord, record, new Set(["id", "updated_at"]));
+const summary = changed
+  .map((key) => `${key}: ${snippet(str(record?.[key]), 80)}`)
+  .join("\n");
+const copy = await loadMail("settings-update", { admin, summary });
+return allowlist.map((to) => ({
+  to,
+  ...copy,
+  idempotencyKey: `settings:update:${changed.join(",")}:${to}`,
+}));
+```
 
-How this is turned on is in [Enable Notifications](https://beck-chan.vercel.app/docs/notifs){target="_blank"}.
+```typescript
+// Admins added
+const vars = { admin, email: added };
+const selfCopy = await loadMail("allowlist-added-self", vars);
+const othersCopy = await loadMail("allowlist-added", vars);
+return allowlistMails(
+  recipients,
+  added,
+  selfCopy,
+  othersCopy,
+  `allowlist:insert:${added}`,
+);
+```
+
+```typescript
+// Admins removed
+const vars = { admin, email: removed };
+const othersCopy = await loadMail("allowlist-removed", vars);
+const selfCopy = await loadMail("allowlist-removed-self", vars);
+const mails = allowlist.map((to) => ({
+  to,
+  ...othersCopy,
+  idempotencyKey: `allowlist:delete:${removed}:to:${to}`,
+}));
+mails.push({
+  to: removed,
+  ...selfCopy,
+  idempotencyKey: `allowlist:delete:${removed}:self`,
+});
+return mails;
+```
+
+### New admin creation
+
+`on-user-created` in [`supabase/functions/on-user-created/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/on-user-created/index.ts){target="_blank"} covers the first login or a new allow-listed admin:
+
+```typescript
+const selfCopy = await loadMail("auth-created-self", vars);
+const othersCopy = await loadMail("auth-created", vars);
+```
+
+:::
 
 <span id="limits"></span>
 
 ## Rate limits live in Postgres
 
-Leave a comment box wide open and a script can fill the board in a minute. The usual fix is a separate counter store, often Redis, or the memory of whichever copy of the site happened to answer. Restart the site and the count forgets everyone. Two copies of the site can disagree about whether this person already posted.
+The usual way to stop a script from filling the comment box is a separate counter store, often Redis, or the memory of whichever copy of the site happened to answer. Restart the site and the count forgets everyone. Two copies of the site can disagree about whether this person already posted.
 
-The counters live in the Postgres database Supabase already hosts, so a restart does not wipe them and every copy of the site sees the same number. By default a visitor can leave one comment every five minutes, and two in a day. Those numbers can be raised in the guestbook settings.
+### Postgres
 
-`submitComment` spends one of those chances by calling `consumeCommentRateLimit` in [`src/lib/rate-limit.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/rate-limit.ts){target="_blank"}. The function does not store the visitor's raw internet address. It stores a scrambled version of it:
+::: {.callout}
+
+**[Database](https://supabase.com/docs/guides/database/overview){target="_blank"}** "Every Supabase project gets a full Postgres database, not a Postgres abstraction."
+
+:::
+
+For our guestbook, the counters live in that database, so a restart does not wipe them and every copy of the site sees the same number. By default a visitor can leave one comment every five minutes, and two in a day. Those numbers can be raised in the guestbook settings.
+
+`submitComment` spends one of those chances by calling `consumeCommentRateLimit` in [`src/lib/rate-limit.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/rate-limit.ts){target="_blank"}:
+
+::: {.panel-tabset}
+
+### Scrambled address
+
+The function does not store the visitor's raw internet address. It stores a scrambled version of it:
 
 ```typescript
 function hashIp(ip: string) {
@@ -430,6 +515,8 @@ function hashIp(ip: string) {
 
 const key = hashIp(ip || "unknown");
 ```
+
+### Counter table
 
 The counting tool is `rate-limiter-flexible`. It writes the counters to `guestbook_rate_limits`. The browser cannot write that table. Only the server can:
 
@@ -445,6 +532,8 @@ new RateLimiterPostgres({
 })
 ```
 
+### Spend a chance
+
 Only if both the short window and the daily window still have room, then the function spends one chance in each:
 
 ```typescript
@@ -452,16 +541,38 @@ await daily.consume(key);
 await burst.consume(key);
 ```
 
+:::
+
 The docs chatbot counts questions the same way, in a table called `docs_chat_limits`: five an hour, and ten a day, again from a scrambled internet address. Every question costs a call to Gemini, the model that writes the reply.
 
 ## pgvector searches the docs
 
-The docs are long, and searching for the exact words someone typed misses questions asked a different way. The usual fix is a second search engine. You copy the docs into it and keep that copy in step with the real pages, or the answers drift.
+The usual way to search docs for questions asked in different words is a second search engine. You copy the docs into it and keep that copy in step with the real pages, or the answers drift.
 
-Supabase keeps that search in the same Postgres database. `pgvector` stores a list of numbers standing in for the meaning of a chunk of text. Those numbers are called an embedding. Gemini creates them, and they are kept in `docs_section`, next to the words they came from.
+### pgvector
 
-When someone asks the chatbot a question, that question becomes the same kind of list of numbers. Postgres looks for the chunks whose numbers are close, and it also does an ordinary word search. The chat keeps the few pages that do well on either test, and Gemini may only answer from those excerpts. The reply includes links back to those pages.
+::: {.callout}
+
+**[pgvector](https://supabase.com/docs/guides/database/extensions/pgvector){target="_blank"}** "is a Postgres extension for vector similarity search. It can also be used for storing embeddings."
+
+:::
+
+For our guestbook, the docs chatbot keeps that search in the same Postgres database:
+
+::: {.panel-tabset}
+
+### Embeddings
+
+`pgvector` stores a list of numbers standing in for the meaning of a chunk of text. Those numbers are called an embedding. Gemini creates them, and they are kept in `docs_section`, next to the words they came from.
+
+### Closest pages
+
+When someone asks a question, that question becomes the same kind of list of numbers. Postgres looks for the chunks whose numbers are close, and it also does an ordinary word search. The chat keeps the few pages that do well on either test, and Gemini may only answer from those excerpts. The reply includes links back to those pages.
+
+### Public pages
 
 On the public version of the site, only pages marked public are searched. The visitor's browser never reads `docs_section` directly. The chat page on the server does, with a key that stays on the server. The build notes are in the [chatbot build](https://beck-chan.vercel.app/docs/bot-build){target="_blank"}.
+
+:::
 
 Those same tables are the catalog in [Build API documentation with Scalar](../api/index.qmd). The comment path, speed limit included, is what [Automate tests with Cucumber and Playwright](../cucumber/index.qmd) checks. The number on the page is [Implement hit counters with PostHog](../posthog/index.qmd).
