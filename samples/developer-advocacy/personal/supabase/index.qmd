@@ -8,15 +8,28 @@ Use Supabase as your comprehensive backend solution.
 
 ## Introduction
 
-A small app needs a database, user login, rules for who can read each row, a way to send mail when data changes, and search that can answer a question. If you build that yourself, you run and maintain each piece.
+Building a web application is a lot of moving pieces. After all, what the user interacts with is just the surface of the iceberg, so to speak. 
 
-Supabase includes those pieces in one hosted Postgres project. Login, row rules, background functions, and vector search come with the project. Your code can stay on the app.
+Maybe admitting this next bit will brand me as an imposter, but I have to be honest and say that while I'm fairly comfortable with digging around in the frontend, I've always felt a tad intimidated by backend infrastructure. Some of the reason being that traditionally, those moving pieces were generally discrete, meaning that you had juggle a lot of different tools and services without a unified platform to help you manage them.
 
-A guestbook has to remember comments, know who the admin is, tell that admin when something changes, and answer questions about its own docs. The [public guestbook](https://y2k-guestbook.vercel.app/){target="_blank"} keeps all four in one Supabase project. Google OAuth 2.0 decides who is an admin. Edge Functions send the mail. Rate limits live in Postgres. The `pgvector` extension is how the chatbot searches the docs.
+Enter **[Supabase](https://supabase.com/){target="_blank"}**: A comprehensive backend-as-a-service (BaaS) platform that provides a suite of tools to help you oversee all the moving pieces — from your database tables, to ready-made ways to read and write those tables, to user authentication, to functions that perform tasks when a row changes, and more. So incredibly user-friendly, that a self-professed backend novice like myself managed to cobble together a solution that does exactly what I wanted it to do.
+
+Nostalgic for the websites of the last millennium, I used Supabase to build a retro-inspired [guestbook application](/samples/content-engineering/personal/guestbook/) with some modern touches: anti-spam measures, an admin dashboard gated by Google OAuth 2.0, and email notifications powered by Gmail API.
+
+::: {.column-margin}
+**Install Your Own**:
+
+[{{< fa brands github >}} beck-chan/y2k-guestbook](https://github.com/beck-chan/y2k-guestbook){target="_blank" .button}
+
+:::
+
+<!-- DO NOT EDIT ABOVE HERE -->
+
+<!-- A guestbook has to remember comments, know who the admin is, tell that admin when something changes, and answer questions about its own docs. The [public guestbook](https://y2k-guestbook.vercel.app/){target="_blank"} keeps all four in one Supabase project. Google OAuth 2.0 decides who is an admin. Edge Functions send the mail. Rate limits live in Postgres. The `pgvector` extension is how the chatbot searches the docs.
 
 One project only helps if the database itself refuses the wrong read. Visitors can leave a comment, and they can see the board, but they never read the table that stores the email address. They read `comments_public`, which shows the name, the message, and the time. Poem likes work the same way. The heart table is closed, and the page reads a count that a small database function maintains. The list of admin addresses is closed too. Nothing in the browser can edit it. The door to the admin side is a role on the login token: `app_metadata.role` has to be `admin`.
 
-That split is what the later pieces rely on. Sign-in checks the role. Mail reads the allowlist from the server. The chatbot reads its own tables the same way, from the server, with the browser kept outside.
+That split is what the later pieces rely on. Sign-in checks the role. Mail reads the allowlist from the server. The chatbot reads its own tables the same way, from the server, with the browser kept outside. -->
 
 ## Google OAuth 2.0 stamps the admin role
 
