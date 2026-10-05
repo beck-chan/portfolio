@@ -555,21 +555,38 @@ Supabase eliminates the need to build and run that second search server. Instead
 
 ### Storing embeddings
 
-Gemini turns each chunk of the docs into a list of numbers that stands in for its meaning. Those numbers are called an embedding. `pgvector` stores that list in `docs_section` as a `vector` of 768 numbers, next to the words they came from. The column is in [`scripts/supabot.sql`](https://github.com/beck-chan/guestbook/blob/main/scripts/supabot.sql){target="_blank"}:
+Gemini turns each chunk of the docs into a list of numbers that stands in for its meaning. Those numbers are called an embedding. `pgvector` stores that list in `docs_section` as a `vector` of 768 numbers, next to the words they came from. 
+
+When the `docs_query_embedding ` table was created, this column is defined in [`scripts/supabot.sql`](https://github.com/beck-chan/guestbook/blob/main/scripts/supabot.sql){target="_blank"}:
 
 ```sql
-embedding vector(768)
+embedding extensions.vector(768) not null,
 ```
 
 ### Searching relevant pages
 
-A question becomes the same kind of list. `pgvector` finds the chunks whose lists are closest by cosine distance. A smaller distance means the meanings are closer. That sort is `match_docs_sections` in [`scripts/supabot.sql`](https://github.com/beck-chan/guestbook/blob/main/scripts/supabot.sql){target="_blank"}:
+A question becomes the same kind of list. The `match_docs_sections` function created in [`scripts/supabot.sql`](https://github.com/beck-chan/guestbook/blob/main/scripts/supabot.sql){target="_blank"} finds the chunks whose lists are closest. `<=>` is cosine distance. A smaller distance means the meanings are closer:
 
 ```sql
+select *
+from public.docs_section
+where (not only_public or public)
 order by embedding <=> query_embedding
+limit least(match_count, 50);
 ```
 
-Postgres also looks for the exact words. The chat keeps the pages that do well on either test, and the reply links back to those pages.
+The `search_docs_sections` function looks for the exact words:
+
+```sql
+select *
+from public.docs_section
+where (not only_public or public)
+  and search_vector @@ to_tsquery('english', query)
+order by ts_rank_cd(search_vector, to_tsquery('english', query)) desc
+limit least(match_count, 50);
+```
+
+The chat keeps the pages that do well on either test, and the reply links back to those pages.
 
 :::
 
