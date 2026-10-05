@@ -617,6 +617,9 @@ Supabase is free to use and open-source, so you can build your own Supabase-powe
 
 :::
 
+
+<!-- FOOTNOTES -->
+
 [^row-level-security]: **Supabase Docs:** [Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security){target="_blank"}
 
 [^publishable-key]: **Supabase Docs:** [Which key do you use?](https://supabase.com/docs/guides/getting-started/api-keys#which-key-do-you-use){target="_blank"}
