@@ -234,19 +234,100 @@ supabase.from("guestbook_settings").update(row).eq("id", 1)
 
 The usual way to add "Sign in with Google" is to run your own login service. You register the app with Google, store users in a table you maintain, hand the browser a cookie that says they are signed in, and remember to check that cookie on every private page. Miss one check and a stranger can open the dashboard.
 
-Supabase Auth holds that Google conversation and the signed-in session for me. A session is just the site remembering that this browser already signed in. Signing in still only tells me who the person is. I keep a short list of admin email addresses, called `admin_allowlist`. If the account is not on that list, I sign them back out.
+Supabase Auth holds that Google conversation and the signed-in session. A session is the site remembering that this browser already signed in. Signing in still only says who the person is. `admin_allowlist` is the short list of admin email addresses.
 
-The login page is `/admin/login`. After Google sends the person back, a function called `ensure_admin_role` looks up their address and writes a small note onto the login: `app_metadata.role` set to `admin`. That note sits where the visitor cannot edit it. When the account is first created, a database hook reads the list. Later, a check named `is_admin()` trusts only that note.
+After Google sends the person back to `/admin/login`, `ensure_admin_role` in [`scripts/schema.sql`](https://github.com/beck-chan/y2k-guestbook/blob/main/scripts/schema.sql){target="_blank"} looks up their address. If it is not on the list, the function returns false:
 
-I only run this check on the admin pages. Everyone else can sign the book with no account at all.
+```sql
+if user_email is null
+   or not exists (
+     select 1 from public.admin_allowlist where email = user_email
+   ) then
+  return false;
+end if;
+```
 
-- If there is no admin session yet, they are sent to `/admin/login`.
-- If they sign in and the note does not say admin, they are signed out and sent home with `?admin_error=1` on the address, so the page can show an error.
-- If they are already signed in as an admin, they go straight to the dashboard.
+Only if the address is on the list, then it writes `app_metadata.role` set to `admin`. That note sits where the visitor cannot edit it:
 
-If I ever move the dashboard off `/admin`, the same check follows whatever path I put in `NEXT_PUBLIC_GUESTBOOK_ADMIN_PATH`. The Google setup steps are in [Prerequisites](https://beck-chan.vercel.app/docs/prerequisites){target="_blank"}.
+```sql
+update auth.users
+set raw_app_meta_data =
+  coalesce(raw_app_meta_data, '{}'::jsonb) || '{"role":"admin"}'::jsonb
+where id = uid
+  and coalesce(raw_app_meta_data->>'role', '') is distinct from 'admin';
+```
 
-The admin address list is the one the browser is not supposed to see. `loadAllowlist` in [`supabase/functions/_shared/allowlist.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/allowlist.ts){target="_blank"} reads it with a server key:
+When the account is first created, `hook_before_user_created` in the same file reads that list. If the address is missing, sign-up is refused:
+
+```sql
+if user_email is null
+   or user_email = ''
+   or not exists (
+     select 1 from public.admin_allowlist where email = user_email
+   ) then
+  return jsonb_build_object(
+    'error',
+    jsonb_build_object(
+      'message', 'Not authorized',
+      'http_code', 403
+    )
+  );
+end if;
+```
+
+Only if the address is on the list, then the same role is written onto the new login:
+
+```sql
+return jsonb_build_object(
+  'user',
+  jsonb_build_object(
+    'app_metadata',
+    jsonb_build_object('role', 'admin')
+  )
+);
+```
+
+`is_admin()` trusts only that note. The `proxy` function in [`src/proxy.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/proxy.ts){target="_blank"} runs the check on admin pages. Everyone else can sign the book with no account at all.
+
+The role on the session is read first:
+
+```typescript
+const role =
+  user && typeof user.app_metadata?.role === "string"
+    ? user.app_metadata.role
+    : null;
+const isAdmin = role === "admin";
+```
+
+If there is no session yet, they are sent to `/admin/login`. If the note does not say admin, they are signed out and sent home with `?admin_error=1`. If they are already signed in as an admin, they go straight to the dashboard:
+
+```typescript
+if (!user) {
+  const loginUrl = request.nextUrl.clone();
+  loginUrl.pathname = loginPath;
+  loginUrl.search = "";
+  return redirectWithCookies(loginUrl, supabaseResponse);
+}
+
+if (!isAdmin) {
+  await supabase.auth.signOut();
+  const homeUrl = request.nextUrl.clone();
+  homeUrl.pathname = guestbookHomePath();
+  homeUrl.search = "admin_error=1";
+  return redirectWithCookies(homeUrl, supabaseResponse);
+}
+
+if (isLogin) {
+  const adminUrl = request.nextUrl.clone();
+  adminUrl.pathname = adminPath;
+  adminUrl.search = "";
+  return redirectWithCookies(adminUrl, supabaseResponse);
+}
+```
+
+If the dashboard moves off `/admin`, the same check follows whatever path is in `NEXT_PUBLIC_GUESTBOOK_ADMIN_PATH`. The Google setup steps are in [Prerequisites](https://beck-chan.vercel.app/docs/prerequisites){target="_blank"}.
+
+`admin_allowlist` is the list the browser is not supposed to see. The `loadAllowlist` function in [`supabase/functions/_shared/allowlist.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/allowlist.ts){target="_blank"} reads it with a server key:
 
 ```typescript
 const url = Deno.env.get("SUPABASE_URL");
@@ -262,39 +343,99 @@ const { data, error } = await supabase.from("admin_allowlist").select("email");
 
 The usual way to email yourself when a comment arrives is to run a second program next to the site. It watches the database, or you put new comments on a queue and a worker reads that queue, and you have to keep that worker awake overnight.
 
-Supabase runs a small program in the cloud when a row changes. They call these Edge Functions. The database taps the function on the shoulder (that tap is called a webhook), and the function sends the email. I can moderate from my inbox, and I am not hosting a separate mail worker. When I want quiet, one on/off switch, `FLAG_NOTIF`, stops the mail and leaves the functions where they are.
+Supabase runs a small program in the cloud when a row changes. They call these Edge Functions. The database calls the function with a webhook, and the function sends the email. `FLAG_NOTIF` is the on/off switch. When it is off, the functions stay where they are and send nothing.
 
-I have two. `notify-admins` covers changes to comments, settings, and the admin list. `on-user-created` covers a brand-new account. Both ignore the tap unless it carries a shared password, `NOTIFY_WEBHOOK_SECRET`, so a stranger on the internet cannot trigger the mail. Both also stay quiet unless `FLAG_NOTIF` is on. The people who receive the mail are the addresses on the allowlist. The function reads that list with a server key the browser never sees.
+`notify-admins` in [`supabase/functions/notify-admins/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/notify-admins/index.ts){target="_blank"} covers changes to comments, settings, and the admin list. It ignores the call unless the request carries `NOTIFY_WEBHOOK_SECRET`, and it stays quiet unless `FLAG_NOTIF` is on:
 
-The message I actually read is the new-comment email. The function fills in a short template and sends it with the Gmail API. If someone edits a comment, I only get mail when the name, the email, or the text changed. A behind-the-scenes timestamp does not bother me.
+```typescript
+if (!verifyNotifySecret(req)) {
+  return jsonResponse(401, { error: "Unauthorized" });
+}
+if (!flagNotifOn()) {
+  return jsonResponse(200, { skipped: "FLAG_NOTIF" });
+}
+```
 
-How I turned this on is in [Enable Notifications](https://beck-chan.vercel.app/docs/notifs){target="_blank"}.
+`verifyNotifySecret` in [`supabase/functions/_shared/env.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/env.ts){target="_blank"} compares the request with that shared password:
+
+```typescript
+const expected = Deno.env.get("NOTIFY_WEBHOOK_SECRET") ?? "";
+if (!expected) return false;
+const auth = req.headers.get("authorization") ?? "";
+const header = req.headers.get("x-notify-webhook-secret") ?? "";
+const bearer = auth.match(/^Bearer\s+(.+)$/i)?.[1]?.trim() ?? "";
+return header === expected || bearer === expected || auth === expected;
+```
+
+The people who receive the mail are the addresses from `loadAllowlist()`. A new comment fills the `comment-insert` template and sends it with the Gmail API:
+
+```typescript
+const copy = await loadMail("comment-insert", { admin, name, body });
+return allowlist.map((to) => ({
+  to,
+  ...copy,
+  idempotencyKey: `comment:insert:${id}:${to}`,
+}));
+```
+
+An edit sends mail only when the name, the email, or the text changed. A timestamp change does not:
+
+```typescript
+const keys = ["display_name", "email", "body"] as const;
+return keys.some((key) => str(oldRecord?.[key]) !== str(record?.[key]));
+```
+
+`on-user-created` in [`supabase/functions/on-user-created/index.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/on-user-created/index.ts){target="_blank"} covers a brand-new account. It uses those same two checks, then fills the `auth-created` template for the allowlist.
+
+How this is turned on is in [Enable Notifications](https://beck-chan.vercel.app/docs/notifs){target="_blank"}.
 
 ## Rate limits live in Postgres
 
 Leave a comment box wide open and a script can fill the board in a minute. The usual fix is a separate counter store, often Redis, or the memory of whichever copy of the site happened to answer. Restart the site and the count forgets everyone. Two copies of the site can disagree about whether this person already posted.
 
-I did not add that extra store. The counters live in the Postgres database Supabase already hosts, so a restart does not wipe them and every copy of the site sees the same number.
+The counters live in the Postgres database Supabase already hosts, so a restart does not wipe them and every copy of the site sees the same number. By default a visitor can leave one comment every five minutes, and two in a day. Those numbers can be raised in the guestbook settings.
 
-By default a visitor can leave one comment every five minutes, and two in a day. I can raise those numbers in the guestbook settings.
+`submitComment` spends one of those chances by calling `consumeCommentRateLimit` in [`src/lib/rate-limit.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/rate-limit.ts){target="_blank"}. The function does not store the visitor's raw internet address. It stores a scrambled version of it:
 
-`submitComment`, the same function that saves a note, spends one of those chances. It does not store the visitor's raw internet address. It stores a scrambled version of it, so the limit can tell people apart without keeping a readable address in the table. The counting tool is called `rate-limiter-flexible`. The browser cannot write those counters. Only the server can.
+```typescript
+function hashIp(ip: string) {
+  return createHash("sha256").update(ip).digest("hex").slice(0, 32);
+}
 
-The docs chatbot has the same kind of limit, for a different reason. Every question costs a call to Gemini, the model that writes the reply. I did not want one browser to use up that allowance. Questions are counted in a table called `docs_chat_limits`: five an hour, and ten a day, again from a scrambled internet address.
+const key = hashIp(ip || "unknown");
+```
+
+The counting tool is `rate-limiter-flexible`. It writes the counters to `guestbook_rate_limits`. The browser cannot write that table. Only the server can:
+
+```typescript
+new RateLimiterPostgres({
+  storeClient,
+  storeType: "pool",
+  points: opts.points,
+  duration: opts.duration,
+  keyPrefix: opts.keyPrefix,
+  tableName: "guestbook_rate_limits",
+  tableCreated: tableReady,
+})
+```
+
+Only if both the short window and the daily window still have room, then the function spends one chance in each:
+
+```typescript
+await daily.consume(key);
+await burst.consume(key);
+```
+
+The docs chatbot counts questions the same way, in a table called `docs_chat_limits`: five an hour, and ten a day, again from a scrambled internet address. Every question costs a call to Gemini, the model that writes the reply.
 
 ## pgvector searches the docs
 
-The docs are long, and searching for the exact words someone typed misses questions asked a different way. The usual fix is a second search engine. You copy the docs into it and keep that copy in step with the real pages, or the answers drift. My first chatbot did this with a local Elasticsearch instance.
+The docs are long, and searching for the exact words someone typed misses questions asked a different way. The usual fix is a second search engine. You copy the docs into it and keep that copy in step with the real pages, or the answers drift.
 
-Supabase lets me keep that search in the same Postgres database. `pgvector` is an add-on that stores a list of numbers standing in for the meaning of a chunk of text. Those numbers are called an embedding. Gemini creates them, and I keep them in a table called `docs_section`, next to the words they came from. There is no second search server to run.
+Supabase keeps that search in the same Postgres database. `pgvector` stores a list of numbers standing in for the meaning of a chunk of text. Those numbers are called an embedding. Gemini creates them, and they are kept in `docs_section`, next to the words they came from.
 
-When someone asks the chatbot a question, that question becomes the same kind of list of numbers. Postgres looks for the chunks whose numbers are close, which is a way of saying the meaning is close. It also does an ordinary word search. The chat keeps the few pages that do well on either test, and Gemini may only answer from those excerpts. The reply includes links, so you can go read the pages yourself.
+When someone asks the chatbot a question, that question becomes the same kind of list of numbers. Postgres looks for the chunks whose numbers are close, and it also does an ordinary word search. The chat keeps the few pages that do well on either test, and Gemini may only answer from those excerpts. The reply includes links back to those pages.
 
-On the public version of the site, only pages I have marked public are searched. The chatbot cannot quote my private notes.
-
-The visitor's browser never reads `docs_section` directly. The chat page on the server does, with a key that stays on the server. I wrote up how I built that in the [chatbot build](https://beck-chan.vercel.app/docs/bot-build){target="_blank"}.
+On the public version of the site, only pages marked public are searched. The visitor's browser never reads `docs_section` directly. The chat page on the server does, with a key that stays on the server. The build notes are in the [chatbot build](https://beck-chan.vercel.app/docs/bot-build){target="_blank"}.
 
 Those same tables are the catalog in [Build API documentation with Scalar](../api/index.qmd). The comment path, speed limit included, is what [Automate tests with Cucumber and Playwright](../cucumber/index.qmd) checks. The number on the page is [Implement hit counters with PostHog](../posthog/index.qmd).
-
-
-The docs chatbot does the same kind of thing for its own notes. In `src/app/docs/chat/route.ts`, the server saves a conversation in `docs_chat_session` and each turn in `docs_chat_message`, again with a key that stays on the server.
