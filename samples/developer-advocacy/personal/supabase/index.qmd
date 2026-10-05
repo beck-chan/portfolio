@@ -31,16 +31,16 @@ Enter **[Supabase](https://supabase.com/){target="_blank"}**: A comprehensive ba
 
 So incredibly user-friendly, that a self-professed backend novice like myself managed to cobble together a solution for my Next.js application that does exactly what I wanted it to do.
 
-## From Browser to Backend
+## From browser to backend
 
 The usual way to read and write a database from a website is to build a small server of your own, whose only job is to answer web requests and talk to the database for you. Since the program can only answer requests while it's turned on, on a computer the internet can reach, you have to have a reliable way to keep that program running. You can keep a physical machine plugged in and connected to the internet, or hand the program to a hosting service that keeps a copy running for you.
 
 For example, our guestbook needs functionality to:
 
-- **Retrieve Comments:** Show a public version of comments that have been submitted.
-- **Save Comments:** Store comments after checks have passed for length, content, and frequency.
-- **Modify Comments:** Let administrators edit, delete, or mark a comment read.
-- **Apply Settings:** Adjust guestbook settings, such as allowed comment length and frequency limits.
+- **Retrieve comments:** Show a public version of comments that have been submitted.
+- **Save comments:** Store comments after checks have passed for length, content, and frequency.
+- **Modify comments:** Let administrators edit, delete, or mark a comment read.
+- **Apply settings:** Adjust guestbook settings, such as allowed comment length and frequency limits.
 
 So you invent one web address for "get the comments," another for "save a comment," and so on. Each address is an instruction in that program — when a request shows up, run this database query and send the result back. 
 
@@ -76,7 +76,7 @@ Under the hood, asking for a table becomes a normal web request to `https://<you
 
 ::: {.panel-tabset}
 
-# Retrieve Comments
+# Retrieve comments
 
 `comments_public` is a table with a view of submitted `comments` that exclude submitted email addresses from display. The `getPublicCommentsPage` function reads that table in [`src/app/actions/comments.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/comments.ts){target="_blank"}:
 
@@ -87,7 +87,7 @@ supabase
   .order("created_at", { ascending: false })
 ```
 
-# Save Comments
+# Save comments
 
 `comments` is the private table that stores submitted comments. The `submitComment` function in [`src/app/actions/comments.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/comments.ts){target="_blank"} writes to this table.
 
@@ -127,25 +127,108 @@ const { error } = await supabase.from("comments").insert({
 });
 ```
 
+# Modify comments
 
+The `loadAdminComments` function in in [`src/app/actions/comments.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/comments.ts){target="_blank"} reads the private `comments` table for the dashboard:
 
-# Modify Comments
+```typescript
+supabase
+  .from("comments")
+  // Display the email address to administrators
+  .select("id, display_name, email, body, is_read, created_at, updated_at")
+  .order("created_at", { ascending: false })
+```
 
-`loadAdminComments` is the version on the dashboard. It asks for that private table, email included. Editing, deleting, and marking a comment read (`updateComment`, `deleteComment`, `setCommentRead`, and `setCommentsRead`) aim at that same private table. If you are not an admin, the database refuses. Those refusals are row rules: instructions saved on the table about who may read or change each row. I do not have to remember to repeat that check on every screen. Postgres, the database itself, checks before it hands anything back or lets a write through.
+The `updateComment`, `deleteComment`, `setCommentRead`, and `setCommentsRead` functions allow administrators to edit and delete comments, as well as toggle comment read status:
 
-The rest of the app uses that same door.
+```typescript
+// updateComment
+supabase
+  .from("comments")
+  .update({
+    display_name: name,
+    email: email || null,
+    body,
+  })
+  .eq("id", input.id)
 
-# Apply Settings
+// deleteComment
+supabase.from("comments").delete().eq("id", id)
 
-The settings row is one record, `guestbook_settings`, with the comment length, the speed limit, and how many notes fit on a page. `loadGuestbookSettings` in `src/lib/loadGuestbookSettings.ts` reads it. `saveGuestbookSettings` in `src/app/actions/settings.ts` writes it back, and only after it has checked that the signed-in person is an admin.
+// setCommentRead
+supabase.from("comments").update({ is_read: read }).eq("id", id)
 
-The admin address list is the one the browser is not supposed to see. The mail function reads it with a server key, in `loadAllowlist` at `supabase/functions/_shared/allowlist.ts`. The docs chatbot does the same kind of thing for its own notes. In `src/app/docs/chat/route.ts`, the server saves a conversation in `docs_chat_session` and each turn in `docs_chat_message`, again with a key that stays on the server.
+// setCommentsRead
+supabase.from("comments").update({ is_read: read }).in("id", uniqueIds)
+```
+
+Permission to modify comments is enforced by row-level security rules, that we set when we created the `comments` table with our [schema.sql](https://github.com/beck-chan/y2k-guestbook/blob/main/schema.sql){target="_blank"}:
+
+```sql
+create policy "admin_update_comments"
+  on public.comments
+  for update
+  to authenticated
+  using (public.is_admin())
+  with check (public.is_admin());
+
+create policy "admin_delete_comments"
+  on public.comments
+  for delete
+  to authenticated
+  using (public.is_admin());
+```
+
+Both policies call the `is_admin()` function defined in [`src/app/actions/auth.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/auth.ts){target="_blank"}:
+
+```typescript
+export async function isAdmin() {
+  const { data, error } = await supabase.auth.getUser();
+  return data.user?.app_metadata.role === "admin";
+}
+```
+
+Which checks whether or not the user is an authorized admin:
+
+```sql
+select coalesce(
+  (auth.jwt() -> 'app_metadata' ->> 'role') = 'admin',
+  false
+);
+```
+
+# Apply settings
+
+The `guestbook_settings` table is one record with the comment length, the speed limit, and how many notes fit on a page. The `loadGuestbookSettings` function in [`src/lib/loadGuestbookSettings.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/loadGuestbookSettings.ts){target="_blank"} reads these saved settings:
+
+```typescript
+supabase
+  .from("guestbook_settings")
+  .select("*")
+  .eq("id", 1)
+  .maybeSingle()
+```
+
+`saveGuestbookSettings` in [`src/app/actions/settings.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/settings.ts){target="_blank"} allows administrators to adjust these settings, first checking that the user is an admin:
+
+```typescript
+const { supabase, error: authError } = await requireAdmin();
+if (!supabase) {
+  return { ok: false, error: authError };
+}
+```
+
+Only if that check passes, then the settings row is edited:
+
+```typescript
+supabase.from("guestbook_settings").update(row).eq("id", 1)
+```
 
 :::
 
 <span id="auth"></span>
 
-## Authentication Gating by Google
+## Authentication gating by Google
 
 <!-- DO NOT EDIT ABOVE HERE -->
 
@@ -162,6 +245,18 @@ I only run this check on the admin pages. Everyone else can sign the book with n
 - If they are already signed in as an admin, they go straight to the dashboard.
 
 If I ever move the dashboard off `/admin`, the same check follows whatever path I put in `NEXT_PUBLIC_GUESTBOOK_ADMIN_PATH`. The Google setup steps are in [Prerequisites](https://beck-chan.vercel.app/docs/prerequisites){target="_blank"}.
+
+The admin address list is the one the browser is not supposed to see. `loadAllowlist` in [`supabase/functions/_shared/allowlist.ts`](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/allowlist.ts){target="_blank"} reads it with a server key:
+
+```typescript
+const url = Deno.env.get("SUPABASE_URL");
+const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+
+const supabase = createClient(url, key, {
+  auth: { persistSession: false, autoRefreshToken: false },
+});
+const { data, error } = await supabase.from("admin_allowlist").select("email");
+```
 
 ## Edge Functions mail on a write
 
@@ -200,3 +295,6 @@ On the public version of the site, only pages I have marked public are searched.
 The visitor's browser never reads `docs_section` directly. The chat page on the server does, with a key that stays on the server. I wrote up how I built that in the [chatbot build](https://beck-chan.vercel.app/docs/bot-build){target="_blank"}.
 
 Those same tables are the catalog in [Build API documentation with Scalar](../api/index.qmd). The comment path, speed limit included, is what [Automate tests with Cucumber and Playwright](../cucumber/index.qmd) checks. The number on the page is [Implement hit counters with PostHog](../posthog/index.qmd).
+
+
+The docs chatbot does the same kind of thing for its own notes. In `src/app/docs/chat/route.ts`, the server saves a conversation in `docs_chat_session` and each turn in `docs_chat_message`, again with a key that stays on the server.
