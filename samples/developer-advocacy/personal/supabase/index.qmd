@@ -11,8 +11,8 @@ Use Supabase as your comprehensive backend solution.
 ::: {.callout}
 Nostalgic for the websites of the last millennium, I used Supabase to build a retro-inspired [guestbook application](/samples/content-engineering/personal/guestbook/) with some modern touches: anti-spam measures, an admin dashboard gated by Google OAuth 2.0, and email notifications powered by Gmail API.
 
-<!-- ::: {.iframe url="https://y2k-guestbook.vercel.app/" title="y2k Guestbook" zoom="50%"} -->
-<!-- ::: -->
+::: {.iframe url="https://y2k-guestbook.vercel.app/" title="y2k Guestbook" zoom="50%"}
+:::
 
 :::
 
