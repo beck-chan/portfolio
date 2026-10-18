@@ -101,19 +101,20 @@ listing:
       - content-engineering/personal/guestbook/index.qmd
       - content-engineering/personal/portfolio/index.qmd
     categories: true
-  - id: personal-advocacy
-    type: grid
-    grid-columns: 2
-    max-description-length: 250
-    sort: false
-    fields: [title, subtitle, description]
-    contents:
-      - developer-advocacy/personal/supabase/index.qmd
-      - developer-advocacy/personal/cucumber/index.qmd
-      - developer-advocacy/personal/api/index.qmd
-      - developer-advocacy/personal/posthog/index.qmd
-      - developer-advocacy/personal/google-sheets/index.qmd
-categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Frontend Development", "Developer Advocacy", "Integrations", "Blog", "Feature Highlights"]
+  # - id: personal-advocacy
+  #   type: grid
+  #   grid-columns: 2
+  #   max-description-length: 250
+  #   sort: false
+  #   fields: [title, subtitle, description]
+  #   contents:
+  #     - developer-advocacy/personal/supabase/index.qmd
+  #     - developer-advocacy/personal/cucumber/index.qmd
+  #     - developer-advocacy/personal/api/index.qmd
+  #     - developer-advocacy/personal/posthog/index.qmd
+  #     - developer-advocacy/personal/google-sheets/index.qmd
+# categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Frontend Development", "Developer Advocacy", "Integrations", "Blog", "Feature Highlights"]
+categories: ["Content Architecture", "Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Jupyter Notebooks", "Literate Programming", "Training & Onboarding", "Content Enablement", "Frontend Development", "Blog", "Feature Highlights"]
 ---
 
 {{< include /samples/single-source/_bio.qmd >}}
@@ -268,14 +269,14 @@ Use [filter by category]{.smallcaps} below to narrow down samples by criteria. S
 :::{#saasquatch-technical}
 :::
 
-## Developer Advocacy
+<!-- ## Developer Advocacy
 
 {{< include /samples/single-source/_advocacy.qmd >}}
 
 ### Personal
 
-:::{#personal-advocacy}
-:::
+:::{#personal-advocacy} -->
+<!-- ::: -->
 
 ## Copywriting
 

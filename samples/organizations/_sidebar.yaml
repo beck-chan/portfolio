@@ -13,8 +13,8 @@ website:
               file: samples/content-engineering/personal/index.qmd
             - text: "Technical Writing"
               file: samples/technical-writing/personal/guestbook/index.qmd
-            - text: "Developer Advocacy"
-              file: samples/developer-advocacy/index.qmd#personal
+            # - text: "Developer Advocacy"
+            #   file: samples/developer-advocacy/index.qmd#personal
         - section: "ValidMind"
           href: samples/organizations/validmind.qmd
           contents:
