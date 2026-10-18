@@ -2,3 +2,4 @@ format:
   html:
     sidebar: developer
     categories: ["Developer Advocacy", "Integrations"]
+    search: false
