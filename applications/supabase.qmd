@@ -3,8 +3,6 @@ title: "Beck Chan"
 subtitle: "For Supabase"
 aliases:
   - /supabase/index.html
-# categories: ["Developer Content", "Backend as a Service", "Feature Documentation", "User Guides", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Tailwind CSS", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Feature Flags"]
-# NTS finish this 
 listing:
   - id: guestbook-citations
     type: grid
@@ -32,8 +30,14 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-    - ../samples/content-engineering/personal/guestbook/index.qmd
-    - ../samples/developer-advocacy/personal/supabase/index.qmd
+    - path: ../samples/content-engineering/personal/guestbook/index.qmd
+      title: "y2k Guestbook"
+      subtitle: "Supabase"
+      description: "Nostalgic for the days of Geocities, anonymous guestbooks, and Adobe Flash animation websites, I used Supabase to build a modernized version with a poetic twist."
+    - path: ../samples/developer-advocacy/personal/supabase/index.qmd
+      title: "Developer Advocacy"
+      subtitle: "Supabase"
+      description: "I wrote a developer advocacy-type article to pair with my custom application, breaking down the capabilities of Supabase that impressed me."
   - id: validmind-content
     type: grid
     grid-columns: 3
@@ -85,6 +89,7 @@ listing:
     fields: [title, subtitle, description]
     contents:
       - ../samples/content-engineering/atryum/index.qmd
+    categories: true
 ---
 
 {{< include /samples/single-source/_bio.qmd >}}
@@ -132,19 +137,21 @@ I was so excited to join the Supabase team, I designed and built a mobile-respon
 - Built-in rate limiting and profanity filtering, and admin notifications powered by Supabase Edge Functions.
 - Docs in MDX with Gemini chatbot, API reference implemented with Scalar. 
 
-::: {.column-margin}
-
-::: {.iframe url="https://beck-chan.vercel.app/" title="y2k Guestbook" zoom="30%" height="400px"}
+::: {.iframe url="https://beck-chan.vercel.app/" title="y2k Guestbook" zoom="50%"}
 :::
 
-:::
+::: {.panel-tabset}
+
+# Content
 
 :::{#guestbook}
 :::
 
-### Citations 
+# Citations 
 
 :::{#guestbook-citations}
+:::
+
 :::
 
 ## Other Samples
