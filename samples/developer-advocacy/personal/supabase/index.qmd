@@ -2,6 +2,18 @@
 title: "Build applications with Supabase"
 subtitle: "Developer Advocacy"
 categories: ["Supabase", "Backend as a Service", "Frontend Development", "Next.js"]
+listing:
+  - id: get-started
+    type: grid
+    grid-columns: 1
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://supabase.com/dashboard/sign-up
+      title: "Supabase"
+      subtitle: "Get started"
+      description: "Supabase is free to use and open-source, so you can build your own Supabase-powered applications with a very low barrier to entry."
 ---
 
 Use Supabase as your comprehensive backend solution.
@@ -49,7 +61,7 @@ You also have to protect each instruction, since not everyone should be able to 
 ### Supabase Data REST API
 
 ::: {.callout}
-The **[Supabase Data REST API](https://supabase.com/docs/guides/api/rest/overview){target="_blank"}** "auto-generates an API directly from your database schema allowing you to connect to your database through a restful interface, directly from the browser."
+The **[Supabase Data REST API](https://supabase.com/docs/guides/api){target="_blank"}** "auto-generates an API directly from your database schema allowing you to connect to your database through a restful interface, directly from the browser."
 
 :::
 
@@ -137,7 +149,7 @@ supabase.from("comments").update({ is_read: read }).eq("id", id)
 supabase.from("comments").update({ is_read: read }).in("id", uniqueIds)
 ```
 
-Permission to modify comments is enforced by row-level security rules, that we set when we created the `comments` table with our `schema.sql`:[^schema-sql]
+Permission to modify comments is enforced by row-level security rules, that we set when we created the `comments` table with `scripts/schema.sql`:[^schema-sql]
 
 ```sql
 create policy "admin_update_comments"
@@ -154,22 +166,24 @@ create policy "admin_delete_comments"
   using (public.is_admin());
 ```
 
-Both policies call the `is_admin()` function defined in `src/app/actions/auth.ts`:[^auth-ts]
-
-```typescript
-export async function isAdmin() {
-  const { data, error } = await supabase.auth.getUser();
-  return data.user?.app_metadata.role === "admin";
-}
-```
-
-Which checks whether or not the user is an authorized admin:
+Both policies call the `is_admin()` function defined in `scripts/schema.sql`:[^schema-sql]
 
 ```sql
 select coalesce(
   (auth.jwt() -> 'app_metadata' ->> 'role') = 'admin',
   false
 );
+```
+
+The app reads that same note in `src/lib/adminAuth.ts`:[^admin-auth-ts]
+
+```typescript
+const {
+  data: { user },
+} = await supabase.auth.getUser();
+if (roleOf(user) === "admin") {
+  return true;
+}
 ```
 
 #### Apply settings
@@ -301,7 +315,7 @@ where id = uid
 
 #### Gate the dashboard
 
-The `is_admin()` function defined in `src/app/actions/auth.ts`[^auth-ts] trusts only the `app_metadata.role` note set to `admin`. `src/proxy.ts`[^proxy-ts] runs this check on `/admin`:
+The `is_admin()` function defined in `scripts/schema.sql`[^schema-sql] trusts only the `app_metadata.role` note set to `admin`. `src/proxy.ts`[^proxy-ts] runs this check on `/admin`:
 
 The role on the session is read first:
 
@@ -594,8 +608,6 @@ The chat keeps the pages that do well on either test, and the reply links back t
 
 :::
 
-<!-- DO NOT EDIT ABOVE HERE -->
-
 ## Conclusion
 
 My dilemma before I built the application was the number of separate programs a simple guestbook interface seems to need. A server to read and write comments. A login service for the admin dashboard, another server to send notifications when a row changes, a counter store so a script cannot fill the board, a second search server for the docs chatbot. 
@@ -606,12 +618,17 @@ For a moment, I understood why the guestbooks of yore were so, well, rudimentary
 
 I suppose the 90s were a more trusting time, or maybe I just didn't think about it as much. Probably a mix of both.
 
-::: {.callout}  
-# Luckily for me, Supabase seamlessly holds those jobs in one project — the Supa-suite solution to the backend feeling like a pile of unrelated tools. 
-
-Supabase is free to use and open-source, so you can build your own Supabase-powered applications with a very low barrier to entry.
+::: {.column-margin}
+::: {#get-started}
+:::
 
 :::
+
+::: {.callout}  
+Luckily for me, Supabase seamlessly holds those jobs in one project — the Supa-suite solution to the backend feeling like a pile of unrelated tools. 
+:::
+
+
 
 
 <!-- FOOTNOTES -->
@@ -628,9 +645,9 @@ Supabase is free to use and open-source, so you can build your own Supabase-powe
 
 [^comment-frequency]: [Full functionality in one database](#limits)
 
-[^schema-sql]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [schema.sql](https://github.com/beck-chan/y2k-guestbook/blob/main/schema.sql){target="_blank"}
+[^schema-sql]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [scripts/schema.sql](https://github.com/beck-chan/y2k-guestbook/blob/main/scripts/schema.sql){target="_blank"}
 
-[^auth-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/app/actions/auth.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/auth.ts){target="_blank"}
+[^admin-auth-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/lib/adminAuth.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/adminAuth.ts){target="_blank"}
 
 [^load-settings-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/lib/loadGuestbookSettings.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/loadGuestbookSettings.ts){target="_blank"}
 
