@@ -1,0 +1,41 @@
+website:
+  sidebar:
+    - id: applications
+      title: "Applications"
+      contents:
+        - text: "Supabase"
+          file: applications/supabase.qmd
+          contents:
+          - section: "y2k Guestbook"
+            file: samples/content-engineering/personal/guestbook/index.qmd
+            contents:
+              - text: "Documentation Build"
+                target: _blank
+                href: https://beck-chan.vercel.app/docs/docs-build
+              - text: "Chatbot Build"
+                target: _blank
+                href: https://beck-chan.vercel.app/docs/bot-build
+              - text: "Guestbook Build"
+                target: _blank
+                href:  https://beck-chan.vercel.app/docs/book-build
+          - text: "Developer Advocacy"
+            file: samples/developer-advocacy/personal/supabase/index.qmd
+        - text: "---"
+        - text: "Other Samples"
+          contents:
+          - section: "ValidMind"
+            href: samples/organizations/validmind.qmd
+            contents:
+              - text: "Content Engineering"
+                file: samples/content-engineering/validmind/index.qmd
+              - text: "Technical Writing"
+                file: samples/technical-writing/validmind/index.qmd
+              - text: "Copywriting"
+                file: samples/copywriting/index.qmd#validmind
+          - section: "Atryum"
+            href: samples/organizations/atryum.qmd
+            contents:
+              - text: "Content Engineering"
+                file: samples/content-engineering/atryum/index.qmd
+              - text: "Technical Writing"
+                file: samples/technical-writing/atryum/index.qmd
