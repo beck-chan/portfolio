@@ -33,7 +33,7 @@ So incredibly user-friendly, that a self-professed backend novice like myself ma
 
 ## From browser to backend
 
-The usual way to read and write a database from a website is to build a small server of your own, whose only job is to answer web requests and talk to the database for you. Since the program can only answer requests while it's turned on, on a computer the internet can reach, you have to have a reliable way to keep that program running. You can keep a physical machine plugged in and connected to the internet, or hand the program to a hosting service that keeps a copy running for you.
+Usually, to read and write a database from a website, you'd build a small server of your own whose only job is to answer web requests and talk to the database for you. Since the program can only answer requests while it's turned on, on a computer the internet can reach, you have to have a reliable way to keep that program running. You can keep a physical machine plugged in and connected to the internet, or hand the program to a hosting service that keeps a copy running for you.
 
 For example, our guestbook needs functionality to:
 
@@ -205,7 +205,7 @@ supabase.from("guestbook_settings").update(row).eq("id", 1)
 
 ## Authentication gating by Google
 
-The usual way to allow users to log in using Google single sign-on is to run your own login service. You register your application with Google, store users in a table you maintain, hand the browser a cookie that says they are signed in, and remember to check that cookie on every private page. 
+Usually, to allow users to log in using Google single sign-on, you'd run your own login service. You register your application with Google, store users in a table you maintain, hand the browser a cookie that says they are signed in, and remember to check that cookie on every private page. 
 
 For example, our guestbook needs functionality to:
 
@@ -213,9 +213,7 @@ For example, our guestbook needs functionality to:
 - **Mark the admin:** Write `admin` onto the login, and again on a later sign-in if the mark is missing.
 - **Gate the dashboard:** Open `/admin` only when the session note says `admin`.
 
-So you invent one check for "is this address allowed," another for "does this session say admin," and so on. Each check is an instruction in that login service — when a sign-in shows up, look up the address and send the result back.
-
-You also have to protect each check, since not everyone who can sign in with Google should be able to open the dashboard. For our guestbook, one missed check and a stranger could open your administrator dashboard. The program that holds all of those checks is the login service you keep running.
+You invent checks for "is this address allowed," another for "does this session say admin," and so on, and protect each check since not everyone who can sign in with Google should be able to open the admin dashboard. Each check is an instruction in that login service — when a sign-in shows up, look up the address and send the result back. For our guestbook, one missed check and a stranger could open your administrator dashboard. 
 
 ### Supabase Auth
 
@@ -348,7 +346,7 @@ if (isLogin) {
 
 ## Supa-erp serverless architecture
 
-The usual way to arrange for notifications is to build another small server of your own, whose only job is to notice changes to your database and send the email. Just like reading and writing the database, we run into similar things we have to consider.
+You know the drill — usually, notifications are handled by another small server of your own, whose only job is to notice changes to your database and send the email. 
 
 For example, our guestbook needs functionality to notify on:
 
@@ -358,9 +356,7 @@ For example, our guestbook needs functionality to notify on:
 - **Admin list changes:** Email when an address is added or removed to the admin allow-list.
 - **Admin creation:** Email when a new admin user signs in for the first time.
 
-So you invent one web address for "a new comment," another for "an edited comment," and so on. Each address is an instruction in that program — when a change shows up, fill in the message and send the email.
-
-You also have to protect each instruction, since not everyone should be able to trigger the mail just because they know the webhook endpoint. Every kind of mail needs its own address in that program, and its own check to make sure the call is allowed. The program that holds all of those addresses is the server you keep running.
+Every kind of notification needs its own invented web address, an instruction — when a change shows up, fill in the message and send the email. Each instruction is protected since not everyone should be able to trigger the mail just because they know the webhook endpoint. 
 
 ### Supabase Edge Functions
 
@@ -470,14 +466,14 @@ if (user && typeof user === "object") {
 
 ## Full functionality in one database
 
-The usual way to stop spam is to build another small store of your own, or to keep the count in the memory of whichever copy of the site happened to answer. Restart that store and the count forgets everyone. Two copies of the site can disagree about whether this person already posted.
+To stop spam, you'd build another small store of your own, or keep the count in the memory of whichever copy of the site happened to answer. Restart that store and the count forgets everyone, or two copies of the site can disagree about whether this person already posted.
 
 For example, our guestbook needs functionality to limit:
 
 - **Short window:** One comment every five minutes.
 - **Daily window:** Two comments in a day.
 
-So you invent one counter for the short window, another for the day, and so on. Each counter is a record in that store — when a comment shows up, spend one chance and send the result back. You also have to protect each counter, since the browser must not be able to reset it. The program that holds the counters is the store you keep running.
+Invent one counter for the short window, another for the day, and so on. Each counter is a record in that store — when a comment shows up, spend one chance and send the result back. You also have to protect each counter, since the browser must not be able to reset it. 
 
 ### Postgres database
 
@@ -534,14 +530,14 @@ await burst.consume(key);
 
 ## Effortless extensibility
 
-The usual way to build a chatbot that searches documentation for questions asked is to build a second search server. You copy the docs into that server, and keep that copy in step with the real pages, or the answers drift.
+To serve a chatbot that searches documentation for questions asked, you'd build a second search server. You copy the docs into that server, and keep that copy in step with the real pages, or the answers drift.
 
 For example, the docs chatbot needs functionality to:
 
 - **Store embeddings:** Store a list of numbers for the meaning of each chunk of text.
 - **Search relevant pages:** Find the chunks whose numbers are close, and also run an ordinary word search.
 
-So you invent a search address for "the meaning of this question," and another for "these exact words." Each address is an instruction in that second server — when a question shows up, find the closest pages and send the excerpts back. The program that holds the copy of the docs is the search server you keep running.
+You invent a search address, an instruction — when a question shows up, find the closest pages and send the excerpts back, for "the meaning of this question," and another for "these exact words." Each address is an instruction in that second server — when a question shows up, find the closest pages and send the excerpts back. 
 
 ### pgvector extension
 

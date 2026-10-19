@@ -129,6 +129,8 @@ Use [filter by category]{.smallcaps} below to narrow down samples by criteria. S
 ::: {.category-filter}
 :::
 
+<span id="supabase"></span>
+
 ## Built with Supabase
 
 I was so excited to join the Supabase team, I designed and built a mobile-responsive Next.js application styled with Tailwind CSS and a backend powered by Supabase, featuring:
