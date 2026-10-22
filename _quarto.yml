@@ -18,10 +18,11 @@ language:
 metadata-files:
   - samples/content-engineering/_sidebar.yaml
   - samples/technical-writing/_sidebar.yaml
-  - samples/copywriting/_sidebar.yaml
   # - samples/developer-advocacy/_sidebar.yaml
+  - samples/copywriting/_sidebar.yaml
   - samples/organizations/_sidebar.yaml
   - samples/content-engineering/validmind/release-notes/_sidebar.yaml
+  - applications/_sidebar.yaml
 
 website:
   title: "Portfolio"
@@ -31,8 +32,8 @@ website:
     left:
       - samples/content-engineering/index.qmd
       - samples/technical-writing/index.qmd
-      - samples/copywriting/index.qmd
       # - samples/developer-advocacy/index.qmd
+      - samples/copywriting/index.qmd
       - text: "All Samples"
         menu:
         - text: "Filter by Criteria"

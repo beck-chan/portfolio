@@ -1,0 +1,4 @@
+format:
+  html:
+    sidebar: applications
+    search: false

@@ -1,0 +1,672 @@
+---
+title: "Build applications with Supabase"
+subtitle: "Developer Advocacy"
+categories: ["Supabase", "Backend as a Service", "Frontend Development", "Next.js"]
+listing:
+  - id: get-started
+    type: grid
+    grid-columns: 1
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://supabase.com/dashboard/sign-up
+      title: "Supabase"
+      subtitle: "Get started"
+      description: "Supabase is free to use and open-source, so you can build your own Supabase-powered applications with a very low barrier to entry."
+---
+
+Use Supabase as your comprehensive backend solution.
+
+## Introduction
+
+::: {.callout}
+Nostalgic for the websites of the last millennium, I used Supabase to build a retro-inspired [guestbook application](/samples/content-engineering/personal/guestbook/) with some modern touches: anti-spam measures, an admin dashboard gated by Google OAuth 2.0, and email notifications powered by Gmail API.
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/" title="y2k Guestbook" zoom="50%"}
+:::
+
+:::
+
+::: {.column-margin}
+**Install Your Own**:
+
+[{{< fa brands github >}} beck-chan/y2k-guestbook](https://github.com/beck-chan/y2k-guestbook){target="_blank" .button}
+
+:::
+
+Building a web application is a lot of moving pieces. After all, what the user interacts with is just the surface of the iceberg, so to speak. 
+
+Maybe admitting this next bit will brand me as an imposter, but I have to be honest and say that while I'm fairly comfortable with digging around in the frontend, I've always felt a tad intimidated by backend infrastructure. Some of the reason being that traditionally, those moving pieces were generally discrete, meaning that you had juggle a lot of different tools and services without a unified platform to help you manage them.
+
+Enter **[Supabase](https://supabase.com/){target="_blank"}**: A comprehensive backend-as-a-service platform that provides a suite of tools to help you connect everything and oversee all the moving pieces — from your database tables, to ready-made ways to read and write those tables, to user authentication, to functions that perform tasks when a row changes, and more. 
+
+So incredibly user-friendly, that a self-professed backend novice like myself managed to cobble together a solution for my Next.js application that does exactly what I wanted it to do.
+
+## From browser to backend
+
+Usually, to read and write a database from a website, you'd build a small server of your own whose only job is to answer web requests and talk to the database for you. Since the program can only answer requests while it's turned on, on a computer the internet can reach, you have to have a reliable way to keep that program running. You can keep a physical machine plugged in and connected to the internet, or hand the program to a hosting service that keeps a copy running for you.
+
+For example, our guestbook needs functionality to:
+
+- **Retrieve comments:** Show a public version of comments that have been submitted.
+- **Save comments:** Store comments after checks have passed for length, content, and frequency.
+- **Modify comments:** Let administrators edit, delete, or mark a comment read.
+- **Apply settings:** Adjust guestbook settings, such as allowed comment length and frequency limits.
+
+So you invent one web address for "get the comments," another for "save a comment," and so on. Each address is an instruction in that program — when a request shows up, run this database query and send the result back. 
+
+You also have to protect each instruction, since not everyone should be able to perform all actions. For example, the address that saves a comment must not let a stranger delete comments. Every interaction with the database needs its own address in that program, and its own check to make sure the person asking is allowed to do that. The program that holds all of those addresses is the server you keep running.
+
+### Supabase Data REST API
+
+::: {.callout}
+The **[Supabase Data REST API](https://supabase.com/docs/guides/api){target="_blank"}** "auto-generates an API directly from your database schema allowing you to connect to your database through a restful interface, directly from the browser."
+
+:::
+
+Supabase eliminates the need to build and run a separate server just to read and write the database. Instead, you can connect directly to the database from your website using the Data REST API. Instead of inventing an address for each action, you name the table, and Supabase turns that name into the address. 
+
+Instead of putting a separate check on each address, Supabase enforces the check on the table itself using Row Level Security.[^row-level-security] Each request carries a token that says who is calling and what they are allowed to do, for example:
+
+- Visitors have access to read public comments and submit comments without needing to sign in, authenticated with Supabase's publishable key.[^publishable-key]
+- Approved administrators have access to manage comments and settings after they sign in. That sign-in carries a note — when the note says `admin`,[^admin-note] the database runs a check called `is_admin()` and allows the change.
+
+The API URL is your "RESTful endpoint for querying and managing your database." For example, `https://<your-project>.supabase.co/rest/v1/` is the front door to your tables. In our guestbook, a helper called `createClient()` in `src/lib/supabase/server.ts`[^server-ts] opens that door:
+
+```typescript
+return createServerClient(
+  // Your Supabase project URL
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  // Your Supabase publishable key
+  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+  // ...
+);
+```
+
+Under the hood, asking for a table becomes a normal web request to `https://<your-project>.supabase.co/rest/v1/<table>`:
+
+::: {.panel-tabset}
+
+#### Retrieve comments
+
+`comments_public` is a table with a view of submitted `comments` that exclude submitted email addresses from display. The `getPublicCommentsPage` function reads that table in `src/app/actions/comments.ts`:[^comments-ts]
+
+```typescript
+supabase
+  .from("comments_public")
+  .select("id, display_name, body, created_at, updated_at", { count: "exact" })
+  .order("created_at", { ascending: false })
+```
+
+#### Save comments
+
+`comments` is the private table that stores submitted comments. The `submitComment` function in `src/app/actions/comments.ts`[^comments-ts] writes to this table.
+
+Comments are first checked for length, content, and frequency.[^comment-frequency] Only if all checks pass, then the comment is written to the `comments` table:
+
+```typescript
+const supabase = await createClient();
+const { error } = await supabase.from("comments").insert({
+  display_name: name,
+  email: email || null,
+  body,
+});
+```
+
+#### Modify comments
+
+The `loadAdminComments` function in `src/app/actions/comments.ts`[^comments-ts] reads the private `comments` table for the dashboard:
+
+```typescript
+supabase
+  .from("comments")
+  // Display the email address to administrators
+  .select("id, display_name, email, body, is_read, created_at, updated_at")
+  .order("created_at", { ascending: false })
+```
+
+The `updateComment`, `deleteComment`, `setCommentRead`, and `setCommentsRead` functions allow administrators to edit and delete comments, as well as toggle comment read status:
+
+```typescript
+// updateComment
+supabase
+  .from("comments")
+  .update({
+    display_name: name,
+    email: email || null,
+    body,
+  })
+  .eq("id", input.id)
+
+// deleteComment
+supabase.from("comments").delete().eq("id", id)
+
+// setCommentRead
+supabase.from("comments").update({ is_read: read }).eq("id", id)
+
+// setCommentsRead
+supabase.from("comments").update({ is_read: read }).in("id", uniqueIds)
+```
+
+Permission to modify comments is enforced by row-level security rules, that we set when we created the `comments` table with `scripts/schema.sql`:[^schema-sql]
+
+```sql
+create policy "admin_update_comments"
+  on public.comments
+  for update
+  to authenticated
+  using (public.is_admin())
+  with check (public.is_admin());
+
+create policy "admin_delete_comments"
+  on public.comments
+  for delete
+  to authenticated
+  using (public.is_admin());
+```
+
+Both policies call the `is_admin()` function defined in `scripts/schema.sql`:[^schema-sql]
+
+```sql
+select coalesce(
+  (auth.jwt() -> 'app_metadata' ->> 'role') = 'admin',
+  false
+);
+```
+
+The app reads that same note in `src/lib/adminAuth.ts`:[^admin-auth-ts]
+
+```typescript
+const {
+  data: { user },
+} = await supabase.auth.getUser();
+if (roleOf(user) === "admin") {
+  return true;
+}
+```
+
+#### Apply settings
+
+The `guestbook_settings` table is one record with the comment length, the speed limit, and how many notes fit on a page. The `loadGuestbookSettings` function in `src/lib/loadGuestbookSettings.ts`[^load-settings-ts] reads these saved settings:
+
+```typescript
+supabase
+  .from("guestbook_settings")
+  .select("*")
+  .eq("id", 1)
+  .maybeSingle()
+```
+
+`saveGuestbookSettings` in `src/app/actions/settings.ts`[^settings-ts] allows administrators to adjust these settings, first checking that the user is an admin:
+
+```typescript
+const { supabase, error: authError } = await requireAdmin();
+if (!supabase) {
+  return { ok: false, error: authError };
+}
+```
+
+Only if that check passes, then the settings row is edited:
+
+```typescript
+supabase.from("guestbook_settings").update(row).eq("id", 1)
+```
+
+:::
+
+<span id="auth"></span>
+
+## Authentication gating by Google
+
+Usually, to allow users to log in using Google single sign-on, you'd run your own login service. You register your application with Google, store users in a table you maintain, hand the browser a cookie that says they are signed in, and remember to check that cookie on every private page. 
+
+For example, our guestbook needs functionality to:
+
+- **Approve sign-in:** Accept a Google sign-in only when the address is on the admin list.
+- **Mark the admin:** Write `admin` onto the login, and again on a later sign-in if the mark is missing.
+- **Gate the dashboard:** Open `/admin` only when the session note says `admin`.
+
+You invent checks for "is this address allowed," another for "does this session say admin," and so on, and protect each check since not everyone who can sign in with Google should be able to open the admin dashboard. Each check is an instruction in that login service — when a sign-in shows up, look up the address and send the result back. For our guestbook, one missed check and a stranger could open your administrator dashboard. 
+
+### Supabase Auth
+
+::: {.callout}
+
+**[Supabase Auth](https://supabase.com/docs/guides/auth){target="_blank"}** "makes it easy to implement authentication and authorization in your app." 
+
+:::
+
+Supabase eliminates the need to build and run a separate login service just to sign admins in with Google. Instead, Supabase Auth holds the admin users in a table for you, manages the browser cookies for signed-in sessions, and checks for that cookie on your administrator dashboard. 
+
+Instead of inventing a check for each private page, the session carries the `admin` note, and the dashboard reads that note:
+
+::: {.panel-tabset}
+
+#### Approve sign-in
+
+`admin_allowlist` is the approved list of addresses that may open the administrator dashboard after a Google sign-in. The `loadAllowlist` function in `supabase/functions/_shared/allowlist.ts`[^allowlist-ts] reads this private table with your Supabase secret keys:[^function-secrets]
+
+```typescript
+const url = Deno.env.get("SUPABASE_URL");
+const secretKeys = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") ?? "{}");
+const key = secretKeys.default;
+
+const supabase = createClient(url, key, {
+  auth: { persistSession: false, autoRefreshToken: false },
+});
+const { data, error } = await supabase.from("admin_allowlist").select("email");
+```
+
+When an authorized admin user signs in for the first time, the `hook_before_user_created` function created by `scripts/schema.sql`[^scripts-schema-sql] reads the `admin_allowlist`:
+
+```sql
+if user_email is null
+   or user_email = ''
+   or not exists (
+     select 1 from public.admin_allowlist where email = user_email
+   ) then
+  return jsonb_build_object(
+    'error',
+    jsonb_build_object(
+      'message', 'Not authorized',
+      'http_code', 403
+    )
+  );
+end if;
+```
+
+Only if the address is on the `admin_allowlist`, then the sign-in is allowed to continue.
+
+#### Mark the admin
+
+Only if the address is on the `admin_allowlist`, then `app_metadata.role` set to `admin` is written onto the new login:
+
+```sql
+return jsonb_build_object(
+  'user',
+  jsonb_build_object(
+    'app_metadata',
+    jsonb_build_object('role', 'admin')
+  )
+);
+```
+
+The `ensure_admin_role` function we created with `scripts/schema.sql` confirms that the user's email address is on the list:
+
+```sql
+if user_email is null
+   or not exists (
+     select 1 from public.admin_allowlist where email = user_email
+   ) then
+  return false;
+end if;
+```
+
+Only if the address is on the `admin_allowlist`, and the saved login does not already say `admin`, then it writes `app_metadata.role` set to `admin`. That covers a later sign-in where the mark may be missing:
+
+```sql
+update auth.users
+set raw_app_meta_data =
+  coalesce(raw_app_meta_data, '{}'::jsonb) || '{"role":"admin"}'::jsonb
+where id = uid
+  and coalesce(raw_app_meta_data->>'role', '') is distinct from 'admin';
+```
+
+#### Gate the dashboard
+
+The `is_admin()` function defined in `scripts/schema.sql`[^schema-sql] trusts only the `app_metadata.role` note set to `admin`. `src/proxy.ts`[^proxy-ts] runs this check on `/admin`:
+
+The role on the session is read first:
+
+```typescript
+const role =
+  user && typeof user.app_metadata?.role === "string"
+    ? user.app_metadata.role
+    : null;
+const isAdmin = role === "admin";
+```
+
+Then, depending on the user's authorization or session status, they are redirected to the appropriate page:
+
+```typescript
+// If there is no session yet, they are sent to `/admin/login`
+if (!user) {
+  const loginUrl = request.nextUrl.clone();
+  loginUrl.pathname = loginPath;
+  loginUrl.search = "";
+  return redirectWithCookies(loginUrl, supabaseResponse);
+}
+
+if (!isAdmin) {
+// If the note does not say admin, they are signed out and sent home with `?admin_error=1`
+  await supabase.auth.signOut();
+  const homeUrl = request.nextUrl.clone();
+  homeUrl.pathname = guestbookHomePath();
+  homeUrl.search = "admin_error=1";
+  return redirectWithCookies(homeUrl, supabaseResponse);
+}
+
+if (isLogin) {
+// If they are already signed in as an admin, they go straight to the dashboard
+  const adminUrl = request.nextUrl.clone();
+  adminUrl.pathname = adminPath;
+  adminUrl.search = "";
+  return redirectWithCookies(adminUrl, supabaseResponse);
+}
+```
+
+:::
+
+## Supa-erp serverless architecture
+
+You know the drill — usually, notifications are handled by another small server of your own, whose only job is to notice changes to your database and send the email. 
+
+For example, our guestbook needs functionality to notify on:
+
+- **New comments:** Email the admins when someone signs the book.
+- **Edited or deleted comments:** Email again when the comment is edited or deleted.
+- **Settings updated:** Email when the guestbook settings change.
+- **Admin list changes:** Email when an address is added or removed to the admin allow-list.
+- **Admin creation:** Email when a new admin user signs in for the first time.
+
+Every kind of notification needs its own invented web address, an instruction — when a change shows up, fill in the message and send the email. Each instruction is protected since not everyone should be able to trigger the mail just because they know the webhook endpoint. 
+
+### Supabase Edge Functions
+
+::: {.callout}
+## **[Supabase Edge Functions](https://supabase.com/docs/guides/functions){target="_blank"}** "are server-side TypeScript functions, distributed globally at the edge—close to your users. They can be used for listening to webhooks."
+
+Learn more about how notifications are implemented in the guestbook: [Enable Notifications](https://beck-chan.vercel.app/docs/notifs){target="_blank"}
+
+:::
+
+Supabase eliminates the need to build and run a separate server just to send email notifications. The database calls an Edge Function when a row changes, and instead of inventing an address for each message, the webhook delivers that change to the function:
+
+
+::: {.panel-tabset}
+
+### Edge Function secrets
+
+`NOTIFY_WEBHOOK_SECRET` and `FLAG_NOTIF` are secrets stored on the Edge Function. `supabase/functions/_shared/env.ts`[^env-ts] reads them with `Deno.env`:
+
+```typescript
+const expected = Deno.env.get("NOTIFY_WEBHOOK_SECRET") ?? "";
+```
+
+```typescript
+const v = (Deno.env.get("FLAG_NOTIF") ?? "").trim().toLowerCase();
+return v === "true" || v === "1";
+```
+
+Any call that doesn't carry the secret is refused, and no notifications are sent with the switch is set to `false`:
+
+```typescript
+if (!verifyNotifySecret(req)) {
+  return jsonResponse(401, { error: "Unauthorized" });
+}
+if (!flagNotifOn()) {
+  return jsonResponse(200, { skipped: "FLAG_NOTIF" });
+}
+```
+
+### Webhook payloads
+
+Supabase posts the row change to `supabase/functions/notify-admins/index.ts`,[^notify-admins-ts] which sends admin notifications on comments received, edited, deleted, or guestbook settings updated. The body names the table, the kind of change, and the row:
+
+```typescript
+type WebhookPayload = {
+  type?: string;
+  table?: string;
+  schema?: string;
+  record?: Record<string, unknown> | null;
+  old_record?: Record<string, unknown> | null;
+};
+
+const table = payload.table ?? "";
+const type = (payload.type ?? "").toUpperCase();
+const record = payload.record ?? null;
+const oldRecord = payload.old_record ?? null;
+```
+
+`record` is the new row. `old_record` is the row before the change. The same function switches on `table` instead of a separate address for each message:
+
+```typescript
+if (table === "comments") {
+  if (type === "INSERT") {
+    const id = str(record?.id) || "new";
+  }
+  if (type === "UPDATE") {
+    if (!commentContentChanged(oldRecord, record)) return [];
+  }
+  if (type === "DELETE") {
+    const id = str(oldRecord?.id) || "deleted";
+  }
+}
+
+if (table === "guestbook_settings") {
+  if (type !== "UPDATE") return null;
+}
+
+if (table === "admin_allowlist") {
+  if (type === "INSERT") {
+    const added = asEmail(record?.email);
+  }
+  if (type === "DELETE") {
+    const removed = asEmail(oldRecord?.email);
+  }
+}
+```
+
+`supabase/functions/on-user-created/index.ts`[^on-user-created-ts] reads the email from the body Supabase posts to notify admins on the allow-list when a new admin has signed in for the first time:
+
+```typescript
+const record = root.record;
+if (record && typeof record === "object") {
+  const fromRecord = asEmail((record as Record<string, unknown>).email);
+  if (fromRecord) return fromRecord;
+}
+
+const user = root.user;
+if (user && typeof user === "object") {
+  const fromUser = asEmail((user as Record<string, unknown>).email);
+  if (fromUser) return fromUser;
+}
+```
+
+:::
+
+<span id="limits"></span>
+
+## Full functionality in one database
+
+To stop spam, you'd build another small store of your own, or keep the count in the memory of whichever copy of the site happened to answer. Restart that store and the count forgets everyone, or two copies of the site can disagree about whether this person already posted.
+
+For example, our guestbook needs functionality to limit:
+
+- **Short window:** One comment every five minutes.
+- **Daily window:** Two comments in a day.
+
+Invent one counter for the short window, another for the day, and so on. Each counter is a record in that store — when a comment shows up, spend one chance and send the result back. You also have to protect each counter, since the browser must not be able to reset it. 
+
+### Postgres database
+
+::: {.callout}
+With **[Supabase Database](https://supabase.com/docs/guides/database/overview){target="_blank"}**s, "Every Supabase project gets a full Postgres database, not a Postgres abstraction."
+
+:::
+
+Supabase eliminates the need to build and run a separate counter store. The counters live in the Postgres database the project already has — `submitComment` spends one chance by calling `consumeCommentRateLimit` in `src/lib/rate-limit.ts`:[^rate-limit-ts]
+
+::: {.panel-tabset}
+
+### Database connection
+
+Each count goes through a shared `DATABASE_URL` door that lends out a database connection for one query, then takes it back. The next query may get a different connection, so this code does not ask the database to remember the query under a name. It sends the query and the values again each time, and the count gets saved:
+
+```typescript
+const connectionString = process.env.DATABASE_URL?.trim();
+
+return pgPool.query({
+  text: config.text,
+  values: config.values,
+});
+```
+
+### Counter table
+
+`rate-limiter-flexible`[^rate-limiter-flexible] saves the counts in a table called `guestbook_rate_limits` — a visitor's browser cannot change that table, preventing users from overriding the limit:
+
+```typescript
+new RateLimiterPostgres({
+  storeClient,
+  storeType: "pool",
+  points: opts.points,
+  duration: opts.duration,
+  keyPrefix: opts.keyPrefix,
+  tableName: "guestbook_rate_limits",
+  tableCreated: tableReady,
+})
+```
+
+### Spending chances
+
+The table stores a scrambled internet address, so the limit can tell people apart without keeping a readable address. The function spends one chance in the short window and one in the daily window only when both still have room:
+
+```typescript
+const key = createHash("sha256").update(ip || "unknown").digest("hex").slice(0, 32);
+
+await daily.consume(key);
+await burst.consume(key);
+```
+
+:::
+
+## Effortless extensibility
+
+To serve a chatbot that searches documentation for questions asked, you'd build a second search server. You copy the docs into that server, and keep that copy in step with the real pages, or the answers drift.
+
+For example, the docs chatbot needs functionality to:
+
+- **Store embeddings:** Store a list of numbers for the meaning of each chunk of text.
+- **Search relevant pages:** Find the chunks whose numbers are close, and also run an ordinary word search.
+
+You invent a search address, an instruction — when a question shows up, find the closest pages and send the excerpts back, for "the meaning of this question," and another for "these exact words." Each address is an instruction in that second server — when a question shows up, find the closest pages and send the excerpts back. 
+
+### pgvector extension
+
+::: {.column-margin}
+![Docs Chatbot Powered by `pgvector`](/samples/content-engineering/personal/guestbook/livebot.gif){.pics width="100%"}
+
+:::
+
+::: {.callout}
+# Supabase offers many extensions that make it easy extend the functionality of your database.
+
+I've used **[pgvector](https://supabase.com/docs/guides/database/extensions/pgvector){target="_blank"}**, "a Postgres extension for vector similarity search," to power my docs chatbot. Learn more about how I build this functionality in [Chatbot Build](https://beck-chan.vercel.app/docs/bot-build){target="_blank"}.
+
+:::
+
+Supabase eliminates the need to build and run that second search server. Instead, documentation chunks are stored in a table called `docs_section`:
+
+::: {.panel-tabset}
+
+### Storing embeddings
+
+Gemini turns each chunk of the docs into a list of numbers that stands in for its meaning. Those numbers are called an embedding. `pgvector` stores that list in `docs_section` as a `vector` of 768 numbers, next to the words they came from. 
+
+When the `docs_query_embedding ` table was created, this column is defined in `scripts/supabot.sql`:[^supabot-sql]
+
+```sql
+embedding extensions.vector(768) not null,
+```
+
+### Searching relevant pages
+
+A question becomes the same kind of list. The `match_docs_sections` function created in `scripts/supabot.sql`[^supabot-sql] finds the chunks whose lists are closest. `<=>` is cosine distance. A smaller distance means the meanings are closer:
+
+```sql
+select *
+from public.docs_section
+where (not only_public or public)
+order by embedding <=> query_embedding
+limit least(match_count, 50);
+```
+
+The `search_docs_sections` function looks for the exact words:
+
+```sql
+select *
+from public.docs_section
+where (not only_public or public)
+  and search_vector @@ to_tsquery('english', query)
+order by ts_rank_cd(search_vector, to_tsquery('english', query)) desc
+limit least(match_count, 50);
+```
+
+The chat keeps the pages that do well on either test, and the reply links back to those pages.
+
+:::
+
+## Conclusion
+
+My dilemma before I built the application was the number of separate programs a simple guestbook interface seems to need. A server to read and write comments. A login service for the admin dashboard, another server to send notifications when a row changes, a counter store so a script cannot fill the board, a second search server for the docs chatbot. 
+
+Each one has to stay running, and each one needs its own check so a stranger cannot do what only an admin should do. Phew — I wasn't sure I wanted to take on all of that just to pay idle homage to a fond childhood memory.
+
+For a moment, I understood why the guestbooks of yore were so, well, rudimentary, and why they relied on insecure methods to allow users to make changes to frontend code instead of integrating a proper backend, and had absolutely no checks in place to prevent a stranger from potentially doing some very nefarious things. 
+
+I suppose the 90s were a more trusting time, or maybe I just didn't think about it as much. Probably a mix of both.
+
+::: {.column-margin}
+::: {#get-started}
+:::
+
+:::
+
+::: {.callout}  
+Luckily for me, Supabase seamlessly holds those jobs in one project — the Supa-suite solution to the backend feeling like a pile of unrelated tools. 
+:::
+
+
+<!-- FOOTNOTES -->
+
+[^row-level-security]: **Supabase Docs:** [Database / Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security){target="_blank"}
+
+[^publishable-key]: **Supabase Docs:** [Start with Supabase / API keys](https://supabase.com/docs/guides/getting-started/api-keys#which-key-do-you-use){target="_blank"}
+
+[^admin-note]: [Authentication gating by Google](#auth)
+
+[^server-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/lib/supabase/server.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/supabase/server.ts){target="_blank"}
+
+[^comments-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/app/actions/comments.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/comments.ts){target="_blank"}
+
+[^comment-frequency]: [Full functionality in one database](#limits)
+
+[^schema-sql]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [scripts/schema.sql](https://github.com/beck-chan/y2k-guestbook/blob/main/scripts/schema.sql){target="_blank"}
+
+[^admin-auth-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/lib/adminAuth.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/adminAuth.ts){target="_blank"}
+
+[^load-settings-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/lib/loadGuestbookSettings.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/loadGuestbookSettings.ts){target="_blank"}
+
+[^settings-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/app/actions/settings.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/actions/settings.ts){target="_blank"}
+
+[^allowlist-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [supabase/functions/_shared/allowlist.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/allowlist.ts){target="_blank"}
+
+[^function-secrets]: **Supabase Docs:** [Edge Functions / Environment variables](https://supabase.com/docs/guides/functions/secrets){target="_blank"}
+
+[^scripts-schema-sql]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [scripts/schema.sql](https://github.com/beck-chan/y2k-guestbook/blob/main/scripts/schema.sql){target="_blank"}
+
+[^proxy-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/proxy.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/proxy.ts){target="_blank"}
+
+[^env-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [supabase/functions/_shared/env.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/_shared/env.ts){target="_blank"}
+
+[^notify-admins-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [supabase/functions/notify-admins/index.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/notify-admins/index.ts){target="_blank"}
+
+[^on-user-created-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [supabase/functions/on-user-created/index.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/supabase/functions/on-user-created/index.ts){target="_blank"}
+
+[^rate-limit-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/lib/rate-limit.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/rate-limit.ts){target="_blank"}
+
+[^rate-limiter-flexible]: **{{< fa brands github >}} animir:** [node-rate-limiter-flexible](https://github.com/animir/node-rate-limiter-flexible){target="_blank"}
+
+[^supabot-sql]: **{{< fa brands github >}} beck-chan/guestbook:** [scripts/supabot.sql](https://github.com/beck-chan/guestbook/blob/main/scripts/supabot.sql){target="_blank"}

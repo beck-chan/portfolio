@@ -15,8 +15,8 @@ listing:
     contents:
     - samples/content-engineering/index.qmd
     - samples/technical-writing/index.qmd
-    - samples/copywriting/index.qmd
     # - samples/developer-advocacy/index.qmd
+    - samples/copywriting/index.qmd
 ---
 
 {{< include /samples/single-source/_bio.qmd >}}

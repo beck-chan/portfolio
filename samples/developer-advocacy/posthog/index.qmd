@@ -1,4 +1,0 @@
----
-title: "Implement visitor hit counter with PostHog"
-subtitle: "Developer Advocacy"
----

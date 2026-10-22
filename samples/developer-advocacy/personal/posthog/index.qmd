@@ -1,0 +1,91 @@
+---
+title: "Implement hit counters with PostHog"
+subtitle: "Developer Advocacy"
+categories: ["PostHog"]
+---
+
+Display user-facing analytics with PostHog.
+
+## Introduction
+
+A hit counter on a page is a number a visitor can check. Keeping that count yourself means a table of visits, a job that writes a row on every page load, and a query you hope still means "people who saw this page."
+
+## A visit log you maintain
+
+The usual way to show a counter is to record each visit in your own database, then count the rows. A refresh writes another row. A trip to another page writes another row. Restart the count, or count the wrong table, and the digits on the page stop meaning what they say.
+
+For example, the guestbook needs functionality to:
+
+- **Count people, not loads:** One person refreshing the page should not add three.
+- **Count one page:** A visit to the docs should not add to the guestbook.
+- **Count since a time:** The number should be able to start at a moment you choose.
+
+So you invent a visits table, a write on every request, and a query that tries to undo the double-counting. The table is the log you have to keep honest.
+
+### PostHog Query API
+
+::: {.callout}
+
+**[PostHog](https://posthog.com/docs/api/query){target="_blank"}** already records a `$pageview` when the site loads its snippet. The counter does not write those events. It asks PostHog's Query API how many distinct people loaded one page.
+
+How to turn the snippet and the counter on is in [Add Analytics](https://beck-chan.vercel.app/docs/analytics){target="_blank"}.
+
+:::
+
+PostHog eliminates the visits table. `getUniqueVisitors` sends a HogQL query. The page shows the number that comes back.
+
+::: {.panel-tabset}
+
+#### Ask for the count
+
+`uniqueVisitorsQuery` in `src/lib/uniqueVisitors.ts`[^visitors-ts] builds the question. `uniq(distinct_id)` is one person. `$pageview` is a page load. The host, the path, and the start time are added only when those settings are set:
+
+```typescript
+let query =
+  "SELECT uniq(distinct_id) FROM events WHERE event = '$pageview'";
+```
+
+`fetchUniqueVisitors` posts that string to PostHog. The personal API key stays on the server. `refresh: "force_blocking"` asks for a fresh count instead of PostHog's cached one:
+
+```typescript
+const response = await fetch(
+  `${apiHost}/api/projects/${projectId}/query/`,
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      query: { kind: "HogQLQuery", query: hogql },
+      refresh: "force_blocking",
+      name: "guestbook_unique_visitors",
+    }),
+  },
+);
+```
+
+In development the function returns an error and does not call PostHog. A missing key does the same.
+
+#### Show it on the page
+
+`src/app/api/hits/route.ts`[^hits-route] is the address the browser is allowed to call. It runs `getUniqueVisitors` and returns the JSON. The PostHog key never goes to the browser:
+
+```typescript
+export async function GET() {
+  const result = await getUniqueVisitors();
+  return NextResponse.json(result, {
+    headers: { "Cache-Control": "no-store" },
+  });
+}
+```
+
+`HitCounter` paints the server's first number, then asks `/api/hits` again every 15 seconds while the tab is open.[^hit-counter] That interval is `HIT_COUNT_REFRESH_MS` in `src/lib/hitCount.ts`.
+
+:::
+
+[^visitors-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/lib/uniqueVisitors.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/lib/uniqueVisitors.ts){target="_blank"}
+
+[^hits-route]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/app/api/hits/route.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/src/app/api/hits/route.ts){target="_blank"}
+
+[^hit-counter]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [src/components/_guestbook/HitCounter.tsx](https://github.com/beck-chan/y2k-guestbook/blob/main/src/components/_guestbook/HitCounter.tsx){target="_blank"}

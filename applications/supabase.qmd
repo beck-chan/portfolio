@@ -1,0 +1,212 @@
+---
+title: "Beck Chan"
+subtitle: "For Supabase"
+aliases:
+  - /supabase/index.html
+listing:
+  - id: guestbook-citations
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://beck-chan.vercel.app/docs/docs-build
+      title: "Documentation Build"
+      subtitle: "y2k Guestbook Docs"
+      description: "Learn how I built the documentation for my guestbook, including details on the API reference implemented with Scalar and how search and LLM-ingestion is supported."
+    - path: https://beck-chan.vercel.app/docs/bot-build
+      title: "Chatbot Build"
+      subtitle: "y2k Guestbook Docs"
+      description: "Learn how I built the chatbot for the documentation, using Supabase's `pgvector` extension and Gemini API."
+    - path: https://beck-chan.vercel.app/docs/book-build
+      title: "Guestbook Build"
+      subtitle: "y2k Guestbook Docs"
+      description: "Learn how I built the guestbook, including details on admin authentication gated by Google OAuth 2.0 and notifications powered by Supabase Edge Functions."
+  - id: guestbook
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: ../samples/content-engineering/personal/guestbook/index.qmd
+      title: "y2k Guestbook"
+      subtitle: "Supabase"
+      description: "Nostalgic for the days of Geocities, anonymous guestbooks, and Adobe Flash animation websites, I used Supabase to build a modernized version with a poetic twist."
+    - path: ../samples/developer-advocacy/personal/supabase/index.qmd
+      title: "Developer Advocacy"
+      subtitle: "Supabase"
+      description: "I wrote a developer advocacy-type article to pair with my custom application, breaking down the capabilities of Supabase that impressed me."
+  - id: validmind-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - ../samples/content-engineering/validmind/redesign.qmd
+      - ../samples/content-engineering/validmind/library.qmd
+      - ../samples/content-engineering/validmind/academy.qmd
+      - ../samples/content-engineering/validmind/quickstarts.qmd
+  - id: validmind-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - ../samples/technical-writing/validmind/jupyter-notebooks.qmd
+      - ../samples/technical-writing/validmind/user-guides.qmd
+      - ../samples/technical-writing/validmind/enablement.qmd
+  - id: atryum-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: ../samples/technical-writing/atryum/integrations.qmd
+      title: "Atryum Integrations"
+      subtitle: "Feature Documentation"
+      description: "User guides written for Atryum integrations."
+    - path: ../samples/technical-writing/atryum/user-guides.qmd
+      title: "Atryum User Guides"
+      subtitle: "Feature Documentation"
+      description: "User guides written for core Atryum functionality."
+    - path: ../samples/technical-writing/atryum/quickstart.qmd
+      title: "Atryum Quickstart"
+      subtitle: "Tutorial"
+      description: "Quickstart and installation guide for Atryum."
+  - id: atryum-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - ../samples/content-engineering/atryum/index.qmd
+    categories: true
+---
+
+{{< include /samples/single-source/_bio.qmd >}}
+
+
+:::: {.flex .flex-wrap .items-center .justify-around .mb4 .cta-bar}
+
+::: {.w-30-l .tc}
+[{{< fa brands github >}} beck-chan](https://github.com/beck-chan){target="_blank" .button .cta}
+
+:::
+
+::: {.w-30-l .tc}
+[{{< fa brands linkedin >}} beck-chan](https://linkedin.com/in/beck-chan){target="_blank" .button .cta}
+
+:::
+
+::: {.w-40-l .tc}
+[{{< fa envelope >}} beckchan.tech@gmail.com](mailto:beckchan.tech@gmail.com){target="_blank" .button .cta}
+
+:::
+
+::::
+
+::: {.callout}
+
+::: {.hidden-mobile}
+Use [filter by category]{.smallcaps} in the right-hand sidebar to narrow down samples by criteria. Select a tab to view samples by group.
+:::
+
+::: {.hidden-desktop}
+Use [filter by category]{.smallcaps} below to narrow down samples by criteria. Select a tab to view samples by group.
+:::
+
+:::
+
+::: {.category-filter}
+:::
+
+<span id="supabase"></span>
+
+## Built with Supabase
+
+I was so excited to join the Supabase team, I designed and built a mobile-responsive Next.js application styled with Tailwind CSS and a backend powered by Supabase, featuring:
+
+- Admin functionality for comment management and customization, dashboard gated via Google OAuth 2.0.
+- Built-in rate limiting and profanity filtering, and admin notifications powered by Supabase Edge Functions.
+- Docs in MDX with Gemini chatbot, API reference implemented with Scalar. 
+
+::: {.iframe url="https://beck-chan.vercel.app/" title="y2k Guestbook" zoom="50%"}
+:::
+
+::: {.panel-tabset}
+
+# Content
+
+:::{#guestbook}
+:::
+
+# Citations 
+
+:::{#guestbook-citations}
+:::
+
+:::
+
+## Other Samples
+
+### ValidMind
+
+{{< include /samples/single-source/validmind/_validmind.qmd >}}
+
+::: {.column-margin}
+[All ValidMind Samples](/samples/organizations/validmind.qmd){.button .cta}
+:::
+
+::: {.panel-tabset}
+
+# Content Engineering
+
+{{< include /samples/single-source/_content.qmd >}}
+
+{{< include /samples/single-source/validmind/_architecture.qmd >}}
+
+:::{#validmind-content}
+:::
+
+# Technical Writing
+
+{{< include /samples/single-source/_technical.qmd >}}
+
+{{< include /samples/single-source/_static-links.qmd >}}
+
+{{< include /samples/single-source/validmind/_best-work.qmd >}}
+
+:::{#validmind-technical}
+:::
+
+:::
+
+#### Atryum
+
+{{< include /samples/single-source/atryum/_atryum.qmd >}}
+
+::: {.panel-tabset}
+
+# Content Engineering
+
+{{< include /samples/single-source/_content.qmd >}}
+
+:::{#atryum-content}
+:::
+
+# Technical Writing
+
+{{< include /samples/single-source/_technical.qmd >}}
+
+{{< include /samples/single-source/atryum/_writing.qmd >}}
+
+:::{#atryum-technical}
+:::
+
+:::

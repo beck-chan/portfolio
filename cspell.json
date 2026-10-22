@@ -4,7 +4,7 @@
 // npx cspell "**/*" --exclude "_output" --exclude ".quarto"
 
 // Just .qmd sample files
-// npx --yes cspell "**/*.qmd" --exclude "_output" --exclude ".quarto" --exclude "poetry/random/*"
+// npx --yes cspell "**/*.qmd" --exclude "_output" --exclude ".quarto"
 
 // Omitted words:
 
@@ -20,6 +20,9 @@
       "Académie",
       "accountabilities",
       "Alexa",
+      "animir",
+      "apikey",
+      "APITEST",
       "atryum",
       "Atryum",
       "automations",
@@ -66,11 +69,16 @@
       "metamorphosized",
       "Multitasked",
       "Nata",
+      "NOTIF",
       "ndash",
       "neighbour",
+      "openapi",
       "OPENAI",
       "operationalizing",
       "osff",
+      "pageview",
+      "Pageviews",
+      "PostgREST",
       "overwritings",
       "pgvector",
       "posthog",
@@ -90,11 +98,14 @@
       "sharelink",
       "sharelinks",
       "sidenav",
+      "Subpages",
       "slideover",
       "smallcaps",
       "squatch",
       "squatchjs",
+      "Supa",
       "supabase",
+      "supabot",
       "tabset",
       "ungated",
       "Ungated",

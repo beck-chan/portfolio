@@ -1,4 +1,0 @@
----
-title: "Build user activity registry with Google Sheets API"
-subtitle: "Developer Advocacy"
----

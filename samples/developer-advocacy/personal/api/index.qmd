@@ -1,0 +1,105 @@
+---
+title: "Build API documentation with Scalar"
+subtitle: "Developer Advocacy"
+categories: ["Scalar", "OpenAPI"]
+---
+
+Implement OpenAPI Specification documentation with Scalar.
+
+## Introduction
+
+The Data API already publishes a description of every table. The hard part is showing that description as a page someone can read and try, without keeping a second copy of the API in a file that goes stale.
+
+## A spec file that has to stay in step
+
+The usual way to publish API docs is to write an OpenAPI file by hand, then render it with a documentation tool. Every new table, column, or permission means editing that file to match the database. Miss one edit and the page describes an API you no longer have.
+
+For example, the guestbook docs need functionality to:
+
+- **Show the live tables:** List the calls the database actually exposes.
+- **Try a request:** Send a call at the reader's own Supabase project.
+- **Sit in the docs:** Use the same page as the rest of the guides, not a separate product.
+
+So you keep a spec file, a renderer, and a rule that says the file must be updated whenever `schema.sql` changes. The file is the copy you have to keep in step.
+
+### Scalar
+
+::: {.callout}
+
+**[Scalar](https://github.com/scalar/scalar){target="_blank"}** renders an API reference from an OpenAPI document. The guestbook does not author that document. It fetches the one PostgREST already serves and hands it to Scalar.
+
+The rendered page is the [API library](https://y2k-guestbook.vercel.app/docs/api){target="_blank"}. The tables in it are the ones in [Build applications with Supabase](../supabase/index.qmd).
+
+:::
+
+Scalar eliminates the hand-written spec. `loadDatabaseOpenApi` asks the Data API for its own description, and `DocsApiReferenceView` mounts Scalar on that result.
+
+::: {.panel-tabset}
+
+#### Fetch the live spec
+
+`fetchOpenApiPair` in `src/lib/docs/loadDatabaseOpenApi.ts`[^openapi-ts] requests `{project}/rest/v1/` and asks for the OpenAPI document. The response is reused for about a minute:
+
+```typescript
+const response = await fetch(restRoot(url), {
+  headers: {
+    apikey: key,
+    Authorization: `Bearer ${key}`,
+    Accept: "application/openapi+json",
+  },
+  next: { revalidate: 60 },
+});
+```
+
+The fetch uses the server key so admin tables and functions appear in the catalog. That key stays on the server. The page then stamps the title and the two ways to authenticate, an `apikey` header and a bearer token:
+
+```typescript
+normalized.components.securitySchemes = {
+  ...normalized.components.securitySchemes,
+  apikey: API_KEY_SCHEME,
+  bearerAuth: BEARER_SCHEME,
+};
+```
+
+#### Mount Scalar
+
+`DocsApiReferenceView` loads the Scalar browser bundle and calls `createApiReference` with that document.[^reference-view] `content: spec` is the integration. The rest of the options are how the reference sits in the docs:
+
+```typescript
+instance = Scalar.createApiReference(hostRef.current, {
+  ...createScalarReferenceConfig(),
+  content: spec,
+});
+```
+
+`createScalarReferenceConfig` in `src/lib/docs/scalarConfig.ts`[^scalar-config] turns Scalar's own theme off, hides the models list, and starts with the tags collapsed. Guestbook CSS takes the place of Scalar's theme:
+
+```typescript
+hideModels: true,
+defaultOpenAllTags: false,
+customCss: SCALAR_CUSTOM_CSS,
+```
+
+#### Point Send at a project
+
+On the public build, Test Request is turned on. The visitor's project id becomes the server Scalar calls, so Send does not hit the example database.[^reference-view]
+
+```typescript
+...(flags.public
+  ? { servers: publicApiServers(appliedRef) }
+  : flags.apiTest
+    ? { servers: publicApiServers(envSupabaseProjectRef()) }
+    : {}),
+```
+
+`onBeforeRequest` in the same config runs `applyRememberedAuth`, which puts the saved anon key and the admin token on the outgoing request.[^api-key] Focusing one Authentication tab does not drop the other.
+
+:::
+
+[^openapi-ts]: **{{< fa brands github >}} beck-chan/guestbook:** [src/lib/docs/loadDatabaseOpenApi.ts](https://github.com/beck-chan/guestbook/blob/main/src/lib/docs/loadDatabaseOpenApi.ts){target="_blank"}
+
+[^reference-view]: **{{< fa brands github >}} beck-chan/guestbook:** [src/app/docs/_components/DocsApiReferenceView.tsx](https://github.com/beck-chan/guestbook/blob/main/src/app/docs/_components/DocsApiReferenceView.tsx){target="_blank"}
+
+[^scalar-config]: **{{< fa brands github >}} beck-chan/guestbook:** [src/lib/docs/scalarConfig.ts](https://github.com/beck-chan/guestbook/blob/main/src/lib/docs/scalarConfig.ts){target="_blank"}
+
+[^api-key]: **{{< fa brands github >}} beck-chan/guestbook:** [src/lib/docs/scalarApiKey.ts](https://github.com/beck-chan/guestbook/blob/main/src/lib/docs/scalarApiKey.ts){target="_blank"}

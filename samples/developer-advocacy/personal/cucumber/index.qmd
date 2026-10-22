@@ -1,0 +1,94 @@
+---
+title: "Automate tests with Cucumber and Playwright"
+subtitle: "Developer Advocacy"
+categories: ["Quality Assurance", "Cucumber", "Playwright"]
+---
+
+Run automated tests with Cucumber and Playwright.
+
+## Introduction
+
+A guestbook you can install needs a way to show that the install behaves. Clicking through it by hand does not travel with the package. A test that only calls functions never opens the page a visitor sees.
+
+## A script that has to know the page
+
+The usual way to automate a browser is to write a script that finds buttons by their code names and fails when the layout changes. The sentences a person would use, "submit a comment," live in a document no one runs. The script and the document drift apart.
+
+For example, the guestbook package needs functionality to:
+
+- **Read the sentences:** Take a `.feature` file as the thing to run.
+- **Perform them in a browser:** Turn each sentence into a Playwright step.
+- **Open a report:** Write an HTML report when a sentence fails.
+
+So you keep a test script, a list of CSS selectors, and a separate write-up of what the script is supposed to prove. Change the dashboard path and every hard-coded `/admin` has to be found by hand.
+
+### Playwright and Cucumber
+
+::: {.callout}
+
+**[Cucumber](https://cucumber.io/docs/gherkin/){target="_blank"}** describes behavior in Gherkin. **[playwright-bdd](https://github.com/vitalets/playwright-bdd){target="_blank"}** runs those sentences with Playwright. `npx y2k-guestbook test` is the command that wires the two together.
+
+The file tree and the rest of the commands are in the [feature tests guide](https://beck-chan.vercel.app/docs/tests){target="_blank"}.
+
+:::
+
+playwright-bdd eliminates the gap between the sentences and the browser. The package writes a Playwright config that points at the `.feature` files and the step definitions, then Playwright runs that config.
+
+::: {.panel-tabset}
+
+#### Point Playwright at the sentences
+
+`writePlaywrightConfig` in `scripts/cli.mjs`[^cli-mjs] writes `features/reports/playwright.config.ts` for the files you asked to run. The text it writes calls `defineBddConfig`, which is the integration. It tells Playwright that the tests are Gherkin, and where the steps live:
+
+```javascript
+const testDir = defineBddConfig({
+  features: ${JSON.stringify(featurePaths.map((file) => posix(resolve(projectRoot, file))))},
+  steps: ${JSON.stringify(stepGlobs(runtime))},
+  featuresRoot: ${JSON.stringify(featuresRoot)},
+  outputDir: ${JSON.stringify(outputDir)},
+  missingSteps: "fail-on-run",
+});
+```
+
+`features` is the list of `.feature` files for this run. `steps` is `features/support/fixtures.ts` plus `features/step_definitions`. `missingSteps: "fail-on-run"` means a sentence with no TypeScript step fails the run instead of being skipped. The HTML reporter writes to `features/reports/results/` for a visitor run, or `features/reports/admin/` when the command is `-p admin`.
+
+#### Hand each sentence a page
+
+`features/support/fixtures.ts`[^fixtures-ts] connects Cucumber's `Given`, `When`, and `Then` to a Playwright page. `createBdd` is that connection. Every sentence receives the same `world`:
+
+```typescript
+import { createBdd, test as base } from "playwright-bdd";
+
+export const { Given, When, Then } = createBdd(test, {
+  worldFixture: "world",
+});
+```
+
+#### Keep the paths out of the sentences
+
+`PlaywrightWorld` in `features/support/world.ts`[^world-ts] reads the installed guestbook path and admin path. The `.feature` file can keep saying `/admin`. The step asks the world for the real address:
+
+```typescript
+const fromEnv = process.env.BASE_URL;
+this.baseUrl = String(fromEnv ?? "http://localhost:3000").replace(/\/$/, "");
+const guestbook = process.env.NEXT_PUBLIC_GUESTBOOK_PATH || "/";
+const admin = process.env.NEXT_PUBLIC_GUESTBOOK_ADMIN_PATH || "/admin";
+```
+
+The sentence itself is the step name. `When` in `features/step_definitions/guestbook.ts`[^guestbook-steps] binds "they click the `submit` button" to a Playwright action:
+
+```typescript
+When("they click the `submit` button", async function (this: PlaywrightWorld) {
+  await clickSubmit(this.page);
+});
+```
+
+:::
+
+[^cli-mjs]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [scripts/cli.mjs](https://github.com/beck-chan/y2k-guestbook/blob/main/scripts/cli.mjs){target="_blank"}
+
+[^fixtures-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [features/support/fixtures.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/features/support/fixtures.ts){target="_blank"}
+
+[^world-ts]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [features/support/world.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/features/support/world.ts){target="_blank"}
+
+[^guestbook-steps]: **{{< fa brands github >}} beck-chan/y2k-guestbook:** [features/step_definitions/guestbook.ts](https://github.com/beck-chan/y2k-guestbook/blob/main/features/step_definitions/guestbook.ts){target="_blank"}
