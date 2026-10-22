@@ -40,16 +40,15 @@ listing:
       description: "I wrote a developer advocacy-type article to pair with my custom application, breaking down the capabilities of Supabase that impressed me."
   - id: validmind-content
     type: grid
-    grid-columns: 3
+    grid-columns: 2
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - ../samples/content-engineering/validmind/quickstarts.qmd
+      - ../samples/content-engineering/validmind/redesign.qmd
       - ../samples/content-engineering/validmind/library.qmd
       - ../samples/content-engineering/validmind/academy.qmd
-      - ../samples/content-engineering/validmind/releases.qmd
-      - ../samples/content-engineering/validmind/redesign.qmd
+      - ../samples/content-engineering/validmind/quickstarts.qmd
   - id: validmind-technical
     type: grid
     grid-columns: 3
@@ -58,9 +57,7 @@ listing:
     fields: [title, subtitle, description]
     contents:
       - ../samples/technical-writing/validmind/jupyter-notebooks.qmd
-      - ../samples/technical-writing/validmind/training.qmd
       - ../samples/technical-writing/validmind/user-guides.qmd
-      - ../samples/technical-writing/validmind/quickstarts.qmd
       - ../samples/technical-writing/validmind/enablement.qmd
   - id: atryum-technical
     type: grid
@@ -161,6 +158,10 @@ I was so excited to join the Supabase team, I designed and built a mobile-respon
 ### ValidMind
 
 {{< include /samples/single-source/validmind/_validmind.qmd >}}
+
+::: {.column-margin}
+[All ValidMind Samples](/samples/organizations/validmind.qmd){.button .cta}
+:::
 
 ::: {.panel-tabset}
 

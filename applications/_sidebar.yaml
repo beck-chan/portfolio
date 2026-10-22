@@ -30,8 +30,6 @@ website:
                 file: samples/content-engineering/validmind/index.qmd
               - text: "Technical Writing"
                 file: samples/technical-writing/validmind/index.qmd
-              - text: "Copywriting"
-                file: samples/copywriting/index.qmd#validmind
           - section: "Atryum"
             href: samples/organizations/atryum.qmd
             contents:
