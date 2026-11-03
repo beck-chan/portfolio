@@ -43,34 +43,84 @@ I designed and built a mobile-responsive Next.js application with a backend and 
 
 ## Concept
 
-Nostalgic for the days of Geocities, anonymous guestbooks, and Adobe Flash animation websites, I built a modernized version with a poetic twist:
+I built CareerChive after using many, many other productivity tool suites to log my daily notes and completed work. No matter what option I chose, the customization process was cumbersome, and manually creating daily entries was tedious. Even after extensive configuration the interfaces did not seem to allow me to capture exactly what I wanted in an intuitive manner, or display analytics in a way that was useful to me in one centralized place.
 
 
-::: {.iframe url="https://beck-chan.vercel.app/" title="My Modernized Guestbook" zoom="50%"}
+::: {.panel-tabset}
+
+# Archive
+
+<!-- For each organization you track with CareerChive, you can auto-generate new daily entries for you to fill in, or use the integrated MCP server to assist you with populating your daily entries. Each day allows you to:  -->
+
+
+For each organization you track with CareerChive, you can auto-generate new daily entries for you to fill in. Each day allows you to:
+
+- Track attendance and reasons for being absent.
+- Log completed work and supporting artifacts by each individual item via drag-and-drop editors.
+- Enter rich text notes and comments.
+- Rate how you felt that day at work. 😠 🙁 😐 🙂 😄
+
+::: {.iframe url="https://careerchive-demo.vercel.app/?org=current&iso=2026-10-21" title="A Sample Daily Log in CareerChive" zoom="50%" new-window="false"}
 :::
 
 ::: {.column-margin}
 
-::: {.iframe url="https://beck-chan.vercel.app/" title="Modernized Guestbook Mobile View" zoom="100%" width="70%" new-window="false"}
+::: {.iframe url="https://careerchive-demo.vercel.app/?org=current&iso=2026-10-21" title="A Sample Daily Log in CareerChive in Mobile View" zoom="90%" width="70%" new-window="false"}
 :::
 
 :::
+
+# Overview
+
+After you've entered some daily logs, you can then glean insights about your logging habits, attendance, work you've completed, and mood ratings over time:
+
+::: {.iframe url="https://careerchive-demo.vercel.app/overview?org=current&period=week&view=2026-10-18" title="Sample Overview Analytics in CareerChive" zoom="50%" new-window="false"}
+:::
+
+::: {.column-margin}
+
+::: {.iframe url="https://careerchive-demo.vercel.app/overview?org=current&period=week&view=2026-10-18" title="Sample Overview Analytics in CareerChive in Mobile View" zoom="90%" width="70%" new-window="false"}
+:::
+
+:::
+
+# Search
+
+After you've entered some daily logs, you can then search your daily logs by keyword and ask the assistant ChiveBot for information about your logs:
+
+::: {.iframe url="https://careerchive-demo.vercel.app/search?input=search" title="Sample Search in CareerChive" zoom="50%" new-window="false"}
+:::
+
+::: {.column-margin}
+
+::: {.iframe url="https://careerchive-demo.vercel.app/search?input=search" title="Sample Search in CareerChive in Mobile View" zoom="90%" width="70%" new-window="false"}
+:::
+
+:::
+
+
+<!-- ## MCP Server
+
+After you've entered some daily logs, you can then use the integrated MCP server to interact with your daily logs: -->
+
+:::
+
 
 ## Documentation
 
-Documentation guides include search functionality, and the API reference features an interactive explorer where users can input their own credentials to test the API when their applications are fully installed:
+Documentation guides include search functionality and a full API library reference implemented with Scalar:
 
 ::: {.panel-tabset}
 
 ### Documentation Landing
 
-::: {.iframe url="https://y2k-guestbook.vercel.app/docs" title="y2k Guestbook Docs" zoom="50%"}
+::: {.iframe url="https://career-chive.vercel.app/docs" title="CareerChive Docs" zoom="50%"}
 :::
 
 
 ### API Library
 
-::: {.iframe url="https://y2k-guestbook.vercel.app/docs/api" title="y2k Guestbook API Library" zoom="50%"}
+::: {.iframe url="https://career-chive.vercel.app/docs/api" title="CareerChive API Library" zoom="50%"}
 :::
 
 :::
