@@ -3,14 +3,13 @@ title: "y2k Guestbook"
 subtitle: "Technical Writing"
 categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar","Feature Flags", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Vercel", "Supabase", "Cucumber", "Google Cloud Platform"]
 listing:
-  - id: personal-technical
+  - id: personal-guestbook
     type: grid
     grid-columns: 2
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - library.qmd
       - developer.qmd
       - guides.qmd
   - id: guestbook
@@ -31,7 +30,7 @@ To support installation and usage of my guestbook application, I created compreh
 
 {{< include /samples/single-source/personal/_guestbook.qmd >}}
 
-:::{#personal-technical}
+:::{#personal-guestbook}
 :::
 
 ## Citation

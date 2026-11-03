@@ -1,0 +1,40 @@
+---
+title: "Personal"
+subtitle: "Technical Writing"
+listing:
+  - id: personal-careerchive
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - career-chive/developer.qmd
+      - career-chive/guides.qmd
+  - id: personal-guestbook
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - guestbook/developer.qmd
+      - guestbook/guides.qmd
+categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation", "User Guides", "Frontend Development"]
+---
+
+{{< include /samples/single-source/personal/_writing.qmd >}}
+
+## CareerChive
+
+{{< include /samples/single-source/personal/_career-chive.qmd >}}
+
+:::{#personal-careerchive}
+:::
+
+## y2k Guestbook
+
+{{< include /samples/single-source/personal/_guestbook.qmd >}}
+
+:::{#personal-guestbook}
+:::

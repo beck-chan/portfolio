@@ -1,0 +1,26 @@
+---
+title: "CareerChive User Guides"
+subtitle: "Technical Writing"
+categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Vercel", "Supabase"]
+listing:
+  - id: guestbook-user-guides
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://career-chive.vercel.app/docs/chatbots
+      title: "Enable CareerChive Chatbot"
+      subtitle: "User Guides"
+      description: "Guide walking users through enabling the integrated user-assistance chatbot powered by Google Gemini."
+    - path: https://career-chive.vercel.app/docs/prerequisites
+      title: "Prerequisites"
+      subtitle: "User Guides"
+      description: "Guide walking users through initial setup required by the application in Supabase and Cloudflare R2."
+---
+
+A couple general user guides I created for my CareerChive application.
+
+::: {.user-guides}
+::: 

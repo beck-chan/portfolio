@@ -1,0 +1,156 @@
+---
+title: "CareerChive"
+subtitle: "Content Engineering"
+aliases:
+  - /career-chive/index.html
+categories: ["Developer Content", "Feature Documentation", "User Guides", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Tailwind CSS", "Vercel", "Supabase", "Feature Flags"]
+listing:
+  - id: guestbook-citations
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://career-chive.vercel.app/docs/docs-build
+      title: "Documentation Build"
+      subtitle: "CareerChive Docs"
+      description: "Learn how I built the documentation for CareerChive, including details on the API reference implemented with Scalar and how search and LLM-ingestion is supported."
+    - path: https://career-chive.vercel.app/docs/chat-build
+      title: "Chatbot Build"
+      subtitle: "CareerChive Docs"
+      description: "Learn how I built the chatbot for the documentation, using Supabase's `pgvector` extension and Gemini API."
+    - path: https://career-chive.vercel.app/docs/app-build
+      title: "Application Build"
+      subtitle: "CareerChive Docs"
+      description: "Learn how I built the CareerChive Application, including details on the automated cron jobs powered by Supabase's `pg_cron` extension."
+    - path: https://career-chive.vercel.app/docs/chivebot-build
+      title: "Chivebot Build"
+      subtitle: "CareerChive Docs"
+      description: "Learn how I built the user assistance chatbot for the application, using Supabase's `pgvector` extension and Gemini API."
+---
+
+::: {.hidden}
+{{< include /samples/single-source/personal/_career-chive.qmd >}}
+
+:::
+
+I designed and built a mobile-responsive Next.js application with a backend and cron jobs powered by Supabase, featuring:
+
+- Attachment storage powered by Cloudflare R2. Password protection with built-in login attempt limiting.
+- Advanced search functionality with embedded AI assistant powered by Gemini.
+- Docs in MDX with Gemini chatbot, API reference implemented with Scalar. 
+
+## Concept
+
+Nostalgic for the days of Geocities, anonymous guestbooks, and Adobe Flash animation websites, I built a modernized version with a poetic twist:
+
+
+::: {.iframe url="https://beck-chan.vercel.app/" title="My Modernized Guestbook" zoom="50%"}
+:::
+
+::: {.column-margin}
+
+::: {.iframe url="https://beck-chan.vercel.app/" title="Modernized Guestbook Mobile View" zoom="100%" width="70%" new-window="false"}
+:::
+
+:::
+
+## Documentation
+
+Documentation guides include search functionality, and the API reference features an interactive explorer where users can input their own credentials to test the API when their applications are fully installed:
+
+::: {.panel-tabset}
+
+### Documentation Landing
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/docs" title="y2k Guestbook Docs" zoom="50%"}
+:::
+
+
+### API Library
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/docs/api" title="y2k Guestbook API Library" zoom="50%"}
+:::
+
+:::
+
+Alongside the interactive API library, I built a chatbot powered by Gemini that can answer questions about the documentation:
+
+::: {.panel-tabset}
+
+### Live Chatbot
+
+The live chatbot uses Supabase's `pgvector` extension to store the embeddings of the documentation, and the Gemini API to answer questions:
+
+![Live Chatbot Powered by `pgvector`](livebot.gif){.pics width="100%"}
+
+### Proof-of-Concept Chatbot
+
+My initial, more complex proof-of-concept chatbot used a local Elasticsearch instance served via Docker and the Gemini API to answer questions about the documentation:
+
+```{=html}
+<figure class="iframe-embed figure iframe-embed--align-center iframe-embed--valign-center iframe-embed--new-window" style="--iframe-zoom: 0.5; --iframe-width: 100%; --iframe-height: 560px;">
+  <div class="iframe-embed__chrome pics">
+    <div class="iframe-embed__frame">
+      <iframe src="https://www.youtube.com/embed/zpzFcJU4MtU" title="Proof-of-Concept Chatbot Built with Elasticsearch" loading="lazy"></iframe>
+    </div>
+    <a class="iframe-embed__open" href="https://www.youtube.com/embed/zpzFcJU4MtU" target="_blank" rel="noopener noreferrer" title="Open Proof-of-Concept Chatbot Built with Elasticsearch" aria-label="Open Proof-of-Concept Chatbot Built with Elasticsearch">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+    </a>
+  </div>
+  <figcaption>Proof-of-Concept Chatbot Built with Elasticsearch</figcaption>
+</figure>
+```
+
+:::
+
+::: {.column-margin}
+[{{< fa flask >}} Try Chatbot Yourself!](https://beck-chan.vercel.app/docs/){.button}
+:::
+
+
+## Feature Flags
+
+Using feature flags I implemented, I can toggle between different versions of the application, like the deployment below which doesn't feature the poetry volume and instead serves the guestbook commenting board at full size:
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/" title="Guestbook Alternate Version" zoom="50%"}
+:::
+
+::: {.column-margin}
+::: {.iframe url="https://y2k-guestbook.vercel.app/" title="Guestbook Alternate Version Mobile View" zoom="100%" width="70%" new-window="false"}
+:::
+
+:::
+
+Or display two different versions of the documentation, such as one that reflects the features of my custom install, and one that reflects the features of the public install:
+
+::: {.panel-tabset}
+
+### Custom Install
+
+::: {.iframe url="https://beck-chan.vercel.app/docs/policy" title="y2k Guestbook Custom Docs" zoom="50%"}
+:::
+
+
+### Public Install
+
+::: {.iframe url="https://y2k-guestbook.vercel.app/docs/policy" title="y2k Guestbook Public Docs" zoom="50%"}
+:::
+
+:::
+
+
+## Citations
+
+Learn more about how I built my guestbook and the accompanying documentation:
+
+::: {.guestbook-citations}
+::: 
+
+
+::: {.column-margin}
+
+[{{< fa brands github >}} **beck-chan**: `careerchive-docs`](https://github.com/beck-chan/careerchive-docs){target="_blank" .button}
+
+:::

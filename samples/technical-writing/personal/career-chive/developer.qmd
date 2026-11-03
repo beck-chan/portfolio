@@ -1,0 +1,26 @@
+---
+title: "CareerChive Developer Guides"
+subtitle: "Technical Writing"
+categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar","Feature Flags", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Vercel", "Supabase"]
+listing:
+  - id: guestbook-developer-guides
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://career-chive.vercel.app/docs/api
+      title: "API Library"
+      subtitle: "Developer Guides"
+      description: "API Library reference featuring a custom Scalar explorer implementation."
+    - path: https://career-chive.vercel.app/docs/install
+      title: "Install with npm"
+      subtitle: "Developer Guides"
+      description: "End-to-end installation guide for integrating the CareerChive package into your own Next.js application using Node Package Manager (npm)."
+---
+
+Developer-focused guides I created for my CareerChive application.
+
+::: {.developer-guides}
+::: 

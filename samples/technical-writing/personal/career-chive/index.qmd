@@ -1,0 +1,39 @@
+---
+title: "CareerChive"
+subtitle: "Technical Writing"
+categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar","Feature Flags", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Vercel", "Supabase"]
+listing:
+  - id: personal-careerchive
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - developer.qmd
+      - guides.qmd
+  - id: career-chive
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - path: ../../../content-engineering/personal/career-chive/index.qmd
+        description: "Learn how I built the CareerChive application, the accompanying documentation, and user-assistance chatbots."
+---
+
+::: {.hidden}
+To support installation and usage of my archival application, I created comprehensive documentation in MDX, including an API reference implemented with Scalar.
+
+:::
+
+{{< include /samples/single-source/personal/_career-chive.qmd >}}
+
+:::{#personal-careerchive}
+:::
+
+## Citation
+
+::: {.career-chive}
+::: 
