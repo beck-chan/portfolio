@@ -3,3 +3,9 @@ format:
     sidebar: developer
     categories: ["Developer Advocacy", "Integrations"]
     search: false
+    navbar: false
+    theme: ../../../../assets/themes/minimal/styles.scss
+    syntax-highlighting: ../../../../assets/themes/minimal/code.theme
+    css: ../../samples/content-engineering/validmind/release-notes/no-top-nav.css
+    grid:
+      sidebar-width: 300px

@@ -1,12 +1,13 @@
 ---
 title: "Beck Chan"
 subtitle: "For Supabase"
+sidebar: false
 aliases:
   - /supabase/index.html
 listing:
   - id: guestbook-citations
     type: grid
-    grid-columns: 3
+    grid-columns: 1
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
@@ -25,22 +26,22 @@ listing:
       description: "Learn how I built the guestbook, including details on admin authentication gated by Google OAuth 2.0 and notifications powered by Supabase Edge Functions."
   - id: guestbook
     type: grid
-    grid-columns: 2
+    grid-columns: 1
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
     contents:
-    - path: ../samples/content-engineering/personal/guestbook/index.qmd
+    - path: ../../samples/content-engineering/personal/guestbook/index.qmd
       title: "y2k Guestbook"
       subtitle: "Content Engineering"
       description: "Nostalgic for the days of Geocities, anonymous guestbooks, and Adobe Flash animation websites, I used Supabase to build a modernized version with a poetic twist."
-    - path: ../samples/developer-advocacy/personal/supabase/index.qmd
+    - path: ../../samples/developer-advocacy/personal/supabase/index.qmd
       title: "Developer Advocacy"
       subtitle: "Supabase"
       description: "I wrote a developer advocacy-type article to pair with my custom application, breaking down the capabilities of Supabase that impressed me."
   - id: careerchive-citations
     type: grid
-    grid-columns: 2
+    grid-columns: 1
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
@@ -68,7 +69,7 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-    - path: ../samples/content-engineering/personal/career-chive/index.qmd
+    - path: ../../samples/content-engineering/personal/career-chive/index.qmd
       title: "CareerChive"
       subtitle: "Content Engineering"
       description: "I built CareerChive after using many, many other productivity tool suites to log my daily notes and completed work. No matter what option I chose, the customization process was cumbersome, and manually creating daily entries was tedious. Even after extensive configuration the interfaces did not seem to allow me to capture exactly what I wanted in an intuitive manner, or display analytics in a way that was useful to me in one centralized place."
@@ -79,10 +80,10 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - ../samples/content-engineering/validmind/redesign.qmd
-      - ../samples/content-engineering/validmind/library.qmd
-      - ../samples/content-engineering/validmind/academy.qmd
-      - ../samples/content-engineering/validmind/quickstarts.qmd
+      - ../../samples/content-engineering/validmind/redesign.qmd
+      - ../../samples/content-engineering/validmind/library.qmd
+      - ../../samples/content-engineering/validmind/academy.qmd
+      - ../../samples/content-engineering/validmind/quickstarts.qmd
   - id: validmind-technical
     type: grid
     grid-columns: 3
@@ -90,9 +91,9 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - ../samples/technical-writing/validmind/jupyter-notebooks.qmd
-      - ../samples/technical-writing/validmind/user-guides.qmd
-      - ../samples/technical-writing/validmind/enablement.qmd
+      - ../../samples/technical-writing/validmind/jupyter-notebooks.qmd
+      - ../../samples/technical-writing/validmind/user-guides.qmd
+      - ../../samples/technical-writing/validmind/enablement.qmd
   - id: atryum-technical
     type: grid
     grid-columns: 3
@@ -100,15 +101,15 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-    - path: ../samples/technical-writing/atryum/integrations.qmd
+    - path: ../../samples/technical-writing/atryum/integrations.qmd
       title: "Atryum Integrations"
       subtitle: "Feature Documentation"
       description: "User guides written for Atryum integrations."
-    - path: ../samples/technical-writing/atryum/user-guides.qmd
+    - path: ../../samples/technical-writing/atryum/user-guides.qmd
       title: "Atryum User Guides"
       subtitle: "Feature Documentation"
       description: "User guides written for core Atryum functionality."
-    - path: ../samples/technical-writing/atryum/quickstart.qmd
+    - path: ../../samples/technical-writing/atryum/quickstart.qmd
       title: "Atryum Quickstart"
       subtitle: "Tutorial"
       description: "Quickstart and installation guide for Atryum."
@@ -119,30 +120,10 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - ../samples/content-engineering/atryum/index.qmd
-    categories: true
+      - ../../samples/content-engineering/atryum/index.qmd
 ---
 
-:::: {.flex .flex-wrap .justify-around}
-
-::: {.w-100-m .w-20-l .tc .flex .items-center .justify-center}
-
-![](/assets/headshot.png){width=80% .pfp}
-
-:::
-
-::: {.w-100-m .w-80-l}
-
-> I'm **Beck**, poet with a passion for process &mdash; helping you empower users by designing and building solutions built to scale. 
->
-> I've designed, implemented, and managed everything from **content**, **support**, **training**, and **onboarding** architecture for organizations from startups to enterprises.
->
-> My methods bridge the gap between product design and user experience, whether that's advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features. 
-
-:::
-
-::::
-
+{{< include /samples/single-source/_bio.qmd >}}
 
 :::: {.flex .flex-wrap .items-center .justify-around .mb4 .cta-bar}
 
@@ -162,21 +143,6 @@ listing:
 :::
 
 ::::
-
-::: {.callout}
-
-::: {.hidden-mobile}
-Use [filter by category]{.smallcaps} in the right-hand sidebar to narrow down samples by criteria. Select a tab to view samples by group.
-:::
-
-::: {.hidden-desktop}
-Use [filter by category]{.smallcaps} below to narrow down samples by criteria. Select a tab to view samples by group.
-:::
-
-:::
-
-::: {.category-filter}
-:::
 
 <span id="supabase"></span>
 
@@ -236,6 +202,8 @@ After you've entered some daily logs, you can then use the integrated MCP server
 
 :::
 
+::: {.column-margin}
+
 #### CareerChive Samples
 
 ::: {.panel-tabset}
@@ -248,6 +216,8 @@ After you've entered some daily logs, you can then use the integrated MCP server
 # CareerChive Citations 
 
 :::{#careerchive-citations}
+:::
+
 :::
 
 :::
@@ -274,6 +244,8 @@ The y2k Guestbook is styled with Tailwind CSS and along with a backend powered b
 
 :::
 
+::: {.column-margin}
+
 #### Guestbook Samples
 
 ::: {.panel-tabset}
@@ -286,6 +258,8 @@ The y2k Guestbook is styled with Tailwind CSS and along with a backend powered b
 # Guestbook Citations 
 
 :::{#guestbook-citations}
+:::
+
 :::
 
 :::

@@ -3,52 +3,12 @@ website:
     - id: applications
       title: "Applications"
       contents:
-        - text: "Supabase"
-          file: applications/supabase.qmd
+        - text: "Beck Chan for Supabase"
+          file: applications/supabase/index.qmd#supabase
           contents:
-          - section: "CareerChive"
-            file: samples/content-engineering/personal/career-chive/index.qmd
-            contents:
-              - text: "Documentation Build"
-                target: _blank
-                href: https://career-chive.vercel.app/docs/docs-build
-              - text: "Docs Chat Build"
-                target: _blank
-                href: https://career-chive.vercel.app/docs/chat-build
-              - text: "Application Build"
-                target: _blank
-                href:  https://career-chive.vercel.app/docs/app-build
-              - text: "Chivebot Build"
-                target: _blank
-                href:  https://career-chive.vercel.app/docs/chivebot-build
-          - section: "y2k Guestbook"
-            file: samples/content-engineering/personal/guestbook/index.qmd
-            contents:
-              - text: "Documentation Build"
-                target: _blank
-                href: https://beck-chan.vercel.app/docs/docs-build
-              - text: "Chatbot Build"
-                target: _blank
-                href: https://beck-chan.vercel.app/docs/bot-build
-              - text: "Guestbook Build"
-                target: _blank
-                href:  https://beck-chan.vercel.app/docs/book-build
+          - text: "CareerChive"
+            file: applications/supabase/index.qmd#careerchive
+          - text: "y2k Guestbook"
+            file: applications/supabase/index.qmd#y2k-guestbook
           - text: "Developer Advocacy"
             file: samples/developer-advocacy/personal/supabase/index.qmd
-        - text: "---"
-        - text: "Other Samples"
-          contents:
-          - section: "ValidMind"
-            href: samples/organizations/validmind.qmd
-            contents:
-              - text: "Content Engineering"
-                file: samples/content-engineering/validmind/index.qmd
-              - text: "Technical Writing"
-                file: samples/technical-writing/validmind/index.qmd
-          - section: "Atryum"
-            href: samples/organizations/atryum.qmd
-            contents:
-              - text: "Content Engineering"
-                file: samples/content-engineering/atryum/index.qmd
-              - text: "Technical Writing"
-                file: samples/technical-writing/atryum/index.qmd

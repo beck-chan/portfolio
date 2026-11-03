@@ -8,9 +8,9 @@
 
 ::: {.w-100-m .w-80-l}
 
-> I'm **Beck**, poet with a passion for process &mdash; helping you empower users by designing and building solutions built to scale. 
+> I'm **Beck**, poet with a passion for process &mdash; helping you empower users by designing, building, and refining solutions built to scale. 
 >
-> I've designed, implemented, and managed everything from **content**, **support**, **training**, and **onboarding** architecture for organizations from startups to enterprises.
+> I've planned, implemented, overhauled, and managed everything from **content**, **support**, **training**, and **onboarding** architecture for organizations from startups to enterprises.
 >
 > My methods bridge the gap between product design and user experience, whether that's advocating for users during early stage development planning, serving as de facto alpha tester and bug fixer extraordinaire, or producing top-quality content that gets users excited about features. 
 

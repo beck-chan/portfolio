@@ -21,6 +21,10 @@ listing:
     contents:
       - path: ../../../content-engineering/personal/guestbook/index.qmd
         description: "Learn how I built the guestbook application, the accompanying documentation, and my custom installation of the guestbook."
+      - path: https://beck-chan.vercel.app/docs/
+        title: "y2k Guestbook Docs"
+        subtitle: "All Documentation"
+        description: "All the documentation I designed and produced for y2k Guestbook."
 ---
 
 ::: {.hidden}
