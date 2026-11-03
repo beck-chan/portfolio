@@ -26,11 +26,12 @@ listing:
       - atryum/index.qmd
   - id: personal-content
     type: grid
-    grid-columns: 2
+    grid-columns: 3
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
     contents:
+      - personal/career-chive/index.qmd
       - personal/guestbook/index.qmd
       - personal/portfolio/index.qmd
     categories: true

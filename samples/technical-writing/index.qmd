@@ -42,8 +42,8 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - personal/guestbook/developer.qmd
-      - personal/guestbook/guides.qmd
+      - personal/career-chive/index.qmd
+      - personal/guestbook/index.qmd
   - id: saasquatch-technical
     type: grid
     grid-columns: 3
@@ -66,7 +66,7 @@ categories: ["Developer Content", "Use Case Tutorials", "Feature Documentation",
 
 ## Personal
 
-{{< include /samples/single-source/personal/_guestbook.qmd >}}
+{{< include /samples/single-source/personal/_writing.qmd >}}
 
 :::{#personal-technical}
 :::

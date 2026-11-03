@@ -6,11 +6,12 @@ aliases:
 listing:
   - id: personal-content
     type: grid
-    grid-columns: 2
+    grid-columns: 3
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
     contents:
+    - ../../content-engineering/personal/career-chive/index.qmd
     - ../../content-engineering/personal/guestbook/index.qmd
     - ../../content-engineering/personal/portfolio/index.qmd
   - id: personal-technical
@@ -20,20 +21,21 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
+      - ../../technical-writing/personal/career-chive/index.qmd
       - ../../technical-writing/personal/guestbook/index.qmd
     categories: true
-  - id: personal-advocacy
-    type: grid
-    grid-columns: 2
-    max-description-length: 250
-    sort: false
-    fields: [title, subtitle, description]
-    contents:
-      - ../../developer-advocacy/personal/supabase/index.qmd
-      - ../../developer-advocacy/personal/cucumber/index.qmd
-      - ../../developer-advocacy/personal/api/index.qmd
-      - ../../developer-advocacy/personal/posthog/index.qmd
-      - ../../developer-advocacy/personal/google-sheets/index.qmd
+  # - id: personal-advocacy
+  #   type: grid
+  #   grid-columns: 2
+  #   max-description-length: 250
+  #   sort: false
+  #   fields: [title, subtitle, description]
+  #   contents:
+  #     - ../../developer-advocacy/personal/supabase/index.qmd
+  #     - ../../developer-advocacy/personal/cucumber/index.qmd
+  #     - ../../developer-advocacy/personal/api/index.qmd
+  #     - ../../developer-advocacy/personal/posthog/index.qmd
+  #     - ../../developer-advocacy/personal/google-sheets/index.qmd
 categories: ["Content Architecture", "Developer Content", "Feature Documentation", "User Guides",  "OpenAPI", "Scalar", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "Quarto", "GitHub Pages", "Netlify", "PostHog", "Vercel", "Supabase", "Cucumber", "Google Cloud Platform", "Feature Flags", "CI/CD Workflows", "Frontend Development", "Developer Advocacy", "Integrations", "Blog", "Feature Highlights"]
 ---
 
@@ -51,7 +53,7 @@ I love to write and build things, so much so that I do it recreationally.
 :::{#personal-technical}
 :::
 
-## Developer Advocacy
+<!-- ## Developer Advocacy
 
 :::{#personal-advocacy}
-:::
+::: -->

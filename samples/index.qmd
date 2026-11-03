@@ -10,8 +10,8 @@ listing:
     sort: false
     fields: [title, subtitle, description]
     contents:
-      - technical-writing/personal/guestbook/developer.qmd
-      - technical-writing/personal/guestbook/guides.qmd
+      - technical-writing/personal/career-chive/index.qmd
+      - technical-writing/personal/guestbook/index.qmd
   - id: validmind-technical
     type: grid
     grid-columns: 3
@@ -93,11 +93,12 @@ listing:
       - technical-writing/saasquatch/user-guides/index.qmd
   - id: personal-content
     type: grid
-    grid-columns: 2
+    grid-columns: 3
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
     contents:
+      - content-engineering/personal/career-chive/index.qmd
       - content-engineering/personal/guestbook/index.qmd
       - content-engineering/personal/portfolio/index.qmd
     categories: true
@@ -230,7 +231,7 @@ Use [filter by category]{.smallcaps} below to narrow down samples by criteria. S
 
 ### Personal
 
-{{< include /samples/single-source/personal/_guestbook.qmd >}}
+{{< include /samples/single-source/personal/_writing.qmd >}}
 
 :::{#personal-technical}
 ::: 

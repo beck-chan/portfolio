@@ -6,11 +6,12 @@ aliases:
 listing:
   - id: personal-content
     type: grid
-    grid-columns: 2
+    grid-columns: 3
     max-description-length: 250
     sort: false
     fields: [title, subtitle, description]
     contents:
+    - career-chive/index.qmd
     - guestbook/index.qmd
     - portfolio/index.qmd
 categories: ["Developer Content", "Feature Documentation", "User Guides", "OpenAPI", "Scalar", "Next.js", "React", "TypeScript", "Node.js", "SQL", "Postgres", "PostHog", "Vercel", "Supabase", "Google Cloud Platform", "Quarto", "Frontend Development", "GitHub Pages", "Netlify", "Cucumber", "CI/CD Workflows"]

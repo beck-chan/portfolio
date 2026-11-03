@@ -12,7 +12,7 @@ website:
             - text: "Content Engineering"
               file: samples/content-engineering/personal/index.qmd
             - text: "Technical Writing"
-              file: samples/technical-writing/personal/guestbook/index.qmd
+              file: samples/technical-writing/personal/index.qmd
             # - text: "Developer Advocacy"
             #   file: samples/developer-advocacy/index.qmd#personal
         - section: "ValidMind"

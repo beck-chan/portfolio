@@ -1,0 +1,1 @@
+I designed and built a mobile-responsive Next.js archival application with a backend powered by Supabase and file storage managed via Cloudflare R2, complete with comprehensive documentation in MDX, including an API reference implemented with Scalar.

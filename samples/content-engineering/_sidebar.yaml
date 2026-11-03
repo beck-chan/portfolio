@@ -9,6 +9,7 @@ website:
         - section: "Personal"
           href: samples/content-engineering/personal/index.qmd
           contents:
+            - samples/content-engineering/personal/career-chive/index.qmd
             - samples/content-engineering/personal/guestbook/index.qmd
             - section: "Portfolio"
               href: samples/content-engineering/personal/portfolio/index.qmd
