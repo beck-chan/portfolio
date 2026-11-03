@@ -1,5 +1,7 @@
 ---
 title: "Build applications with Supabase"
+aliases:
+  - /supabase/advocacy.html
 subtitle: "Developer Advocacy"
 categories: ["Supabase", "Backend as a Service", "Frontend Development", "Next.js"]
 listing:

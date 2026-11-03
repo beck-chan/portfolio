@@ -1,0 +1,323 @@
+---
+title: "Beck Chan"
+subtitle: "For Supabase"
+sidebar: false
+aliases:
+  - /supabase/index.html
+listing:
+  - id: guestbook-citations
+    type: grid
+    grid-columns: 1
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://beck-chan.vercel.app/docs/docs-build
+      title: "Documentation Build"
+      subtitle: "y2k Guestbook Docs"
+      description: "Learn how I built the documentation for my guestbook, including details on the API reference implemented with Scalar and how search and LLM-ingestion is supported."
+    - path: https://beck-chan.vercel.app/docs/bot-build
+      title: "Chatbot Build"
+      subtitle: "y2k Guestbook Docs"
+      description: "Learn how I built the chatbot for the documentation, using Supabase's `pgvector` extension and Gemini API."
+    - path: https://beck-chan.vercel.app/docs/book-build
+      title: "Guestbook Build"
+      subtitle: "y2k Guestbook Docs"
+      description: "Learn how I built the guestbook, including details on admin authentication gated by Google OAuth 2.0 and notifications powered by Supabase Edge Functions."
+  - id: guestbook
+    type: grid
+    grid-columns: 1
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: ../../samples/content-engineering/personal/guestbook/index.qmd
+      title: "y2k Guestbook"
+      subtitle: "Content Engineering"
+      description: "Nostalgic for the days of Geocities, anonymous guestbooks, and Adobe Flash animation websites, I used Supabase to build a modernized version with a poetic twist."
+    - path: ../../samples/developer-advocacy/personal/supabase/index.qmd
+      title: "Developer Advocacy"
+      subtitle: "Supabase"
+      description: "I wrote a developer advocacy-type article to pair with my custom application, breaking down the capabilities of Supabase that impressed me."
+  - id: careerchive-citations
+    type: grid
+    grid-columns: 1
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: https://career-chive.vercel.app/docs/docs-build
+      title: "Documentation Build"
+      subtitle: "CareerChive Docs"
+      description: "Learn how I built the documentation for CareerChive, including details on the API reference implemented with Scalar and how search and LLM-ingestion is supported."
+    - path: https://career-chive.vercel.app/docs/chat-build
+      title: "Docs Chat Build"
+      subtitle: "CareerChive Docs"
+      description: "Learn how I built the chatbot for the documentation, using Supabase's `pgvector` extension and Gemini API."
+    - path: https://career-chive.vercel.app/docs/app-build
+      title: "Application Build"
+      subtitle: "CareerChive Docs"
+      description: "Learn how I built the CareerChive Application, including details on the automated cron jobs powered by Supabase's `pg_cron` extension."
+    - path: https://career-chive.vercel.app/docs/chivebot-build
+      title: "Chivebot Build"
+      subtitle: "CareerChive Docs"
+      description: "Learn how I built the user assistance chatbot for the application, using Supabase's `pgvector` extension and Gemini API."
+  - id: careerchive
+    type: grid
+    grid-columns: 1
+    max-description-length: 450
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: ../../samples/content-engineering/personal/career-chive/index.qmd
+      title: "CareerChive"
+      subtitle: "Content Engineering"
+      description: "I built CareerChive after using many, many other productivity tool suites to log my daily notes and completed work. No matter what option I chose, the customization process was cumbersome, and manually creating daily entries was tedious. Even after extensive configuration the interfaces did not seem to allow me to capture exactly what I wanted in an intuitive manner, or display analytics in a way that was useful to me in one centralized place."
+  - id: validmind-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - ../../samples/content-engineering/validmind/redesign.qmd
+      - ../../samples/content-engineering/validmind/library.qmd
+      - ../../samples/content-engineering/validmind/academy.qmd
+      - ../../samples/content-engineering/validmind/quickstarts.qmd
+  - id: validmind-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - ../../samples/technical-writing/validmind/jupyter-notebooks.qmd
+      - ../../samples/technical-writing/validmind/user-guides.qmd
+      - ../../samples/technical-writing/validmind/enablement.qmd
+  - id: atryum-technical
+    type: grid
+    grid-columns: 3
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+    - path: ../../samples/technical-writing/atryum/integrations.qmd
+      title: "Atryum Integrations"
+      subtitle: "Feature Documentation"
+      description: "User guides written for Atryum integrations."
+    - path: ../../samples/technical-writing/atryum/user-guides.qmd
+      title: "Atryum User Guides"
+      subtitle: "Feature Documentation"
+      description: "User guides written for core Atryum functionality."
+    - path: ../../samples/technical-writing/atryum/quickstart.qmd
+      title: "Atryum Quickstart"
+      subtitle: "Tutorial"
+      description: "Quickstart and installation guide for Atryum."
+  - id: atryum-content
+    type: grid
+    grid-columns: 2
+    max-description-length: 250
+    sort: false
+    fields: [title, subtitle, description]
+    contents:
+      - ../../samples/content-engineering/atryum/index.qmd
+---
+
+{{< include /samples/single-source/_bio.qmd >}}
+
+:::: {.flex .flex-wrap .items-center .justify-around .mb4 .cta-bar}
+
+::: {.w-30-l .tc}
+[{{< fa brands github >}} beck-chan](https://github.com/beck-chan){target="_blank" .button .cta}
+
+:::
+
+::: {.w-30-l .tc}
+[{{< fa brands linkedin >}} beck-chan](https://linkedin.com/in/beck-chan){target="_blank" .button .cta}
+
+:::
+
+::: {.w-40-l .tc}
+[{{< fa envelope >}} beckchan.tech@gmail.com](mailto:beckchan.tech@gmail.com){target="_blank" .button .cta}
+
+:::
+
+::::
+
+<span id="supabase"></span>
+
+## Built with Supabase
+
+I was so excited to join the Supabase team, I designed and built two mobile-responsive Next.js applications with backends powered by Supabase to teach myself about Supabase features. Each application is fully 
+supported by documentation I also designed, written in MDX — the same framework used by Supabase to build docs.
+
+### CareerChive
+
+CareerChive is styled with Tailwind CSS and along with a backend and cron jobs powered by Supabase, features:
+
+- Attachment storage powered by Cloudflare R2. Password protection with built-in login attempt limiting.
+- Advanced search functionality with embedded AI assistant powered by Gemini.
+- Docs in MDX with Gemini chatbot, API reference implemented with Scalar. 
+
+::: {.panel-tabset}
+
+# Archive
+
+::: {.callout}
+The below embedded demo iframes are interactive mockups, and are not connected to a live backend deployment.
+:::
+
+<!-- For each organization you track with CareerChive, you can auto-generate new daily entries for you to fill in, or use the integrated MCP server to assist you with populating your daily entries. Each day allows you to:  -->
+
+
+For each organization you track with CareerChive, you can auto-generate new daily entries for you to fill in. Each day allows you to:
+
+- Track attendance and reasons for being absent.
+- Log completed work and supporting artifacts by each individual item via drag-and-drop editors.
+- Enter rich text notes and comments.
+- Rate how you felt that day at work. 😠 🙁 😐 🙂 😄
+
+::: {.iframe url="https://careerchive-demo.vercel.app/?org=current&iso=2026-10-21" title="A Sample Daily Log in CareerChive" zoom="50%" new-window="false"}
+:::
+
+After you've entered some daily logs, you can then glean insights about your logging habits, attendance, work you've completed, and mood ratings over time...
+
+::: {.iframe url="https://careerchive-demo.vercel.app/overview?org=current&period=week&view=2026-10-18" title="Sample Overview Analytics in CareerChive" zoom="50%" new-window="false"}
+:::
+
+... and search your daily logs by keyword and ask the assistant ChiveBot for information about your logs:
+
+::: {.iframe url="https://careerchive-demo.vercel.app/search?input=search" title="Sample Search in CareerChive" zoom="50%" new-window="false"}
+:::
+
+
+<!-- # MCP Server
+
+After you've entered some daily logs, you can then use the integrated MCP server to interact with your daily logs: -->
+
+# Archive Docs
+
+::: {.iframe url="https://career-chive.vercel.app/docs" title="CareerChive Docs" zoom="50%"}
+:::
+
+:::
+
+::: {.column-margin}
+
+#### CareerChive Samples
+
+::: {.panel-tabset}
+
+# CareerChive Content
+
+:::{#careerchive}
+:::
+
+# CareerChive Citations 
+
+:::{#careerchive-citations}
+:::
+
+:::
+
+:::
+
+### y2k Guestbook
+
+The y2k Guestbook is styled with Tailwind CSS and along with a backend powered by Supabase, features:
+
+- Admin functionality for comment management and customization, dashboard gated via Google OAuth 2.0.
+- Built-in rate limiting and profanity filtering, and admin notifications powered by Supabase Edge Functions.
+- Docs in MDX with Gemini chatbot, API reference implemented with Scalar. 
+
+::: {.panel-tabset}
+
+#### Guestbook
+
+::: {.iframe url="https://beck-chan.vercel.app/" title="y2k Guestbook" zoom="50%"}
+:::
+
+#### Guestbook Docs
+
+::: {.iframe url="https://beck-chan.vercel.app/docs" title="y2k Guestbook Docs" zoom="50%"}
+:::
+
+:::
+
+::: {.column-margin}
+
+#### Guestbook Samples
+
+::: {.panel-tabset}
+
+# Guestbook Content
+
+:::{#guestbook}
+:::
+
+# Guestbook Citations 
+
+:::{#guestbook-citations}
+:::
+
+:::
+
+:::
+
+## Other Samples
+
+### ValidMind
+
+{{< include /samples/single-source/validmind/_validmind.qmd >}}
+
+::: {.column-margin}
+[All ValidMind Samples](/samples/organizations/validmind.qmd){.button .cta}
+:::
+
+::: {.panel-tabset}
+
+# Content Engineering
+
+{{< include /samples/single-source/_content.qmd >}}
+
+{{< include /samples/single-source/validmind/_architecture.qmd >}}
+
+:::{#validmind-content}
+:::
+
+# Technical Writing
+
+{{< include /samples/single-source/_technical.qmd >}}
+
+{{< include /samples/single-source/_static-links.qmd >}}
+
+{{< include /samples/single-source/validmind/_best-work.qmd >}}
+
+:::{#validmind-technical}
+:::
+
+:::
+
+#### Atryum
+
+{{< include /samples/single-source/atryum/_atryum.qmd >}}
+
+::: {.panel-tabset}
+
+# Content Engineering
+
+{{< include /samples/single-source/_content.qmd >}}
+
+:::{#atryum-content}
+:::
+
+# Technical Writing
+
+{{< include /samples/single-source/_technical.qmd >}}
+
+{{< include /samples/single-source/atryum/_writing.qmd >}}
+
+:::{#atryum-technical}
+:::
+
+:::

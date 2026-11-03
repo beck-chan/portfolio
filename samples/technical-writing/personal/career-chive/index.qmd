@@ -21,6 +21,10 @@ listing:
     contents:
       - path: ../../../content-engineering/personal/career-chive/index.qmd
         description: "Learn how I built the CareerChive application, the accompanying documentation, and user-assistance chatbots."
+      - path: https://career-chive.vercel.app/docs/
+        title: "CareerChive Docs"
+        subtitle: "All Documentation"
+        description: "All the documentation I designed and produced for CareerChive."
 ---
 
 ::: {.hidden}
