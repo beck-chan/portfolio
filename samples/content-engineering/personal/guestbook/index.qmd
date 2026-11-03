@@ -71,6 +71,8 @@ Documentation guides include search functionality, and the API reference feature
 
 :::
 
+### Docs Chatbot
+
 Alongside the interactive API library, I built a chatbot powered by Gemini that answers questions about the guestbook's docs:
 
 ::: {.panel-tabset}

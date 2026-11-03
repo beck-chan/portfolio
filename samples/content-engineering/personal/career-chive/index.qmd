@@ -17,7 +17,7 @@ listing:
       subtitle: "CareerChive Docs"
       description: "Learn how I built the documentation for CareerChive, including details on the API reference implemented with Scalar and how search and LLM-ingestion is supported."
     - path: https://career-chive.vercel.app/docs/chat-build
-      title: "Chatbot Build"
+      title: "Docs Chat Build"
       subtitle: "CareerChive Docs"
       description: "Learn how I built the chatbot for the documentation, using Supabase's `pgvector` extension and Gemini API."
     - path: https://career-chive.vercel.app/docs/app-build
@@ -45,6 +45,9 @@ I designed and built a mobile-responsive Next.js application with a backend and 
 
 I built CareerChive after using many, many other productivity tool suites to log my daily notes and completed work. No matter what option I chose, the customization process was cumbersome, and manually creating daily entries was tedious. Even after extensive configuration the interfaces did not seem to allow me to capture exactly what I wanted in an intuitive manner, or display analytics in a way that was useful to me in one centralized place.
 
+::: {.callout}
+The below embedded demo iframes are interactive mockups, and are not connected to a live backend deployment.
+:::
 
 ::: {.panel-tabset}
 
@@ -123,6 +126,8 @@ Documentation guides include search functionality and a full API library referen
 :::
 
 :::
+
+### Docs Chatbot
 
 In addition to the core user guides, I built a chatbot that answers questions about CareerChive's docs. The chatbot uses Supabase's `pgvector` extension to store the embeddings of the documentation, and the Gemini API to answer questions:
 
