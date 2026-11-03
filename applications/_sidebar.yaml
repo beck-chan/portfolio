@@ -6,6 +6,21 @@ website:
         - text: "Supabase"
           file: applications/supabase.qmd
           contents:
+          - section: "CareerChive"
+            file: samples/content-engineering/personal/career-chive/index.qmd
+            contents:
+              - text: "Documentation Build"
+                target: _blank
+                href: https://career-chive.vercel.app/docs/docs-build
+              - text: "Docs Chat Build"
+                target: _blank
+                href: https://career-chive.vercel.app/docs/chat-build
+              - text: "Application Build"
+                target: _blank
+                href:  https://career-chive.vercel.app/docs/app-build
+              - text: "Chivebot Build"
+                target: _blank
+                href:  https://career-chive.vercel.app/docs/chivebot-build
           - section: "y2k Guestbook"
             file: samples/content-engineering/personal/guestbook/index.qmd
             contents:
